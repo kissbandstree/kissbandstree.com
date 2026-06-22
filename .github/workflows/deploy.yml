@@ -38,9 +38,9 @@ jobs:
       SFTP_PORT: ${{ vars.SFTP_PORT || '22' }}
       SFTP_REMOTE_DIR: ${{ vars.SFTP_REMOTE_DIR }}
       DEPLOY_MODE: ${{ github.event.inputs.mode || 'changed' }}
-      DEPLOY_UPLOAD_LIST: ${{ runner.temp }}/deploy-upload.txt
-      DEPLOY_DELETE_LIST: ${{ runner.temp }}/deploy-delete.txt
-      DEPLOY_LFTP_SCRIPT: ${{ runner.temp }}/deploy.lftp
+      DEPLOY_UPLOAD_LIST: /tmp/deploy-upload.txt
+      DEPLOY_DELETE_LIST: /tmp/deploy-delete.txt
+      DEPLOY_LFTP_SCRIPT: /tmp/deploy.lftp
 
     steps:
       - name: Check out repository
