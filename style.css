@@ -608,8 +608,7 @@ body.toc-lock {
 
 .news-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 0 auto;
   max-width: var(--maxwidth);
   overflow: hidden;

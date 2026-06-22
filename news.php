@@ -17,8 +17,13 @@
 <div class="news-container colored" id="news-container">
 
   <div class="full">
+    23-06-2026
+    <a href="https://github.com/kissbandstree">We are now on GitHub.</a>
+  </div>
+
+  <div class="full">
     07-09-2025
-    <a href="/tree.php">OUT NOW: THE KISS BANDS TREE!</a>
+    <a href="/tree.php">Out now: The Kiss Bands Tree!</a>
   </div>
 
 </div>
