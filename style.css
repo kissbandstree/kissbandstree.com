@@ -443,6 +443,12 @@ input[type="checkbox"] {
   max-width: var(--maxwidth);
 }
 
+.footer-socials {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
 /* Table of contents */
 
 .toc-container {
