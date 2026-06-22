@@ -1,0 +1,11 @@
+
+RewriteEngine on
+
+# Redirect www → non-www (http or https)
+RewriteCond %{HTTP_HOST} ^www\.kissbandstree\.com$ [NC]
+RewriteRule ^(.*)$ https://kissbandstree.com/$1 [R=301,L]
+
+# Redirect http → https (non-www)
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteRule ^(.*)$ https://kissbandstree.com/$1 [R=301,L]

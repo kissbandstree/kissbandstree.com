@@ -1,0 +1,293 @@
+/* Tree */
+/* kissbandstree.com/tree.css */
+
+/* TAGS */
+
+body {
+  display: flex;
+  flex-direction: row;
+  margin: 16px;
+  padding: 0;
+  overflow: auto;
+  cursor: move;
+}
+
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+td,
+th,
+input,
+textarea,
+select,
+option,
+pre,
+code,
+.text,
+.lineup-item,
+.band-header,
+.band-comment,
+.artist-header-name,
+.footer {
+  cursor: text;
+}
+
+a,
+button,
+.show-pointer,
+img,
+svg,
+label {
+  cursor: pointer;
+}
+
+body.drag-pan-lock,
+body.drag-pan-lock * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+/* CLASSES */
+
+.sidebar {
+  flex: 0 0 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  overflow-y: auto;
+  margin-right: 96px;
+}
+
+.text {
+  text-align: justify;
+  margin-top: 64px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+  width: 100%;
+}
+
+.single-line-justify {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.full {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.focus {
+  color: var(--white);
+  display: inline-block;
+}
+
+.focus svg {
+  display: block;
+  height: 64px;
+  width: auto;
+}
+
+.poster-container {
+  flex: 0 0 auto;
+  width: max-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.artist {
+  flex: 0 0 896px;
+  margin-right: 96px;
+}
+
+.artist h1 {
+  margin-bottom: 32px;
+}
+
+.band-box {
+  display: grid;
+  grid-template-columns: 161px minmax(0, 1fr) 256px;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--white);
+  width: 100%;
+}
+
+.band-left,
+.band-right {
+  display: contents;
+}
+
+.band-left {
+  padding: 0;
+  min-width: 0;
+}
+
+.band-photo {
+  grid-column: 1;
+  grid-row: 1;
+  width: 161px;
+  border-right: 1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+  padding: 0;
+  margin: 0;
+}
+
+.band-photo img {
+  width: 160px;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+.band-text-box {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 8px;
+  border-right: 1px solid var(--white);
+}
+
+.band-right {
+  padding: 0;
+  min-width: 0;
+  position: relative;
+}
+
+.band-header {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--white);
+  padding: 8px;
+}
+
+.band-year {
+  font-weight: normal;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.band-lineup {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 8px;
+}
+
+.lineup-item {
+  white-space: nowrap;
+  margin-bottom: 5px;
+}
+
+.band-comment {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  border-left: 1px solid var(--white);
+  padding: 8px 12px;
+  display: flex;
+  align-items: flex-start;
+  text-align: justify;
+}
+
+.arrow-outer-container {
+  display: grid;
+  grid-template-columns: 161px minmax(0, 1fr) 256px;
+  width: 100%;
+}
+
+.arrow-container {
+  grid-column: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  pointer-events: none;
+}
+
+.arrow-slot {
+  min-width: 64px;
+  text-align: center;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 32px;
+  color: var(--white);
+  margin-top: 0px;
+  margin-bottom: 6px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.artist-header {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--white);
+  margin-bottom: 48px;
+}
+
+.artist-header-photo {
+  height: 128px;
+  border-left: 1px solid var(--white);
+  overflow: hidden;
+}
+
+.artist-header-photo img {
+  height: 128px;
+  object-fit: cover;
+  display: block;
+}
+
+.artist-header-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.grid-item {
+  border: 1px solid var(--white);
+}
+
+.grid-container-artist {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  line-height: 0;
+  margin: 20px auto;
+  max-width: var(--maxwidth);
+  width: 100%;
+}
+
+.grid-container-releases {
+  display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+    line-height: 0;
+    margin: 20px auto;
+    max-width: var(--maxwidth);
+    width: 100%;
+}
+
+/* END OF FILE */

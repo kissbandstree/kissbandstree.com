@@ -1,0 +1,22 @@
+Kiss Bands Tree is a display of all bands with members of the band Kiss. 
+
+Criterion for band to be listed is to have played a concert or released a song. 
+
+Artists often play in several bands simultaneously. Chronological order is by when a band started. A following band does not necessarily mean the artists left previous bands. 
+
+A slash in band name means there was a name change, or the band used both names. 
+
+Artists with unknown names are not listed, although they might be featured in band photographs. 
+
+Instruments played by the artist are listed in order of relevance. For instance, an artist who for the most part plays guitar and less frequently drums, will have "guitar, drums" listed. 
+
+Photo descriptions lists, if available, L - R, time, date and scenario. 
+
+URL lists the most representative web site. It can be band's or artist's own domain, Wikipedia, YouTube, etc. Facebook is listed separately. 
+
+Play, Prev and Next buttons on individual band and artist pages show all bands and artists, in alphabetical order. 
+
+Dates are in the form of DD-MM-YYYY. Unknown dates are displayed as ??-??-??. Known year with missing day and month is displayed as ??-??-YYYY. 
+
+All names and photos are copyright their respective owners. Kiss Bands Tree name, logo and icon are copyright Kiss Bands Tree. Please credit Kiss Bands Tree when using information from this website and poster. 
+

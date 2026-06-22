@@ -1,0 +1,65 @@
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
+}
+
+@media (min-width: 600px) {
+  .standard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .stats-row {
+    margin: 0;
+  }
+}
+
+.stats-text {
+  min-width: 320px;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-text a,
+.stats-text span {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.cake-pie {
+  width: 190px;
+  height: 190px;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.cake-pie path {
+  cursor: pointer;
+  stroke: none;
+}
+
+.cake-pie path:focus {
+  outline: none;
+}
+
+.cake-pie path:hover,
+.cake-pie path.stats-slice-highlight {
+  fill: var(--white);
+}
+
+.stats-text a.stats-highlight:not(:has(img, svg)) {
+  background: var(--white);
+}
+
+  .stats-text span:hover,
+  .stats-text span.stats-highlight {
+  background: var(--color1);
+}

@@ -1,0 +1,19 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Local dependency folders
+node_modules/
+vendor/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
