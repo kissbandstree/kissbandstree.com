@@ -1,0 +1,64 @@
+name: Deploy site
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Upload via SFTP
+    runs-on: ubuntu-latest
+
+    env:
+      SFTP_HOST: ${{ secrets.SFTP_HOST }}
+      SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
+      SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+      SFTP_PORT: ${{ vars.SFTP_PORT || '22' }}
+      SFTP_REMOTE_DIR: ${{ vars.SFTP_REMOTE_DIR }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate deployment settings
+        shell: bash
+        run: |
+          test -n "$SFTP_HOST" || { echo "Missing secret: SFTP_HOST"; exit 1; }
+          test -n "$SFTP_USERNAME" || { echo "Missing secret: SFTP_USERNAME"; exit 1; }
+          test -n "$SFTP_PASSWORD" || { echo "Missing secret: SFTP_PASSWORD"; exit 1; }
+          test -n "$SFTP_REMOTE_DIR" || { echo "Missing variable: SFTP_REMOTE_DIR"; exit 1; }
+
+      - name: Install lftp
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Trust SFTP host key
+        shell: bash
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "$SFTP_PORT" "$SFTP_HOST" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload website files
+        shell: bash
+        run: |
+          lftp -u "$SFTP_USERNAME","$SFTP_PASSWORD" -p "$SFTP_PORT" "sftp://$SFTP_HOST" <<EOF
+          set cmd:fail-exit yes
+          set net:max-retries 2
+          set net:timeout 30
+          mirror --reverse --verbose --only-newer --no-perms --parallel=4 \
+            --exclude-glob .git/** \
+            --exclude-glob .github/** \
+            --exclude-glob .vscode/** \
+            --exclude-glob .gitignore \
+            --exclude-glob DEPLOYMENT.md \
+            --exclude-glob README.md \
+            --exclude-glob LICENCE \
+            ./ "$SFTP_REMOTE_DIR"
+          bye
+          EOF
