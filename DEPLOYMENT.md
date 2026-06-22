@@ -17,9 +17,15 @@ Add these repository variables:
 
 Use port `22` unless the host says something else.
 
-Run deployment from `Actions` > `Deploy site` > `Run workflow`.
+Normal deploys run automatically when `main` is pushed to GitHub.
 
-The workflow uploads site files without deleting remote-only files.
+The normal deploy uploads only site files changed in the latest commit. If a tracked site file is deleted or renamed in Git, the workflow removes the old server file too.
+
+To run a deploy by hand, open `Actions` > `Deploy site` > `Run workflow`.
+
+Use mode `changed` for a fast latest-commit deploy.
+
+Use mode `full` if the server needs a repair sync. Full sync checks the whole site tree, so it is slower. Full sync does not delete remote-only files.
 
 These local repository files are not uploaded:
 
