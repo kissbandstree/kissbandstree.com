@@ -40,7 +40,7 @@ jobs:
       DEPLOY_MODE: ${{ github.event.inputs.mode || 'changed' }}
       DEPLOY_UPLOAD_LIST: /tmp/deploy-upload.txt
       DEPLOY_DELETE_LIST: /tmp/deploy-delete.txt
-      DEPLOY_LFTP_SCRIPT: /tmp/deploy.lftp
+      DEPLOY_SFTP_BATCH: /tmp/deploy.sftp
 
     steps:
       - name: Check out repository
@@ -144,14 +144,22 @@ jobs:
             echo "delete_count=$delete_count"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Install lftp
+      - name: Install deploy tools
         if: steps.plan.outputs.has_changes == 'true'
         shell: bash
         run: |
-          if ! command -v lftp >/dev/null 2>&1; then
-            sudo apt-get install -y --no-install-recommends lftp || {
+          tools=()
+
+          if [[ "${{ steps.plan.outputs.mode }}" == "full" ]]; then
+            command -v lftp >/dev/null 2>&1 || tools+=(lftp)
+          else
+            command -v sshpass >/dev/null 2>&1 || tools+=(sshpass)
+          fi
+
+          if [[ "${#tools[@]}" -gt 0 ]]; then
+            sudo apt-get install -y --no-install-recommends "${tools[@]}" || {
               sudo apt-get update
-              sudo apt-get install -y --no-install-recommends lftp
+              sudo apt-get install -y --no-install-recommends "${tools[@]}"
             }
           fi
 
@@ -169,32 +177,39 @@ jobs:
         run: |
           remote_root="${SFTP_REMOTE_DIR%/}"
 
-          {
-            echo "set cmd:fail-exit yes"
-            echo "set net:max-retries 2"
-            echo "set net:timeout 30"
-            printf 'mkdir -p "%s"\n' "$remote_root"
-          } > "$DEPLOY_LFTP_SCRIPT"
+          : > "$DEPLOY_SFTP_BATCH"
+
+          add_remote_dirs() {
+            local relative_dir="$1"
+            local current="$remote_root"
+
+            [[ -z "$relative_dir" || "$relative_dir" == "." ]] && return
+
+            IFS='/' read -ra parts <<< "$relative_dir"
+            for part in "${parts[@]}"; do
+              [[ -z "$part" ]] && continue
+              current="$current/$part"
+              printf -- '-mkdir "%s"\n' "$current" >> "$DEPLOY_SFTP_BATCH"
+            done
+          }
 
           while IFS= read -r file; do
             [[ -z "$file" ]] && continue
-            printf 'rm -f "%s/%s"\n' "$remote_root" "$file" >> "$DEPLOY_LFTP_SCRIPT"
+            printf -- '-rm "%s/%s"\n' "$remote_root" "$file" >> "$DEPLOY_SFTP_BATCH"
           done < "$DEPLOY_DELETE_LIST"
 
           while IFS= read -r file; do
             [[ -z "$file" ]] && continue
             dir=$(dirname "$file")
-            if [[ "$dir" == "." ]]; then
-              target_dir="$remote_root"
-            else
-              target_dir="$remote_root/$dir"
-            fi
-            printf 'mkdir -p "%s"\n' "$target_dir" >> "$DEPLOY_LFTP_SCRIPT"
-            printf 'put -O "%s" "%s"\n' "$target_dir" "$file" >> "$DEPLOY_LFTP_SCRIPT"
+            add_remote_dirs "$dir"
+            printf 'put "%s" "%s/%s"\n' "$file" "$remote_root" "$file" >> "$DEPLOY_SFTP_BATCH"
           done < "$DEPLOY_UPLOAD_LIST"
 
-          echo "bye" >> "$DEPLOY_LFTP_SCRIPT"
-          lftp -u "$SFTP_USERNAME","$SFTP_PASSWORD" -p "$SFTP_PORT" "sftp://$SFTP_HOST" < "$DEPLOY_LFTP_SCRIPT"
+          sshpass -p "$SFTP_PASSWORD" sftp \
+            -P "$SFTP_PORT" \
+            -o BatchMode=no \
+            -o StrictHostKeyChecking=yes \
+            "$SFTP_USERNAME@$SFTP_HOST" < "$DEPLOY_SFTP_BATCH"
 
       - name: Full sync website files
         if: steps.plan.outputs.mode == 'full' && steps.plan.outputs.has_changes == 'true'
