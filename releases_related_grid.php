@@ -53,7 +53,6 @@
   <div class="grid-container-release" id="grid-container">
     <?php
     foreach ($releaseFiles as $txtFile) {
-      $fileName = basename($txtFile);
       $slug = basename($txtFile, '.txt');
       $lines = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       $artist = trim($lines[0] ?? '');
@@ -65,7 +64,7 @@
       $imgUrl = find_related_thumb($slug);
 
       echo '<div class="grid-item" data-members="' . $membersAttr . '">';
-      echo '<a href="release_related.php?a=' . urlencode($fileName) . '">';
+      echo '<a href="release_related.php?a=' . urlencode($slug) . '">';
       echo '<img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" title="' . $tooltip . '" class="bitmap">';
       echo '</a>';
       echo '</div>';

@@ -78,11 +78,11 @@ if ($currentIndex === false) {
 
 $nextIndex = ($currentIndex + 1) % count($releases);
 $prevIndex = ($currentIndex - 1 + count($releases)) % count($releases);
-$nextReleaseFile = basename($releases[$nextIndex]);
-$prevReleaseFile = basename($releases[$prevIndex]);
+$nextReleaseSlug = basename($releases[$nextIndex], '.txt');
+$prevReleaseSlug = basename($releases[$prevIndex], '.txt');
 
 $releaseFiles = array_map(function ($item) {
-  return basename($item);
+  return basename($item, '.txt');
 }, $releases);
 ?>
 
@@ -104,7 +104,7 @@ $releaseFiles = array_map(function ($item) {
 
   <div class="skip-buttons colored">
       <span id="skip-left-btn" class="skip-button">
-        <a href="release_related.php?a=<?= htmlspecialchars($prevReleaseFile, ENT_QUOTES, 'UTF-8') ?>" title="Previous">
+        <a href="release_related.php?a=<?= htmlspecialchars($prevReleaseSlug, ENT_QUOTES, 'UTF-8') ?>" title="Previous">
           <svg class="icons">
             <use href="icons.svg#skip_left"></use>
           </svg>
@@ -120,7 +120,7 @@ $releaseFiles = array_map(function ($item) {
       </span>
 
       <span id="skip-right-btn" class="skip-button">
-        <a href="release_related.php?a=<?= htmlspecialchars($nextReleaseFile, ENT_QUOTES, 'UTF-8') ?>" title="Next">
+        <a href="release_related.php?a=<?= htmlspecialchars($nextReleaseSlug, ENT_QUOTES, 'UTF-8') ?>" title="Next">
           <svg class="icons">
             <use href="icons.svg#skip_right"></use>
           </svg>
@@ -135,7 +135,7 @@ $releaseFiles = array_map(function ($item) {
     const playButton = document.getElementById('playPauseBtn');
 
     const releases = <?= json_encode($releaseFiles) ?>;
-    const currentIndex = releases.indexOf(<?= json_encode($releaseFile) ?>);
+    const currentIndex = releases.indexOf(<?= json_encode($releaseSlug) ?>);
 
     function navigateToNextRelease() {
       const nextRelease = releases[(currentIndex + 1) % releases.length];

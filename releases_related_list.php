@@ -58,7 +58,6 @@
   <div class="standard">
     <?php
     foreach ($releaseFiles as $txtFile) {
-      $fileName = basename($txtFile);
       $slug = basename($txtFile, '.txt');
       $lines = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       $artist = trim($lines[0] ?? '');
@@ -70,8 +69,8 @@
 
       echo '<div class="release-list-item" data-members="' . $membersAttr . '">';
       echo '<h2 class="small-photo-heading">';
-      echo '<a href="release_related.php?a=' . urlencode($fileName) . '" class="thumb-link"><span class="band-photo-wrap"><img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" class="band-photo bitmap"></span></a>';
-      echo '<a href="release_related.php?a=' . urlencode($fileName) . '" class="artist-name">' . htmlspecialchars($artist, ENT_QUOTES, 'UTF-8') . ' - "' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '"</a>';
+      echo '<a href="release_related.php?a=' . urlencode($slug) . '" class="thumb-link"><span class="band-photo-wrap"><img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" class="band-photo bitmap"></span></a>';
+      echo '<a href="release_related.php?a=' . urlencode($slug) . '" class="artist-name">' . htmlspecialchars($artist, ENT_QUOTES, 'UTF-8') . ' - "' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '"</a>';
       echo '</h2>';
       echo '<div class="band-lineup">' . htmlspecialchars($date, ENT_QUOTES, 'UTF-8') . '</div><br>';
       echo '</div>';

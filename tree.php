@@ -234,7 +234,6 @@
     <div class="grid-container-releases" id="grid-container-solo">
       <?php
       foreach ($relatedFiles as $txtFile) {
-        $fileName = basename($txtFile);
         $slug   = basename($txtFile, '.txt');
         $lines  = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $artist = $lines[0] ?? '';
@@ -257,7 +256,7 @@
         }
 
         echo '<div class="grid-item">';
-        echo '<a href="release_related.php?a=' . urlencode($fileName) . '">';
+        echo '<a href="release_related.php?a=' . urlencode($slug) . '">';
         echo '<img src="' . $imgUrl . '" alt="' . htmlspecialchars($title) . '" title="' . $tooltip . '" class="bitmap">';
         echo '</a>';
         echo '</div>';
