@@ -844,15 +844,33 @@ body.toc-lock {
   object-fit: cover;
 }
 
+.small-photo-heading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  max-width: 100%;
+}
+
+.small-photo-heading .band-photo-wrap,
+.small-photo-heading .artist-photo-wrap {
+  margin-right: 0;
+  position: relative;
+  top: -2px;
+}
+
 .band-photo-wrap {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   line-height: 0;
-  vertical-align: -9px;
+  vertical-align: middle;
   margin-right: 8px;
 }
 
 .thumb-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   line-height: 0;
   vertical-align: middle;
 }
@@ -868,13 +886,19 @@ body.toc-lock {
 }
 
 .artist-photo-wrap {
-  display: inline-block;
-  vertical-align: -4px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  vertical-align: middle;
   margin-right: 2px;
 }
 
 h2 .artist-photo-wrap {
   margin-right: 16px;
+}
+
+h2.small-photo-heading .artist-photo-wrap {
+  margin-right: 0;
 }
 
 /* hide checkbox but keep it accessible */

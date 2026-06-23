@@ -53,10 +53,10 @@
       }
 
       echo "<div class='band-list-item' data-members='$members_attr'>";
-      echo "<h2>";
+      echo "<h2 class='small-photo-heading'>";
       echo "<a href='band.php?a=$band_slug' class='thumb-link'>";
       echo "<span class='band-photo-wrap'><img src='$imgUrl' alt='" . htmlspecialchars($band_name) . "' class='band-photo bitmap'></span>";
-      echo "</a> ";
+      echo "</a>";
       echo "<a href='band.php?a=$band_slug' class='artist-name'>" . htmlspecialchars($band_name) . "</a>";
       if ($year_line !== '') {
         // Safe text, then insert break opportunities after common separators

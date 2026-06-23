@@ -323,10 +323,10 @@ $artist_name = trim($contents[0]);
           $imgUrl = "img/band.png";
         }
 
-        echo "<h2>";
+        echo "<h2 class='small-photo-heading'>";
         echo "<a href='band.php?a=" . urlencode($slug) . "' class='thumb-link'>";
         echo "<span class='band-photo-wrap'><img src='$imgUrl' alt='" . htmlspecialchars($band_title) . "' class='band-photo bitmap' loading='lazy' decoding='async'></span>";
-        echo "</a> ";
+        echo "</a>";
 
         echo "<a href='band.php?a=" . urlencode($slug) . "' class='artist-name'>" . htmlspecialchars($band_title) . "</a>";
 

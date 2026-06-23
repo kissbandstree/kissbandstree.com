@@ -56,9 +56,9 @@
 
       echo "<div class='artist-list-item' data-members='$members_attr'>";
 
-      echo "<h2>";
+      echo "<h2 class='small-photo-heading'>";
       echo "<span class='artist-photo-wrap rounded'><a href='$artist_url'><img src='$imgUrl' alt='" . htmlspecialchars($artist_name) . "' class='artist-photo bitmap rounded'></a></span>";
-      echo "<a href='$artist_url'>" . htmlspecialchars($artist_name) . "</a>";
+      echo "<a href='$artist_url' class='artist-name'>" . htmlspecialchars($artist_name) . "</a>";
       echo "</h2><br>";
       echo "<div id='bands_$artist_id'>";
 
