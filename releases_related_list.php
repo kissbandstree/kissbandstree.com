@@ -69,9 +69,9 @@
       $imgUrl = find_related_thumb($slug);
 
       echo '<div class="release-list-item" data-members="' . $membersAttr . '">';
-      echo '<h2>';
-      echo '<span class="band-photo-wrap"><a href="release_related.php?a=' . urlencode($fileName) . '"><img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" class="band-photo bitmap"></a></span>';
-      echo '<a href="release_related.php?a=' . urlencode($fileName) . '">' . htmlspecialchars($artist, ENT_QUOTES, 'UTF-8') . ' - "' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '"</a>';
+      echo '<h2 class="small-photo-heading">';
+      echo '<a href="release_related.php?a=' . urlencode($fileName) . '" class="thumb-link"><span class="band-photo-wrap"><img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" class="band-photo bitmap"></span></a>';
+      echo '<a href="release_related.php?a=' . urlencode($fileName) . '" class="artist-name">' . htmlspecialchars($artist, ENT_QUOTES, 'UTF-8') . ' - "' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '"</a>';
       echo '</h2>';
       echo '<div class="band-lineup">' . htmlspecialchars($date, ENT_QUOTES, 'UTF-8') . '</div><br>';
       echo '</div>';
