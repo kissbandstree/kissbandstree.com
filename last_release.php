@@ -1,4 +1,6 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
+
 $releaseFiles = array_merge(
   glob('releases/band/*.txt', GLOB_NOSORT) ?: [],
   glob('releases/related/*.txt', GLOB_NOSORT) ?: []
@@ -15,9 +17,9 @@ foreach ($releaseFiles as $file) {
   $artist = trim($contents[0] ?? '');
   $title = trim($contents[1] ?? '');
   $dateText = trim($contents[2] ?? '');
-  $releaseDate = DateTime::createFromFormat('d-m-Y', $dateText);
+  $releaseSort = release_date_sort_value($dateText);
 
-  if (!$releaseDate) continue;
+  if ($releaseSort === PHP_INT_MAX) continue;
 
   $latestReleases[] = [
     'type' => $type,
@@ -25,7 +27,7 @@ foreach ($releaseFiles as $file) {
     'artist' => $artist,
     'title' => $title,
     'dateText' => $dateText,
-    'timestamp' => $releaseDate->getTimestamp(),
+    'timestamp' => $releaseSort,
   ];
 }
 

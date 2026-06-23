@@ -97,3 +97,39 @@ function render_numbered_tracklist($tracklistFile)
   return implode('<br>', $output) . '<br><br>';
 }
 
+function release_date_sort_value($dateText)
+{
+  $dateText = trim($dateText);
+  if (!preg_match('/^(\d{2}|XX)-(\d{2}|XX)-(\d{4}|XXXX)$/i', $dateText, $matches)) {
+    return PHP_INT_MAX;
+  }
+
+  if (strtoupper($matches[3]) === 'XXXX') {
+    return PHP_INT_MAX;
+  }
+
+  $day = strtoupper($matches[1]) === 'XX' ? 1 : (int) $matches[1];
+  $month = strtoupper($matches[2]) === 'XX' ? 1 : (int) $matches[2];
+  $year = (int) $matches[3];
+
+  if ($month < 1 || $month > 12 || $day < 1 || $day > 31) {
+    return PHP_INT_MAX;
+  }
+
+  return ($year * 10000) + ($month * 100) + $day;
+}
+
+function compare_release_files_by_date($a, $b)
+{
+  $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  $aSort = release_date_sort_value($aLines[2] ?? '');
+  $bSort = release_date_sort_value($bLines[2] ?? '');
+
+  if ($aSort === $bSort) {
+    return strcasecmp($a, $b);
+  }
+
+  return $aSort <=> $bSort;
+}
+

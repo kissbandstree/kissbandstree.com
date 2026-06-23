@@ -140,13 +140,7 @@
       $releaseFiles = glob('releases/band/*.txt');
 
       // Sort chronologically
-      usort($releaseFiles, function ($a, $b) {
-        $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $aDate = isset($aLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($aLines[2])) : null;
-        $bDate = isset($bLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($bLines[2])) : null;
-        return $aDate <=> $bDate;
-      });
+      usort($releaseFiles, 'compare_release_files_by_date');
 
       $releaseText = [];
       foreach ($releaseFiles as $txtFile) {
@@ -202,13 +196,7 @@
       $relatedFiles = glob('releases/related/*.txt');
 
       // Sort chronologically
-      usort($relatedFiles, function ($a, $b) {
-        $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $aDate = isset($aLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($aLines[2])) : null;
-        $bDate = isset($bLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($bLines[2])) : null;
-        return $aDate <=> $bDate;
-      });
+      usort($relatedFiles, 'compare_release_files_by_date');
 
       $relatedText = [];
       foreach ($relatedFiles as $txtFile) {

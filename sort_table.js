@@ -222,15 +222,17 @@
   }
 
   function isDmyDate(value) {
-    return /^(\d{1,2})-(\d{1,2})-(\d{4})$/.test(String(value || "").trim());
+    return /^(\d{1,2}|XX)-(\d{1,2}|XX)-(\d{4}|XXXX)$/i.test(String(value || "").trim());
   }
 
   function parseDmy(value) {
-    var m = String(value || "").trim().match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/);
+    var m = String(value || "").trim().match(/^(\d{1,2}|XX)-(\d{1,2}|XX)-(\d{4}|XXXX)$/i);
     if (!m) return Number.POSITIVE_INFINITY;
 
-    var day = Number(m[1]);
-    var month = Number(m[2]) - 1;
+    if (m[3].toUpperCase() === "XXXX") return Number.POSITIVE_INFINITY;
+
+    var day = m[1].toUpperCase() === "XX" ? 1 : Number(m[1]);
+    var month = m[2].toUpperCase() === "XX" ? 0 : Number(m[2]) - 1;
     var year = Number(m[3]);
     var ts = Date.UTC(year, month, day);
     return Number.isFinite(ts) ? ts : Number.POSITIVE_INFINITY;

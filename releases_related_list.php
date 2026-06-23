@@ -16,6 +16,8 @@
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/toc_releases_related.php"); ?>
 
   <?php
+  require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
+
   function find_related_thumb($slug)
   {
     $extensions = ['png', 'webp', 'jpg', 'jpeg'];
@@ -31,22 +33,7 @@
   }
 
   $releaseFiles = glob('releases/related/*.txt');
-
-  usort($releaseFiles, function ($a, $b) {
-    $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $aDate = isset($aLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($aLines[2])) : false;
-    $bDate = isset($bLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($bLines[2])) : false;
-
-    $aTs = $aDate ? $aDate->getTimestamp() : 0;
-    $bTs = $bDate ? $bDate->getTimestamp() : 0;
-
-    if ($aTs === $bTs) {
-      return strcasecmp($a, $b);
-    }
-
-    return $aTs <=> $bTs;
-  });
+  usort($releaseFiles, 'compare_release_files_by_date');
   ?>
 
   <div class="standard colored">

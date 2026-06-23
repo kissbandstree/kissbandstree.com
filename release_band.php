@@ -42,22 +42,7 @@ $imgThumb = find_release_cover($release);
 $thumb = $imgThumb;
 
 $releases = glob('releases/band/*.txt');
-usort($releases, function ($a, $b) {
-  $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-  $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-  $aDate = isset($aLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($aLines[2])) : false;
-  $bDate = isset($bLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($bLines[2])) : false;
-
-  $aTs = $aDate ? $aDate->getTimestamp() : 0;
-  $bTs = $bDate ? $bDate->getTimestamp() : 0;
-
-  if ($aTs === $bTs) {
-    return strcasecmp($a, $b);
-  }
-
-  return $aTs <=> $bTs;
-});
+usort($releases, 'compare_release_files_by_date');
 
 $currentIndex = array_search($filePath, $releases, true);
 if ($currentIndex === false) {

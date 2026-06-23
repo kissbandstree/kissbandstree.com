@@ -2,18 +2,14 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 
 $releaseParam = isset($_GET['a']) ? trim($_GET['a']) : '';
-$releaseFile = basename($releaseParam);
+$releaseSlug = basename($releaseParam);
 
-if ($releaseFile === '') {
+if ($releaseSlug === '' || substr($releaseSlug, -4) === '.txt') {
   http_response_code(404);
   die('<h2>Release file not found.</h2>');
 }
 
-if (substr($releaseFile, -4) !== '.txt') {
-  $releaseFile .= '.txt';
-}
-
-$releaseSlug = basename($releaseFile, '.txt');
+$releaseFile = $releaseSlug . '.txt';
 $filePath = 'releases/related/' . $releaseFile;
 
 if (!is_file($filePath)) {
@@ -54,22 +50,7 @@ $imgThumb = find_related_cover($releaseSlug);
 $thumb = $imgThumb;
 
 $releases = glob('releases/related/*.txt');
-usort($releases, function ($a, $b) {
-  $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-  $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-  $aDate = isset($aLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($aLines[2])) : false;
-  $bDate = isset($bLines[2]) ? DateTime::createFromFormat('d-m-Y', trim($bLines[2])) : false;
-
-  $aTs = $aDate ? $aDate->getTimestamp() : 0;
-  $bTs = $bDate ? $bDate->getTimestamp() : 0;
-
-  if ($aTs === $bTs) {
-    return strcasecmp($a, $b);
-  }
-
-  return $aTs <=> $bTs;
-});
+usort($releases, 'compare_release_files_by_date');
 
 $currentIndex = array_search($filePath, $releases, true);
 if ($currentIndex === false) {
