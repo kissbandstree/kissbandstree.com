@@ -1,0 +1,13 @@
+# Repository-only files
+.git/**
+.github/**
+.vscode/**
+.ftpignore
+.gitignore
+DEPLOYMENT.md
+README.md
+kissbandstree.md
+LICENCE
+
+# Local photo originals
+photos_bands_originals/**

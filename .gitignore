@@ -17,3 +17,6 @@ vendor/
 .env
 .env.local
 .env.*.local
+
+# Local photo originals
+/photos_bands_originals/

@@ -5,10 +5,15 @@ workflow="${1:?Pass the workflow path}"
 test_dir=$(mktemp -d)
 cleanup() {
   rm -f "$test_dir/upload.sh" "$test_dir/full.sh" "$test_dir/uploads.txt" \
-    "$test_dir/deletes.txt" "$test_dir/batch.txt" "$test_dir/result.txt"
-  rmdir "$test_dir"
+    "$test_dir/deletes.txt" "$test_dir/batch.txt" "$test_dir/result.txt" \
+    "$test_dir/plan.sh" "$test_dir/output.txt" "$test_dir/site/.ftpignore" \
+    "$test_dir/site/photos_bands_originals/keep.png" \
+    "$test_dir/site/photos_bands/keep.png"
+  rmdir "$test_dir/site/photos_bands_originals" "$test_dir/site/photos_bands" \
+    "$test_dir/site" "$test_dir"
 }
 trap cleanup EXIT
+mkdir -p "$test_dir/site/photos_bands_originals" "$test_dir/site/photos_bands"
 
 extract_step() {
   awk -v step="$1" '
@@ -23,6 +28,7 @@ extract_step() {
 
 extract_step "Upload changed website files" "$test_dir/upload.sh"
 extract_step "Full sync website files" "$test_dir/full.sh"
+extract_step "Prepare deployment plan" "$test_dir/plan.sh"
 
 export DEPLOY_UPLOAD_LIST="$test_dir/uploads.txt"
 export DEPLOY_DELETE_LIST="$test_dir/deletes.txt"
@@ -30,6 +36,48 @@ export DEPLOY_SFTP_BATCH="$test_dir/batch.txt"
 export TEST_RESULT="$test_dir/result.txt"
 export SFTP_REMOTE_DIR=/website
 export SFTP_PASSWORD=test SFTP_USERNAME=test SFTP_HOST=test SFTP_PORT=22
+
+git() {
+  case "$1" in
+    rev-parse) echo base ;;
+    diff)
+      printf '%s\n' \
+        $'A\tphotos_bands_originals/keep.png' \
+        $'M\tphotos_bands_originals/keep.png' \
+        $'T\tphotos_bands_originals/keep.png' \
+        $'D\tphotos_bands_originals/deleted.png' \
+        $'R100\tphotos_bands_originals/old.png\tphotos_bands_originals/keep.png' \
+        $'C100\tphotos_bands_originals/old.png\tphotos_bands_originals/keep.png' \
+        $'A\t.ftpignore'
+      if [[ "${TEST_ARCHIVE_ONLY:-false}" != true ]]; then
+        printf '%s\n' $'M\tphotos_bands/keep.png' $'D\tphotos_bands/deleted.png'
+      fi
+      ;;
+    *) echo "Unexpected git command: $*" >&2; return 1 ;;
+  esac
+}
+export -f git
+export DEPLOY_MODE=changed GITHUB_SHA=test GITHUB_OUTPUT="$test_dir/output.txt"
+printf 'original\n' > "$test_dir/site/photos_bands_originals/keep.png"
+printf 'published\n' > "$test_dir/site/photos_bands/keep.png"
+printf 'photos_bands_originals/**\n' > "$test_dir/site/.ftpignore"
+(
+  cd "$test_dir/site"
+  bash -e -o pipefail "$test_dir/plan.sh"
+)
+test "$(cat "$DEPLOY_UPLOAD_LIST")" = photos_bands/keep.png
+test "$(cat "$DEPLOY_DELETE_LIST")" = photos_bands/deleted.png
+grep -q '^has_changes=true$' "$GITHUB_OUTPUT"
+
+export TEST_ARCHIVE_ONLY=true
+: > "$GITHUB_OUTPUT"
+(
+  cd "$test_dir/site"
+  bash -e -o pipefail "$test_dir/plan.sh"
+)
+test ! -s "$DEPLOY_UPLOAD_LIST"
+test ! -s "$DEPLOY_DELETE_LIST"
+grep -q '^has_changes=false$' "$GITHUB_OUTPUT"
 
 sshpass() {
   cat > "$TEST_RESULT"
@@ -71,5 +119,12 @@ page_line=$(line_number 'mirror --reverse --verbose --only-newer --no-perms --pa
 test "$data_line" -lt "$loader_line"
 test "$loader_line" -lt "$page_line"
 grep -q -F -- '--exclude-glob .github/**' "$TEST_RESULT"
+grep -q -F -- '--exclude-glob .ftpignore' "$TEST_RESULT"
+grep -q -F -- '--exclude-glob photos_bands_originals/**' "$TEST_RESULT"
+grep -q -F -- '      - photos_bands_originals/**' "$workflow"
+grep -q -F -- '      - .ftpignore' "$workflow"
+site_root=$(cd "$(dirname "$workflow")/../.." && pwd)
+grep -q -x -F -- '/photos_bands_originals/' "$site_root/.gitignore"
+grep -q -x -F -- 'photos_bands_originals/**' "$site_root/.ftpignore"
 
-echo "PASS: deployment syntax, changed/full upload order, deletes last, deletion-only mode, tooling exclusion."
+echo "PASS: deployment syntax, upload order, deletes last, deletion-only mode, tooling/archive exclusions, deployable photos."

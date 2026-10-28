@@ -7,11 +7,13 @@ on:
     paths-ignore:
       - .github/**
       - .vscode/**
+      - .ftpignore
       - .gitignore
       - DEPLOYMENT.md
       - README.md
       - kissbandstree.md
       - LICENCE
+      - photos_bands_originals/**
   workflow_dispatch:
     inputs:
       mode:
@@ -89,7 +91,7 @@ jobs:
 
           is_excluded() {
             case "$1" in
-              .git/*|.github/*|.vscode/*|.gitignore|DEPLOYMENT.md|README.md|kissbandstree.md|LICENCE)
+              .git/*|.github/*|.vscode/*|.ftpignore|.gitignore|DEPLOYMENT.md|README.md|kissbandstree.md|LICENCE|photos_bands_originals/*)
                 return 0
                 ;;
             esac
@@ -234,11 +236,13 @@ jobs:
             --exclude-glob .git/** \
             --exclude-glob .github/** \
             --exclude-glob .vscode/** \
+            --exclude-glob .ftpignore \
             --exclude-glob .gitignore \
             --exclude-glob DEPLOYMENT.md \
             --exclude-glob README.md \
             --exclude-glob kissbandstree.md \
             --exclude-glob LICENCE \
+            --exclude-glob photos_bands_originals/** \
             ./ "$SFTP_REMOTE_DIR"
           bye
           EOF

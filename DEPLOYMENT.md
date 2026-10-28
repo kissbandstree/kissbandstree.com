@@ -32,8 +32,19 @@ Tests, migration and benchmark tools live under `.github/`, so the existing
 push filters and both deployment modes exclude them. Do not upload benchmark
 outputs, pre-migration snapshots or research files.
 
+`photos_bands_originals/` is local only while the archive awaits cleanup. It is
+ignored by Git and excluded from changed and full deployments, including remote
+deletions. These exclusions do not delete local originals or existing server
+copies, and do not purge older Git history. Published images in `photos_bands/`
+and `photos_bands_large/` remain deployable.
+
+`.ftpignore` supplies the same repository/archive exclusions for FTP clients
+that support it. GitHub Actions enforces its own exclusions in the workflow;
+it does not read `.ftpignore`.
+
 Run `bash .github/tests/deployment.sh .github/workflows/deploy.yml` to check
-the upload ordering and shell syntax with mocked transfer commands.
+the upload ordering, archive exclusions and shell syntax with mocked transfer
+commands.
 
 To run a deploy by hand, open `Actions` > `Deploy site` > `Run workflow`.
 
@@ -46,8 +57,10 @@ These local repository files are not uploaded:
 - `.git/`
 - `.github/`
 - `.vscode/`
+- `.ftpignore`
 - `.gitignore`
 - `DEPLOYMENT.md`
 - `README.md`
 - `kissbandstree.md`
 - `LICENCE`
+- `photos_bands_originals/`

@@ -27,6 +27,11 @@
 - Avoid decorative visual effects unless explicitly requested.
 - Use `<h2>` for all section headers. Reserve `<h1>` only for the main page title/top-line heading.
 
+## Licensing and copyright
+
+- Never include years or year ranges in the site's own licences or copyright
+  sentences, including the footer. Preserve required third-party notices.
+
 ## Working copy
 
 - The authoritative working site is
@@ -214,6 +219,11 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
   `X:\My Drive\WEBSITES\WEB SITES SOURCE\kissbandstree.com\photos_artists_originals`.
 - These SOURCE archives are separate from the Google Drive website directory.
   Do not put originals in the deployed site.
+- Keep the website's `photos_bands_originals/` folder local only, excluded from
+  Git and FTP/SFTP deployment. It is awaiting cleanup and may be added later
+  only on explicit request. Exclusion does not authorize deleting originals.
+  Keep `.gitignore`, `.ftpignore` and the workflow's push filters and both
+  deployment modes consistent.
 - The artist-original archive must contain only originals of photos currently
   used on the site. Keep research candidates in temporary session storage.
   Remove rejected candidates and superseded originals from this archive;
