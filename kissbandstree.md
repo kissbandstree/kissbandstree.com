@@ -67,6 +67,8 @@
   guessed dates.
 - Write URLs without a trailing slash, including official website links,
   photo sources and documentation references.
+- Prefer URLs without the `www.` prefix where the destination supports it.
+  Always use `facebook.com`, not `www.facebook.com`, for Facebook URLs.
 - Read representative existing entries before adding or changing site content.
   Follow established conventions rather than introducing a new format.
 - Keep band Comments short and factual, in a single unbroken text block with
@@ -279,8 +281,13 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
   Restored at the user's request instead of the black-and-white 2016
   performance photo; only the currently used color original belongs in the
   artist-original archive.
-- Bengan Jonasson uses the standard artist placeholder pending a suitable
-  individual photo; do not restore the rejected band-photo crop.
+- Bengan Jonasson's artist-selected performance photo is by Mattias Boström:
+  <https://facebook.com/photo/?fbid=10151280424111128&set=a.474229441127>.
+  The untouched 640x640 download is retained in the artist-original archive as
+  `bengan_jonasson_mattias_bostrom_facebook_10151280424111128.jpg`.
+  Crop `(145,30,400,400)` and generate the native 400x400 portrait and 64x64
+  thumbnail directly from that original. Do not restore the rejected
+  band-photo crop.
 - Individual-photo candidate: Peter Bothén's photograph of Bengan playing bass,
   taken 25 September 2020:
   <https://www.flickr.com/photos/134299215@N03/50395425767>.
@@ -294,8 +301,7 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
   <https://facebook.com/ikizmusic> (linked by his Turkish Jazz artist profile).
 - Bengan Jonasson's Facebook: <https://facebook.com/benganjonasson>,
   confirmed by the user.
-- Outstanding content: Bengan's individual photo and verified personal websites
-  for the new artists.
+- Outstanding content: verified personal websites for the new artists.
   Current Dan/Bengan website fields link to the band's cast biography and
   Robert's to Yamaha's biography; do not mistake these for personal websites.
 - User-supplied individual-photo candidate: Bengan performing at Nordic Guitar
