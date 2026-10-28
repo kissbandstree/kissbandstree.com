@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
 
   <?php
   // Fetch all filenames in the artists folder
-  $artists = glob('artists/*.txt');
+  $artists = content_glob('artists/*.txt');
   ?>
 
   <div class="standard colored">
@@ -52,7 +52,7 @@
         <?php
         // Loop through all the files in the artists folder
         foreach ($artists as $i => $file) {
-          $contents = file($file);
+          $contents = content_file($file);
           $basename = basename($file, ".txt");
 
           // Process the list of names
@@ -76,7 +76,7 @@
           // Output table rows
           echo "<tr data-members='" . $members_attr . "'>";
           echo "<td style='text-align: right;' class='not-wrap'>" . ($i + 1) . "</td>"; // index
-          if (file_exists('photos_artists/' . $basename . '.png')) {
+          if (content_exists('photos_artists/' . $basename . '.png')) {
             echo "<td class='not-wrap' title='" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "'>
         <a href='/artist.php?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>
         <img src='photos_artists/" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . ".png' alt='artist' class='bitmap'>
@@ -91,7 +91,7 @@
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[1]) . "'>" . trim($contents[1]) . "</td>"; // instrument
           echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars(trim($contents[6]), ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[6]), ENT_QUOTES, 'UTF-8') . "</td>";
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[5]) . "'>" . implode(', ', $links) . "</td>"; // played with
-          echo "<td class='not-wrap'>" . date('d-m-Y', filemtime('artists/' . $basename . '.txt')) . "</td>"; // entry
+          echo "<td class='not-wrap'>" . date('d-m-Y', content_mtime('artists/' . $basename . '.txt')) . "</td>"; // entry
           echo "</tr>";
         }
         ?>

@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php'); ?>
+<?php
+require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
 
   <?php
   // Load artist files
-  $artists = glob(__DIR__ . '/artists/*.txt');
+  $artists = content_glob(__DIR__ . '/artists/*.txt');
 
   // Month headings + days per month (allow Feb 29)
   $months = [1 => 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -23,7 +24,7 @@
 
   // Build birthdays; DOB is on line 9 (index 8) as dd-mm-YYYY (YYYY may include ? like 19??)
   foreach ($artists as $f) {
-    $c   = file($f, FILE_IGNORE_NEW_LINES);
+    $c   = content_file($f, FILE_IGNORE_NEW_LINES);
     $dob = trim($c[8] ?? '');
     // Match dd-mm-(YYYY|19?? etc.). Allow -, ., /
     if (!preg_match('/^(\d{1,2})[.\-\/](\d{1,2})[.\-\/]([0-9?]{2,4})$/', $dob, $m)) continue;
@@ -38,7 +39,7 @@
     $name       = trim($c[0] ?? $slug);
     $artist_url = '/artist.php?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8');
 
-    $imgRel = file_exists(__DIR__ . "/photos_artists/$slug.png")
+    $imgRel = content_exists(__DIR__ . "/photos_artists/$slug.png")
       ? "/photos_artists/$slug.png"
       : "/img/artist_small.png";
 

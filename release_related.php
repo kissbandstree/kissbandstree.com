@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/content.php';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 
 $releaseParam = isset($_GET['a']) ? trim($_GET['a']) : '';
@@ -12,12 +13,12 @@ if ($releaseSlug === '' || substr($releaseSlug, -4) === '.txt') {
 $releaseFile = $releaseSlug . '.txt';
 $filePath = 'releases/related/' . $releaseFile;
 
-if (!is_file($filePath)) {
+if (!content_exists($filePath)) {
   http_response_code(404);
   die('<h2>Release file not found: ' . htmlspecialchars($releaseFile, ENT_QUOTES, 'UTF-8') . '</h2>');
 }
 
-$contents = file($filePath, FILE_IGNORE_NEW_LINES);
+$contents = content_file($filePath, FILE_IGNORE_NEW_LINES);
 $artistName = trim($contents[0] ?? '');
 $albumTitle = trim($contents[1] ?? '');
 $releaseDate = trim($contents[2] ?? '');
@@ -31,14 +32,14 @@ function find_related_cover($slug)
 
   foreach ($extensions as $ext) {
     $large = 'photos_releases_large/related/' . $slug . '.' . $ext;
-    if (file_exists($large)) {
+    if (content_exists($large)) {
       return $large;
     }
   }
 
   foreach ($extensions as $ext) {
     $small = 'photos_releases/related/' . $slug . '.' . $ext;
-    if (file_exists($small)) {
+    if (content_exists($small)) {
       return $small;
     }
   }
@@ -49,7 +50,7 @@ function find_related_cover($slug)
 $imgThumb = find_related_cover($releaseSlug);
 $thumb = $imgThumb;
 
-$releases = glob('releases/related/*.txt');
+$releases = content_glob('releases/related/*.txt');
 usort($releases, 'compare_release_files_by_date');
 
 $currentIndex = array_search($filePath, $releases, true);
@@ -210,7 +211,7 @@ $releaseFiles = array_map(function ($item) {
       echo 'WITH KISS MEMBER: ' . $memberLinks . '<br>';
     }
     echo '<br>';
-    echo 'Entry updated: ' . date('d-m-Y.', filemtime($filePath));
+    echo 'Entry updated: ' . date('d-m-Y.', content_mtime($filePath));
     ?>
   </div>
 
@@ -256,8 +257,8 @@ $releaseFiles = array_map(function ($item) {
   <div class="standard justify center-on-medium-screen" id="release-related-comments-container">
     <?php
     $commentsFile = 'releases_comments/related/' . $releaseSlug . '.txt';
-    if (file_exists($commentsFile) && filesize($commentsFile) > 0) {
-      $commentsContent = file_get_contents($commentsFile);
+    if (content_exists($commentsFile) && content_size($commentsFile) > 0) {
+      $commentsContent = content_text($commentsFile);
       echo nl2br(htmlspecialchars($commentsContent, ENT_QUOTES, 'UTF-8')) . '<br><br>';
     } else {
       echo 'No comments available.<br><br>';

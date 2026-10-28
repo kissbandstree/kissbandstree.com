@@ -1,15 +1,16 @@
 <?php
+require_once __DIR__ . '/content.php';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 
 $releaseFiles = array_merge(
-  glob('releases/band/*.txt', GLOB_NOSORT) ?: [],
-  glob('releases/related/*.txt', GLOB_NOSORT) ?: []
+  content_glob('releases/band/*.txt', GLOB_NOSORT) ?: [],
+  content_glob('releases/related/*.txt', GLOB_NOSORT) ?: []
 );
 
 $latestReleases = [];
 
 foreach ($releaseFiles as $file) {
-  $contents = @file($file, FILE_IGNORE_NEW_LINES);
+  $contents = @content_file($file, FILE_IGNORE_NEW_LINES);
   if (!$contents) continue;
 
   $type = basename(dirname($file));
@@ -47,7 +48,7 @@ function latest_release_thumb($type, $slug)
 
   foreach ($extensions as $ext) {
     $path = 'photos_releases/' . $type . '/' . $slug . '.' . $ext;
-    if (file_exists($path)) {
+    if (content_exists($path)) {
       return $path;
     }
   }

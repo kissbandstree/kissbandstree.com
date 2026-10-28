@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,8 +12,8 @@
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/toc.php"); ?>
 
   <?php
-  $bandFiles = glob('bands/*.txt');
-  $artists = glob('artists/*.txt');
+  $bandFiles = content_glob('bands/*.txt');
+  $artists = content_glob('artists/*.txt');
   ?>
 
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/news.php"); ?>
@@ -33,7 +33,7 @@
   <div class="standard justify center-on-medium-screen">
     <?php
     echo "Lineups: " . count($bandFiles) . ". Artists: " . count($artists) . ". ";
-    echo nl2br(file_get_contents("intro.txt"));
+    echo nl2br(content_text("intro.txt"));
     ?>
   </div>
 

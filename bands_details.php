@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 <head>
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/head.php"); ?>
@@ -10,7 +10,7 @@
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/toc_bands.php"); ?>
 
 <?php
-  $bandFiles = glob('bands/*.txt'); // Assuming text files are in the "bands" folder
+  $bandFiles = content_glob('bands/*.txt'); // Assuming text files are in the "bands" folder
 ?>
 
 <div class="standard colored">
@@ -23,7 +23,7 @@
 // Function to process the band name and generate the link
 function generateBandLink($file_path) {
   // Read the bands list from the provided file path
-  $bands_list = file_get_contents($file_path);
+  $bands_list = content_text($file_path);
 
   // Explode the bands list by newline to get each band name separately
   $bands_array = explode("\n", $bands_list);
@@ -54,9 +54,9 @@ function generateBandLink($file_path) {
     $band_file_path = 'bands/' . strtolower(str_replace(' ', '_', $band_name_clean)) . '.txt';
 
     // Check if the band file exists
-    if (file_exists($band_file_path)) {
+    if (content_exists($band_file_path)) {
       // Read the band information from the band file
-      $contents = file($band_file_path, FILE_IGNORE_NEW_LINES);
+      $contents = content_file($band_file_path, FILE_IGNORE_NEW_LINES);
 
       // Extract year
       $year = trim($contents[1]);
@@ -80,7 +80,7 @@ function generateBandLink($file_path) {
         );
 
         // Check if artist file exists
-        if (file_exists('artists/' . $member_name_link . '.txt')) {
+        if (content_exists('artists/' . $member_name_link . '.txt')) {
           $artist_link = "<a href=\"/artist.php?a=$member_name_link\">$name</a>";
         } else {
           $artist_link = $name;

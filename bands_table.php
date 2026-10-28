@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
 
   <?php
   // Fetch all filenames in the bands folder
-  $bands = glob('bands/*.txt');
+  $bands = content_glob('bands/*.txt');
   ?>
 
   <div class="standard colored">
@@ -38,7 +38,7 @@
         <?php
         // Loop through all the files in the bands folder
         foreach ($bands as $i => $file) {
-          $contents = file($file);
+          $contents = content_file($file);
           $members_attr = htmlspecialchars(trim($contents[5]), ENT_QUOTES, 'UTF-8');
           $basename = basename($file, ".txt");
 
@@ -65,7 +65,7 @@
           echo "<tr data-members='" . $members_attr . "'>";
           echo "<td class='not-wrap' style='text-align: right;'>" . ($i + 1) . "</td>";
 
-          if (file_exists('photos_bands/' . $basename . '.png')) {
+          if (content_exists('photos_bands/' . $basename . '.png')) {
             echo "<td class='not-wrap less-padding'><a href='/band.php?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></td>";
           } else {
             echo "<td class='not-wrap'><a href='/band.php?a=$basename'><img src='img/band.png' alt='band' class='bitmap'></a></td>";
@@ -80,7 +80,7 @@
 
           echo "<td class='not-wrap' data-sort-value='" . $member_count . "'>" . $member_count . "</td>";
 
-          $entry_ts = filemtime('bands/' . $basename . '.txt');
+          $entry_ts = content_mtime('bands/' . $basename . '.txt');
           echo "<td class='not-wrap' data-sort-value='" . $entry_ts . "'>" . date('d-m-Y', $entry_ts) . "</td>";
 
           echo "</tr>";

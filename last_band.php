@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php'); ?>
+<?php
+require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php'); ?>
 <div class="top-line">
 
     <svg class="icons" aria-hidden="true">
@@ -18,7 +19,7 @@
 
 <?php
 // Fetch all filenames in the bands folder sorted by modification time
-$bands = glob('bands/*.txt', GLOB_NOSORT);
+$bands = content_glob('bands/*.txt', GLOB_NOSORT);
 $band_mtimes = array_map(function($f) { return get_band_mtime(basename($f, '.txt')); }, $bands);
 array_multisort($band_mtimes, SORT_DESC, $bands);
 $latest_four_bands = array_slice($bands, 0, 4); // Get the four latest modified files
@@ -28,11 +29,11 @@ $latest_four_bands = array_slice($bands, 0, 4); // Get the four latest modified 
     <?php
     // Loop through the four latest modified files
     foreach ($latest_four_bands as $i => $file) {
-        $contents = file($file);
+        $contents = content_file($file);
         echo "<div class='band-item'>";
 
         // Fetch contents of file as an array, where each line is a 0-based numerically indexed element in the array
-        $contents = file($file);
+        $contents = content_file($file);
 
         // Fetch basename (the filename part only)
         $basename = basename($file, ".txt");
@@ -53,7 +54,7 @@ $latest_four_bands = array_slice($bands, 0, 4); // Get the four latest modified 
         }
 
         // Output some stuff
-        if (file_exists('photos_bands/' . $basename . '.png')) {
+        if (content_exists('photos_bands/' . $basename . '.png')) {
             echo "<div><a href='/band.php?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></div>";
         } else {
             echo "<div><a href='/band.php?a=$basename'><img src='img/band_small.png' alt='band' class='bitmap'></a></div>"; // photo

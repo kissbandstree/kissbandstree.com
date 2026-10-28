@@ -1,0 +1,419 @@
+{
+    "schema_version": 1,
+    "records": {
+        "all_systems_go": {
+            "modified": 1777427202,
+            "lines": [
+                "Vinnie Vincent Invasion\r\n",
+                "All Systems Go\r\n",
+                "17-05-1988\r\n",
+                "Vinnie Vincent\r\n"
+            ]
+        },
+        "anomaly": {
+            "modified": 1777427202,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Anomaly\r\n",
+                "15-09-2009\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "asshole": {
+            "modified": 1777427202,
+            "lines": [
+                "Gene Simmons\r\n",
+                "Asshole\r\n",
+                "08-06-2004\r\n",
+                "Gene Simmons\r\n"
+            ]
+        },
+        "audio_dog": {
+            "modified": 1777427202,
+            "lines": [
+                "Bruce Kulick\r\n",
+                "Audiodog\r\n",
+                "23-10-2001\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "badlands": {
+            "modified": 1782223852,
+            "lines": [
+                "Badlands\r\n",
+                "Badlands\r\n",
+                "08-05-1989\r\n",
+                "Eric Singer\r\n"
+            ]
+        },
+        "bk3": {
+            "modified": 1777427202,
+            "lines": [
+                "Bruce Kulick\r\n",
+                "BK3\r\n",
+                "02-02-2010\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "blackjack": {
+            "modified": 1777427202,
+            "lines": [
+                "Blackjack\r\n",
+                "Blackjack\r\n",
+                "18-06-1979\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "black_n_blue": {
+            "modified": 1782224259,
+            "lines": [
+                "Black 'n Blue\r\n",
+                "Black 'n Blue\r\n",
+                "02-08-1984\r\n",
+                "Tommy Thayer\r\n"
+            ]
+        },
+        "bombshell": {
+            "modified": 1777427202,
+            "lines": [
+                "Thayer-St.James\r\n",
+                "Bombshell\r\n",
+                "15-11-2025\r\n",
+                "Tommy Thayer\r\n"
+            ]
+        },
+        "brutal_planet": {
+            "modified": 1777427202,
+            "lines": [
+                "Alice Cooper\r\n",
+                "Brutal Planet\r\n",
+                "06-06-2000\r\n",
+                "Eric Singer\r\n"
+            ]
+        },
+        "cat_number_one": {
+            "modified": 1777427202,
+            "lines": [
+                "Criss\r\n",
+                "Cat #1\r\n",
+                "16-08-1994\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "chelsea": {
+            "modified": 1782224321,
+            "lines": [
+                "Chelsea\r\n",
+                "Chelsea\r\n",
+                "XX-XX-1970\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "euphoria": {
+            "modified": 1782225738,
+            "lines": [
+                "Vinnie Vincent\r\n",
+                "Euphoria\r\n",
+                "XX-XX-1996\r\n",
+                "Vinnie Vincent\r\n"
+            ]
+        },
+        "frehleys_comet": {
+            "modified": 1777427202,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Frehley's Comet\r\n",
+                "07-07-1987\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "got_to_get_back": {
+            "modified": 1777427202,
+            "lines": [
+                "KKB\r\n",
+                "Got To Get Back\r\n",
+                "28-05-2015\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "great_american_music": {
+            "modified": 1782225698,
+            "lines": [
+                "Good Rats\r\n",
+                "Great American Music\r\n",
+                "XX-XX-1981\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "in_heat": {
+            "modified": 1777427202,
+            "lines": [
+                "Black 'n Blue\r\n",
+                "In Heat\r\n",
+                "08-05-1988\r\n",
+                "Tommy Thayer\r\n"
+            ]
+        },
+        "let_me_rock_you": {
+            "modified": 1777427202,
+            "lines": [
+                "Peter Criss\r\n",
+                "Let Me Rock You\r\n",
+                "18-05-1982\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "lightning": {
+            "modified": 1777427202,
+            "lines": [
+                "Lightning\r\n",
+                "Lightning\r\n",
+                "14-08-1979\r\n",
+                "Eric Carr\r\n"
+            ]
+        },
+        "live_to_win": {
+            "modified": 1777427202,
+            "lines": [
+                "Paul Stanley\r\n",
+                "Live To Win\r\n",
+                "24-10-2006\r\n",
+                "Paul Stanley\r\n"
+            ]
+        },
+        "lost_and_spaced": {
+            "modified": 1777427202,
+            "lines": [
+                "ESP\r\n",
+                "Lost And Spaced\r\n",
+                "01-10-1998\r\n",
+                "Eric Singer, Bruce Kulick\r\n"
+            ]
+        },
+        "magic_bullet_theory": {
+            "modified": 1777427202,
+            "lines": [
+                "Mark St. John\r\n",
+                "Magic Bullet Theory\r\n",
+                "14-01-2003\r\n",
+                "Mark St. John\r\n"
+            ]
+        },
+        "mark_st_john_project": {
+            "modified": 1782245503,
+            "lines": [
+                "Mark St. John Project\r\n",
+                "Mark St. John Project\r\n",
+                "XX-XX-1999\r\n",
+                "Mark St. John"
+            ]
+        },
+        "nasty_nasty": {
+            "modified": 1777427202,
+            "lines": [
+                "Black 'n Blue\r\n",
+                "Nasty Nasty\r\n",
+                "30-08-1986\r\n",
+                "Tommy Thayer\r\n"
+            ]
+        },
+        "now_and_then": {
+            "modified": 1777427202,
+            "lines": [
+                "Soul Station\r\n",
+                "Now And Then\r\n",
+                "19-03-2021\r\n",
+                "Paul Stanley\r\n"
+            ]
+        },
+        "one_for_all": {
+            "modified": 1777427202,
+            "lines": [
+                "Peter Criss\r\n",
+                "One For All\r\n",
+                "24-07-2007\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "origins_vol_1": {
+            "modified": 1782226017,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Origins Vol. 1\r\n",
+                "13-04-2016\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "origins_vol_2": {
+            "modified": 1777427202,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Origins Vol. 2\r\n",
+                "18-09-2020\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "out_of_control": {
+            "modified": 1777427202,
+            "lines": [
+                "Peter Criss\r\n",
+                "Out Of Control\r\n",
+                "17-09-1980\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "peter_criss": {
+            "modified": 1777427202,
+            "lines": [
+                "Peter Criss\r\n",
+                "Peter Criss\r\n",
+                "19-12-2025\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "rockology": {
+            "modified": 1782224115,
+            "lines": [
+                "Eric Carr\r\n",
+                "Rockology\r\n",
+                "19-10-1999\r\n",
+                "Eric Carr, Bruce Kulick\r\n"
+            ]
+        },
+        "second_sighting": {
+            "modified": 1777427202,
+            "lines": [
+                "Frehley's Comet\r\n",
+                "Second Sighting\r\n",
+                "24-05-1988\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "seventh_star": {
+            "modified": 1782232718,
+            "lines": [
+                "Black Sabbath\r\n",
+                "Seventh Star\r\n",
+                "20-01-1986\r\n",
+                "Eric Singer\r\n"
+            ]
+        },
+        "spaceman": {
+            "modified": 1777427202,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Spaceman\r\n",
+                "19-10-2018\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "space_invader": {
+            "modified": 1782225968,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Space Invader\r\n",
+                "18-08-2014\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "the_blue_room": {
+            "modified": 1777427202,
+            "lines": [
+                "Union\r\n",
+                "The Blue Room\r\n",
+                "22-02-2000\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "the_eternal_idol": {
+            "modified": 1777427202,
+            "lines": [
+                "Black Sabbath\r\n",
+                "The Eternal Idol\r\n",
+                "08-11-1987\r\n",
+                "Eric Singer\r\n"
+            ]
+        },
+        "the_lost_tapes": {
+            "modified": 1777427202,
+            "lines": [
+                "Thayer-St.James\r\n",
+                "The Lost Tapes\r\n",
+                "03-06-2022\r\n",
+                "Tommy Thayer\r\n"
+            ]
+        },
+        "transformer": {
+            "modified": 1777427202,
+            "lines": [
+                "Bruce Kulick\r\n",
+                "Transformer\r\n",
+                "20-07-2004\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "treasure": {
+            "modified": 1782234705,
+            "lines": [
+                "Treasure\r\n",
+                "Treasure\r\n",
+                "XX-XX-1977\r\n",
+                "Vinnie Vincent"
+            ]
+        },
+        "trouble_walkin": {
+            "modified": 1777427202,
+            "lines": [
+                "Ace Frehley\r\n",
+                "Trouble Walkin'\r\n",
+                "13-10-1989\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "union": {
+            "modified": 1777427202,
+            "lines": [
+                "Union\r\n",
+                "Union\r\n",
+                "24-02-1998\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        },
+        "vinnie_vincent_invasion": {
+            "modified": 1777427202,
+            "lines": [
+                "Vinnie Vincent Invasion\r\n",
+                "Vinnie Vincent Invasion\r\n",
+                "02-08-1986\r\n",
+                "Vinnie Vincent\r\n"
+            ]
+        },
+        "white_tiger": {
+            "modified": 1782225919,
+            "lines": [
+                "White Tiger\r\n",
+                "White Tiger\r\n",
+                "XX-XX-1986\r\n",
+                "Mark St. John\r\n"
+            ]
+        },
+        "without_love": {
+            "modified": 1782224063,
+            "lines": [
+                "Black 'n Blue\r\n",
+                "Without Love\r\n",
+                "16-09-1985\r\n",
+                "Tommy Thayer\r\n"
+            ]
+        },
+        "worlds_apart": {
+            "modified": 1777427202,
+            "lines": [
+                "Blackjack\r\n",
+                "Worlds Apart\r\n",
+                "04-04-1980\r\n",
+                "Bruce Kulick\r\n"
+            ]
+        }
+    }
+}

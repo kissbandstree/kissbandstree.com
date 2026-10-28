@@ -1,0 +1,595 @@
+{
+    "schema_version": 1,
+    "records": {
+        "ace_frehley": {
+            "modified": 1777083637,
+            "lines": [
+                "﻿Rip It Out\r\n",
+                "Speedin' Back To My Baby\r\n",
+                "Snow Blind\r\n",
+                "Ozone\r\n",
+                "What's On Your Mind?\r\n",
+                "New York Groove\r\n",
+                "I'm In Need Of Love\r\n",
+                "Wiped-Out\r\n",
+                "Fractured Mirror\r\n"
+            ]
+        },
+        "alive": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Deuce\r\n",
+                "Strutter\r\n",
+                "Got To Choose\r\n",
+                "Hotter Than Hell\r\n",
+                "Firehouse\r\n",
+                "Nothin’ To Lose\r\n",
+                "C’mon And Love Me\r\n",
+                "Parasite\r\n",
+                "She\r\n",
+                "Watchin’ You\r\n",
+                "100,000 Years\r\n",
+                "Black Diamond\r\n",
+                "Rock Bottom\r\n",
+                "Cold Gin\r\n",
+                "Rock And Roll All Nite\r\n",
+                "Let Me Go, Rock And Roll\r\n"
+            ]
+        },
+        "alive_ii": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Detroit Rock City (Live)\r\n",
+                "King Of The Night Time World (Live)\r\n",
+                "Ladies Room (Live)\r\n",
+                "Makin' Love (Live)\r\n",
+                "Love Gun (Live)\r\n",
+                "Calling Dr. Love (Live)\r\n",
+                "Christine Sixteen (Live)\r\n",
+                "Shock Me (Live)\r\n",
+                "Hard Luck Woman (Live)\r\n",
+                "Tomorrow And Tonight (Live)\r\n",
+                "I Stole Your Love (Live)\r\n",
+                "Beth (Live)\r\n",
+                "God Of Thunder (Live)\r\n",
+                "I Want You (Live)\r\n",
+                "Shout It Out Loud (Live)\r\n",
+                "All American Man\r\n",
+                "Rockin' In The U.S.A.\r\n",
+                "Larger Than Life\r\n",
+                "Rocket Ride\r\n",
+                "Any Way You Want It\r\n"
+            ]
+        },
+        "alive_iii": {
+            "modified": 1782080485,
+            "lines": [
+                "Creatures Of The Night (Live)\r\n",
+                "Deuce (Live)\r\n",
+                "I Just Wanna (Live)\r\n",
+                "Unholy (Live)\r\n",
+                "Heaven's On Fire (Live)\r\n",
+                "Watchin' You (Live)\r\n",
+                "Domino (Live)\r\n",
+                "I Was Made For Lovin' You (Live)\r\n",
+                "I Still Love You (Live)\r\n",
+                "Rock And Roll All Nite (Live)\r\n",
+                "Lick It Up (Live)\r\n",
+                "Forever (Live)\r\n",
+                "Take It Off (Live)\r\n",
+                "I Love It Loud (Live)\r\n",
+                "Detroit Rock City (Live)\r\n",
+                "God Gave Rock 'N Roll To You II (Live)\r\n",
+                "The Star-Spangled Banner (Live)"
+            ]
+        },
+        "animalize": {
+            "modified": 1777080727,
+            "lines": [
+                "﻿I've Had Enough (Into The Fire)\r\n",
+                "Heaven's On Fire\r\n",
+                "Burn Bitch Burn\r\n",
+                "Lonely Is The Hunter\r\n",
+                "Under The Gun\r\n",
+                "Thrills In The Night\r\n",
+                "While The City Sleeps\r\n",
+                "Murder In High-Heels\r\n"
+            ]
+        },
+        "asylum": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿King Of The Mountain\r\n",
+                "Any Way You Slice It\r\n",
+                "Who Wants To Be Lonely\r\n",
+                "Trial By Fire\r\n",
+                "I'm Alive\r\n",
+                "Love's A Deadly Weapon\r\n",
+                "Tears Are Falling\r\n",
+                "Secretly Cruel\r\n",
+                "Radar For Love\r\n",
+                "Uh! All Night\r\n"
+            ]
+        },
+        "carnival_of_souls": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Hate\r\n",
+                "Rain\r\n",
+                "Master & Slave\r\n",
+                "Childhood's End\r\n",
+                "I Will Be There\r\n",
+                "Jungle\r\n",
+                "In My Head\r\n",
+                "It Never Goes Away\r\n",
+                "Seduction Of The Innocent\r\n",
+                "I Confess\r\n",
+                "In The Mirror\r\n",
+                "I Walk Alone\r\n"
+            ]
+        },
+        "crazy_nights": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Crazy Crazy Nights\r\n",
+                "I'll Fight Hell To Hold You\r\n",
+                "Bang Bang You\r\n",
+                "No, No, No\r\n",
+                "Hell Or High Water\r\n",
+                "My Way\r\n",
+                "When Your Walls Come Down\r\n",
+                "Reason To Live\r\n",
+                "Good Girl Gone Bad\r\n",
+                "Turn On The Night\r\n",
+                "Thief In The Night\r\n"
+            ]
+        },
+        "creatures_of_the_night": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Creatures Of The Night\r\n",
+                "Saint And Sinner\r\n",
+                "Keep Me Comin'\r\n",
+                "Rock And Roll Hell\r\n",
+                "Danger\r\n",
+                "I Love It Loud\r\n",
+                "I Still Love You\r\n",
+                "Killer\r\n",
+                "War Machine\r\n"
+            ]
+        },
+        "destroyer": {
+            "modified": 1777083519,
+            "lines": [
+                "﻿Detroit Rock City\r\n",
+                "King Of The Night Time World\r\n",
+                "God Of Thunder\r\n",
+                "Great Expectations\r\n",
+                "Flaming Youth\r\n",
+                "Sweet Pain\r\n",
+                "Shout It Out Loud\r\n",
+                "Beth\r\n",
+                "Do You Love Me?\r\n"
+            ]
+        },
+        "double_platinum": {
+            "modified": 1777084608,
+            "lines": [
+                "﻿Strutter '78\r\n",
+                "Do You Love Me?\r\n",
+                "Hard Luck Woman (Remix)\r\n",
+                "Calling Dr. Love (Remix)\r\n",
+                "Let Me Go, Rock 'N Roll\r\n",
+                "Love Gun\r\n",
+                "God Of Thunder\r\n",
+                "Firehouse (Remix)\r\n",
+                "Hotter Than Hell\r\n",
+                "I Want You\r\n",
+                "Deuce (Remix)\r\n",
+                "100,000 Years (Remix)\r\n",
+                "Detroit Rock City (Remix)\r\n",
+                "Rock Bottom (Intro)\r\n",
+                "She (Remix)\r\n",
+                "Rock And Roll All Nite\r\n",
+                "Beth\r\n",
+                "Makin' Love\r\n",
+                "C'mon And Love Me (Remix)\r\n",
+                "Cold Gin\r\n",
+                "Black Diamond (Remix)\r\n"
+            ]
+        },
+        "dressed_to_kill": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Room Service\r\n",
+                "Two Timer\r\n",
+                "Ladies In Waiting\r\n",
+                "Getaway\r\n",
+                "Rock Bottom\r\n",
+                "C'mon And Love Me\r\n",
+                "Anything For My Baby\r\n",
+                "She\r\n",
+                "Love Her All I Can\r\n",
+                "Rock And Roll All Nite\r\n"
+            ]
+        },
+        "dynasty": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿I Was Made For Lovin' You\r\n",
+                "2,000 Man\r\n",
+                "Sure Know Something\r\n",
+                "Dirty Livin'\r\n",
+                "Charisma\r\n",
+                "Magic Touch\r\n",
+                "Hard Times\r\n",
+                "X-Ray Eyes\r\n",
+                "Save Your Love\r\n"
+            ]
+        },
+        "gene_simmons": {
+            "modified": 1777083637,
+            "lines": [
+                "﻿Radioactive\r\n",
+                "Burning Up With Fever\r\n",
+                "See You Tonite\r\n",
+                "Tunnel Of Love\r\n",
+                "True Confessions\r\n",
+                "Living In Sin\r\n",
+                "Always Near You / Nowhere To Hide\r\n",
+                "Man Of 1000 Faces\r\n",
+                "Mr. Make Believe\r\n",
+                "See You In Your Dreams\r\n",
+                "When You Wish Upon A Star\r\n"
+            ]
+        },
+        "greatest_kiss": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Detroit Rock City\r\n",
+                "Hard Luck Woman\r\n",
+                "Sure Know Something\r\n",
+                "Deuce\r\n",
+                "Do You Love Me\r\n",
+                "I Was Made For Lovin' You\r\n",
+                "Calling Dr. Love\r\n",
+                "Christine Sixteen\r\n",
+                "Beth\r\n",
+                "Strutter\r\n",
+                "Cold Gin\r\n",
+                "Plaster Caster\r\n",
+                "Rock And Roll All Nite\r\n",
+                "Flaming Youth\r\n",
+                "Two Sides Of The Coin\r\n",
+                "Shout It Out Loud (New Video Version)\r\n"
+            ]
+        },
+        "hotter_than_hell": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Got To Choose\r\n",
+                "Parasite\r\n",
+                "Goin' Blind\r\n",
+                "Hotter Than Hell\r\n",
+                "Let Me Go, Rock And Roll\r\n",
+                "All The Way\r\n",
+                "Watchin' You\r\n",
+                "Mainline\r\n",
+                "Comin' Home\r\n",
+                "Strange Ways\r\n"
+            ]
+        },
+        "hot_in_the_shade": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Rise To It\r\n",
+                "Betrayed\r\n",
+                "Hide Your Heart\r\n",
+                "Prisoner Of Love\r\n",
+                "Read My Body\r\n",
+                "Love's A Slap In The Face\r\n",
+                "Forever\r\n",
+                "Silver Spoon\r\n",
+                "Cadillac Dreams\r\n",
+                "King Of Hearts\r\n",
+                "The Street Giveth And The Street Taketh Away\r\n",
+                "You Love Me To Hate You\r\n",
+                "Somewhere Between Heaven And Hell\r\n",
+                "Little Caesar\r\n",
+                "Boomerang\r\n"
+            ]
+        },
+        "killers": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿I'm A Legend Tonight\r\n",
+                "Down On Your Knees\r\n",
+                "Cold Gin\r\n",
+                "Love Gun\r\n",
+                "Shout It Out Loud (7\" Mix)\r\n",
+                "Escape From The Island\r\n",
+                "Talk To Me\r\n",
+                "Sure Know Something\r\n",
+                "Nowhere To Run\r\n",
+                "Partners In Crime\r\n",
+                "Detroit Rock City (Edited Version)\r\n",
+                "God Of Thunder (Edited Version)\r\n",
+                "I Was Made For Lovin' You (Edited Version)\r\n",
+                "Shandi\r\n",
+                "Rock And Roll All Nite (Live)\r\n"
+            ]
+        },
+        "kiss": {
+            "modified": 1782073067,
+            "lines": [
+                "﻿Strutter\r\n",
+                "Nothin’ To Lose\r\n",
+                "Firehouse\r\n",
+                "Cold Gin\r\n",
+                "Let Me Know\r\n",
+                "Kissin' Time\r\n",
+                "Deuce\r\n",
+                "Love Theme From KISS\r\n",
+                "100,000 Years\r\n",
+                "Black Diamond\r\n"
+            ]
+        },
+        "lick_it_up": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Exciter\r\n",
+                "Not For The Innocent\r\n",
+                "Lick It Up\r\n",
+                "Young And Wasted\r\n",
+                "Gimme More\r\n",
+                "All Hell's Breakin' Loose\r\n",
+                "A Million To One\r\n",
+                "Fits Like A Glove\r\n",
+                "Dance All Over Your Face\r\n",
+                "And On The 8th Day\r\n"
+            ]
+        },
+        "love_gun": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿I Stole Your Love\r\n",
+                "Christine Sixteen\r\n",
+                "Got Love For Sale\r\n",
+                "Shock Me\r\n",
+                "Tomorrow And Tonight\r\n",
+                "Love Gun\r\n",
+                "Hooligan\r\n",
+                "Almost Human\r\n",
+                "Plaster Caster\r\n",
+                "Then She Kissed Me\r\n"
+            ]
+        },
+        "monster": {
+            "modified": 1777084125,
+            "lines": [
+                "﻿Hell Or Hallelujah\r\n",
+                "Wall Of Sound\r\n",
+                "Freak\r\n",
+                "Back To The Stone Age\r\n",
+                "Shout Mercy\r\n",
+                "Long Way Down\r\n",
+                "Eat Your Heart Out\r\n",
+                "The Devil Is Me\r\n",
+                "Outta This World\r\n",
+                "All For The Love Of Rock & Roll\r\n",
+                "Take Me Down Below\r\n",
+                "Last Chance\r\n"
+            ]
+        },
+        "paul_stanley": {
+            "modified": 1777083637,
+            "lines": [
+                "﻿Tonight You Belong To Me\r\n",
+                "Move On\r\n",
+                "Ain’t Quite Right\r\n",
+                "Wouldn’t You Like To Know Me\r\n",
+                "Take Me Away (Together As One)\r\n",
+                "It’s Alright\r\n",
+                "Hold Me Touch Me (Think Of Me When We’re Apart)\r\n",
+                "Love In Chains\r\n",
+                "Goodbye\r\n"
+            ]
+        },
+        "peter_criss": {
+            "modified": 1777083637,
+            "lines": [
+                "﻿I'm Gonna Love You\r\n",
+                "You Matter To Me\r\n",
+                "Tossin' And Turnin'\r\n",
+                "Don't You Let Me Down\r\n",
+                "That's The Kind Of Sugar Papa Likes\r\n",
+                "Easy Thing\r\n",
+                "Rock Me Baby\r\n",
+                "Kiss The Girl Goodbye\r\n",
+                "Hooked On Rock 'N' Roll\r\n",
+                "I Can't Stop The Rain\r\n"
+            ]
+        },
+        "psycho_circus": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Psycho Circus\r\n",
+                "Within\r\n",
+                "I Pledge Allegiance To The State Of Rock & Roll\r\n",
+                "Into The Void\r\n",
+                "We Are One\r\n",
+                "You Wanted The Best\r\n",
+                "Raise Your Glasses\r\n",
+                "I Finally Found My Way\r\n",
+                "Dreamin'\r\n",
+                "Journey Of 1,000 Years\r\n"
+            ]
+        },
+        "revenge": {
+            "modified": 1782080485,
+            "lines": [
+                "Unholy\r\n",
+                "Take It Off\r\n",
+                "Tough Love\r\n",
+                "Spit\r\n",
+                "God Gave Rock 'N Roll To You II\r\n",
+                "Domino\r\n",
+                "Heart Of Chrome\r\n",
+                "Thou Shalt Not\r\n",
+                "Every Time I Look At You\r\n",
+                "Paralyzed\r\n",
+                "I Just Wanna\r\n",
+                "Carr Jam 1981"
+            ]
+        },
+        "rock_and_roll_over": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿I Want You\r\n",
+                "Take Me\r\n",
+                "Calling Dr. Love\r\n",
+                "Ladies Room\r\n",
+                "Baby Driver\r\n",
+                "Love 'Em And Leave 'Em\r\n",
+                "Mr. Speed\r\n",
+                "See You In Your Dreams\r\n",
+                "Hard Luck Woman\r\n",
+                "Makin' Love\r\n"
+            ]
+        },
+        "smashes_thrashes_and_hits": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Let's Put The X In Sex\r\n",
+                "(You Make Me) Rock Hard\r\n",
+                "Love Gun\r\n",
+                "Love Gun (Remixed)\r\n",
+                "Detroit Rock City\r\n",
+                "I Love It Loud\r\n",
+                "Deuce\r\n",
+                "Lick It Up\r\n",
+                "Heaven's On Fire\r\n",
+                "Calling Dr. Love\r\n",
+                "Strutter\r\n",
+                "Beth\r\n",
+                "Beth (Eric Carr Version)\r\n",
+                "Tears Are Falling\r\n",
+                "I Was Made For Lovin' You\r\n",
+                "Rock And Roll All Nite\r\n",
+                "Shout It Out Loud\r\n"
+            ]
+        },
+        "sonic_boom": {
+            "modified": 1777083637,
+            "lines": [
+                "﻿Modern Day Delilah\r\n",
+                "Russian Roulette\r\n",
+                "Never Enough\r\n",
+                "Yes I Know (Nobody's Perfect)\r\n",
+                "Stand\r\n",
+                "Hot And Cold\r\n",
+                "All For The Glory\r\n",
+                "Danger Us\r\n",
+                "I'm An Animal\r\n",
+                "When Lightning Strikes\r\n",
+                "Say Yeah\r\n"
+            ]
+        },
+        "symphony": {
+            "modified": 1777084398,
+            "lines": [
+                "﻿Deuce (Live)\r\n",
+                "Strutter (Live)\r\n",
+                "Let Me Go Rock & Roll (Live)\r\n",
+                "Lick It Up (Live)\r\n",
+                "Calling Dr. Love (Live)\r\n",
+                "Psycho Circus (Live)\r\n",
+                "Beth (Live)\r\n",
+                "Forever (Live)\r\n",
+                "Goin' Blind (Live)\r\n",
+                "Sure Know Something (Live)\r\n",
+                "Shandi (Live)\r\n",
+                "Detroit Rock City (Live)\r\n",
+                "King Of The Night Time World (Live)\r\n",
+                "Do You Love Me (Live)\r\n",
+                "Shout It Out Loud (Live)\r\n",
+                "God Of Thunder (Live)\r\n",
+                "Love Gun (Live)\r\n",
+                "Black Diamond (Live)\r\n",
+                "Great Expectations (Live)\r\n",
+                "I Was Made For Lovin' You (Live)\r\n",
+                "Rock And Roll All Nite (Live)\r\n"
+            ]
+        },
+        "the_elder": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Fanfare\r\n",
+                "Just A Boy\r\n",
+                "Odyssey\r\n",
+                "Only You\r\n",
+                "Under The Rose\r\n",
+                "Dark Light\r\n",
+                "A World Without Heroes\r\n",
+                "The Oath\r\n",
+                "Mr. Blackwell\r\n",
+                "Escape From The Island\r\n",
+                "I\r\n"
+            ]
+        },
+        "unmasked": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Is That You?\r\n",
+                "Shandi\r\n",
+                "Talk To Me\r\n",
+                "Naked City\r\n",
+                "What Makes The World Go 'Round\r\n",
+                "Tomorrow\r\n",
+                "Two Sides Of The Coin\r\n",
+                "She's So European\r\n",
+                "Easy As It Seems\r\n",
+                "Torpedo Girl\r\n",
+                "You're All That I Want\r\n"
+            ]
+        },
+        "unplugged": {
+            "modified": 1777084225,
+            "lines": [
+                "﻿Comin' Home (Live)\r\n",
+                "Plaster Caster (Live)\r\n",
+                "Goin' Blind (Live)\r\n",
+                "Do You Love Me? (Live)\r\n",
+                "Domino (Live)\r\n",
+                "Sure Know Something (Live)\r\n",
+                "A World Without Heroes (Live)\r\n",
+                "Rock Bottom (Live)\r\n",
+                "See You Tonite (Live)\r\n",
+                "I Still Love You (Live)\r\n",
+                "Every Time I Look At You (Live)\r\n",
+                "2,000 Man (Live)\r\n",
+                "Beth (Live)\r\n",
+                "Nothin' To Lose (Live)\r\n",
+                "Rock And Roll All Nite (Live)\r\n"
+            ]
+        },
+        "you_wanted_the_best_you_got_the_best": {
+            "modified": 1777083596,
+            "lines": [
+                "﻿Room Service (Live)\r\n",
+                "Two Timer (Live)\r\n",
+                "Let Me Know (Live)\r\n",
+                "Rock Bottom (Live)\r\n",
+                "Parasite (Live)\r\n",
+                "Firehouse (Live)\r\n",
+                "I Stole Your Love (Live)\r\n",
+                "Calling Dr. Love (Live)\r\n",
+                "Take Me (Live)\r\n",
+                "Shout It Out Loud (Live)\r\n",
+                "Beth (Live)\r\n",
+                "Rock And Roll All Nite (Live)\r\n",
+                "Kiss Tells All\r\n"
+            ]
+        }
+    }
+}

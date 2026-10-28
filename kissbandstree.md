@@ -38,11 +38,13 @@
 ## Adding bands and artists
 
 - Verify names, roles, dates and links against official sources. Preserve blank
-  fields in the existing positional text-file formats; do not invent metadata.
+  fields in the JSON record's positional `lines` array; do not invent metadata.
 - Complete band entries with lineup, official link, photos, credits and working
   artist links. Create missing artist pages with portraits and credits, and add
   reciprocal entries to the relevant chronological `bands_list` files.
 - Match lineup names exactly to artist names and reuse existing artist records.
+- Store new records in the appropriate JSON collection under `data`; do not
+  recreate the old per-record text files or directories. See JSON content below.
 - Preserve lineup numbering in the display name, filename, photos, comments,
   credits, chronological artist lists and tree links. Joining an existing trio
   is not the same as founding a new band. Do not create an earlier lineup with
@@ -57,13 +59,67 @@
 - Never mention sources or include source URLs in Comments. Keep research
   references in project documentation, separate from the published comment.
   Distinguish announced plans from completed releases.
-- Band records contain name, active dates, website, Facebook identifier, a
+- Band `lines` arrays contain name, active dates, website, Facebook identifier, a
   reserved blank line, associated Kiss members, then lineup lines.
-- Artist records contain name, instruments, Facebook identifier, gender, date
+- Artist `lines` arrays contain name, instruments, Facebook identifier, gender, date
   of passing, associated Kiss members, aliases, website and date of birth.
-- Band credits contain description, photographer, source name and source URL.
+- Band credit `lines` contain description, photographer, source name and source URL.
   Artist credits contain description, photographer and source URL. Artist
   credits skip blank lines when read, so preserve those three field positions.
+
+## JSON content
+
+- `data/*.json` is the authoritative content store. Thirteen collections replace
+  1,738 individual text files. Images remain ordinary files in their existing
+  directories. Public URLs, slugs and relationships are unchanged.
+- Each collection has `schema_version: 1` and a `records` object keyed by the
+  existing slug. Each record contains `modified` (Unix timestamp in seconds)
+  and `lines` (an ordered array of strings).
+- The first migration deliberately retains the existing positional fields.
+  Line strings preserve whitespace and their original `\n` or `\r\n` endings,
+  including blank fields and the absence of a final newline. Do not remove
+  blank fields, put multiple lines into one array item, or insert a line without
+  an ending before another line. An empty original has `lines: []`.
+- Edit only the intended record and update its `modified` timestamp when its
+  content changes. Collection file modification times do not set every entry's
+  date. Photo modification times still contribute to artist/band update dates.
+- Runtime data access is centralized in `content.php`. It loads and validates
+  each required collection once per request. There is no cross-request cache
+  and no legacy text-file fallback.
+- Existing templates use logical keys such as `artists/dan_reed.txt` through
+  the `content_*` helpers. These are lookup keys, not physical files or public
+  data URLs. Do not call native filesystem functions on these keys.
+- Invalid/missing collection data is an error, not an empty catalog. Optional
+  absent records are checked with `content_exists`; required reads must fail
+  explicitly.
+
+| Content | JSON collection |
+|---|---|
+| Artists | `data/artists.json` |
+| Band lineups | `data/bands.json` |
+| Chronological artist band lists | `data/artist-bands.json` |
+| Artist photo credits | `data/artist-credits.json` |
+| Band photo credits | `data/band-credits.json` |
+| Band comments | `data/band-comments.json` |
+| Band releases | `data/band-releases.json` |
+| Related releases | `data/related-releases.json` |
+| Band release comments | `data/band-release-comments.json` |
+| Related release comments | `data/related-release-comments.json` |
+| Band tracklists | `data/band-release-tracklists.json` |
+| Related tracklists | `data/related-release-tracklists.json` |
+| About, intro, footer, thanks and other page text | `data/pages.json` |
+
+- Run `php .github/tests/content.php` after content or loader changes.
+- `php .github/tools/benchmark.php OUTPUT.json [REFERENCE.json] [BASE_URL]`
+  checks every detail page and the main views, then measures twelve routes
+  with two warmups and 25 samples each. The default base URL is
+  `http://localhost:8003`. The benchmark requires PHP 8.4 or newer for HTTP
+  response-header inspection. Keep output files outside the website.
+- The optional reference compares HTTP status and HTML hashes, ignoring only
+  the source-file dates labelled `Document updated` and `Version`.
+- The one-time migration tool is `.github/tools/migrate-content.php`.
+  It refuses to overwrite existing JSON and only removes old sources with
+  `--remove-text` after verifying all source content and timestamps.
 
 ## Facebook and website links
 

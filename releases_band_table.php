@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@
   <?php
   require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 
-  $releaseFiles = glob('releases/band/*.txt');
+  $releaseFiles = content_glob('releases/band/*.txt');
   usort($releaseFiles, 'compare_release_files_by_date');
   ?>
 
@@ -39,7 +39,7 @@
         <?php
         foreach ($releaseFiles as $i => $file) {
           $basename = basename($file, '.txt');
-          $contents = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+          $contents = content_file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
           $artist = trim($contents[0] ?? '');
           $album = trim($contents[1] ?? '');
@@ -57,7 +57,7 @@
           }
 
           $imgUrl = 'photos_releases/band/' . $basename . '.png';
-          if (!file_exists($imgUrl)) {
+          if (!content_exists($imgUrl)) {
             $imgUrl = 'img/album.png';
           }
 
@@ -68,7 +68,7 @@
           echo '<td class="not-wrap" style="text-align: left;" title="' . htmlspecialchars($album, ENT_QUOTES, 'UTF-8') . '"><a href="/release_band.php?a=' . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . '">"' . htmlspecialchars($album, ENT_QUOTES, 'UTF-8') . '"</a></td>';
           echo '<td class="not-wrap" style="text-align: left;" title="' . htmlspecialchars($date, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($date, ENT_QUOTES, 'UTF-8') . '</td>';
           echo '<td class="not-wrap" style="text-align: left;" title="' . $membersAttr . '">' . implode(', ', $memberLinks) . '</td>';
-          echo '<td class="not-wrap">' . date('d-m-Y', filemtime($file)) . '</td>';
+          echo '<td class="not-wrap">' . date('d-m-Y', content_mtime($file)) . '</td>';
           echo '</tr>';
         }
         ?>

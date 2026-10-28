@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,15 +10,15 @@
 
   <?php
   require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php");
-  $bandFiles = glob('bands/*.txt');
-  $artists = glob('artists/*.txt');
+  $bandFiles = content_glob('bands/*.txt');
+  $artists = content_glob('artists/*.txt');
   ?>
 
   <div class="sidebar">
 
     <div class="full">
       <a href="/" class="logo-link">
-        <?php echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/img/logo.svg'); ?>
+        <?php echo content_text($_SERVER['DOCUMENT_ROOT'] . '/img/logo.svg'); ?>
       </a>
     </div>
 
@@ -36,7 +36,7 @@
     </div>
 
     <div class="text">
-      <?php echo nl2br(file_get_contents("about_poster.txt")); ?>
+      <?php echo nl2br(content_text("about_poster.txt")); ?>
     </div>
 
     <div class="center">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="text">
-      <?php echo nl2br(file_get_contents("intro.txt")); ?>
+      <?php echo nl2br(content_text("intro.txt")); ?>
     </div>
 
     <div class="center">
@@ -59,7 +59,7 @@
       <?php
       function generateSimpleBandLinks($file_path)
       {
-        $bands_array = array_filter(array_map('trim', file($file_path)));
+        $bands_array = array_filter(array_map('trim', content_file($file_path)));
         $links = [];
 
         foreach ($bands_array as $band_name) {
@@ -103,11 +103,11 @@
 
       function listAllArtists()
       {
-        $artist_files = glob('artists/*.txt');
+        $artist_files = content_glob('artists/*.txt');
         $artists_info = [];
 
         foreach ($artist_files as $file_path) {
-          $lines = file($file_path, FILE_IGNORE_NEW_LINES);
+          $lines = content_file($file_path, FILE_IGNORE_NEW_LINES);
           if (count($lines) >= 2) {
             $name = trim($lines[0]);
             $instruments = trim($lines[1]);
@@ -137,14 +137,14 @@
 
     <div class="text">
       <?php
-      $releaseFiles = glob('releases/band/*.txt');
+      $releaseFiles = content_glob('releases/band/*.txt');
 
       // Sort chronologically
       usort($releaseFiles, 'compare_release_files_by_date');
 
       $releaseText = [];
       foreach ($releaseFiles as $txtFile) {
-        $lines  = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $lines  = content_file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $artist = $lines[0] ?? '';
         $title  = $lines[1] ?? '';
         $date   = $lines[2] ?? '';
@@ -167,14 +167,14 @@
       <?php
       foreach ($releaseFiles as $txtFile) {
         $slug   = basename($txtFile, '.txt');
-        $lines  = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $lines  = content_file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $artist = $lines[0] ?? '';
         $title  = $lines[1] ?? '';
         $date   = $lines[2] ?? '';
         $tooltip = htmlspecialchars("$artist\n$title\n$date");
 
         $imgUrl = "photos_releases/band/$slug.png";
-        if (!file_exists($imgUrl)) $imgUrl = 'img/album.png';
+        if (!content_exists($imgUrl)) $imgUrl = 'img/album.png';
 
         echo '<div class="grid-item">';
         echo '<a href="release_band.php?a=' . urlencode($slug) . '">';
@@ -193,14 +193,14 @@
 
     <div class="text">
       <?php
-      $relatedFiles = glob('releases/related/*.txt');
+      $relatedFiles = content_glob('releases/related/*.txt');
 
       // Sort chronologically
       usort($relatedFiles, 'compare_release_files_by_date');
 
       $relatedText = [];
       foreach ($relatedFiles as $txtFile) {
-        $lines  = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $lines  = content_file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $artist = $lines[0] ?? '';
         $title  = $lines[1] ?? '';
         $date   = $lines[2] ?? '';
@@ -223,23 +223,23 @@
       <?php
       foreach ($relatedFiles as $txtFile) {
         $slug   = basename($txtFile, '.txt');
-        $lines  = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $lines  = content_file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $artist = $lines[0] ?? '';
         $title  = $lines[1] ?? '';
         $date   = $lines[2] ?? '';
         $tooltip = htmlspecialchars("$artist\n$title\n$date");
 
         $imgUrl = "photos_releases/related/$slug.png";
-        if (!file_exists($imgUrl)) {
+        if (!content_exists($imgUrl)) {
           $imgUrl = "photos_releases/related/$slug.webp";
         }
-        if (!file_exists($imgUrl)) {
+        if (!content_exists($imgUrl)) {
           $imgUrl = "photos_releases/related/$slug.jpg";
         }
-        if (!file_exists($imgUrl)) {
+        if (!content_exists($imgUrl)) {
           $imgUrl = "photos_releases/related/$slug.jpeg";
         }
-        if (!file_exists($imgUrl)) {
+        if (!content_exists($imgUrl)) {
           $imgUrl = 'img/album.png';
         }
 
@@ -259,7 +259,7 @@
     </div>
 
     <div class="text">
-      <?php echo (file_get_contents("thanks.txt")); ?>
+      <?php echo (content_text("thanks.txt")); ?>
     </div>
 
     <div class="center">
@@ -269,9 +269,9 @@
     </div>
 
     <div class="footer">
-      <?php echo nl2br(file_get_contents("footer.txt")); ?><br><br>
+      <?php echo nl2br(content_text("footer.txt")); ?><br><br>
       <a href="https://focusstudios.no" class="focus" aria-label="Focus Studios">
-        <?php echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/img/focus_studios.svg'); ?>
+        <?php echo content_text($_SERVER['DOCUMENT_ROOT'] . '/img/focus_studios.svg'); ?>
       </a>
     </div>
   </div>
@@ -280,7 +280,7 @@
     <?php
     function generateBandLink($filePath, &$previousLineup, &$firstBand)
     {
-      $bandsList = file_get_contents($filePath);
+      $bandsList = content_text($filePath);
       $bandsArray = explode("\n", $bandsList);
 
       foreach ($bandsArray as $bandName) {
@@ -291,12 +291,12 @@
         $bandUrl = 'band.php?a=' . urlencode($slug);
         $bandFilePath = 'bands/' . $slug . '.txt';
 
-        if (!file_exists($bandFilePath)) {
+        if (!content_exists($bandFilePath)) {
           echo '<i>No lineup information available.</i>';
           continue;
         }
 
-        $contents = file($bandFilePath, FILE_IGNORE_NEW_LINES);
+        $contents = content_file($bandFilePath, FILE_IGNORE_NEW_LINES);
         $year = htmlspecialchars(trim($contents[1] ?? ''), ENT_QUOTES, 'UTF-8');
         $photoFilePath = 'photos_bands/' . $slug . '.png';
         $lineup = array_slice($contents, 6);
@@ -319,7 +319,7 @@
 
         // Left column: photo + text box
         echo '<div class="band-left">';
-        if (file_exists($photoFilePath)) {
+        if (content_exists($photoFilePath)) {
           echo '<div class="band-photo"><a href="' . $bandUrl . '"><img src="' . $photoFilePath . '" alt="' . htmlspecialchars($bandName) . '" title="' . htmlspecialchars($bandName) . '" class="bitmap"></a></div>';
         } else {
           echo '<div class="band-photo"><a href="' . $bandUrl . '"><img src="img/band.png" alt="' . htmlspecialchars($bandName) . '" title="' . htmlspecialchars($bandName) . '" class="bitmap"></a></div>';
@@ -338,7 +338,7 @@
           $memberNameLink = sanitize_artist_slug($name);
 
           if ($name !== '?') {
-            if ($name !== '' && file_exists('artists/' . $memberNameLink . '.txt')) {
+            if ($name !== '' && content_exists('artists/' . $memberNameLink . '.txt')) {
               $artistLink = "<a href=\"/artist.php?a={$memberNameLink}\" class=\"artist-name\">" . htmlspecialchars($name) . "</a>";
             } else {
               $artistLink = htmlspecialchars($name);
@@ -354,8 +354,8 @@
         // Right column: comments (matches full band-box height as a sibling column)
         $comment_file = "bands_comments/{$slug}.txt";
         $comment_html = '';
-        if (file_exists($comment_file)) {
-          $raw = trim(file_get_contents($comment_file));
+        if (content_exists($comment_file)) {
+          $raw = trim(content_text($comment_file));
           if ($raw !== '') $comment_html = nl2br(htmlspecialchars($raw));
         }
         echo '<div class="band-comment">' . ($comment_html !== '' ? $comment_html : '&nbsp;') . '</div>';
@@ -388,7 +388,7 @@
       echo '<div class="artist-header">';
       $artistUrl = 'artist.php?a=' . urlencode(sanitize_artist_slug($artistName));
       echo '<div class="artist-header-name"><h1><a href="' . $artistUrl . '">' . htmlspecialchars($artistName) . '</a></h1></div>';
-      if (file_exists($artistPhotoPath)) {
+      if (content_exists($artistPhotoPath)) {
         echo '<div class="artist-header-photo"><img src="' . $artistPhotoPath . '" alt="' . htmlspecialchars($artistName) . '" class="bitmap"></div>';
       } else {
         echo '<div class="artist-header-photo"><img src="img/artist_small.png" alt="' . htmlspecialchars($artistName) . '"></div>';
@@ -415,21 +415,17 @@
 
     <div class="grid-container-artist" id="grid-container">
       <?php
-      $artistFiles = glob('artists/*.txt');
+      $artistFiles = content_glob('artists/*.txt');
 
       foreach ($artistFiles as $txtFile) {
         $artistName = basename($txtFile, '.txt');
         $artistUrl  = 'artist.php?a=' . urlencode($artistName);
         $imgUrl     = 'photos_artists/' . $artistName . '.png';
-        if (!file_exists($imgUrl)) $imgUrl = 'img/artist_small.png';
+        if (!content_exists($imgUrl)) $imgUrl = 'img/artist_small.png';
 
         // first line as title
         $firstLine = '';
-        $h = fopen($txtFile, 'r');
-        if ($h) {
-          $firstLine = trim(fgets($h));
-          fclose($h);
-        }
+        $firstLine = trim(content_file($txtFile)[0] ?? '');
 
         echo sprintf(
           '<div class="grid-item">

@@ -194,17 +194,25 @@ jobs:
             done
           }
 
+          for phase in data loader pages; do
+            while IFS= read -r file; do
+              [[ -z "$file" ]] && continue
+              case "$file" in
+                data/*.json) file_phase=data ;;
+                content.php) file_phase=loader ;;
+                *) file_phase=pages ;;
+              esac
+              [[ "$file_phase" == "$phase" ]] || continue
+              dir=$(dirname "$file")
+              add_remote_dirs "$dir"
+              printf 'put "%s" "%s/%s"\n' "$file" "$remote_root" "$file" >> "$DEPLOY_SFTP_BATCH"
+            done < "$DEPLOY_UPLOAD_LIST"
+          done
+
           while IFS= read -r file; do
             [[ -z "$file" ]] && continue
             printf -- '-rm "%s/%s"\n' "$remote_root" "$file" >> "$DEPLOY_SFTP_BATCH"
           done < "$DEPLOY_DELETE_LIST"
-
-          while IFS= read -r file; do
-            [[ -z "$file" ]] && continue
-            dir=$(dirname "$file")
-            add_remote_dirs "$dir"
-            printf 'put "%s" "%s/%s"\n' "$file" "$remote_root" "$file" >> "$DEPLOY_SFTP_BATCH"
-          done < "$DEPLOY_UPLOAD_LIST"
 
           sshpass -p "$SFTP_PASSWORD" sftp \
             -P "$SFTP_PORT" \
@@ -220,6 +228,8 @@ jobs:
           set cmd:fail-exit yes
           set net:max-retries 2
           set net:timeout 30
+          mirror --reverse --verbose --only-newer --no-perms ./data "$SFTP_REMOTE_DIR/data"
+          put ./content.php -o "$SFTP_REMOTE_DIR/content.php"
           mirror --reverse --verbose --only-newer --no-perms --parallel=4 \
             --exclude-glob .git/** \
             --exclude-glob .github/** \

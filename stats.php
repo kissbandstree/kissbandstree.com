@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 <head>
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/head.php"); ?>
-<link rel="stylesheet" href="stats.css?v=<?= filemtime($_SERVER['DOCUMENT_ROOT'] . '/stats.css') ?>">
+<link rel="stylesheet" href="stats.css?v=<?= content_mtime($_SERVER['DOCUMENT_ROOT'] . '/stats.css') ?>">
 </head>
 
 <body>
@@ -24,13 +24,13 @@
 </div>
 
 <?php
-  $bands = glob('bands/*.txt');
-  $artists = glob('artists/*.txt');
-  $bands_photos = glob('photos_bands/*.png'); 
-  $artists_photos = glob('photos_artists/*.png');
+  $bands = content_glob('bands/*.txt');
+  $artists = content_glob('artists/*.txt');
+  $bands_photos = content_glob('photos_bands/*.png');
+  $artists_photos = content_glob('photos_artists/*.png');
 
   function count_from_list_file($path) {
-    $rows = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $rows = content_file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     if ($rows === false) {
       return 0;
     }
@@ -142,12 +142,12 @@
   foreach ($kiss_members as $member_key => $member_data) {
     $artist_with_counts[$member_key] = 0;
     $artist_with_names[$member_key] = [];
-    $lineup_rows = file('bands_list/' . $member_key . '.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $lineup_rows = content_file('bands_list/' . $member_key . '.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     $lineup_names_by_member[$member_key] = $lineup_rows === false ? [] : $lineup_rows;
   }
 
   foreach ($artists as $artist_file) {
-    $artist_lines = file($artist_file, FILE_IGNORE_NEW_LINES);
+    $artist_lines = content_file($artist_file, FILE_IGNORE_NEW_LINES);
     $artist_name = trim($artist_lines[0] ?? '');
     $gender = strtolower(trim($artist_lines[3] ?? ''));
     if ($gender === 'male') {
@@ -207,7 +207,7 @@
   $instrument_counts = [];
   $instrument_artists = [];
   foreach ($artists as $artist_file) {
-    $artist_lines = file($artist_file, FILE_IGNORE_NEW_LINES);
+    $artist_lines = content_file($artist_file, FILE_IGNORE_NEW_LINES);
     $artist_name = trim($artist_lines[0] ?? '');
     $raw_instruments = trim($artist_lines[1] ?? '');
     if ($raw_instruments === '') {
@@ -357,7 +357,7 @@
 
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/footer.php"); ?>
 
-<script src="stats.js?v=<?= filemtime($_SERVER['DOCUMENT_ROOT'] . '/stats.js') ?>"></script>
+<script src="stats.js?v=<?= content_mtime($_SERVER['DOCUMENT_ROOT'] . '/stats.js') ?>"></script>
 
 </body>
 </html>

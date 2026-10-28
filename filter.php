@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/content.php';
 /**
  * Centralized filter utilities for bands and artists
  * Supports two filter types:
@@ -29,17 +30,17 @@ function get_artist_collaborator_members($artist_slug) {
   $found = [];
 
   $bands_list_file = 'bands_list/' . $artist_slug . '.txt';
-  if (file_exists($bands_list_file)) {
-    $bands = array_filter(array_map('trim', file($bands_list_file)));
+  if (content_exists($bands_list_file)) {
+    $bands = array_filter(array_map('trim', content_file($bands_list_file)));
 
     foreach ($bands as $band_name) {
       $band_slug = sanitize_band_slug($band_name);
       $band_file = 'bands/' . $band_slug . '.txt';
-      if (!file_exists($band_file)) {
+      if (!content_exists($band_file)) {
         continue;
       }
 
-      $lines = file($band_file, FILE_IGNORE_NEW_LINES);
+      $lines = content_file($band_file, FILE_IGNORE_NEW_LINES);
       foreach ($lines as $line) {
         $line = trim($line);
         if ($line === '' || strpos($line, ' - ') === false) {
@@ -86,7 +87,7 @@ function render_member_filter() {
       $slug = sanitize_artist_slug($name);
       $id   = 'm_' . $slug;
       $img  = "photos_artists/$slug.png";
-      if (!file_exists($img)) {
+      if (!content_exists($img)) {
         $img = 'img/artist_small.png';
       }
 
@@ -171,12 +172,12 @@ function render_member_filter() {
 function render_band_filter() {
   // Collect all unique bands from all artists
   $all_bands = [];
-  $artists = glob('artists/*.txt');
+  $artists = content_glob('artists/*.txt');
   
   foreach ($artists as $artist_file) {
     $band_list_file = 'bands_list/' . basename($artist_file);
-    if (file_exists($band_list_file)) {
-      $bands = array_filter(array_map('trim', file($band_list_file)));
+    if (content_exists($band_list_file)) {
+      $bands = array_filter(array_map('trim', content_file($band_list_file)));
       $all_bands = array_unique(array_merge($all_bands, $bands));
     }
   }

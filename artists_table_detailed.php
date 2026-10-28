@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
 
   <?php
   // Fetch all filenames in the artists folder
-  $artists = glob('artists/*.txt');
+  $artists = content_glob('artists/*.txt');
   ?>
 
   <div class="standard colored">
@@ -47,7 +47,7 @@
         <?php
         // Loop through all the files in the artists folder
         foreach ($artists as $i => $file) {
-          $contents = file($file);
+          $contents = content_file($file);
           $basename = basename($file, ".txt");
 
           // Process the list of names
@@ -72,7 +72,7 @@
           echo "<tr data-members='" . $members_attr . "'>";
           echo "<td style='text-align: right;'>" . ($i + 1) . "</td>"; // index
 
-          if (file_exists('photos_artists/' . $basename . '.png')) {
+          if (content_exists('photos_artists/' . $basename . '.png')) {
             echo "<td class='not-wrap' title='" . trim($contents[0]) . "'><a href='/artist.php?a=$basename'><img src='photos_artists/$basename.png' alt='artist' class='bitmap'></a></td>";
           } else {
             echo "<td class='not-wrap'><img src='img/artist_small.png' alt='artist' class='bitmap'></td>"; // photo
@@ -101,7 +101,7 @@
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[5]) . "'>" . implode(', ', $links) . "</td>"; // played with
 
           // Fetch file modification time as a unix timestamp and convert to a human-readable date
-          echo "<td class='not-wrap'>" . date('d-m-Y', filemtime('artists/' . $basename . '.txt')) . "</td>";
+          echo "<td class='not-wrap'>" . date('d-m-Y', content_mtime('artists/' . $basename . '.txt')) . "</td>";
 
           echo "</tr>";
         }

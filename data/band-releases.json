@@ -1,0 +1,311 @@
+{
+    "schema_version": 1,
+    "records": {
+        "ace_frehley": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Ace Frehley\r\n",
+                "18-09-1978\r\n",
+                "Ace Frehley\r\n"
+            ]
+        },
+        "alive": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Alive!\r\n",
+                "10-09-1975\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "alive_ii": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Alive II\r\n",
+                "24-10-1977\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "alive_iii": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Alive III\r\n",
+                "18-05-1993\r\n",
+                "Gene Simmons, Paul Stanley, Eric Singer, Bruce Kulick\r\n"
+            ]
+        },
+        "animalize": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Animalize\r\n",
+                "13-09-1984\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Mark St. John\r\n"
+            ]
+        },
+        "asylum": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Asylum\r\n",
+                "16-09-1985\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Bruce Kulick\r\n"
+            ]
+        },
+        "carnival_of_souls": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Carnival Of Souls\r\n",
+                "28-10-1997\r\n",
+                "Gene Simmons, Paul Stanley, Eric Singer, Bruce Kulick\r\n"
+            ]
+        },
+        "crazy_nights": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Crazy Nights\r\n",
+                "18-09-1987\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Bruce Kulick\r\n"
+            ]
+        },
+        "creatures_of_the_night": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Creatures Of The Night\r\n",
+                "25-10-1982\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Vinnie Vincent\r\n"
+            ]
+        },
+        "destroyer": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Destroyer\r\n",
+                "15-03-1976\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "double_platinum": {
+            "modified": 1782237076,
+            "lines": [
+                "Kiss\r\n",
+                "Double Platinum\r\n",
+                "24-04-1978\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "dressed_to_kill": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Dressed To Kill\r\n",
+                "19-03-1975\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "dynasty": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Dynasty\r\n",
+                "23-05-1979\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "gene_simmons": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Gene Simmons\r\n",
+                "18-09-1978\r\n",
+                "Gene Simmons\r\n"
+            ]
+        },
+        "greatest_kiss": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Greatest Kiss\r\n",
+                "08-04-1997\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley, Eric Carr, Bruce Kulick\r\n"
+            ]
+        },
+        "hotter_than_hell": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Hotter Than Hell\r\n",
+                "22-10-1974\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "hot_in_the_shade": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Hot In The Shade\r\n",
+                "17-10-1989\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Bruce Kulick\r\n"
+            ]
+        },
+        "killers": {
+            "modified": 1777429464,
+            "lines": [
+                "Kiss\r\n",
+                "Killers\r\n",
+                "15-06-1982\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Ace Frehley\r\n"
+            ]
+        },
+        "kiss": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Kiss\r\n",
+                "08-02-1974\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "lick_it_up": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Lick It Up\r\n",
+                "23-09-1983\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Vinnie Vincent\r\n"
+            ]
+        },
+        "love_gun": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Love Gun\r\n",
+                "17-06-1977\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "monster": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Monster\r\n",
+                "09-10-2012\r\n",
+                "Gene Simmons, Paul Stanley, Eric Singer, Tommy Thayer\r\n"
+            ]
+        },
+        "paul_stanley": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Paul Stanley\r\n",
+                "18-09-1978\r\n",
+                "Paul Stanley\r\n"
+            ]
+        },
+        "peter_criss": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Peter Criss\r\n",
+                "18-09-1978\r\n",
+                "Peter Criss\r\n"
+            ]
+        },
+        "psycho_circus": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Psycho Circus\r\n",
+                "22-09-1998\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "revenge": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Revenge\r\n",
+                "19-05-1992\r\n",
+                "Gene Simmons, Paul Stanley, Eric Singer, Bruce Kulick\r\n"
+            ]
+        },
+        "rock_and_roll_over": {
+            "modified": 1782237037,
+            "lines": [
+                "Kiss\r\n",
+                "Rock And Roll Over\r\n",
+                "01-11-1976\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "smashes_thrashes_and_hits": {
+            "modified": 1782078371,
+            "lines": [
+                "Kiss\r\n",
+                "Smashes, Thrashes & Hits\r\n",
+                "15-11-1988\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley, Eric Carr, Vinnie Vincent, Mark St. John, Bruce Kulick\r\n"
+            ]
+        },
+        "sonic_boom": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Sonic Boom\r\n",
+                "06-10-2009\r\n",
+                "Gene Simmons, Paul Stanley, Eric Singer, Tommy Thayer\r\n"
+            ]
+        },
+        "symphony": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Symphony: Alive IV\r\n",
+                "22-07-2003\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Tommy Thayer\r\n"
+            ]
+        },
+        "the_elder": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "The Elder\r\n",
+                "10-11-1981\r\n",
+                "Gene Simmons, Paul Stanley, Eric Carr, Ace Frehley\r\n"
+            ]
+        },
+        "unmasked": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "Unmasked\r\n",
+                "20-05-1980\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        },
+        "unplugged": {
+            "modified": 1782211101,
+            "lines": [
+                "Kiss\r\n",
+                "Kiss Unplugged\r\n",
+                "12-03-1996\r\n",
+                "Gene Simmons, Paul Stanley, Eric Singer, Bruce Kulick\r\n"
+            ]
+        },
+        "you_wanted_the_best_you_got_the_best": {
+            "modified": 1777427202,
+            "lines": [
+                "Kiss\r\n",
+                "You Wanted The Best, You Got The Best!\r\n",
+                "25-06-1996\r\n",
+                "Gene Simmons, Paul Stanley, Peter Criss, Ace Frehley\r\n"
+            ]
+        }
+    }
+}

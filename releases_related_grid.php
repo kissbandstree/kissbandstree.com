@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,7 +19,7 @@
 
     foreach ($extensions as $ext) {
       $path = 'photos_releases/related/' . $slug . '.' . $ext;
-      if (file_exists($path)) {
+      if (content_exists($path)) {
         return $path;
       }
     }
@@ -27,7 +27,7 @@
     return 'img/album.png';
   }
 
-  $releaseFiles = glob('releases/related/*.txt');
+  $releaseFiles = content_glob('releases/related/*.txt');
   usort($releaseFiles, 'compare_release_files_by_date');
   ?>
 
@@ -41,7 +41,7 @@
     <?php
     foreach ($releaseFiles as $txtFile) {
       $slug = basename($txtFile, '.txt');
-      $lines = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      $lines = content_file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       $artist = trim($lines[0] ?? '');
       $title = trim($lines[1] ?? '');
       $date = trim($lines[2] ?? '');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,7 +35,7 @@
 
   <div class="standard justify">
     <?php
-    echo nl2br(htmlspecialchars(file_get_contents("about_poster.txt")));
+    echo nl2br(htmlspecialchars(content_text("about_poster.txt")));
     ?>
   </div>
 
@@ -52,7 +52,7 @@
 
   <div class="standard justify">
     <?php
-    echo nl2br(htmlspecialchars(file_get_contents("about_website.txt")));
+    echo nl2br(htmlspecialchars(content_text("about_website.txt")));
     ?>
   </div>
 
@@ -69,7 +69,7 @@
 
   <div class="standard justify">
     <?php
-    echo nl2br(htmlspecialchars(file_get_contents("issues.txt")));
+    echo nl2br(htmlspecialchars(content_text("issues.txt")));
     ?>
   </div>
 

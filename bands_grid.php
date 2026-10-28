@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,7 +18,7 @@
 
   <div class="standard colored">
     <?php
-    $bandFiles = glob('bands/*.txt'); // Assuming text files are in the "bands" folder
+    $bandFiles = content_glob('bands/*.txt'); // Assuming text files are in the "bands" folder
     echo "
         <span id='totalEntries'>Entries: " . count($bandFiles) . ".&nbsp;</span>
         <span>Showing: <span id='visibleEntries'></span>.&nbsp;</span>
@@ -63,7 +63,7 @@
       $slug = sanitize_artist_slug($name);
       $id   = 'm_' . $slug;
       $img  = "photos_artists/$slug.png";
-      if (!file_exists($img)) {
+      if (!content_exists($img)) {
         $img = 'img/artist_small.png';
       }
 
@@ -88,12 +88,12 @@
       $bandUrl = 'band.php?a=' . urlencode($bandName);
 
       $imgUrl = 'photos_bands/' . $bandName . '.png';
-      if (!file_exists($imgUrl)) {
+      if (!content_exists($imgUrl)) {
         $imgUrl = 'img/band_small.png'; // Use default image if no photo found
       }
 
       // Read the first line (title) and the sixth line (members) from the text file
-      $fileLines = file($txtFile, FILE_IGNORE_NEW_LINES);
+      $fileLines = content_file($txtFile, FILE_IGNORE_NEW_LINES);
       $firstLine = trim($fileLines[0]); // First line as the title
       $membersLine = trim($fileLines[5]); // Sixth line (index 5) as members
 

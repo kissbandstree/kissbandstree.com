@@ -1,10 +1,11 @@
 <?php
-$bandFilesSorted = glob('bands/*.txt');
+require_once __DIR__ . '/content.php';
+$bandFilesSorted = content_glob('bands/*.txt');
 sort($bandFilesSorted, SORT_NATURAL | SORT_FLAG_CASE);
 $bandsData = [];
 foreach ($bandFilesSorted as $bandFile) {
   $slug = basename($bandFile, '.txt');
-  $lines = file($bandFile, FILE_IGNORE_NEW_LINES);
+  $lines = content_file($bandFile, FILE_IGNORE_NEW_LINES);
   $name = trim($lines[0] ?? $slug);
   $years = trim($lines[1] ?? '');
   $bandsData[] = [
@@ -14,12 +15,12 @@ foreach ($bandFilesSorted as $bandFile) {
   ];
 }
 
-$artistFilesSorted = glob('artists/*.txt');
+$artistFilesSorted = content_glob('artists/*.txt');
 sort($artistFilesSorted, SORT_NATURAL | SORT_FLAG_CASE);
 $artistsData = [];
 foreach ($artistFilesSorted as $artistFile) {
   $slug = basename($artistFile, '.txt');
-  $lines = file($artistFile, FILE_IGNORE_NEW_LINES);
+  $lines = content_file($artistFile, FILE_IGNORE_NEW_LINES);
   $name = trim($lines[0] ?? $slug);
   $artistsData[] = [
     'slug' => $slug,

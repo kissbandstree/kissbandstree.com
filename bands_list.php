@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php"); ?>
+<?php
+require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@
 
   <div class="standard colored">
     <?php
-    $bandFiles = glob('bands/*.txt');
+    $bandFiles = content_glob('bands/*.txt');
     sort($bandFiles, SORT_NATURAL | SORT_FLAG_CASE);
     echo "
         <span id='totalEntries'>Entries: " . count($bandFiles) . ".&nbsp;</span>
@@ -29,7 +30,7 @@
   <div class="standard">
     <?php
     foreach ($bandFiles as $band_file) {
-      $contents = file($band_file, FILE_IGNORE_NEW_LINES); // keep blanks to keep positions
+      $contents = content_file($band_file, FILE_IGNORE_NEW_LINES); // keep blanks to keep positions
       if (!$contents) continue;
 
       $band_name = trim($contents[0] ?? '');
@@ -48,7 +49,7 @@
 
       // Photo (correct folder)
       $imgUrl = "photos_bands/$band_slug.png";
-      if (!file_exists($imgUrl)) {
+      if (!content_exists($imgUrl)) {
         $imgUrl = "img/band.png";
       }
 
@@ -85,7 +86,7 @@
           $artist_slug = sanitize_artist_slug($name);
           $artist_path = "artists/$artist_slug.txt";
 
-          if (file_exists($artist_path)) {
+          if (content_exists($artist_path)) {
             echo "<a href='artist.php?a=$artist_slug' class='artist-name'>" . htmlspecialchars($name) . "</a>";
           } else {
             echo htmlspecialchars($name);

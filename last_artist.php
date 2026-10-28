@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php'); ?>
+<?php
+require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php'); ?>
 <div class="top-line">
 
     <svg class="icons" aria-hidden="true">
@@ -18,7 +19,7 @@
 
 <?php
 // Fetch all filenames in the artists folder sorted by modification time
-$artists = glob('artists/*.txt', GLOB_NOSORT);
+$artists = content_glob('artists/*.txt', GLOB_NOSORT);
 $artist_mtimes = array_map(function($f) { return get_artist_mtime(basename($f, '.txt')); }, $artists);
 array_multisort($artist_mtimes, SORT_DESC, $artists);
 $latest_four_artists = array_slice($artists, 0, 4); // Get the four latest modified files
@@ -28,11 +29,11 @@ $latest_four_artists = array_slice($artists, 0, 4); // Get the four latest modif
     <?php
     // Loop through the four latest modified files
     foreach ($latest_four_artists as $i => $file) {
-        $contents = file($file);
+        $contents = content_file($file);
         echo "<div class='artist-item'>";
 
         // Fetch contents of file as an array, where each line is a 0-based numerically indexed element in the array
-        $contents = file($file);
+        $contents = content_file($file);
 
         // Fetch basename (the filename part only)
         $basename = basename($file, ".txt");
@@ -53,7 +54,7 @@ $latest_four_artists = array_slice($artists, 0, 4); // Get the four latest modif
         }
 
         // Output some stuff
-        if (file_exists('photos_artists/' . $basename . '.png')) {
+        if (content_exists('photos_artists/' . $basename . '.png')) {
             echo "<div><a href='/artist.php?a=$basename'><img src='photos_artists/$basename.png' alt='artist' class='bitmap rounded'></a></div>";
         } else {
             echo "<div><a href='/artist.php?a=$basename'><img src='img/artist_small.png' alt='artist' class='bitmap rounded'></a></div>"; // photo

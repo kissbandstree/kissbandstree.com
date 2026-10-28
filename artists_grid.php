@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@
 
   <div class="standard colored">
     <?php
-    $artistFiles = glob('artists/*.txt'); // Get text files from folder
+    $artistFiles = content_glob('artists/*.txt'); // Get text files from folder
     ?>
     <?php echo
     "
@@ -28,21 +28,21 @@
 
   <div class="grid-container-artist" id="grid-container">
     <?php
-    $artistFiles = glob('artists/*.txt'); // Get text files from folder
+    $artistFiles = content_glob('artists/*.txt'); // Get text files from folder
 
     foreach ($artistFiles as $index => $txtFile) {
       $artistName = basename($txtFile, '.txt');
       $artistUrl = 'artist.php?a=' . urlencode($artistName);
 
       $imgUrl = 'photos_artists/' . $artistName . '.png';
-      if (!file_exists($imgUrl)) {
+      if (!content_exists($imgUrl)) {
         $imgUrl = 'img/artist_small.png'; // Use default image if no photo found
       }
 
       // Read the first line from the text file
       $firstLine = '';
-      if (file_exists($txtFile)) {
-        $firstLine = fgets(fopen($txtFile, 'r'));
+      if (content_exists($txtFile)) {
+        $firstLine = content_file($txtFile)[0] ?? '';
         $firstLine = trim($firstLine); // Remove any leading/trailing whitespace
       }
 

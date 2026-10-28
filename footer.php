@@ -1,11 +1,11 @@
-<footer class="footer colored">
+<?php require_once __DIR__ . '/content.php'; ?><footer class="footer colored">
   <?php
   echo "Document updated: " . date("d-m-Y. ", getlastmod());
   ?>
   <br>
   <br>
   <?php
-  echo nl2br(file_get_contents("footer.txt"));
+  echo nl2br(content_text("footer.txt"));
   ?>
   <br>
   <br>

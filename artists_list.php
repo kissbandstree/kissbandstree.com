@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php"); ?>
+<?php
+require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,7 @@
 
   <div class="standard colored">
     <?php
-    $artistFiles = glob('artists/*.txt'); // Get text files from folder
+    $artistFiles = content_glob('artists/*.txt'); // Get text files from folder
     ?>
     <?php echo
     "
@@ -35,18 +36,18 @@
 
   <div class="standard">
     <?php
-    $artists = glob('artists/*.txt');
+    $artists = content_glob('artists/*.txt');
     sort($artists, SORT_NATURAL | SORT_FLAG_CASE);
 
     foreach ($artists as $artist_file) {
-      $contents = file($artist_file, FILE_IGNORE_NEW_LINES);
+      $contents = content_file($artist_file, FILE_IGNORE_NEW_LINES);
       $artist_name = trim($contents[0]);
       $artist_id = preg_replace('/[^a-z0-9]/i', '_', strtolower($artist_name));
       $artist_url = 'artist.php?a=' . urlencode(basename($artist_file, '.txt'));
 
       // Photo path (fallback if missing)
       $imgUrl = 'photos_artists/' . $artist_id . '.png';
-      if (!file_exists($imgUrl)) {
+      if (!content_exists($imgUrl)) {
         $imgUrl = 'img/artist_small.png';
       }
 
@@ -64,19 +65,19 @@
 
       // Chronological bands list
       $bands_list_file = 'bands_list/' . basename($artist_file);
-      if (file_exists($bands_list_file)) {
-        $bands = array_filter(array_map('trim', file($bands_list_file)));
+      if (content_exists($bands_list_file)) {
+        $bands = array_filter(array_map('trim', content_file($bands_list_file)));
 
         foreach ($bands as $band_name) {
           $slug = sanitize_band_slug($band_name);
           $band_file = 'bands/' . $slug . '.txt';
 
-          if (!file_exists($band_file)) {
+          if (!content_exists($band_file)) {
             echo "<div>Missing file: " . htmlspecialchars($band_name) . "</div>";
             continue;
           }
 
-          $band_contents = file($band_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+          $band_contents = content_file($band_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
           $band_display_name = trim($band_contents[0]);
           $year_line = trim($band_contents[1]);
 

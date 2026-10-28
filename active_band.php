@@ -1,13 +1,14 @@
 <?php
+require_once __DIR__ . '/content.php';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 // Shows all band lineups where line 2 ($contents[1]) contains the word "present".
 
-$bands = glob('bands/*.txt', GLOB_NOSORT);
+$bands = content_glob('bands/*.txt', GLOB_NOSORT);
 
 $activeBands = [];
 
 foreach ($bands as $file) {
-  $contents = @file($file, FILE_IGNORE_NEW_LINES);
+  $contents = @content_file($file, FILE_IGNORE_NEW_LINES);
   if (!$contents || !isset($contents[1])) continue;
 
   $line2 = trim($contents[1]);
@@ -19,7 +20,7 @@ foreach ($bands as $file) {
 }
 
 // Sort by file modification time (DESC)
-array_multisort(array_map('filemtime', $activeBands), SORT_DESC, $activeBands);
+array_multisort(array_map('content_mtime', $activeBands), SORT_DESC, $activeBands);
 ?>
 
 <div class="top-line">
@@ -41,7 +42,7 @@ array_multisort(array_map('filemtime', $activeBands), SORT_DESC, $activeBands);
 <div class="last-container colored" id="activeBandContainer">
   <?php
   foreach ($activeBands as $file) {
-    $contents = file($file, FILE_IGNORE_NEW_LINES);
+    $contents = content_file($file, FILE_IGNORE_NEW_LINES);
     $basename = basename($file, ".txt");
 
     $yearLine = trim($contents[1] ?? '');
@@ -67,7 +68,7 @@ array_multisort(array_map('filemtime', $activeBands), SORT_DESC, $activeBands);
 
     echo "<div class='band-item'>";
 
-    if (file_exists('photos_bands/' . $basename . '.png')) {
+    if (content_exists('photos_bands/' . $basename . '.png')) {
       echo "<div><a href='/band.php?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></div>";
     } else {
       echo "<div><a href='/band.php?a=$basename'><img src='img/band_small.png' alt='band' class='bitmap'></a></div>";

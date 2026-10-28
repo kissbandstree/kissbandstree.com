@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php"); ?>
+<?php
+require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . "/functions.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,16 +10,16 @@ $artist = isset($_GET['a']) ? $_GET['a'] : '';
 $file_path = 'artists/' . $artist . '.txt';
 
 // Fail fast if file is missing
-if (!is_file($file_path)) {
+if (!content_exists($file_path)) {
   http_response_code(404);
   die("<h2>Artist file not found: " . htmlspecialchars($artist) . "</h2>");
 }
 
 // Load contents
-$contents = file($file_path, FILE_IGNORE_NEW_LINES);
+$contents = content_file($file_path, FILE_IGNORE_NEW_LINES);
 
 // Create thumbnail URL
-if (file_exists('photos_artists_large/' . $artist . '.png')) {
+if (content_exists('photos_artists_large/' . $artist . '.png')) {
   $thumb = 'photos_artists_large/' . $artist . '.png';
 } else {
   $thumb = 'img/artist.png';
@@ -41,7 +42,7 @@ $artist_name = trim($contents[0]);
 
   <?php
   // Get the list of artists from the directory
-  $artists = glob('artists/*.txt');
+  $artists = content_glob('artists/*.txt');
   $current_artist = isset($_GET['a']) ? $_GET['a'] : '';
   $current_index = array_search('artists/' . $current_artist . '.txt', $artists);
   $next_index = ($current_index + 1) % count($artists);
@@ -192,7 +193,7 @@ $artist_name = trim($contents[0]);
 
   <div class="image-container" id="artistPhotoContainer">
     <?php
-    if (file_exists('photos_artists_large/' . $artist . '.png')) {
+    if (content_exists('photos_artists_large/' . $artist . '.png')) {
       echo "<img src='photos_artists_large/$artist.png' title='" . trim($contents[0]) . "' class='bitmap full'>";
     } else {
       echo "<img src='img/artist.png' title='No photo for this artist' class='bitmap full'>";
@@ -253,7 +254,7 @@ $artist_name = trim($contents[0]);
 
     // Updated
     $file = "artists/$artist.txt";
-    if (file_exists($file)) {
+    if (content_exists($file)) {
       echo "Entry updated: " . date("d-m-Y.", get_artist_mtime($artist)) . "<br>";
     }
     ?>
@@ -279,8 +280,8 @@ $artist_name = trim($contents[0]);
     <?php
     $artist_name = trim($contents[0]);
     $bands_list_file = 'bands_list/' . $artist . '.txt';
-    if (file_exists($bands_list_file)) {
-      $bands = array_filter(array_map('trim', file($bands_list_file)));
+    if (content_exists($bands_list_file)) {
+      $bands = array_filter(array_map('trim', content_file($bands_list_file)));
     } else {
       $bands = [];
     }
@@ -302,12 +303,12 @@ $artist_name = trim($contents[0]);
       $slug = sanitize_band_slug($band_name);
       $band_file = 'bands/' . $slug . '.txt';
 
-      if (!file_exists($band_file)) {
+      if (!content_exists($band_file)) {
         echo "<h2>Missing file: " . htmlspecialchars($band_name) . "</h2>";
         continue;
       }
 
-      $band_contents = file($band_file);
+      $band_contents = content_file($band_file);
       $lineup = array_map('trim', array_slice($band_contents, 6));
 
       if (artistInLineup($lineup, $artist_name)) {
@@ -319,7 +320,7 @@ $artist_name = trim($contents[0]);
 
         // Tiny band photo (same logic as bands_list.php)
         $imgUrl = "photos_bands/$slug.png";
-        if (!file_exists($imgUrl)) {
+        if (!content_exists($imgUrl)) {
           $imgUrl = "img/band.png";
         }
 
@@ -346,7 +347,7 @@ $artist_name = trim($contents[0]);
           $instrument = trim($parts[1]);
           $slug_member = sanitize_artist_slug($name);
 
-          if (file_exists("artists/$slug_member.txt")) {
+          if (content_exists("artists/$slug_member.txt")) {
             echo "<a href=\"/artist.php?a=$slug_member\">$name</a>";
           } else {
             echo htmlspecialchars($name);
@@ -369,8 +370,8 @@ $artist_name = trim($contents[0]);
     <br>
     <?php
     $file_path = 'artists_credits/' . $artist . '.txt';
-    if (file_exists($file_path)) {
-      $credits = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (content_exists($file_path)) {
+      $credits = content_file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     } else {
       $credits = [];
     }

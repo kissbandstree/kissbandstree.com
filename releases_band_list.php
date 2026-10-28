@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,7 +18,7 @@
   <?php
   require_once($_SERVER['DOCUMENT_ROOT'] . '/functions.php');
 
-  $releaseFiles = glob('releases/band/*.txt');
+  $releaseFiles = content_glob('releases/band/*.txt');
   usort($releaseFiles, 'compare_release_files_by_date');
   ?>
 
@@ -32,7 +32,7 @@
     <?php
     foreach ($releaseFiles as $txtFile) {
       $slug = basename($txtFile, '.txt');
-      $lines = file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      $lines = content_file($txtFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       $artist = trim($lines[0] ?? '');
       $title = trim($lines[1] ?? '');
       $date = trim($lines[2] ?? '');
@@ -40,7 +40,7 @@
       $membersAttr = htmlspecialchars($members, ENT_QUOTES, 'UTF-8');
 
       $imgUrl = 'photos_releases/band/' . $slug . '.png';
-      if (!file_exists($imgUrl)) {
+      if (!content_exists($imgUrl)) {
         $imgUrl = 'img/album.png';
       }
 

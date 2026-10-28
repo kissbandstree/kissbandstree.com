@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,7 +29,7 @@
 
   <div class="standard justify">
     <?php
-    echo (file_get_contents("thanks.txt"));
+    echo (content_text("thanks.txt"));
     ?>
   </div>
 

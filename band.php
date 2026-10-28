@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/content.php';
 require_once('functions.php');
 
 // Get band slug from URL
@@ -6,19 +7,19 @@ $band = isset($_GET['a']) ? $_GET['a'] : '';
 $file_path = 'bands/' . $band . '.txt';
 
 // Fail fast if file is missing
-if (!is_file($file_path)) {
+if (!content_exists($file_path)) {
   http_response_code(404);
   die("<h2>Band file not found: " . htmlspecialchars($band) . "</h2>");
 }
 
 // Load contents
-$contents = file($file_path, FILE_IGNORE_NEW_LINES);
+$contents = content_file($file_path, FILE_IGNORE_NEW_LINES);
 
 // Thumbnail
 // Absolute (for OG in head.php)
 $siteUrl = "https://kissbandstree.com/";
 // Relative (for inline <img>)
-$imgThumb = file_exists("photos_bands_large/$band.png")
+$imgThumb = content_exists("photos_bands_large/$band.png")
   ? "photos_bands_large/$band.png"
   : "img/band.png";
 // Keep $thumb as absolute because head.php expects it for og:image
@@ -29,7 +30,7 @@ $pagetitle = trim($contents[0]);
 $lineup = array_slice($contents, 6);
 
 // Get all bands for next/prev and make ordering stable
-$bands = glob('bands/*.txt');
+$bands = content_glob('bands/*.txt');
 sort($bands, SORT_NATURAL | SORT_FLAG_CASE);
 
 $current_index = array_search($file_path, $bands, true);
@@ -198,7 +199,7 @@ $band_slugs = array_map(function ($b) {
         $safeName = htmlspecialchars($name);
         $safeInstr = htmlspecialchars($instrument);
 
-        $link = ($name === 'unknown' || !file_exists($path))
+        $link = ($name === 'unknown' || !content_exists($path))
           ? $safeName
           : "<a href=\"/artist.php?a=$slug\">$safeName</a>";
 
@@ -255,8 +256,8 @@ $band_slugs = array_map(function ($b) {
   <div class="standard colored" id="band-comments-container">
     <?php
     $comments_file = "bands_comments/$band.txt";
-    if (file_exists($comments_file) && filesize($comments_file) > 0) {
-      $comments_content = file_get_contents($comments_file);
+    if (content_exists($comments_file) && content_size($comments_file) > 0) {
+      $comments_content = content_text($comments_file);
       echo nl2br(htmlspecialchars($comments_content)) . "<br><br>";
     } else {
       echo "No comments available.<br><br>";
@@ -268,7 +269,7 @@ $band_slugs = array_map(function ($b) {
     <h2>PHOTO CREDITS</h2><br>
     <?php
     $credit_file = "bands_credits/$band.txt";
-    $credits = file_exists($credit_file) ? file($credit_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
+    $credits = content_exists($credit_file) ? content_file($credit_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
 
     function get_credit($array, $index)
     {

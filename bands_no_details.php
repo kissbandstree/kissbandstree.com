@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/toc_bands.php"); ?>
 
   <?php
-  $bandFiles = glob('bands/*.txt'); // Assuming text files are in the "bands" folder
+  $bandFiles = content_glob('bands/*.txt'); // Assuming text files are in the "bands" folder
   ?>
 
   <div class="standard colored">
@@ -24,7 +24,7 @@
   function generateBandLink($file_path)
   {
     // Read the bands list from the provided file path
-    $bands_list = file_get_contents($file_path);
+    $bands_list = content_text($file_path);
 
     // Explode the bands list by newline to get each band name separately
     $bands_array = explode("\n", $bands_list);

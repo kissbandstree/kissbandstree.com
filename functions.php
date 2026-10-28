@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/content.php';
 
 // Shared helper functions
 
@@ -45,8 +46,8 @@ function get_band_mtime($slug)
   ];
   $mtime = 0;
   foreach ($candidates as $path) {
-    if (file_exists($path)) {
-      $mtime = max($mtime, filemtime($path));
+    if (content_exists($path)) {
+      $mtime = max($mtime, content_mtime($path));
     }
   }
   return $mtime;
@@ -62,8 +63,8 @@ function get_artist_mtime($slug)
   ];
   $mtime = 0;
   foreach ($candidates as $path) {
-    if (file_exists($path)) {
-      $mtime = max($mtime, filemtime($path));
+    if (content_exists($path)) {
+      $mtime = max($mtime, content_mtime($path));
     }
   }
   return $mtime;
@@ -71,11 +72,11 @@ function get_artist_mtime($slug)
 
 function render_numbered_tracklist($tracklistFile)
 {
-  if (!file_exists($tracklistFile) || filesize($tracklistFile) === 0) {
+  if (!content_exists($tracklistFile) || content_size($tracklistFile) === 0) {
     return 'No tracklist available.<br><br>';
   }
 
-  $lines = file($tracklistFile, FILE_IGNORE_NEW_LINES);
+  $lines = content_file($tracklistFile, FILE_IGNORE_NEW_LINES);
   $tracks = [];
 
   foreach ($lines as $line) {
@@ -121,8 +122,8 @@ function release_date_sort_value($dateText)
 
 function compare_release_files_by_date($a, $b)
 {
-  $aLines = file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-  $bLines = file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  $aLines = content_file($a, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  $bLines = content_file($b, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
   $aSort = release_date_sort_value($aLines[2] ?? '');
   $bSort = release_date_sort_value($bLines[2] ?? '');
 
