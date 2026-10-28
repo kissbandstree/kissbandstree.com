@@ -35,6 +35,11 @@ function render_kiss_member_links($members_line)
   return implode(', ', $links);
 }
 
+function is_band_active(string $dates): bool
+{
+  return preg_match('/\bpresent\b/i', $dates) === 1;
+}
+
 function get_band_mtime($slug)
 {
   $candidates = [
@@ -133,4 +138,3 @@ function compare_release_files_by_date($a, $b)
 
   return $aSort <=> $bSort;
 }
-

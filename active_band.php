@@ -14,7 +14,7 @@ foreach ($bands as $file) {
   $line2 = trim($contents[1]);
 
   // Only match the word "present" (case-insensitive)
-  if (!preg_match('/\bpresent\b/i', $line2)) continue;
+  if (!is_band_active($line2)) continue;
 
   $activeBands[] = $file;
 }

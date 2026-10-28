@@ -1,4 +1,7 @@
-<?php require_once __DIR__ . '/content.php'; ?><!DOCTYPE html>
+<?php
+require_once __DIR__ . '/content.php';
+require_once __DIR__ . '/functions.php';
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/head.php"); ?>
@@ -48,25 +51,42 @@
 
   function pie_slice_path($cx, $cy, $radius, $start_angle, $end_angle) {
     $start_rad = deg2rad($start_angle - 90);
+    $middle_rad = deg2rad(($start_angle + $end_angle) / 2 - 90);
     $end_rad = deg2rad($end_angle - 90);
+    $inner_radius = $radius / 2;
 
     $x1 = $cx + $radius * cos($start_rad);
     $y1 = $cy + $radius * sin($start_rad);
+    $xm = $cx + $radius * cos($middle_rad);
+    $ym = $cy + $radius * sin($middle_rad);
     $x2 = $cx + $radius * cos($end_rad);
     $y2 = $cy + $radius * sin($end_rad);
 
-    $large_arc = ($end_angle - $start_angle) > 180 ? 1 : 0;
+    // Two arcs per edge also support a single slice spanning the full circle.
     return sprintf(
-      'M %.3F %.3F L %.3F %.3F A %.3F %.3F 0 %d 1 %.3F %.3F Z',
-      $cx,
-      $cy,
+      'M %.3F %.3F A %.3F %.3F 0 0 1 %.3F %.3F ' .
+      'A %.3F %.3F 0 0 1 %.3F %.3F L %.3F %.3F ' .
+      'A %.3F %.3F 0 0 0 %.3F %.3F A %.3F %.3F 0 0 0 %.3F %.3F Z',
       $x1,
       $y1,
       $radius,
       $radius,
-      $large_arc,
+      $xm,
+      $ym,
+      $radius,
+      $radius,
       $x2,
-      $y2
+      $y2,
+      $cx + $inner_radius * cos($end_rad),
+      $cy + $inner_radius * sin($end_rad),
+      $inner_radius,
+      $inner_radius,
+      $cx + $inner_radius * cos($middle_rad),
+      $cy + $inner_radius * sin($middle_rad),
+      $inner_radius,
+      $inner_radius,
+      $cx + $inner_radius * cos($start_rad),
+      $cy + $inner_radius * sin($start_rad)
     );
   }
 
@@ -77,7 +97,7 @@
     $radius = $size / 2;
 
     if ($total <= 0) {
-      return '<svg class="cake-pie" viewBox="0 0 ' . $size . ' ' . $size . '" aria-hidden="true"><circle cx="' . $cx . '" cy="' . $cy . '" r="' . $radius . '" fill="#7f8ea8" /></svg>';
+      return '<svg class="cake-pie" viewBox="0 0 ' . $size . ' ' . $size . '" aria-hidden="true"><circle cx="' . $cx . '" cy="' . $cy . '" r="' . ($radius * 0.75) . '" fill="none" stroke="#7f8ea8" stroke-width="' . ($radius / 2) . '" /></svg>';
     }
 
     $svg = '<svg class="cake-pie" viewBox="0 0 ' . $size . ' ' . $size . '">';
@@ -189,6 +209,13 @@
     'no' => max(0, count($bands) - count($bands_photos)),
   ];
 
+  $active_band_counts = ['yes' => 0, 'no' => 0];
+  foreach ($bands as $band_file) {
+    $band_lines = content_file($band_file, FILE_IGNORE_NEW_LINES);
+    $active_key = is_band_active($band_lines[1] ?? '') ? 'yes' : 'no';
+    $active_band_counts[$active_key]++;
+  }
+
   $artist_photo_counts = [
     'yes' => count($artists_photos),
     'no' => max(0, count($artists) - count($artists_photos)),
@@ -199,7 +226,7 @@
     'female' => 'var(--grey2)',
   ];
 
-  $photo_colors = [
+  $yes_no_colors = [
     'yes' => 'var(--grey1)',
     'no' => 'var(--grey2)',
   ];
@@ -257,13 +284,14 @@
     'female' => 'Female',
   ];
 
-  $photo_titles = [
+  $yes_no_titles = [
     'yes' => 'Yes',
     'no' => 'No',
   ];
 
-  $band_photo_pie_svg = svg_pie($band_photo_counts, $photo_colors, [], $photo_titles, 'band-photos');
-  $artist_photo_pie_svg = svg_pie($artist_photo_counts, $photo_colors, [], $photo_titles, 'artist-photos');
+  $band_photo_pie_svg = svg_pie($band_photo_counts, $yes_no_colors, [], $yes_no_titles, 'band-photos');
+  $active_band_pie_svg = svg_pie($active_band_counts, $yes_no_colors, [], $yes_no_titles, 'active-bands');
+  $artist_photo_pie_svg = svg_pie($artist_photo_counts, $yes_no_colors, [], $yes_no_titles, 'artist-photos');
   $bands_pie_svg = svg_pie($bands_member_counts, $member_colors, $member_links, $member_titles, 'bands');
   $artists_pie_svg = svg_pie($artists_member_counts, $member_colors, $member_links, $member_titles, 'artists');
   $gender_pie_svg = svg_pie($gender_counts, $gender_colors, [], $gender_titles, 'gender');
@@ -350,6 +378,17 @@
 <?php
   echo "<span class='stats-gender' data-member='male'>MALE</span>: " . $male_count . "<br>";
   echo "<span class='stats-gender' data-member='female'>FEMALE</span>: " . $female_count;
+?>
+    </p>
+  </div>
+
+  <div class="stats-row">
+    <h2>ACTIVE BANDS</h2>
+    <?php echo $active_band_pie_svg; ?>
+    <p class="stats-text">
+<?php
+  echo "<span class='stats-member' data-group='active-bands' data-member='yes'>YES</span>: " . $active_band_counts['yes'] . "<br>";
+  echo "<span class='stats-member' data-group='active-bands' data-member='no'>NO</span>: " . $active_band_counts['no'];
 ?>
     </p>
   </div>

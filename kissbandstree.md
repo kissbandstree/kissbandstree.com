@@ -26,6 +26,12 @@
 - Never use rounded corners (no border-radius).
 - Avoid decorative visual effects unless explicitly requested.
 - Use `<h2>` for all section headers. Reserve `<h1>` only for the main page title/top-line heading.
+- Stats charts have empty centres. Preserve slice hover, selection and keyboard
+  interactions and their matching legend highlights.
+- ACTIVE BANDS counts individual lineup records. YES means the active-date
+  field contains the word `present`, case-insensitively. NO includes all other
+  lineups. Use the shared `is_band_active` helper for Stats and the homepage.
+  Run `php .github/tests/stats.php` after changing this behavior.
 
 ## Licensing and copyright
 

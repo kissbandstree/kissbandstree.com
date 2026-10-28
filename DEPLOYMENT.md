@@ -21,10 +21,11 @@ Normal deploys run automatically when `main` is pushed to GitHub.
 
 The normal deploy uploads only site files changed in the latest commit. If a tracked site file is deleted or renamed in Git, the workflow removes the old server file too.
 
-Content now lives in `data/*.json`; deploy these files and `content.php` with
-the PHP pages. The workflow uploads JSON collections first, the shared loader
-second, and other changed files next. It deletes obsolete files only after all
-uploads. Full sync also uploads JSON and the loader before other site files.
+Content now lives in `data/*.json`. Deploy these files, `content.php` and
+`functions.php` with the PHP pages. The workflow uploads JSON collections
+first, the content loader second, shared helpers third, and other changed
+files next. It deletes obsolete files only after all uploads. Full sync also
+uploads JSON, the loader and shared helpers before other site files.
 For the first text-to-JSON deployment, use `changed` mode so the tracked old
 text files are removed; full sync leaves remote-only files in place.
 

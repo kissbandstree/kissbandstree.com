@@ -196,12 +196,13 @@ jobs:
             done
           }
 
-          for phase in data loader pages; do
+          for phase in data loader helpers pages; do
             while IFS= read -r file; do
               [[ -z "$file" ]] && continue
               case "$file" in
                 data/*.json) file_phase=data ;;
                 content.php) file_phase=loader ;;
+                functions.php) file_phase=helpers ;;
                 *) file_phase=pages ;;
               esac
               [[ "$file_phase" == "$phase" ]] || continue
@@ -232,6 +233,7 @@ jobs:
           set net:timeout 30
           mirror --reverse --verbose --only-newer --no-perms ./data "$SFTP_REMOTE_DIR/data"
           put ./content.php -o "$SFTP_REMOTE_DIR/content.php"
+          put ./functions.php -o "$SFTP_REMOTE_DIR/functions.php"
           mirror --reverse --verbose --only-newer --no-perms --parallel=4 \
             --exclude-glob .git/** \
             --exclude-glob .github/** \

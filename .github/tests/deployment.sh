@@ -84,7 +84,7 @@ sshpass() {
 }
 export -f sshpass
 
-printf '%s\n' index.php content.php data/artists.json data/bands.json style.css > "$DEPLOY_UPLOAD_LIST"
+printf '%s\n' index.php functions.php content.php data/artists.json data/bands.json style.css > "$DEPLOY_UPLOAD_LIST"
 printf '%s\n' artists/old.txt bands/old.txt > "$DEPLOY_DELETE_LIST"
 bash -e -o pipefail "$test_dir/upload.sh"
 
@@ -93,11 +93,13 @@ line_number() {
 }
 data_line=$(line_number 'put "data/bands.json"')
 loader_line=$(line_number 'put "content.php"')
+helper_line=$(line_number 'put "functions.php"')
 page_line=$(line_number 'put "index.php"')
 last_upload=$(line_number 'put "style.css"')
 delete_line=$(line_number '-rm "/website/artists/old.txt"')
 test "$data_line" -lt "$loader_line"
-test "$loader_line" -lt "$page_line"
+test "$loader_line" -lt "$helper_line"
+test "$helper_line" -lt "$page_line"
 test "$last_upload" -lt "$delete_line"
 
 printf '' > "$DEPLOY_UPLOAD_LIST"
@@ -115,9 +117,11 @@ export -f lftp
 bash -e -o pipefail "$test_dir/full.sh"
 data_line=$(line_number 'mirror --reverse --verbose --only-newer --no-perms ./data')
 loader_line=$(line_number 'put ./content.php')
+helper_line=$(line_number 'put ./functions.php')
 page_line=$(line_number 'mirror --reverse --verbose --only-newer --no-perms --parallel=4')
 test "$data_line" -lt "$loader_line"
-test "$loader_line" -lt "$page_line"
+test "$loader_line" -lt "$helper_line"
+test "$helper_line" -lt "$page_line"
 grep -q -F -- '--exclude-glob .github/**' "$TEST_RESULT"
 grep -q -F -- '--exclude-glob .ftpignore' "$TEST_RESULT"
 grep -q -F -- '--exclude-glob photos_bands_originals/**' "$TEST_RESULT"
