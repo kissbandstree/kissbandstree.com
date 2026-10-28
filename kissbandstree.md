@@ -85,6 +85,40 @@
 - A website field must identify the artist's or band's own website/profile,
   not an unrelated research source. Ask before substituting a biography page.
 
+## Facebook page posts
+
+- Write short, visitor-facing announcements, not development summaries.
+  For a new band page, use `<Band name> page added.` as the opening line.
+- Welcome newly added artists using the established wording:
+  `Welcome to Kiss Bands Tree <artist names>!`
+  Separate names with commas and use `and` before the last name.
+- Do not add a band-history paragraph or repeat the lineup unless requested.
+- Include the public band-page URL without a trailing slash. Check that the
+  link preview identifies the correct numbered lineup and shows its band photo.
+- End with relevant band and artist hashtags, including the associated Kiss
+  member. Do not add `#KISS` or `#KissBandsTree`.
+- An emoji is optional and must fit the specific band or subject. Do not use
+  a generic guitar by default. If no suitable emoji exists, omit it; for
+  Shogun Mojo, use no emoji rather than an unrelated substitute.
+- Separate the announcement, welcome, link and hashtags with blank lines.
+- Creating a post means drafting it unless the user explicitly requests
+  publication. Publish only through an available logged-in session with access
+  to the correct Kiss Bands Tree Facebook Page. Verify the final text, link
+  preview and Page identity before publishing, then verify the published post.
+  If access is unavailable, provide the draft and report that limitation.
+
+Approved Shogun Mojo example:
+
+```text
+Shogun Mojo page added.
+
+Welcome to Kiss Bands Tree Dan Reed, Bengan Jonasson and Robert Mehmet Ikiz!
+
+https://kissbandstree.com/band.php?a=shogun_mojo_2
+
+#ShogunMojo #TommyThayer #DanReed #BenganJonasson #RobertMehmetIkiz
+```
+
 ## Completion checklist
 
 - Band: correct numbered lineup, dates, website, verified Facebook when
