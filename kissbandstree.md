@@ -4,9 +4,9 @@
 
 1. Read this document before each task. Inspect the relevant PHP reader and
    several comparable existing records before changing data or presentation.
-2. Verify that localhost:8003 serves `D:\kissbandstree.com`. Check repository
-   status and preserve unrelated local work. Never use the Google Drive website
-   copy as the working site.
+2. Verify that localhost:8003 serves
+   `X:\My Drive\WEBSITES\WEB SITES\kissbandstree.com`. Check repository status
+   and preserve unrelated local work. Do not edit the old D: copy.
 3. Perform the requested work, not just a proposal. Research missing fields and
    try another reasonable source when the first one fails.
 4. Ask the user when an identity, chronology, lineup number or intended behavior
@@ -29,11 +29,16 @@
 
 ## Working copy
 
-- The authoritative working site is `D:\kissbandstree.com`, served at
-  `http://localhost:8003`. The Google Drive website copy is not the active
-  working copy. Verify the server document root before editing or previewing.
-- Do not synchronize the old Google Drive site over this working copy.
-  Transfer individual additions only after checking for conflicts.
+- The authoritative working site is
+  `X:\My Drive\WEBSITES\WEB SITES\kissbandstree.com`, served at
+  `http://localhost:8003`. Verify the server document root before editing or
+  previewing. Other computers should use their corresponding synced copy.
+- Google Drive is the intended working location so the site can be updated
+  from different computers and locations. This takes priority over the faster
+  response times measured on D:.
+- `D:\kissbandstree.com` is no longer the active working copy. Do not edit it
+  or synchronize it over Google Drive without an explicit request and a
+  conflict check.
 
 ## Adding bands and artists
 
@@ -63,6 +68,8 @@
   reserved blank line, associated Kiss members, then lineup lines.
 - Artist `lines` arrays contain name, instruments, Facebook identifier, gender, date
   of passing, associated Kiss members, aliases, website and date of birth.
+- A missing birth date is unknown, not an error. Display it as blank in the
+  detailed artist table, matching the artist page; do not invent a date.
 - Band credit `lines` contain description, photographer, source name and source URL.
   Artist credits contain description, photographer and source URL. Artist
   credits skip blank lines when read, so preserve those three field positions.
@@ -115,6 +122,10 @@
   with two warmups and 25 samples each. The default base URL is
   `http://localhost:8003`. The benchmark requires PHP 8.4 or newer for HTTP
   response-header inspection. Keep output files outside the website.
+- The benchmark rejects HTTP server errors and PHP warnings, notices,
+  deprecations and fatal/parse errors, including HTML-formatted diagnostics.
+  Run `php .github/tests/benchmark.php` to test that detection with local
+  fixture responses; it starts and stops its own temporary server.
 - The optional reference compares HTTP status and HTML hashes, ignoring only
   the source-file dates labelled `Document updated` and `Version`.
 - The one-time migration tool is `.github/tools/migrate-content.php`.
@@ -201,8 +212,8 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
   `X:\My Drive\WEBSITES\WEB SITES SOURCE\kissbandstree.com\photos_bands_originals`.
 - Save untouched artist originals in
   `X:\My Drive\WEBSITES\WEB SITES SOURCE\kissbandstree.com\photos_artists_originals`.
-- These Google Drive source archives remain intentional even though the
-  working website is on D:. Do not put originals in the deployed site.
+- These SOURCE archives are separate from the Google Drive website directory.
+  Do not put originals in the deployed site.
 - The artist-original archive must contain only originals of photos currently
   used on the site. Keep research candidates in temporary session storage.
   Remove rejected candidates and superseded originals from this archive;

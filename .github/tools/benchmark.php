@@ -56,7 +56,7 @@ function request_page(string $path): array
         'hash' => hash('sha256', $normalized),
         'bytes' => strlen($body),
         'milliseconds' => $elapsed,
-        'errors' => preg_match('/(?:Warning|Fatal error|Parse error|Notice):/', $body) === 1,
+        'errors' => preg_match('/(?:Warning|Fatal error|Parse error|Notice|Deprecated|Recoverable fatal error):/', strip_tags($body)) === 1,
     ];
 }
 

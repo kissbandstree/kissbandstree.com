@@ -94,7 +94,7 @@
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[3]) . "'>" . trim($contents[3]) . "</td>"; // gender
 
-          echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[8]) . "'>" . trim($contents[8]) . "</td>"; // birth
+          echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[8] ?? '') . "'>" . trim($contents[8] ?? '') . "</td>"; // birth
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[9] ?? '') . "'>" . trim($contents[9] ?? '') . "</td>"; // passing
 
