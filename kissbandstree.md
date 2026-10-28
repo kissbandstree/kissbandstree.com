@@ -105,12 +105,19 @@
 
 ## Photos
 
+- Strongly prefer color photos. Do not replace a color photo with a
+  black-and-white alternative without the user's approval.
 - Save untouched band originals in
   `X:\My Drive\WEBSITES\WEB SITES SOURCE\kissbandstree.com\photos_bands_originals`.
 - Save untouched artist originals in
   `X:\My Drive\WEBSITES\WEB SITES SOURCE\kissbandstree.com\photos_artists_originals`.
 - These Google Drive source archives remain intentional even though the
   working website is on D:. Do not put originals in the deployed site.
+- The artist-original archive must contain only originals of photos currently
+  used on the site. Keep research candidates in temporary session storage.
+  Remove rejected candidates and superseded originals from this archive;
+  verify the current published photo before deleting. Do not retain band-photo
+  copies in the artist-original archive.
 - Always find the best available source: inspect official full-size links and
   `srcset`, compare actual dimensions and detail, and avoid preview downloads
   when a better original exists. Do not substitute artificial enlargement for
@@ -145,16 +152,16 @@
 - Robert Mehmet Ikiz's individual performance photo is by Gerald Langer:
   <https://www.turkishjazz.org/artist/robert-mehmet-ikiz>.
   Its untouched original is retained in the artist-original archive.
-- Dan Reed's individual performance photo at Liseberg, Gothenburg, on
-  7 June 2016 is by Blondinrikard Fröberg, CC BY 2.0:
-  <https://www.flickr.com/photos/blondinrikard/26918658634>.
-  License: <https://creativecommons.org/licenses/by/2.0>.
-  The untouched 5312x2988 original is retained in the artist-original archive
-  as `Dan_Reed_Network_Blondinrikard_Froberg_2016_26918658634.jpg`.
-  Honor EXIF orientation 6 before cropping `(950,550,2000,2000)` in the
-  upright image; generate the 1024x1024 portrait and 64x64 thumbnail directly
-  from that original. This replaces the December 2019 portrait the user
-  disliked; retain the earlier original in the archive.
+- Dan Reed's individual December 2019 color portrait is by JürnC, CC BY-SA 4.0:
+  <https://commons.wikimedia.org/wiki/File:Dan_Reed.jpg>.
+  License: <https://creativecommons.org/licenses/by-sa/4.0>.
+  The untouched original is retained in the artist-original archive as
+  `Dan_Reed_JuernC_2019.jpg`. Rotate 90 degrees clockwise, then crop
+  `(450,150,2400,2400)` in the upright image; generate the 1024x1024 portrait
+  and 64x64 thumbnail directly from that original.
+  Restored at the user's request instead of the black-and-white 2016
+  performance photo; only the currently used color original belongs in the
+  artist-original archive.
 - Bengan Jonasson uses the standard artist placeholder pending a suitable
   individual photo; do not restore the rejected band-photo crop.
 - Individual-photo candidate: Peter Bothén's photograph of Bengan playing bass,
