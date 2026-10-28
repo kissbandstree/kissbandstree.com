@@ -10,6 +10,7 @@ on:
       - .gitignore
       - DEPLOYMENT.md
       - README.md
+      - kissbandstree.md
       - LICENCE
   workflow_dispatch:
     inputs:
@@ -88,7 +89,7 @@ jobs:
 
           is_excluded() {
             case "$1" in
-              .git/*|.github/*|.vscode/*|.gitignore|DEPLOYMENT.md|README.md|LICENCE)
+              .git/*|.github/*|.vscode/*|.gitignore|DEPLOYMENT.md|README.md|kissbandstree.md|LICENCE)
                 return 0
                 ;;
             esac
@@ -226,6 +227,7 @@ jobs:
             --exclude-glob .gitignore \
             --exclude-glob DEPLOYMENT.md \
             --exclude-glob README.md \
+            --exclude-glob kissbandstree.md \
             --exclude-glob LICENCE \
             ./ "$SFTP_REMOTE_DIR"
           bye

@@ -35,4 +35,5 @@ These local repository files are not uploaded:
 - `.gitignore`
 - `DEPLOYMENT.md`
 - `README.md`
+- `kissbandstree.md`
 - `LICENCE`
