@@ -95,6 +95,18 @@
   If a source account is unverified, use its platform name without guessing
   the account owner. Do not display a raw URL as the source name.
 
+## Credit source URL checks
+
+- Verify that the original and cleaned URLs reach the same source. Preserve
+  paths, query strings and image IDs. A verified clean URL may redirect to the
+  publisher's preferred `www.` host or trailing-slash form.
+- On 29 October 2026, Black Sabbath #9's Metal Edge article returned 404 with
+  and without `www.`. Its existing credit URL was retained; do not substitute
+  a guessed article URL.
+- Nautilus's Backstage Auctions item returned 403 with and without `www.` in
+  HTTP checks; the bare host also returned 403 in the browser. Its existing
+  credit URL was retained until the item destination can be verified.
+
 ## JSON content
 
 - `data/*.json` is the authoritative content store. Thirteen collections replace
