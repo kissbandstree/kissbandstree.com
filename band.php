@@ -269,7 +269,7 @@ $band_slugs = array_map(function ($b) {
     <h2>PHOTO CREDITS</h2><br>
     <?php
     $credit_file = "bands_credits/$band.txt";
-    $credits = content_exists($credit_file) ? content_file($credit_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
+    $credits = content_exists($credit_file) ? content_file($credit_file, FILE_IGNORE_NEW_LINES) : [];
 
     function get_credit($array, $index)
     {

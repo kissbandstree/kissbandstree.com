@@ -2,11 +2,12 @@
     "schema_version": 1,
     "records": {
         "ace_frehley": {
-            "modified": 1745882442,
+            "modified": 1793231233,
             "lines": [
                 "Ace Frehley photo shoot\r\n",
                 "unknown\r\n",
-                "https://facebook.com/theperfectradio/posts/pfbid02TGpCUiBAt9pjScydWovcJzbGgWyMTVLdnmDKaAcSrfKGWTzCkZdJAw176YzVbFP2l\r\n"
+                "https://facebook.com/theperfectradio/posts/pfbid02TGpCUiBAt9pjScydWovcJzbGgWyMTVLdnmDKaAcSrfKGWTzCkZdJAw176YzVbFP2l\r\n",
+                "Facebook\r\n"
             ]
         },
         "al_ferrante": {
@@ -19,19 +20,21 @@
             ]
         },
         "art_lindauer": {
-            "modified": 1692540790,
+            "modified": 1793231233,
             "lines": [
                 "Art at photoshoot 2017\r\n",
                 "FotoArt\r\n",
-                "https://facebook.com/photo.php?fbid=10212435275093772\r\n"
+                "https://facebook.com/photo.php?fbid=10212435275093772\r\n",
+                "Facebook\r\n"
             ]
         },
         "bengan_jonasson": {
-            "modified": 1793229402,
+            "modified": 1793231233,
             "lines": [
                 "Bengan Jonasson in concert\r\n",
                 "Mattias Boström\r\n",
-                "https://facebook.com/photo/?fbid=10151280424111128&set=a.474229441127\r\n"
+                "https://facebook.com/photo/?fbid=10151280424111128\r\n",
+                "Facebook, Bengt Jonasson\r\n"
             ]
         },
         "bobby_donati": {
@@ -62,19 +65,21 @@
             ]
         },
         "bruce_kulick": {
-            "modified": 1745886995,
+            "modified": 1793231233,
             "lines": [
                 "Bruce Kulick photo session \r\n",
                 "Simon Diez\r\n",
-                "https://facebook.com/photo/?fbid=1035246891293128&set=a.229388855212273\r\n"
+                "https://facebook.com/photo/?fbid=1035246891293128&set=a.229388855212273\r\n",
+                "Facebook\r\n"
             ]
         },
         "bucky_ballard": {
-            "modified": 1757633869,
+            "modified": 1793231233,
             "lines": [
                 "Bucky Ballard in concert\r\n",
                 "Simon Diez\r\n",
-                "https://www.discogs.com/artist/722820-Bucky-Ballard/image/SW1hZ2U6NTAxNjU3MDM="
+                "https://www.discogs.com/artist/722820-Bucky-Ballard/image/SW1hZ2U6NTAxNjU3MDM=\r\n",
+                "Discogs\r\n"
             ]
         },
         "cyril_cianflone": {
@@ -105,11 +110,12 @@
             ]
         },
         "dan_reed": {
-            "modified": 1793215607,
+            "modified": 1793231233,
             "lines": [
                 "Dan Reed in December 2019. Rotated and cropped to a square from the original. Licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0).\r\n",
                 "JürnC\r\n",
-                "https://commons.wikimedia.org/wiki/File:Dan_Reed.jpg\r\n"
+                "https://commons.wikimedia.org/wiki/File:Dan_Reed.jpg\r\n",
+                "Wikimedia Commons\r\n"
             ]
         },
         "david_schienberg": {
@@ -121,19 +127,21 @@
             ]
         },
         "eric_carr": {
-            "modified": 1745885176,
+            "modified": 1793231233,
             "lines": [
                 "Eric Carr photo shoot 1981 \r\n",
                 "unknown\r\n",
-                "https://ebay.com/itm/285470022280\r\n"
+                "https://ebay.com/itm/285470022280\r\n",
+                "eBay\r\n"
             ]
         },
         "gene_simmons": {
-            "modified": 1745882952,
+            "modified": 1793231233,
             "lines": [
                 "Gene Simmons live with Kiss\r\n",
                 "Thomas Banneyer / Picture Alliance / Getty Images\r\n",
-                "https://rollingstone.com/music/music-features/kiss-final-show-whats-next-gene-simmons-1234876243\r\n"
+                "https://rollingstone.com/music/music-features/kiss-final-show-whats-next-gene-simmons-1234876243\r\n",
+                "Rolling Stone\r\n"
             ]
         },
         "joey_lucenti": {
@@ -146,11 +154,12 @@
             ]
         },
         "joey_melotti": {
-            "modified": 1707581982,
+            "modified": 1793231233,
             "lines": [
                 "Joey playing keyboard\r\n",
                 "\r\n",
-                "https://discogs.com/artist/978166/image/SW1hZ2U6MTUzNzg3ODA=\r\n"
+                "https://discogs.com/artist/978166/image/SW1hZ2U6MTUzNzg3ODA=\r\n",
+                "Discogs\r\n"
             ]
         },
         "joe_mcginness": {
@@ -172,11 +181,12 @@
             ]
         },
         "julian_raymond": {
-            "modified": 1782226205,
+            "modified": 1793231233,
             "lines": [
                 "Julian Raymond, winning a Grammy for Best Country Song - \"I'm Not Gonna Miss You\" by Glen Campbell.\r\n",
                 "unknown\r\n",
-                "https://julianraymond.net/photos-1\r\n"
+                "https://julianraymond.net/photos-1\r\n",
+                "Website, Julian Raymond\r\n"
             ]
         },
         "karl_cochran": {
@@ -189,11 +199,12 @@
             ]
         },
         "mark_manro": {
-            "modified": 1707582066,
+            "modified": 1793231233,
             "lines": [
                 "Mark Manro playing electric guitar, 2017\r\n",
                 "\r\n",
-                "https://facebook.com/photo/?fbid=217447928781038\r\n"
+                "https://facebook.com/photo/?fbid=217447928781038\r\n",
+                "Facebook\r\n"
             ]
         },
         "marty_cohen": {
@@ -206,35 +217,39 @@
             ]
         },
         "matt_rael": {
-            "modified": 1728868357,
+            "modified": 1793231233,
             "lines": [
                 "Matt Rael with self-made guitar\r\n",
                 "unknown\r\n",
-                "https://matthewmorganrael.com\r\n"
+                "https://matthewmorganrael.com\r\n",
+                "Website, Matt Rael\r\n"
             ]
         },
         "mike_visceglia": {
-            "modified": 1682058468,
+            "modified": 1793231233,
             "lines": [
                 "Mike Visceglia in studio with acoustic bass guitar\r\n",
                 "\r\n",
-                "https://furchguitars.com/en/umelci/mike-visceglia\r\n"
+                "https://furchguitars.com/en/umelci/mike-visceglia\r\n",
+                "Furch Guitars\r\n"
             ]
         },
         "paul_stanley": {
-            "modified": 1745882386,
+            "modified": 1793231233,
             "lines": [
                 "Paul Stanley photo shoot for Rock Scene 1996\r\n",
                 "Mark Weiss\r\n",
-                "https://rockscenemagazine.com/rock-scene-remembers/happy-birthday-to-paul-stanley-born-on-january-20-1952\r\n"
+                "https://rockscenemagazine.com/rock-scene-remembers/happy-birthday-to-paul-stanley-born-on-january-20-1952\r\n",
+                "Rock Scene Magazine\r\n"
             ]
         },
         "peter_criss": {
-            "modified": 1745883285,
+            "modified": 1793231233,
             "lines": [
                 "Peter Criss photo session\r\n",
                 "unknown\r\n",
-                "https://roynet.com/roster/peter-criss\r\n"
+                "https://roynet.com/roster/peter-criss\r\n",
+                "Roynet\r\n"
             ]
         },
         "phil_bardowell": {
@@ -247,27 +262,21 @@
             ]
         },
         "robert_mehmet_ikiz": {
-            "modified": 1793211974,
+            "modified": 1793231233,
             "lines": [
                 "Robert Mehmet Ikiz performing on drums.\r\n",
                 "Gerald Langer\r\n",
-                "https://www.turkishjazz.org/artist/robert-mehmet-ikiz\r\n"
-            ]
-        },
-        "rock_redline": {
-            "modified": 1682058551,
-            "lines": [
-                "\r\n",
-                "\r\n",
-                "https://facebook.com/rock.redline.39\r\n"
+                "https://www.turkishjazz.org/artist/robert-mehmet-ikiz\r\n",
+                "Turkish Jazz\r\n"
             ]
         },
         "shane_bankston": {
-            "modified": 1682058187,
+            "modified": 1793231233,
             "lines": [
                 "\r\n",
                 "\r\n",
-                "https://facebook.com/photo/?fbid=10203754296452704&set=pob.100003460229174\r\n"
+                "https://facebook.com/photo/?fbid=10203754296452704&set=pob.100003460229174\r\n",
+                "Facebook\r\n"
             ]
         },
         "tommy_dimitri": {
@@ -280,19 +289,21 @@
             ]
         },
         "tommy_thayer": {
-            "modified": 1745884413,
+            "modified": 1793231233,
             "lines": [
                 "Tommy Thayer photo session\r\n",
                 "unknown\r\n",
-                "https://pinterest.com/pin/48695239714185462\r\n"
+                "https://pinterest.com/pin/48695239714185462\r\n",
+                "Pinterest\r\n"
             ]
         },
         "vinnie_vincent": {
-            "modified": 1745885823,
+            "modified": 1793231233,
             "lines": [
                 "Vinnie Vincent live with Kiss 1982\r\n",
                 "unknown\r\n",
-                "https://kisstimeline.com/timeline/vinnie-vincent-is-hired-as-new-guitarist-in-kiss\r\n"
+                "https://kisstimeline.com/timeline/vinnie-vincent-is-hired-as-new-guitarist-in-kiss\r\n",
+                "Kiss Timeline\r\n"
             ]
         }
     }

@@ -83,9 +83,17 @@
   of passing, associated Kiss members, aliases, website and date of birth.
 - A missing birth date is unknown, not an error. Display it as blank in the
   detailed artist table, matching the artist page; do not invent a date.
-- Band credit `lines` contain description, photographer, source name and source URL.
-  Artist credits contain description, photographer and source URL. Artist
-  credits skip blank lines when read, so preserve those three field positions.
+- Band credit `lines` contain description, photographer, source name/text and
+  an optional source URL. Artist credits retain description, photographer,
+  source URL/citation and an optional source name, in that order.
+  Keep these established positions so data-first deployments remain compatible.
+  Preserve blank fields when reading either kind of credit; missing values
+  display as `n/a`. Never use `FILE_SKIP_EMPTY_LINES` for positional credits.
+  Both page types link the source name when a URL is supplied; otherwise display the source
+  text without a link, for example `Emailed to Kiss Bands Tree by Gene Simmons`.
+  Preserve existing source names such as `Facebook, Richie Scarlet`.
+  If a source account is unverified, use its platform name without guessing
+  the account owner. Do not display a raw URL as the source name.
 
 ## JSON content
 
@@ -130,6 +138,8 @@
 | About, intro, footer, thanks and other page text | `data/pages.json` |
 
 - Run `php .github/tests/content.php` after content or loader changes.
+- Run `php .github/tests/credits.php` after credit or credit-display changes.
+  It checks field positions and source links on every credited page.
 - `php .github/tools/benchmark.php OUTPUT.json [REFERENCE.json] [BASE_URL]`
   checks every detail page and the main views, then measures twelve routes
   with two warmups and 25 samples each. The default base URL is
@@ -257,6 +267,16 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
 - Verify rendered band and artist pages, reciprocal links, indexes and tree,
   photo dimensions and credits before completing an addition.
 
+## Joey Melotti photo reference
+
+- User-approved individual performance photo:
+  <https://discogs.com/artist/978166/image/SW1hZ2U6MTUzNzg3ODA=>.
+- The untouched 600x473 JPEG is retained in the artist-original archive as
+  `joey_melotti_discogs_15378780.jpg`. Crop `(80,45,400,400)` and generate the
+  native 400x400 portrait and 64x64 thumbnail directly from that original.
+- The photographer is unverified. Keep the existing photographer field blank
+  rather than guessing an attribution.
+
 ## Shogun Mojo references
 
 - The lineup with Tommy is **Shogun Mojo #2** (`shogun_mojo_2`).
@@ -282,7 +302,7 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
   performance photo; only the currently used color original belongs in the
   artist-original archive.
 - Bengan Jonasson's artist-selected performance photo is by Mattias Boström:
-  <https://facebook.com/photo/?fbid=10151280424111128&set=a.474229441127>.
+  <https://facebook.com/photo/?fbid=10151280424111128>.
   The untouched 640x640 download is retained in the artist-original archive as
   `bengan_jonasson_mattias_bostrom_facebook_10151280424111128.jpg`.
   Crop `(145,30,400,400)` and generate the native 400x400 portrait and 64x64

@@ -371,7 +371,7 @@ $artist_name = trim($contents[0]);
     <?php
     $file_path = 'artists_credits/' . $artist . '.txt';
     if (content_exists($file_path)) {
-      $credits = content_file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      $credits = content_file($file_path, FILE_IGNORE_NEW_LINES);
     } else {
       $credits = [];
     }
@@ -386,7 +386,13 @@ $artist_name = trim($contents[0]);
     PHOTOGRAPHER: <?php echo get_credit($credits, 1); ?><br>
     SOURCE: <?php
             $source = get_credit($credits, 2);
-            echo ($source !== 'n/a') ? "<a href='" . $source . "'>" . $source . "</a>" : 'n/a';
+            $url = filter_var($source, FILTER_VALIDATE_URL) !== false ? $source : 'n/a';
+            if ($url !== 'n/a') {
+              $source = get_credit($credits, 3);
+            }
+            echo ($url && $url !== 'n/a')
+              ? "<a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($source) . "</a>"
+              : htmlspecialchars($source);
             ?>
 
     <br>
