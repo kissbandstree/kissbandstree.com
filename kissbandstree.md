@@ -312,6 +312,17 @@ https://kissbandstree.com/band.php?a=shogun_mojo_2
   Tommy joined the longstanding trio of Dan Reed, Bengan Jonasson and Robert
   Mehmet Ikiz; he did not form a new band with them.
 - Official lineup: <https://shogunmojo.com/the-cast>.
+- Related release `shogun_mojo` is the self-titled debut, announced for
+  30 October 2026. Frontiers' EU and US CD listings and Apple Music agree on
+  this date; the earlier Ultimate Classic Rock announcement said 6 November.
+  Use the label's CD track order, which differs from Apple's digital order:
+  <https://frontiers.shop/products/shogun-mojo-shogun-mojo-cd> and
+  <https://frontiers-us.shop/products/shogun-mojo-shogun-mojo-cd>.
+- Album cover: <https://music.apple.com/us/album/shogun-mojo/6789621161>.
+  The untouched 3000x3000 download is retained in the external SOURCE archive
+  under `photos_releases_originals/shogun_mojo_apple_music_6789621161.jpg`.
+  Generate the 1024x1024 cover and 128x128 thumbnail directly from that image,
+  without cropping. It matches the cover on Frontiers' CD product mockup.
 - Full-resolution photo, 3567x2290:
   <https://shogunmojo.com/storage/2026/04/SHOGUN-MOJO-BAND-SHOT-EXTERIOR-MEDIUM.png>.
 - Photographer attribution, Paja Hartmanova / Frontiers Music Srl:
