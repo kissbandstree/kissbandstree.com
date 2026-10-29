@@ -195,6 +195,8 @@
   For a new band page, use `<Band name> page added.` as the opening line.
   When reusing a commit title, add sentence punctuation to the Facebook opening
   line; the Git commit title itself must still have no final period.
+  Preserve the site's sentence case: write `Related releases`, not
+  `Related Releases`, including when adapting a commit title.
 - Welcome newly added artists using the established wording:
   `Welcome to Kiss Bands Tree <artist names>!`
   Separate names with commas and use `and` before the last name.
@@ -214,6 +216,9 @@
   searching by name does not return the correct person.
 - End with relevant band and artist hashtags, including the associated Kiss
   member. Do not add `#KISS` or `#KissBandsTree`.
+  Preserve readable name capitalization, such as `#RobertMehmetIkiz`, rather
+  than accepting a lowercased hashtag suggestion. Keep verified mention
+  display names as supplied by the account, including `ikiz`.
 - An emoji is optional and must fit the specific band or subject. Do not use
   a generic guitar by default. If no suitable emoji exists, omit it; for
   Shogun Mojo, use no emoji rather than an unrelated substitute.
@@ -226,7 +231,7 @@
   do not hand the publishing step back to the user.
   If access is unavailable, provide the draft and report that limitation.
 
-Approved Shogun Mojo example:
+Approved Shogun Mojo band-page example:
 
 ```text
 Shogun Mojo page added.
@@ -234,6 +239,19 @@ Shogun Mojo page added.
 Welcome to Kiss Bands Tree Dan Reed, Bengan Jonasson and Robert Mehmet Ikiz!
 
 https://kissbandstree.com/band.php?a=shogun_mojo_2
+
+#ShogunMojo #TommyThayer #DanReed #BenganJonasson #RobertMehmetIkiz
+```
+
+Approved Shogun Mojo album announcement (user-edited wording and case;
+the mention line uses actual linked accounts in Facebook):
+
+```text
+Added Shogun Mojo album to Related releases.
+
+https://github.com/kissbandstree/kissbandstree.com/commit/74770be2e6ef95ec5ed7552bb2758f172f010e1a
+
+Shogun Mojo Dan Reed ikiz
 
 #ShogunMojo #TommyThayer #DanReed #BenganJonasson #RobertMehmetIkiz
 ```
