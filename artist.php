@@ -298,13 +298,15 @@ $artist_name = trim($contents[0]);
     }
 
     $artist_found = false;
+    $band_separator = '';
 
     foreach ($bands as $band_name) {
       $slug = sanitize_band_slug($band_name);
       $band_file = 'bands/' . $slug . '.txt';
 
       if (!content_exists($band_file)) {
-        echo "<h2>Missing file: " . htmlspecialchars($band_name) . "</h2>";
+        echo $band_separator . "<h2>Missing file: " . htmlspecialchars($band_name) . "</h2>";
+        $band_separator = '';
         continue;
       }
 
@@ -312,6 +314,8 @@ $artist_name = trim($contents[0]);
       $lineup = array_map('trim', array_slice($band_contents, 6));
 
       if (artistInLineup($lineup, $artist_name)) {
+        echo $band_separator;
+        $band_separator = "<br><br>";
         $artist_found = true;
 
         // Band title + years
@@ -356,7 +360,6 @@ $artist_name = trim($contents[0]);
           echo " - " . htmlspecialchars($instrument) . "<br>\n";
         }
 
-        echo "<br><br>";
       }
     }
 

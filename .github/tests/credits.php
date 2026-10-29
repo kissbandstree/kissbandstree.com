@@ -78,7 +78,23 @@ foreach (['artist' => 'artists', 'band' => 'bands'] as $type => $directory) {
       check_credits(html_entity_decode($anchor[1], ENT_QUOTES | ENT_HTML5, 'UTF-8') === $url,
         "Wrong source destination for $type/$slug");
     }
+    if ($type === 'artist') {
+      check_credits(preg_match('~<div id="bandsContainer"[^>]*>(.*?)</div>~s', $html, $band_block) === 1,
+        "Band list missing for artist/$slug");
+      $entries = preg_split('~(?=<h2\b)~', $band_block[1]);
+      $prefix = array_shift($entries);
+      if ($entries !== []) {
+        check_credits(trim($prefix) === '', "Extra content before the first band for artist/$slug");
+        foreach ($entries as $index => $entry) {
+          preg_match('~(?:<br>\s*)+$~', $entry, $spacing);
+          $is_band_entry = str_starts_with($entry, "<h2 class='small-photo-heading'>");
+          $expected_breaks = $is_band_entry ? ($index === array_key_last($entries) ? 1 : 3) : 0;
+          check_credits(substr_count($spacing[0] ?? '', '<br>') === $expected_breaks,
+            "Wrong spacing after band $index for artist/$slug");
+        }
+      }
+    }
     $count++;
   }
 }
-echo "PASS: $count credited and missing-credit pages; positional fields, named links, plain-text sources and Rock Redline removal.\n";
+echo "PASS: $count credited and missing-credit pages; positional fields, named links, plain-text sources, artist band spacing and Rock Redline removal.\n";

@@ -26,6 +26,8 @@
 - Never use rounded corners (no border-radius).
 - Avoid decorative visual effects unless explicitly requested.
 - Use `<h2>` for all section headers. Reserve `<h1>` only for the main page title/top-line heading.
+- Artist band lists keep spacing between entries, without extra blank lines
+  before the first or after the last entry.
 - Stats charts have empty centres. Preserve slice hover, selection and keyboard
   interactions and their matching legend highlights.
 - ACTIVE BANDS counts individual lineup records. YES means the active-date
