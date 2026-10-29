@@ -193,12 +193,25 @@
 
 - Write short, visitor-facing announcements, not development summaries.
   For a new band page, use `<Band name> page added.` as the opening line.
+  When reusing a commit title, add sentence punctuation to the Facebook opening
+  line; the Git commit title itself must still have no final period.
 - Welcome newly added artists using the established wording:
   `Welcome to Kiss Bands Tree <artist names>!`
   Separate names with commas and use `and` before the last name.
 - Do not add a band-history paragraph or repeat the lineup unless requested.
-- Include the public band-page URL without a trailing slash. Check that the
+- Add the public band-page URL first, without a trailing slash. Check that the
   link preview identifies the correct numbered lineup and shows its band photo.
+  Once the card is generated, remove the visible band URL while keeping the
+  linked preview card. Keep any GitHub commit URL as a text link only, without
+  replacing the band's photo preview.
+- Add relevant, verified Facebook artist or band mentions before the hashtags
+  when appropriate. Select actual accounts in Facebook's mention picker;
+  plain text beginning with `@` is not a verified linked mention.
+- Include everyone in the featured lineup and everyone named in its comments,
+  without duplicates, in the artist hashtags. Include only working, verified
+  mentions in the mention line; do not substitute plain names or profile URLs
+  for unavailable mentions. Try a verified stored Facebook handle when
+  searching by name does not return the correct person.
 - End with relevant band and artist hashtags, including the associated Kiss
   member. Do not add `#KISS` or `#KissBandsTree`.
 - An emoji is optional and must fit the specific band or subject. Do not use
@@ -209,6 +222,8 @@
   publication. Publish only through an available logged-in session with access
   to the correct Kiss Bands Tree Facebook Page. Verify the final text, link
   preview and Page identity before publishing, then verify the published post.
+  When publication is authorized, the assistant publishes the approved post;
+  do not hand the publishing step back to the user.
   If access is unavailable, provide the draft and report that limitation.
 
 Approved Shogun Mojo example:
