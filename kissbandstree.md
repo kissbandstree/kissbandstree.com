@@ -73,7 +73,8 @@
 - TOC labels use regular capitalization, such as Bands and Related, not all caps.
 - Calendar shows artist birthdays and appears between Related and About in
   the main menu and header swipe sequence. Keep its existing artist links,
-  date tooltips and current-day indicator.
+  date tooltips and current-day indicator. Months shrink to the available
+  content width between open sidebars; day rows grow when birthday photos wrap.
 - Reset clears all localStorage settings for this site, including Kiss-member
   and band filters, slideshow state, theme, collapsed sections, view and sidebar
   preferences. It reloads with defaults in Grid view, preserving the current

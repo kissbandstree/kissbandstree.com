@@ -7,6 +7,13 @@ const vm = require('node:vm');
 const root = path.join(__dirname, '..', '..');
 const source = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
 
+test('Calendar fits the content width between sidebars and accommodates wrapped birthdays', () => {
+  const styles = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
+  assert.match(styles, /\.grid-container\.calendar\s*\{[^}]*grid-template-columns:\s*repeat\(auto-fit,\s*minmax\(min\(560px,\s*100%\),\s*1fr\)\)/);
+  assert.match(styles, /\.calendar \.month-grid\s*\{[^}]*grid-template-columns:\s*repeat\(7,\s*minmax\(0,\s*1fr\)\)/);
+  assert.match(styles, /\.calendar \.daycell\s*\{[^}]*min-height:\s*72px;[^}]*height:\s*auto;/);
+});
+
 function createSettings(url = 'http://localhost:8003/release_related.php?a=shogun_mojo', saved = {}, desktop = false, hoverTargets = []) {
   function element() {
     const classes = new Set();

@@ -1203,7 +1203,7 @@ a:has(> svg.icons) .icons {
 /* Calendar spacing between months */
 .grid-container.calendar {
   line-height: 1.45;
-  grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr));
   gap: 16px 16px;
 }
 
@@ -1221,7 +1221,7 @@ a:has(> svg.icons) .icons {
 /* month grid stays the same */
 .calendar .month-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 2px;
 }
 
@@ -1230,7 +1230,7 @@ a:has(> svg.icons) .icons {
   background: var(--grey1);
   padding: 4px;
   min-height: 72px;
-  height: 72px;
+  height: auto;
 }
 
 /* Big background date (no selection/click) */
