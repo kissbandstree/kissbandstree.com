@@ -140,13 +140,26 @@ test('mobile navigation and Back close TOC, while resize preserves desktop prefe
   assert.equal(elements['settings-panel'].hidden, false);
 });
 
-test('Dark mode restores its preference and updates pressed state when toggled', () => {
-  const { document, elements, storage } = createSettings(undefined, { mode: 'dark' });
-  assert.equal(elements['toggle-mode-button'].attributes['aria-pressed'], 'true');
-  elements['toggle-mode-button'].click();
-  assert.equal(storage.mode, 'light');
-  assert.equal(document.documentElement.classList.contains('invert-colors'), false);
-  assert.equal(elements['toggle-mode-button'].attributes['aria-pressed'], 'false');
+test('Dark mode is active by default and follows the displayed theme without changing saved preferences', () => {
+  for (const url of ['http://localhost:8003/about.php', 'http://localhost:8003/tree.php']) {
+    for (const saved of [{}, { mode: 'light' }, { mode: 'dark' }]) {
+      const { document, elements, storage } = createSettings(url, saved);
+      const button = elements['toggle-mode-button'];
+      const dark = saved.mode !== 'dark';
+      assert.equal(storage.mode, saved.mode);
+      assert.equal(document.documentElement.classList.contains('invert-colors'), !dark);
+      assert.equal(button.classList.contains('button-on'), dark);
+      assert.equal(button.attributes['aria-pressed'], String(dark));
+      button.click();
+      assert.equal(storage.mode, dark ? 'dark' : 'light');
+      assert.equal(document.documentElement.classList.contains('invert-colors'), dark);
+      assert.equal(button.classList.contains('button-on'), !dark);
+      assert.equal(button.attributes['aria-pressed'], String(!dark));
+      button.click();
+      assert.equal(button.classList.contains('button-on'), dark);
+      assert.equal(button.attributes['aria-pressed'], String(dark));
+    }
+  }
 });
 
 test('native button keyboard activation is not duplicated by the legacy icon handler', () => {
@@ -268,6 +281,7 @@ test('Tree Photos and Comments default on, toggle independently and persist acro
   assert.equal(restored.document.body.classList.contains('tree-comments-hidden'), true);
   restored.elements['reset-settings-button'].click();
   const reset = createSettings('http://localhost:8003/tree.php', restored.storage, true);
+  assert.equal(reset.elements['toggle-mode-button'].attributes['aria-pressed'], 'true');
   assert.equal(reset.elements['toggle-photos-button'].attributes['aria-pressed'], 'true');
   assert.equal(reset.elements['toggle-comments-button'].attributes['aria-pressed'], 'true');
 });
@@ -296,7 +310,7 @@ test('inline Tree controls reuse Dark mode, Fullscreen, Share and Reset without 
   const setup = createSettings('http://localhost:8003/tree.php?focus=kiss', {}, true);
   setup.elements['toggle-mode-button'].click();
   assert.equal(setup.storage.mode, 'dark');
-  assert.equal(setup.elements['toggle-mode-button'].attributes['aria-pressed'], 'true');
+  assert.equal(setup.elements['toggle-mode-button'].attributes['aria-pressed'], 'false');
   await setup.elements['toggle-fullscreen-button'].click();
   assert.equal(setup.document.fullscreenElement, setup.document.documentElement);
   await setup.elements['toggle-fullscreen-button'].click();

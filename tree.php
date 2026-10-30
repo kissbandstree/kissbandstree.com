@@ -274,10 +274,7 @@
     </div>
 
     <div class="footer">
-      <?php echo nl2br(content_text("footer.txt")); ?><br><br>
-      <a href="https://focusstudios.no" class="focus" aria-label="Focus Studios">
-        <?php echo content_text($_SERVER['DOCUMENT_ROOT'] . '/img/focus_studios.svg'); ?>
-      </a>
+      <?php require __DIR__ . '/footer-branding.php'; ?>
     </div>
   </div>
 

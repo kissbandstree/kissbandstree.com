@@ -457,6 +457,22 @@ body:has(> .heading) {
   justify-content: center;
 }
 
+.footer-branding {
+  margin-top: 16px;
+}
+
+.focus {
+  color: var(--white);
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.focus svg {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
 /* Table of contents */
 
 .toc-container {

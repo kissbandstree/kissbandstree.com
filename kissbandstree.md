@@ -23,11 +23,20 @@
 ## Presentation
 
 - Never use easing transitions.
+- Standard page and Tree footers share `footer-branding.php`. Show copyright
+  and production credits on separate lines, with the Focus Studios logo last.
+  Keep the standard page's update date and social links above these credits.
+  Match Pekosoft's Focus logo sizing: 32px height with automatic width.
+  Run `php .github/tests/footer.php` after changing the footer.
 - Settings replaces the header's Dark mode control. It contains Dark mode,
   Fullscreen, Share and Reset. Tree shows these four controls directly on the
   page instead of a Settings menu, sharing their markup in `settings-controls.php`.
   Tree controls are icon-only buttons with tooltips and screen-reader labels.
   Settings menus on other pages keep their visible control labels.
+  Dark mode is enabled by default. Its active and pressed states follow the
+  displayed theme in both Tree and Settings. Preserve the legacy stored `mode`
+  values for compatibility: `light` means the default dark appearance and
+  `dark` means the inverted light appearance.
   Keep Tree artist names vertically centered with Photos enabled or disabled.
   Tree also has Photos and Comments toggles, enabled by default and remembered
   across visits. Photos controls band and artist photographs, including the

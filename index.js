@@ -193,7 +193,7 @@ function toggleMode() {
 function updateModeButtonState() {
   const button = document.getElementById('toggle-mode-button');
   if (!button) return;
-  const active = document.documentElement.classList.contains('invert-colors');
+  const active = !document.documentElement.classList.contains('invert-colors');
   button.classList.toggle('button-on', active);
   button.setAttribute('aria-pressed', String(active));
 }

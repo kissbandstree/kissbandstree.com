@@ -51,9 +51,10 @@
             ]
         },
         "footer": {
-            "modified": 1756853430,
+            "modified": 1793365852,
             "lines": [
-                "Made by Ole Peko Sørensen at <a href=\"https://focusstudios.no\">Focus Studios</a>. Copyright &copy; <a href=\"https://kissbandstree.com\">Kiss Bands Tree</a>. All rights reserved."
+                "Copyright &copy; <a href=\"https://kissbandstree.com\">Kiss Bands Tree</a>. All rights reserved.\n",
+                "Produced at <a href=\"https://focusstudios.no\">Focus Studios</a> by <a href=\"https://peko.net\">Ole Peko Sørensen</a>."
             ]
         },
         "intro": {

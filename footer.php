@@ -4,11 +4,6 @@
   ?>
   <br>
   <br>
-  <?php
-  echo nl2br(content_text("footer.txt"));
-  ?>
-  <br>
-  <br>
   <div class="footer-socials">
     <a href="https://facebook.com/kissbandstree" aria-label="Facebook" title="Facebook">
       <svg class="icons" aria-hidden="true" focusable="false">
@@ -21,6 +16,7 @@
       </svg>
     </a>
   </div>
+  <?php require __DIR__ . '/footer-branding.php'; ?>
 </footer>
 
 <script src="index.js"></script>

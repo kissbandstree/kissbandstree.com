@@ -140,17 +140,6 @@ body.drag-pan-lock * {
   padding-top: 20px;
 }
 
-.focus {
-  color: var(--white);
-  display: inline-block;
-}
-
-.focus svg {
-  display: block;
-  height: 64px;
-  width: auto;
-}
-
 .poster-container {
   flex: 0 0 auto;
   width: max-content;

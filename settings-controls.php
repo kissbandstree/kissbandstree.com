@@ -1,4 +1,4 @@
-<button id="toggle-mode-button" class="toc-button" type="button" title="Toggle dark mode" aria-pressed="false">
+<button id="toggle-mode-button" class="toc-button button-on" type="button" title="Toggle dark mode" aria-pressed="true">
   <svg class="icons" aria-hidden="true"><use href="icons.svg#moon"></use></svg>
   <span class="control-label">Dark mode</span>
 </button>
