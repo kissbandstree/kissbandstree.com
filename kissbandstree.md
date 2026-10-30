@@ -23,6 +23,16 @@
 ## Presentation
 
 - Never use easing transitions.
+- Swipe left or right on the header to move through Home and the main-menu
+  sections, wrapping at either end and preserving the Grid/Table/List view.
+  Detail pages use their parent section. Tree is excluded from the swipe
+  sequence and retains its own drag-to-pan interaction.
+- Reuse cross-site interaction code instead of implementing another gesture
+  recognizer. `swipe-gesture.js` and Pekosoft's `js/swipe-gesture.js` must stay
+  byte-identical; both sites serve their own local copy. Navigation rules stay
+  in each site's `swipe.js`. Run `node --test .github/tests/swipe.test.cjs`
+  here and `node --test tests/swipe.test.cjs tests/swipe-gesture.test.cjs`
+  in Pekosoft after changing shared swipe behavior.
 - Never use rounded corners (no border-radius).
 - Avoid decorative visual effects unless explicitly requested.
 - Use `<h2>` for all section headers. Reserve `<h1>` only for the main page title/top-line heading.

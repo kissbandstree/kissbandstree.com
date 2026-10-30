@@ -24,3 +24,5 @@
 </footer>
 
 <script src="index.js"></script>
+<script src="swipe-gesture.js?v=<?php echo filemtime(__DIR__ . '/swipe-gesture.js'); ?>"></script>
+<script src="swipe.js?v=<?php echo filemtime(__DIR__ . '/swipe.js'); ?>"></script>

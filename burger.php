@@ -8,7 +8,7 @@
     <use href="icons.svg#burger"></use>
   </svg>
 
-  <div id="toc" class="toc-container">
+  <div id="toc" class="toc-container no-swipe">
     <ul>
       <li>
         <h1>
