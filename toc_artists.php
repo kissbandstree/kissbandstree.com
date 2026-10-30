@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/page-routes.php';
 $artistViews = [
   'artists_grid.php' => ['title' => 'Grid', 'icon' => 'view_grid'],
   'artists_table.php' => ['title' => 'Table', 'icon' => 'view_table'],
@@ -6,7 +7,7 @@ $artistViews = [
 ];
 
 $artistViewOrder = array_keys($artistViews);
-$currentPage = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$currentPage = basename($_SERVER['SCRIPT_NAME']);
 $currentViewIndex = array_search($currentPage, $artistViewOrder, true);
 
 if ($currentViewIndex === false) {
@@ -18,6 +19,8 @@ if ($currentViewIndex === false) {
 }
 
 $currentViewIcon = $artistViews[$currentView]['icon'];
+$viewQuery = $currentViewIndex === false ? '' : (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) ?? '');
+$nextViewUrl = resolve_page_request('/' . $nextView, $viewQuery)['url'];
 ?>
 
 <div class="top-line">
@@ -30,12 +33,12 @@ $currentViewIcon = $artistViews[$currentView]['icon'];
   <h2>ARTISTS</h2>
 
   <a
-    href="<?= htmlspecialchars($nextView, ENT_QUOTES, 'UTF-8') ?>"
+    href="<?= htmlspecialchars($nextViewUrl, ENT_QUOTES, 'UTF-8') ?>"
     title="View"
     data-view-group="artists"
-    data-view-grid="artists_grid.php"
-    data-view-table="artists_table.php"
-    data-view-list="artists_list.php">
+    data-view-grid="<?= htmlspecialchars(get_page_url('artists', 'grid', $viewQuery), ENT_QUOTES, 'UTF-8') ?>"
+    data-view-table="<?= htmlspecialchars(get_page_url('artists', 'table', $viewQuery), ENT_QUOTES, 'UTF-8') ?>"
+    data-view-list="<?= htmlspecialchars(get_page_url('artists', 'list', $viewQuery), ENT_QUOTES, 'UTF-8') ?>">
     <svg class="icons">
       <use href="icons.svg#<?= htmlspecialchars($currentViewIcon, ENT_QUOTES, 'UTF-8') ?>"></use>
     </svg>

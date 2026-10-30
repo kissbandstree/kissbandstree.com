@@ -23,7 +23,7 @@
 
   <div class="full">
     07-09-2025
-    <a href="/tree.php">Out now: The Kiss Bands Tree!</a>
+    <a href="/tree">Out now: The Kiss Bands Tree!</a>
   </div>
 
 </div>

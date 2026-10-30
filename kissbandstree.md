@@ -36,7 +36,7 @@
   BANDS and ACTIVE BANDS share `render_band_card` and their responsive layout.
   Cards show the photo, linked name and lineup number, period, linked Kiss
   members and SHOW ON TREE. Keep update dates in the two existing sections.
-  Reuse `tree.php?focus=SLUG` for navigation. Run
+  Reuse `/tree?focus=SLUG` for navigation. Run
   `php .github/tests/home.php` after changing these sections.
 - Standard page and Tree footers share `footer-branding.php`. Show copyright
   and production credits on separate lines, with the Focus Studios logo last.
@@ -71,6 +71,16 @@
   label typography and the grey2 hover background. Their scroll areas and
   bottom Close controls use the same spacing.
 - TOC labels use regular capitalization, such as Bands and Related, not all caps.
+- Public sections use clean root URLs: `/bands`, `/artists`, `/releases`,
+  `/related`, `/calendar`, `/about`, `/thanks`, `/stats` and `/tree`.
+  Grid is the default; the four view sections use `?view=table` and `?view=list`.
+  `page.php` selects existing templates through `page-routes.php`. Old section
+  PHP URLs permanently redirect, preserving the original view and other query
+  parameters. Explicit Grid queries and trailing slashes redirect to the base URL.
+  Invalid view parameters return HTTP 400. Canonical URLs omit the view parameter;
+  sharing retains it. Keep `.htaccess` and local Caddy dispatch rules consistent.
+  Detail-page URLs are unchanged. Run `php .github/tests/routes.php` for routing
+  checks and add `--http http://localhost:8003` to test the running server.
 - Calendar shows artist birthdays and appears between Related and About in
   the main menu and header swipe sequence. Keep its existing artist links,
   date tooltips and current-day indicator. Months shrink to the available

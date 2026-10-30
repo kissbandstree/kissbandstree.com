@@ -107,16 +107,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!header) return;
 
   const sections = {
-    "/band.php": "/bands_grid.php",
-    "/artist.php": "/artists_grid.php",
-    "/artists_table_detailed.php": "/artists_table.php",
-    "/release_band.php": "/releases_band_grid.php",
-    "/release_related.php": "/releases_related_grid.php"
+    "/band.php": "/bands",
+    "/artist.php": "/artists",
+    "/artists_table_detailed.php": "/artists",
+    "/release_band.php": "/releases",
+    "/release_related.php": "/related"
   };
   const currentPath = sections[window.location.pathname] || window.location.pathname;
   const home = header.querySelector(".logo-link");
   const links = [home, ...document.querySelectorAll("#toc a[href]")]
-    .filter(link => link && new URL(link.href).pathname !== "/tree.php");
+    .filter(link => link && !["/tree", "/tree.php"].includes(new URL(link.href).pathname));
 
   function normalizePath(path) {
     return path === "/index.php" ? "/" : path;

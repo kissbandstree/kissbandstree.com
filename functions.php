@@ -54,7 +54,7 @@ function render_band_card(string $file, ?int $modified = null, ?string $period =
   if ($modified !== null) {
     $html .= '<div title="Entry updated">' . date('d-m-Y', $modified) . '</div>';
   }
-  $html .= '<div><a href="/tree.php?focus=' . rawurlencode($slug) . '">SHOW ON TREE</a></div>';
+  $html .= '<div><a href="/tree?focus=' . rawurlencode($slug) . '">SHOW ON TREE</a></div>';
   return $html . '</div>';
 }
 

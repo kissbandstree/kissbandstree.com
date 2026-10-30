@@ -91,7 +91,7 @@ foreach (['lineup-container', 'bandContainer', 'activeBandContainer'] as $contai
     }
     $treeLinks = $xpath->query('./div/a[text()="SHOW ON TREE"]', $card);
     check_home($treeLinks->length === 1
-      && $treeLinks->item(0)->getAttribute('href') === '/tree.php?focus=' . rawurlencode($slug),
+      && $treeLinks->item(0)->getAttribute('href') === '/tree?focus=' . rawurlencode($slug),
       'Missing or incorrect SHOW ON TREE link: ' . $slug);
     $treeTargets[$slug] = true;
     $updated = $xpath->query('./div[@title="Entry updated"]', $card);

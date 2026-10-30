@@ -36,7 +36,7 @@ function createSettings(url = 'http://localhost:8003/release_related.php?a=shogu
       click() { return this.handlers.click?.(); }
     };
   }
-  const isTree = new URL(url).pathname === '/tree.php';
+  const isTree = ['/tree', '/tree.php'].includes(new URL(url).pathname);
   const ids = ['settings-feedback', 'toggle-mode-button', 'toggle-fullscreen-button',
     'share-settings-button', 'reset-settings-button', ...(isTree
       ? ['toggle-photos-button', 'toggle-comments-button']
@@ -264,6 +264,10 @@ test('Share cancellation does not copy, while failures fall back with diagnostic
 
 test('Reset clears all saved settings and filters, restores Grid and preserves queries and detail pages', () => {
   for (const [page, expected] of [
+    ['bands?view=list&search=Tommy#top', 'bands?search=Tommy#top'],
+    ['artists?view=table', 'artists'],
+    ['releases?view=list', 'releases'],
+    ['related?view=table&search=Kiss', 'related?search=Kiss'],
     ['artists_table_detailed.php?search=Tommy#top', 'artists_grid.php?search=Tommy#top'],
     ['bands_list.php', 'bands_grid.php'],
     ['release_related.php?a=shogun_mojo', 'release_related.php?a=shogun_mojo'],
@@ -353,7 +357,7 @@ test('Tree visibility preferences do not change other pages or their Settings me
 });
 
 test('inline Tree controls reuse Dark mode, Fullscreen, Share and Reset without a Settings panel', async () => {
-  const setup = createSettings('http://localhost:8003/tree.php?focus=kiss', {}, true);
+  const setup = createSettings('http://localhost:8003/tree?focus=kiss', {}, true);
   setup.elements['toggle-mode-button'].click();
   assert.equal(setup.storage.mode, 'dark');
   assert.equal(setup.elements['toggle-mode-button'].attributes['aria-pressed'], 'false');
@@ -364,11 +368,11 @@ test('inline Tree controls reuse Dark mode, Fullscreen, Share and Reset without 
   const copied = [];
   setup.navigator.clipboard = { writeText: async value => copied.push(value) };
   await setup.elements['share-settings-button'].click();
-  assert.deepEqual(copied, ['http://localhost:8003/tree.php?focus=kiss']);
+  assert.deepEqual(copied, ['http://localhost:8003/tree?focus=kiss']);
   assert.equal(setup.elements['settings-feedback'].textContent, 'Link copied.');
   setup.elements['reset-settings-button'].click();
   assert.deepEqual(Object.keys(setup.storage), []);
-  assert.deepEqual(setup.replacements, ['http://localhost:8003/tree.php?focus=kiss']);
+  assert.deepEqual(setup.replacements, ['http://localhost:8003/tree?focus=kiss']);
 });
 
 test('the copied sprite contains every literal site icon reference', () => {

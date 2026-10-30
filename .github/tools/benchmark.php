@@ -15,21 +15,21 @@ $reference = $argv[2] ?? null;
 $base_url = $argv[3] ?? 'http://localhost:8003';
 
 $pages = [
-    '/', '/about.php', '/thanks.php', '/bands_grid.php', '/bands_list.php',
-    '/bands_table.php', '/artists_grid.php', '/artists_list.php',
-    '/artists_table.php', '/artists_table_detailed.php', '/stats.php',
-    '/calendar.php', '/tree.php', '/timeline.php', '/members.php',
-    '/releases_band_grid.php', '/releases_band_list.php', '/releases_band_table.php',
-    '/releases_related_grid.php', '/releases_related_list.php', '/releases_related_table.php',
+    '/', '/about', '/thanks', '/bands', '/bands?view=list',
+    '/bands?view=table', '/artists', '/artists?view=list',
+    '/artists?view=table', '/artists_table_detailed.php', '/stats',
+    '/calendar', '/tree', '/timeline.php', '/members.php',
+    '/releases', '/releases?view=list', '/releases?view=table',
+    '/related', '/related?view=list', '/related?view=table',
     '/artist.php?a=dan_reed', '/band.php?a=shogun_mojo_2',
     '/artist.php?a=missing_migration_test', '/band.php?a=missing_migration_test',
     '/release_band.php?a=missing_migration_test', '/release_related.php?a=missing_migration_test',
 ];
 $measured = [
-    '/', '/artists_grid.php', '/artists_table_detailed.php', '/bands_grid.php',
-    '/bands_table.php', '/tree.php', '/stats.php', '/calendar.php',
+    '/', '/artists', '/artists_table_detailed.php', '/bands',
+    '/bands?view=table', '/tree', '/stats', '/calendar',
     '/artist.php?a=dan_reed', '/band.php?a=shogun_mojo_2',
-    '/releases_band_table.php', '/releases_related_table.php',
+    '/releases?view=table', '/related?view=table',
 ];
 
 function request_page(string $path): array

@@ -50,43 +50,45 @@ function createSwipe(url, mode = 'grid', hasHeader = true) {
         preventDefault() {}
       });
     }
-    return location.pathname;
+    return location.pathname + location.search;
   }
   return { location, header, handlers, swipe };
 }
 
 test('main-menu swipes wrap through Home and skip Tree in both directions', () => {
-  const pages = ['/', '/bands_grid.php', '/artists_grid.php', '/releases_band_grid.php',
-    '/releases_related_grid.php', '/calendar.php', '/about.php', '/thanks.php', '/stats.php'];
+  const pages = ['/', '/bands', '/artists', '/releases',
+    '/related', '/calendar', '/about', '/thanks', '/stats'];
   for (let index = 0; index < pages.length; index++) {
     assert.equal(createSwipe(pages[index]).swipe('forward'), pages[(index + 1) % pages.length]);
     assert.equal(createSwipe(pages[index]).swipe('backward'),
       pages[(index - 1 + pages.length) % pages.length]);
   }
-  assert.equal(createSwipe('/index.php').swipe('forward'), '/bands_grid.php');
+  assert.equal(createSwipe('/index.php').swipe('forward'), '/bands');
 });
 
 test('Grid, Table and List navigation follows the existing view preference', () => {
   for (const mode of ['grid', 'table', 'list']) {
-    const sections = ['bands', 'artists', 'releases_band', 'releases_related'];
+    const sections = ['bands', 'artists', 'releases', 'related'];
+    const query = mode === 'grid' ? '' : `?view=${mode}`;
     for (let index = 0; index < sections.length - 1; index++) {
-      const current = `/${sections[index]}_${mode}.php`;
-      const next = `/${sections[index + 1]}_${mode}.php`;
+      const current = `/${sections[index]}${query}`;
+      const next = `/${sections[index + 1]}${query}`;
       assert.equal(createSwipe(current, mode).swipe('forward'), next);
       assert.equal(createSwipe(next, mode).swipe('backward'), current);
     }
-    assert.equal(createSwipe('/', mode).swipe('forward'), `/bands_${mode}.php`);
+    assert.equal(createSwipe('/', mode).swipe('forward'), `/bands${query}`);
   }
 });
 
 test('detail pages and detailed artist table use their parent navigation section', () => {
   for (const mode of ['grid', 'table', 'list']) {
+    const query = mode === 'grid' ? '' : `?view=${mode}`;
     for (const [page, next] of [
-      ['/band.php?a=shogun_mojo_2', `/artists_${mode}.php`],
-      ['/artist.php?a=tommy_thayer', `/releases_band_${mode}.php`],
-      ['/release_band.php?a=kiss', `/releases_related_${mode}.php`],
-      ['/release_related.php?a=shogun_mojo', '/calendar.php'],
-      ['/artists_table_detailed.php', `/releases_band_${mode}.php`]
+      ['/band.php?a=shogun_mojo_2', `/artists${query}`],
+      ['/artist.php?a=tommy_thayer', `/releases${query}`],
+      ['/release_band.php?a=kiss', `/related${query}`],
+      ['/release_related.php?a=shogun_mojo', '/calendar'],
+      ['/artists_table_detailed.php', `/releases${query}`]
     ]) {
       assert.equal(createSwipe(page, mode).swipe('forward'), next);
     }
@@ -94,14 +96,14 @@ test('detail pages and detailed artist table use their parent navigation section
 });
 
 test('Calendar has a main-menu link with its calendar icon', () => {
-  assert.match(menu, /<a href="calendar\.php">\s*<svg class="icons">\s*<use href="icons\.svg#calendar"><\/use>\s*<\/svg>\s*Calendar\s*<\/a>/);
+  assert.match(menu, /<a href="\/calendar">\s*<svg class="icons">\s*<use href="icons\.svg#calendar"><\/use>\s*<\/svg>\s*Calendar\s*<\/a>/);
 });
 
 test('Tree and pages without a header attach no swipe handlers', () => {
-  const tree = createSwipe('/tree.php', 'grid', false);
+  const tree = createSwipe('/tree', 'grid', false);
   assert.deepEqual(Object.keys(tree.handlers), []);
-  assert.equal(tree.swipe('forward'), '/tree.php');
-  assert.equal(createSwipe('/tree.php').swipe('forward'), '/tree.php');
+  assert.equal(tree.swipe('forward'), '/tree');
+  assert.equal(createSwipe('/tree').swipe('forward'), '/tree');
   const treeSource = fs.readFileSync(path.join(root, 'tree.php'), 'utf8');
   assert.doesNotMatch(treeSource, /src="swipe\.js/);
 });
@@ -120,11 +122,11 @@ test('header logo and its SVG children allow swipes while retaining a Home link'
   const toc = fs.readFileSync(path.join(root, 'toc.php'), 'utf8');
   assert.match(toc, /<a href="\/" class="logo-link logo-link-small" data-swipe-link draggable="false">/);
   for (const direction of ['forward', 'backward']) {
-    const swipe = createSwipe('/artists_grid.php');
+    const swipe = createSwipe('/artists');
     const logo = {};
     assert.equal(swipe.swipe(direction, {
       closest: selector => selector === 'a[data-swipe-link]' ? logo : null
-    }), direction === 'forward' ? '/releases_band_grid.php' : '/bands_grid.php');
+    }), direction === 'forward' ? '/releases' : '/bands');
   }
 });
 

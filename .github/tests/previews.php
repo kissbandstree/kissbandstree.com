@@ -63,7 +63,11 @@ foreach ($sections as $slug => $pages) {
       check_preview($meta['og:image'] === $origin . '/png/og/' . $slug . '.png', 'Wrong section preview: ' . $page);
       check_preview($meta['og:image:type'] === 'image/png' && $meta['og:image:width'] === '1200'
         && $meta['og:image:height'] === '630', 'Missing preview dimensions: ' . $page);
-      check_preview($meta['og:url'] === $origin . '/' . $page . '?test=preserved', 'Changed page URL: ' . $page);
+      $publicSlug = ['index' => '', 'releases_band' => 'releases', 'releases_related' => 'related'][$slug] ?? $slug;
+      $isRouted = !in_array($page, ['bands_details.php', 'bands_no_details.php', 'artists_table_detailed.php'], true);
+      $expectedPath = $isRouted ? '/' . $publicSlug : '/' . $page;
+      $viewQuery = preg_match('/_(table|list)\.php$/', $page, $view) === 1 ? '&view=' . $view[1] : '';
+      check_preview($meta['og:url'] === $origin . $expectedPath . '?test=preserved' . $viewQuery, 'Wrong clean sharing URL: ' . $page);
     }
     $pageCount++;
   }

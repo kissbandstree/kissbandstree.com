@@ -16,11 +16,11 @@
       <li>
         <h1>
           <a
-            href="bands_grid.php"
+            href="/bands"
             data-view-group="bands"
-            data-view-grid="bands_grid.php"
-            data-view-table="bands_table.php"
-            data-view-list="bands_list.php">
+            data-view-grid="/bands"
+            data-view-table="/bands?view=table"
+            data-view-list="/bands?view=list">
             <svg class="icons">
               <use href="icons.svg#band"></use>
             </svg>
@@ -31,11 +31,11 @@
       <li>
         <h1>
           <a
-            href="artists_grid.php"
+            href="/artists"
             data-view-group="artists"
-            data-view-grid="artists_grid.php"
-            data-view-table="artists_table.php"
-            data-view-list="artists_list.php">
+            data-view-grid="/artists"
+            data-view-table="/artists?view=table"
+            data-view-list="/artists?view=list">
             <svg class="icons">
               <use href="icons.svg#person"></use>
             </svg>
@@ -46,11 +46,11 @@
       <li>
         <h1>
           <a
-            href="releases_band_grid.php"
+            href="/releases"
             data-view-group="releases"
-            data-view-grid="releases_band_grid.php"
-            data-view-table="releases_band_table.php"
-            data-view-list="releases_band_list.php">
+            data-view-grid="/releases"
+            data-view-table="/releases?view=table"
+            data-view-list="/releases?view=list">
             <svg class="icons">
               <use href="icons.svg#lp"></use>
             </svg>
@@ -61,11 +61,11 @@
       <li>
         <h1>
           <a
-            href="releases_related_grid.php"
+            href="/related"
             data-view-group="related"
-            data-view-grid="releases_related_grid.php"
-            data-view-table="releases_related_table.php"
-            data-view-list="releases_related_list.php">
+            data-view-grid="/related"
+            data-view-table="/related?view=table"
+            data-view-list="/related?view=list">
             <svg class="icons">
               <use href="icons.svg#lp"></use>
             </svg>
@@ -75,7 +75,7 @@
       </li>
       <li>
         <h1>
-          <a href="calendar.php">
+          <a href="/calendar">
             <svg class="icons">
               <use href="icons.svg#calendar"></use>
             </svg>
@@ -85,7 +85,7 @@
       </li>
       <li>
         <h1>
-          <a href="about.php">
+          <a href="/about">
             <svg class="icons">
               <use href="icons.svg#about"></use>
             </svg>
@@ -95,7 +95,7 @@
       </li>
       <li>
         <h1>
-          <a href="thanks.php">
+          <a href="/thanks">
             <svg class="icons">
               <use href="icons.svg#star"></use>
             </svg>
@@ -105,7 +105,7 @@
       </li>
       <li>
         <h1>
-          <a href="stats.php">
+          <a href="/stats">
             <svg class="icons">
               <use href="icons.svg#cake_diagram"></use>
             </svg>
@@ -115,7 +115,7 @@
       </li>
       <li>
         <h1>
-          <a href="tree.php">
+          <a href="/tree">
             <svg class="icons">
               <use href="icons.svg#tree"></use>
             </svg>

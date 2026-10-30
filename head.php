@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/page-routes.php';
 $defaultOrigin = 'https://kissbandstree.com';
 $requestHost = isset($_SERVER['HTTP_HOST']) ? trim((string) $_SERVER['HTTP_HOST']) : '';
 $requestUri = isset($_SERVER['REQUEST_URI']) ? trim((string) $_SERVER['REQUEST_URI']) : '/';
@@ -11,8 +12,12 @@ if ($requestHost !== '') {
 	$origin = $defaultOrigin;
 }
 
-$ogUrl = $origin . ($requestUri !== '' ? $requestUri : '/');
-$canonicalUrl = $defaultOrigin . ($requestUri !== '' ? $requestUri : '/');
+$pageRoute = resolve_page_request(
+	parse_url($requestUri, PHP_URL_PATH),
+	parse_url($requestUri, PHP_URL_QUERY) ?? ''
+);
+$ogUrl = $origin . ($pageRoute !== null ? $pageRoute['url'] : $requestUri);
+$canonicalUrl = $defaultOrigin . ($pageRoute !== null ? $pageRoute['canonical'] : $requestUri);
 
 $currentPage = pathinfo(isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : '', PATHINFO_FILENAME);
 $previewAliases = [

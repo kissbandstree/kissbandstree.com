@@ -262,7 +262,11 @@ async function shareCurrentPage() {
 function resetSettings() {
   localStorage.clear();
   const url = new URL(window.location.href);
-  url.pathname = url.pathname.replace(/_(?:table(?:_detailed)?|list)\.php$/i, '_grid.php');
+  if (['/bands', '/artists', '/releases', '/related'].includes(url.pathname)) {
+    url.searchParams.delete('view');
+  } else {
+    url.pathname = url.pathname.replace(/_(?:table(?:_detailed)?|list)\.php$/i, '_grid.php');
+  }
   window.location.replace(url.href);
 }
 
@@ -368,7 +372,7 @@ document.addEventListener('keydown', function (event) {
   }
 });
 
-// Focus a lineup on tree.php when arriving with ?focus=<band-slug>
+// Focus a lineup when arriving with ?focus=<band-slug>
 function focusBandFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const slug = (params.get('focus') || '').trim();
@@ -395,6 +399,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Keep grid/table/list preference consistent across sections
 function getViewModeFromPage(pageName) {
+  if (['bands', 'artists', 'releases', 'related'].includes(pageName)) {
+    return new URLSearchParams(window.location.search).get('view') || 'grid';
+  }
   if (/_grid\.php$/i.test(pageName)) return 'grid';
   if (/_table(?:_detailed)?\.php$/i.test(pageName)) return 'table';
   if (/_list\.php$/i.test(pageName)) return 'list';
@@ -432,7 +439,8 @@ function applyPreferredViews() {
     const listPage = link.dataset.viewList;
     const isViewSwitch = link.getAttribute('title') === 'View';
     const pages = [gridPage, tablePage, listPage].filter(Boolean);
-    const pageMode = pages.includes(currentPage) ? getViewModeFromPage(currentPage) : null;
+    const pageMode = pages.some(page => new URL(page, window.location.origin).pathname === window.location.pathname)
+      ? currentMode : null;
 
     if (isViewSwitch) {
       const targetMode = pageMode ? nextMode(pageMode) : preferredMode;
@@ -476,7 +484,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function enableTreeDragPan() {
   const page = (window.location.pathname.split('/').pop() || '').toLowerCase();
-  if (page !== 'tree.php') return;
+  if (page !== 'tree' && page !== 'tree.php') return;
 
   const isTextTarget = (target) => {
     if (!(target instanceof Element)) return false;

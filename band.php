@@ -231,7 +231,7 @@ $band_slugs = array_map(function ($b) {
 
     echo "WITH KISS MEMBER: " . implode(', ', $links) . "<br><br>";
 
-    echo "<a href=\"tree.php?focus=" . urlencode($band) . "\">SHOW ON TREE</a><br><br>";
+    echo "<a href=\"/tree?focus=" . urlencode($band) . "\">SHOW ON TREE</a><br><br>";
 
     echo "Entry updated: " . date('d-m-Y.', get_band_mtime($band));
     ?>

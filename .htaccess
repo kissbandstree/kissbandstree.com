@@ -9,3 +9,8 @@ RewriteRule ^(.*)$ https://kissbandstree.com/$1 [R=301,L]
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-SSL} !on
 RewriteRule ^(.*)$ https://kissbandstree.com/$1 [R=301,L]
+
+# Route public pages and old implementation URLs before rendering any content.
+RewriteRule ^(index|calendar|about|thanks|stats|tree|(bands|artists|releases_band|releases_related)_(grid|table|list))\.php$ page.php [L]
+RewriteRule ^(bands|artists|releases|related|calendar|about|thanks|stats|tree)/?$ page.php [L]
+RewriteRule ^$ page.php [L]
