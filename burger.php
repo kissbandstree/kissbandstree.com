@@ -75,6 +75,16 @@
       </li>
       <li>
         <h1>
+          <a href="calendar.php">
+            <svg class="icons">
+              <use href="icons.svg#calendar"></use>
+            </svg>
+            Calendar
+          </a>
+        </h1>
+      </li>
+      <li>
+        <h1>
           <a href="about.php">
             <svg class="icons">
               <use href="icons.svg#about"></use>

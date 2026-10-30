@@ -71,12 +71,20 @@
   label typography and the grey2 hover background. Their scroll areas and
   bottom Close controls use the same spacing.
 - TOC labels use regular capitalization, such as Bands and Related, not all caps.
+- Calendar shows artist birthdays and appears between Related and About in
+  the main menu and header swipe sequence. Keep its existing artist links,
+  date tooltips and current-day indicator.
 - Reset clears all localStorage settings for this site, including Kiss-member
   and band filters, slideshow state, theme, collapsed sections, view and sidebar
   preferences. It reloads with defaults in Grid view, preserving the current
   section or detail page and its query parameters.
 - Keep `icons.svg` identical to Pekosoft's sprite when updating it. Check that
   all icons referenced by this site remain present.
+- Page bitmaps use the TOC symbols: `png/` contains 512 by 512 PNGs and
+  `png/og/` contains 1200 by 630 sharing previews, with white symbols on black.
+  Home uses the site icon. Grid, Table and List share their section preview.
+  Keep detail-page photos and album covers ahead of these generic previews
+  in `head.php`. Run `php .github/tests/previews.php` after changing previews.
 - Run `node --test .github/tests/settings.test.cjs` after changing Settings.
 - Swipe left or right on the header to move through Home and the main-menu
   sections, wrapping at either end and preserving the Grid/Table/List view.

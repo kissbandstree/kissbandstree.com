@@ -57,7 +57,7 @@ function createSwipe(url, mode = 'grid', hasHeader = true) {
 
 test('main-menu swipes wrap through Home and skip Tree in both directions', () => {
   const pages = ['/', '/bands_grid.php', '/artists_grid.php', '/releases_band_grid.php',
-    '/releases_related_grid.php', '/about.php', '/thanks.php', '/stats.php'];
+    '/releases_related_grid.php', '/calendar.php', '/about.php', '/thanks.php', '/stats.php'];
   for (let index = 0; index < pages.length; index++) {
     assert.equal(createSwipe(pages[index]).swipe('forward'), pages[(index + 1) % pages.length]);
     assert.equal(createSwipe(pages[index]).swipe('backward'),
@@ -85,12 +85,16 @@ test('detail pages and detailed artist table use their parent navigation section
       ['/band.php?a=shogun_mojo_2', `/artists_${mode}.php`],
       ['/artist.php?a=tommy_thayer', `/releases_band_${mode}.php`],
       ['/release_band.php?a=kiss', `/releases_related_${mode}.php`],
-      ['/release_related.php?a=shogun_mojo', '/about.php'],
+      ['/release_related.php?a=shogun_mojo', '/calendar.php'],
       ['/artists_table_detailed.php', `/releases_band_${mode}.php`]
     ]) {
       assert.equal(createSwipe(page, mode).swipe('forward'), next);
     }
   }
+});
+
+test('Calendar has a main-menu link with its calendar icon', () => {
+  assert.match(menu, /<a href="calendar\.php">\s*<svg class="icons">\s*<use href="icons\.svg#calendar"><\/use>\s*<\/svg>\s*Calendar\s*<\/a>/);
 });
 
 test('Tree and pages without a header attach no swipe handlers', () => {
