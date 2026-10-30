@@ -27,44 +27,8 @@ $latest_four_bands = array_slice($bands, 0, 4); // Get the four latest modified 
 
 <div class="last-container colored" id="bandContainer">
     <?php
-    // Loop through the four latest modified files
-    foreach ($latest_four_bands as $i => $file) {
-        $contents = content_file($file);
-        echo "<div class='band-item'>";
-
-        // Fetch contents of file as an array, where each line is a 0-based numerically indexed element in the array
-        $contents = content_file($file);
-
-        // Fetch basename (the filename part only)
-        $basename = basename($file, ".txt");
-
-        // Process the list of names
-        $list = explode(',', $contents[5]);
-        $list = array_map('trim', $list);
-
-        // Produce the link(s) by dynamically generating slugs
-        $links = [];
-        foreach ($list as $name) {
-            $slug = strtolower(str_replace(
-                [" ", ".", "'", "-", "[", "]"],
-                ["_", "", "", "_", "", ""],
-                $name
-            ));
-            $links[] = "<a href='/artist.php?a=$slug'>$name</a>";
-        }
-
-        // Output some stuff
-        if (content_exists('photos_bands/' . $basename . '.png')) {
-            echo "<div><a href='/band.php?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></div>";
-        } else {
-            echo "<div><a href='/band.php?a=$basename'><img src='img/band_small.png' alt='band' class='bitmap'></a></div>"; // photo
-        }
-        echo "<div><a href='/band.php?a=$basename'>" . trim($contents[0]) . "</a></div>"; // band
-        echo "<div>" . trim($contents[1]) . "</div>"; // year
-        echo "<div>" . implode(', ', $links) . "</div>"; // played with
-        // Fetch file modification time as a unix timestamp and convert to a human-readable date
-        echo "<div title='Entry updated'>" . date('d-m-Y', get_band_mtime($basename)) . "</div>";
-        echo "</div>";
+    foreach ($latest_four_bands as $file) {
+        echo render_band_card($file, get_band_mtime(basename($file, '.txt')));
     }
     ?>
 </div>

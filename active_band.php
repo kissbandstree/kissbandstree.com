@@ -48,38 +48,7 @@ array_multisort(array_map('content_mtime', $activeBands), SORT_DESC, $activeBand
     $yearLine = trim($contents[1] ?? '');
     $yearLineUi = preg_replace('/\bpresent\b/i', '[present]', $yearLine, 1);
 
-    // Members
-    $list = explode(',', $contents[5] ?? '');
-    $list = array_map('trim', $list);
-
-    $links = [];
-    foreach ($list as $name) {
-      if ($name === '') continue;
-
-      $slug = strtolower(str_replace(
-        [" ", ".", "'", "-", "[", "]"],
-        ["_", "", "", "_", "", ""],
-        $name
-      ));
-
-      $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-      $links[] = "<a href='/artist.php?a=$slug'>$safeName</a>";
-    }
-
-    echo "<div class='band-item'>";
-
-    if (content_exists('photos_bands/' . $basename . '.png')) {
-      echo "<div><a href='/band.php?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></div>";
-    } else {
-      echo "<div><a href='/band.php?a=$basename'><img src='img/band_small.png' alt='band' class='bitmap'></a></div>";
-    }
-
-    echo "<div><a href='/band.php?a=$basename'>" . htmlspecialchars(trim($contents[0] ?? ''), ENT_QUOTES, 'UTF-8') . "</a></div>"; // band
-    echo "<div>" . htmlspecialchars($yearLineUi, ENT_QUOTES, 'UTF-8') . "</div>"; // year + [present]
-    echo "<div>" . implode(', ', $links) . "</div>"; // members
-    echo "<div title='Entry updated'>" . date('d-m-Y', get_band_mtime($basename)) . "</div>"; // modified date
-
-    echo "</div>";
+    echo render_band_card($file, get_band_mtime($basename), $yearLineUi);
   }
   ?>
 </div>

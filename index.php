@@ -18,6 +18,8 @@
 
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/news.php"); ?>
 
+  <?php require($_SERVER['DOCUMENT_ROOT'] . "/lineups.php"); ?>
+
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/members.php"); ?>
 
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/search.php"); ?>

@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const root = path.join(__dirname, '..', '..');
 const source = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
 
-function createSettings(url = 'http://localhost:8003/release_related.php?a=shogun_mojo', saved = {}, desktop = false) {
+function createSettings(url = 'http://localhost:8003/release_related.php?a=shogun_mojo', saved = {}, desktop = false, hoverTargets = []) {
   function element() {
     const classes = new Set();
     return {
@@ -36,6 +36,7 @@ function createSettings(url = 'http://localhost:8003/release_related.php?a=shogu
       : ['settings-panel', 'settings-menu-container', 'toc', 'toggle-menu-button',
         'burger-container', 'toggle-settings-panel-button', 'toggle-settings-panel-close-button'])];
   const elements = Object.fromEntries(ids.map(id => [id, element()]));
+  const hoverElements = hoverTargets.map(target => Object.assign(element(), target));
   if (elements['settings-panel']) elements['settings-panel'].hidden = true;
   const events = {};
   const windowEvents = {};
@@ -51,7 +52,11 @@ function createSettings(url = 'http://localhost:8003/release_related.php?a=shogu
     body: element(), documentElement: element(), title: 'Kiss Bands Tree',
     fullscreenEnabled: true, fullscreenElement: null,
     getElementById: id => elements[id] || null,
-    querySelector: () => null, querySelectorAll: () => [],
+    querySelector: () => null,
+    querySelectorAll(selector) {
+      if (selector === '.artist-name, .arrow[data-artist-name]') return hoverElements;
+      return [];
+    },
     addEventListener(name, callback) { (events[name] ??= []).push(callback); },
     async exitFullscreen() { document.fullscreenElement = null; }
   };
@@ -76,8 +81,34 @@ function createSettings(url = 'http://localhost:8003/release_related.php?a=shogu
   });
   vm.runInContext(source, context);
   for (const callback of events.DOMContentLoaded) callback();
-  return { context, document, elements, events, windowEvents, layout, storage, navigator, replacements, prompts, warnings, errors };
+  return { context, document, elements, hoverElements, events, windowEvents, layout, storage, navigator, replacements, prompts, warnings, errors };
 }
+
+test('artist-name and arrow hover highlight only matching names and arrows and clear them on leave', () => {
+  for (const url of ['http://localhost:8003/artist.php?a=paul_stanley', 'http://localhost:8003/tree.php']) {
+    const { hoverElements } = createSettings(url, {}, true, [
+      { textContent: 'Paul Stanley', dataset: {} },
+      { textContent: ' Paul Stanley ', dataset: {} },
+      { textContent: 'Matt Rael', dataset: {} },
+      { textContent: '\u2193', dataset: { artistName: 'Paul Stanley' } },
+      { textContent: '\u2193', dataset: { artistName: 'Paul Stanley' } },
+      { textContent: '\u2193', dataset: { artistName: 'Matt Rael' } }
+    ]);
+    const highlighted = () => hoverElements.map(el => el.classList.contains('artist-hover'));
+    for (const index of [0, 1, 3, 4]) {
+      hoverElements[index].handlers.mouseenter();
+      assert.deepEqual(highlighted(), [true, true, false, true, true, false]);
+      hoverElements[index].handlers.mouseleave();
+      assert.deepEqual(highlighted(), [false, false, false, false, false, false]);
+    }
+    for (const index of [2, 5]) {
+      hoverElements[index].handlers.mouseenter();
+      assert.deepEqual(highlighted(), [false, false, true, false, false, true]);
+      hoverElements[index].handlers.mouseleave();
+      assert.deepEqual(highlighted(), [false, false, false, false, false, false]);
+    }
+  }
+});
 
 test('mobile menus start closed and close each other, with outside-click and Escape dismissal', () => {
   const { context, document, elements, events } = createSettings();

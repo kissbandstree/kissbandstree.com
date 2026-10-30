@@ -305,14 +305,7 @@
 
         // Arrows (keep previous lineup positions with blanks where artists stop)
         if (!$firstBand) {
-          $arrowSlots = getLineupArrowSlots($previousLineup, $lineup);
-          if (in_array(true, $arrowSlots, true)) {
-            echo '<div class="arrow-outer-container"><div class="arrow-container">';
-            foreach ($arrowSlots as $hasArrow) {
-              echo '<div class="arrow-slot">' . ($hasArrow ? '<span class="arrow">&darr;</span>' : '&nbsp;') . '</div>';
-            }
-            echo '</div></div>';
-          }
+          echo render_lineup_arrows($previousLineup, $lineup);
         } else {
           $firstBand = false;
         }
@@ -367,18 +360,6 @@
         // Prepare for next iteration
         $previousLineup = array_map('trim', $lineup);
       }
-    }
-
-    function getLineupArrowSlots($previousLineup, $currentLineup)
-    {
-      $currentArtists = array_map(function ($member) {
-        return trim(explode(' - ', $member)[0]);
-      }, $currentLineup);
-
-      return array_map(function ($member) use ($currentArtists) {
-        $previousArtist = trim(explode(' - ', $member)[0]);
-        return $previousArtist !== '?' && in_array($previousArtist, $currentArtists, true);
-      }, $previousLineup);
     }
 
     $previousLineup = [];

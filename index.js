@@ -332,23 +332,23 @@ document.addEventListener('DOMContentLoaded', function () {
     a.classList.add('artist-name');
   });
 
-  // Hover effect across all artist-name elements
+  // Hover effect across matching artist names and arrows
 
-  const artistElements = document.querySelectorAll('.artist-name');
-  artistElements.forEach(el => {
-    const name = el.textContent.trim();
+  const hoverElements = document.querySelectorAll('.artist-name, .arrow[data-artist-name]');
+  hoverElements.forEach(el => {
+    const name = el.dataset.artistName ?? el.textContent.trim();
 
     el.addEventListener('mouseenter', () => {
-      artistElements.forEach(element => {
-        if (element.textContent.trim() === name) {
+      hoverElements.forEach(element => {
+        if ((element.dataset.artistName ?? element.textContent.trim()) === name) {
           element.classList.add('artist-hover');
         }
       });
     });
 
     el.addEventListener('mouseleave', () => {
-      artistElements.forEach(element => {
-        if (element.textContent.trim() === name) {
+      hoverElements.forEach(element => {
+        if ((element.dataset.artistName ?? element.textContent.trim()) === name) {
           element.classList.remove('artist-hover');
         }
       });

@@ -35,6 +35,60 @@ function render_kiss_member_links($members_line)
   return implode(', ', $links);
 }
 
+function render_band_card(string $file, ?int $modified = null, ?string $period = null): string
+{
+  $contents = content_file($file, FILE_IGNORE_NEW_LINES);
+  $slug = basename($file, '.txt');
+  $name = htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8');
+  $bandUrl = '/band.php?a=' . rawurlencode($slug);
+  $photo = 'photos_bands/' . $slug . '.png';
+  if (!content_exists($photo)) {
+    $photo = 'img/band_small.png';
+  }
+
+  $html = "<div class='band-item'>";
+  $html .= '<div><a href="' . $bandUrl . '"><img src="' . $photo . '" alt="' . $name . '" class="bitmap"></a></div>';
+  $html .= '<div><a href="' . $bandUrl . '">' . $name . '</a></div>';
+  $html .= '<div>' . htmlspecialchars($period ?? trim($contents[1]), ENT_QUOTES, 'UTF-8') . '</div>';
+  $html .= '<div>' . render_kiss_member_links($contents[5]) . '</div>';
+  if ($modified !== null) {
+    $html .= '<div title="Entry updated">' . date('d-m-Y', $modified) . '</div>';
+  }
+  $html .= '<div><a href="/tree.php?focus=' . rawurlencode($slug) . '">SHOW ON TREE</a></div>';
+  return $html . '</div>';
+}
+
+function getLineupArrowSlots($previousLineup, $currentLineup)
+{
+  $currentArtists = array_map(function ($member) {
+    return trim(explode(' - ', $member)[0]);
+  }, $currentLineup);
+
+  return array_map(function ($member) use ($currentArtists) {
+    $previousArtist = trim(explode(' - ', $member)[0]);
+    return $previousArtist !== '?' && in_array($previousArtist, $currentArtists, true);
+  }, $previousLineup);
+}
+
+function render_lineup_arrows(array $previousLineup, array $currentLineup): string
+{
+  $arrowSlots = getLineupArrowSlots($previousLineup, $currentLineup);
+  if (!in_array(true, $arrowSlots, true)) {
+    return '';
+  }
+
+  $html = '<div class="arrow-outer-container" aria-hidden="true"><div class="arrow-container">';
+  foreach ($arrowSlots as $index => $hasArrow) {
+    $arrow = '&nbsp;';
+    if ($hasArrow) {
+      $name = trim(explode(' - ', $previousLineup[$index])[0]);
+      $arrow = '<span class="arrow" data-artist-name="' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '">&darr;</span>';
+    }
+    $html .= '<div class="arrow-slot">' . $arrow . '</div>';
+  }
+  return $html . '</div></div>';
+}
+
 function is_band_active(string $dates): bool
 {
   return preg_match('/\bpresent\b/i', $dates) === 1;

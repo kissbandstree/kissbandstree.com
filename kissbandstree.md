@@ -23,6 +23,13 @@
 ## Presentation
 
 - Never use easing transitions.
+- Home shows Kiss's LINEUPS above MEMBERS, including reunion periods in the
+  chronological order of Gene Simmons's Tree timeline. Lineups, LAST MODIFIED
+  BANDS and ACTIVE BANDS share `render_band_card` and their responsive layout.
+  Cards show the photo, linked name and lineup number, period, linked Kiss
+  members and SHOW ON TREE. Keep update dates in the two existing sections.
+  Reuse `tree.php?focus=SLUG` for navigation. Run
+  `php .github/tests/home.php` after changing these sections.
 - Standard page and Tree footers share `footer-branding.php`. Show copyright
   and production credits on separate lines, with the Focus Studios logo last.
   Keep the standard page's update date and social links above these credits.
@@ -74,7 +81,15 @@
 - Avoid decorative visual effects unless explicitly requested.
 - Use `<h2>` for all section headers. Reserve `<h1>` only for the main page title/top-line heading.
 - Artist band lists keep spacing between entries, without extra blank lines
-  before the first or after the last entry.
+  before the first or after the last entry. Artist pages and Tree share
+  `render_lineup_arrows` and arrow styling. Between lineups, show an arrow for
+  each continuing member, retaining the previous lineup's positions and blanks
+  for departing members. Do not connect unknown members or put arrows before
+  the first or after the last lineup. Artist-page arrows fit the content width.
+  Hovering an artist name or arrow highlights that artist's arrows alongside matching
+  names throughout the page, on both artist pages and Tree. Clear the highlight
+  when the pointer leaves, without highlighting other artists' arrows.
+  Run `php .github/tests/credits.php` to check all artist pages and arrow cases.
 - Stats charts have empty centres. Preserve slice hover, selection and keyboard
   interactions and their matching legend highlights.
 - ACTIVE BANDS counts individual lineup records. YES means the active-date

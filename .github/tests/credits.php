@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 $root = dirname(__DIR__, 2);
 chdir($root);
-require_once $root . '/content.php';
+require_once $root . '/functions.php';
 
 function check_credits($condition, $message)
 {
@@ -27,6 +27,29 @@ if (($argv[1] ?? '') === '--render') {
   exit;
 }
 
+foreach ([
+  [[], ['A - vocals'], []],
+  [['A - vocals'], ['B - vocals'], [false]],
+  [['A - vocals', 'B - guitar'], ['B - bass', 'A - guitar'], [true, true]],
+  [['? - vocals', 'A - guitar', 'B - bass'], ['? - vocals', 'B - guitar'], [false, false, true]],
+  [['A "Quoted" & B - vocals'], ['A "Quoted" & B - bass'], [true]],
+] as [$previous, $current, $expected]) {
+  check_credits(getLineupArrowSlots($previous, $current) === $expected, 'Incorrect continuing-member arrow positions.');
+  $arrows = render_lineup_arrows($previous, $current);
+  check_credits(substr_count($arrows, 'class="arrow"') === count(array_filter($expected)),
+    'Incorrect continuing-member arrow count.');
+  check_credits(substr_count($arrows, 'class="arrow-slot"') === (in_array(true, $expected, true) ? count($expected) : 0),
+    'Departing-member arrow positions were not preserved.');
+  check_credits(in_array(true, $expected, true) || $arrows === '', 'Unexpected arrows without continuing members.');
+  foreach ($expected as $index => $hasArrow) {
+    if ($hasArrow) {
+      $name = trim(explode(' - ', $previous[$index])[0]);
+      check_credits(str_contains($arrows, 'data-artist-name="' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '"'),
+        'Arrow artist identity is missing or incorrectly escaped.');
+    }
+  }
+}
+
 check_credits(!content_exists('artists_credits/rock_redline.txt'), 'Rock Redline credit still exists.');
 $nautilus = content_file('bands_credits/nautilus.txt', FILE_IGNORE_NEW_LINES);
 check_credits(count($nautilus) === 4 && trim($nautilus[2]) === 'Backstage Auctions, Lydia Criss',
@@ -35,8 +58,10 @@ check_credits(count($nautilus) === 4 && trim($nautilus[2]) === 'Backstage Auctio
 $count = 0;
 foreach (['artist' => 'artists', 'band' => 'bands'] as $type => $directory) {
   $records = content_records($directory . '_credits');
-  $slugs = array_keys($records);
-  $slugs[] = $type === 'artist' ? 'alan_graf' : 'kkb';
+  $slugs = $type === 'artist' ? array_keys(content_records('artists')) : array_keys($records);
+  if ($type === 'band') {
+    $slugs[] = 'kkb';
+  }
   foreach ($slugs as $slug) {
     check_credits(content_exists("$directory/$slug.txt"), "Credit has no matching entry: $slug");
     $lines = array_map('trim', $records[$slug]['lines'] ?? []);
@@ -79,22 +104,90 @@ foreach (['artist' => 'artists', 'band' => 'bands'] as $type => $directory) {
         "Wrong source destination for $type/$slug");
     }
     if ($type === 'artist') {
-      check_credits(preg_match('~<div id="bandsContainer"[^>]*>(.*?)</div>~s', $html, $band_block) === 1,
-        "Band list missing for artist/$slug");
-      $entries = preg_split('~(?=<h2\b)~', $band_block[1]);
-      $prefix = array_shift($entries);
-      if ($entries !== []) {
-        check_credits(trim($prefix) === '', "Extra content before the first band for artist/$slug");
-        foreach ($entries as $index => $entry) {
-          preg_match('~(?:<br>\s*)+$~', $entry, $spacing);
-          $is_band_entry = str_starts_with($entry, "<h2 class='small-photo-heading'>");
-          $expected_breaks = $is_band_entry ? ($index === array_key_last($entries) ? 1 : 3) : 0;
-          check_credits(substr_count($spacing[0] ?? '', '<br>') === $expected_breaks,
-            "Wrong spacing after band $index for artist/$slug");
+      $document = new DOMDocument();
+      $document->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING);
+      $xpath = new DOMXPath($document);
+      $container = $document->getElementById('bandsContainer');
+      check_credits($container !== null, "Band list missing for artist/$slug");
+      $entries = $xpath->query('./div[@class="artist-lineup"]', $container);
+      $expectedBands = [];
+      $expectedPreviousLineup = [];
+      $hasMissingBands = false;
+      $artistName = trim(content_file("artists/$slug.txt")[0]);
+      if (content_exists("bands_list/$slug.txt")) {
+        foreach (content_file("bands_list/$slug.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $bandName) {
+          $bandSlug = sanitize_band_slug($bandName);
+          if (!content_exists("bands/$bandSlug.txt")) {
+            check_credits(str_contains($html, 'Missing file: ' . htmlspecialchars(trim($bandName))),
+              "Missing band was not reported for artist/$slug");
+            $hasMissingBands = true;
+            $expectedPreviousLineup = [];
+            continue;
+          }
+          $lineup = array_slice(content_file("bands/$bandSlug.txt"), 6);
+          foreach ($lineup as $member) {
+            if (strcasecmp(trim(explode(' - ', $member)[0]), $artistName) === 0) {
+              $expectedBands[] = [$bandSlug, $lineup, $expectedPreviousLineup];
+              $expectedPreviousLineup = $lineup;
+              break;
+            }
+          }
         }
+      }
+      check_credits($entries->length === count($expectedBands), "Artist lineup selection changed: $slug");
+      $expectedArrowGroups = 0;
+      foreach ($entries as $index => $entry) {
+        [$bandSlug, $lineup, $previousLineup] = $expectedBands[$index];
+        $headingLink = $xpath->query('./h2/a', $entry)->item(0);
+        check_credits($headingLink->getAttribute('href') === 'band.php?a=' . urlencode($bandSlug),
+          "Artist lineup order changed: $slug");
+        $breaks = 0;
+        for ($node = $entry->lastChild; $node !== null; $node = $node->previousSibling) {
+          if ($node->nodeType === XML_TEXT_NODE && trim($node->textContent) === '') continue;
+          if ($node->nodeName !== 'br') break;
+          $breaks++;
+        }
+        check_credits($breaks === 1, "Extra spacing after band $index for artist/$slug");
+        $separator = $entry->previousSibling;
+        while ($separator !== null && $separator->nodeType === XML_TEXT_NODE && trim($separator->textContent) === '') {
+          $separator = $separator->previousSibling;
+        }
+        $slots = getLineupArrowSlots($previousLineup, $lineup);
+        if (!in_array(true, $slots, true)) {
+          check_credits(!($separator instanceof DOMElement) || $separator->getAttribute('class') !== 'arrow-outer-container',
+            "Unexpected arrow before the first band or after missing data for artist/$slug");
+          if ($index === 0 && !$hasMissingBands) {
+            check_credits($separator === null, "Extra content before the first band for artist/$slug");
+          }
+        } else {
+          $expectedArrowGroups++;
+          check_credits($separator instanceof DOMElement && $separator->getAttribute('class') === 'arrow-outer-container',
+            "Missing arrow separator for artist/$slug");
+          check_credits($xpath->query('.//span[@class="arrow"]', $separator)->length === count(array_filter($slots))
+            && $xpath->query('.//div[@class="arrow-slot"]', $separator)->length === count($slots),
+            "Incorrect arrow positions for artist/$slug");
+          foreach ($xpath->query('.//div[@class="arrow-slot"]', $separator) as $slotIndex => $slot) {
+            $arrow = $xpath->query('./span[@class="arrow"]', $slot)->item(0);
+            check_credits(($arrow !== null) === $slots[$slotIndex], "Incorrect arrow slot for artist/$slug");
+            if ($arrow !== null) {
+              $name = trim(explode(' - ', $previousLineup[$slotIndex])[0]);
+              check_credits($arrow->getAttribute('data-artist-name') === $name,
+                "Arrow identifies the wrong artist for artist/$slug");
+            }
+          }
+        }
+      }
+      check_credits($xpath->query('./div[@class="arrow-outer-container"]', $container)->length === $expectedArrowGroups,
+        "Unexpected extra arrow groups for artist/$slug");
+      if ($entries->length > 0 && !$hasMissingBands) {
+        $last = $entries->item($entries->length - 1)->nextSibling;
+        while ($last !== null && $last->nodeType === XML_TEXT_NODE && trim($last->textContent) === '') {
+          $last = $last->nextSibling;
+        }
+        check_credits($last === null, "Extra content after the last band for artist/$slug");
       }
     }
     $count++;
   }
 }
-echo "PASS: $count credited and missing-credit pages; positional fields, named links, plain-text sources, artist band spacing and Rock Redline removal.\n";
+echo "PASS: $count pages including every artist; credit fields, source links, lineup selection/order, spacing, continuing-member arrows and Rock Redline removal.\n";

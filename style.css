@@ -751,6 +751,7 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
     max-width: calc(50% - 8px);
   }
 
+  #lineup-container .band-item,
   #bandContainer .band-item,
   #activeBandContainer .band-item,
   #lastReleaseContainer .band-item {
@@ -1127,6 +1128,47 @@ a:has(> svg.icons) .icons {
 
 .band-lineup {
   margin-bottom: 1.5em;
+}
+
+.arrow-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  pointer-events: none;
+}
+
+.arrow-slot {
+  min-width: 64px;
+  text-align: center;
+}
+
+.arrow {
+  display: inline-block;
+  pointer-events: auto;
+  cursor: default;
+  font-size: 32px;
+  color: var(--white);
+  margin: 0 16px 6px;
+}
+
+.arrow.artist-hover {
+  color: var(--color1);
+}
+
+#bandsContainer .arrow-outer-container {
+  margin: 8px 0;
+}
+
+#bandsContainer .arrow-slot {
+  flex: 0 1 64px;
+  min-width: 0;
+}
+
+#bandsContainer .arrow {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .band-entry {

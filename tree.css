@@ -250,27 +250,6 @@ body.drag-pan-lock * {
 
 .arrow-container {
   grid-column: 2;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  pointer-events: none;
-}
-
-.arrow-slot {
-  min-width: 64px;
-  text-align: center;
-}
-
-.arrow {
-  display: inline-block;
-  font-size: 32px;
-  color: var(--white);
-  margin-top: 0px;
-  margin-bottom: 6px;
-  margin-left: 16px;
-  margin-right: 16px;
 }
 
 .artist-header {
