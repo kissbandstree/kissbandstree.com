@@ -20,7 +20,9 @@ foreach ($bands as $file) {
 }
 
 // Sort by file modification time (DESC)
-array_multisort(array_map('content_mtime', $activeBands), SORT_DESC, $activeBands);
+array_multisort(array_map(function ($file) {
+  return get_band_mtime(basename($file, '.txt'));
+}, $activeBands), SORT_DESC, $activeBands);
 ?>
 
 <div class="top-line">
@@ -42,13 +44,9 @@ array_multisort(array_map('content_mtime', $activeBands), SORT_DESC, $activeBand
 <div class="last-container colored" id="activeBandContainer">
   <?php
   foreach ($activeBands as $file) {
-    $contents = content_file($file, FILE_IGNORE_NEW_LINES);
     $basename = basename($file, ".txt");
 
-    $yearLine = trim($contents[1] ?? '');
-    $yearLineUi = preg_replace('/\bpresent\b/i', '[present]', $yearLine, 1);
-
-    echo render_band_card($file, get_band_mtime($basename), $yearLineUi);
+    echo render_band_card($file, get_band_mtime($basename));
   }
   ?>
 </div>

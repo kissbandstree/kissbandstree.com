@@ -91,7 +91,8 @@
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[1]) . "'>" . trim($contents[1]) . "</td>"; // instrument
           echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars(trim($contents[6]), ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[6]), ENT_QUOTES, 'UTF-8') . "</td>";
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[5]) . "'>" . implode(', ', $links) . "</td>"; // played with
-          echo "<td class='not-wrap'>" . date('d-m-Y', content_mtime('artists/' . $basename . '.txt')) . "</td>"; // entry
+          $entry_ts = get_artist_mtime($basename);
+          echo "<td class='not-wrap' data-sort-value='" . $entry_ts . "'>" . date('d-m-Y', $entry_ts) . "</td>"; // entry
           echo "</tr>";
         }
         ?>

@@ -23,6 +23,14 @@
 ## Presentation
 
 - Never use easing transitions.
+- Centralize band and artist update dates in `get_band_mtime` and
+  `get_artist_mtime` in `functions.php`. Use the newest timestamp among the
+  entry, small photo, large photo and credits, plus comments for bands.
+  Artists have no separate comments collection. JSON records use their own
+  `modified` values, not the collection file's timestamp. Use these helpers for
+  detail pages, table dates and sorting, LAST MODIFIED BANDS, LAST MODIFIED
+  ARTISTS and ACTIVE BANDS. Run `php .github/tests/updated.php` and
+  `php .github/tests/home.php` after changing update-date behavior.
 - Home shows Kiss's LINEUPS above MEMBERS, including reunion periods in the
   chronological order of Gene Simmons's Tree timeline. Lineups, LAST MODIFIED
   BANDS and ACTIVE BANDS share `render_band_card` and their responsive layout.

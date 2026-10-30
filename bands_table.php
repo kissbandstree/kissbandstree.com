@@ -80,7 +80,7 @@
 
           echo "<td class='not-wrap' data-sort-value='" . $member_count . "'>" . $member_count . "</td>";
 
-          $entry_ts = content_mtime('bands/' . $basename . '.txt');
+          $entry_ts = get_band_mtime($basename);
           echo "<td class='not-wrap' data-sort-value='" . $entry_ts . "'>" . date('d-m-Y', $entry_ts) . "</td>";
 
           echo "</tr>";

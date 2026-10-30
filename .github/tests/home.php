@@ -79,9 +79,6 @@ foreach (['lineup-container', 'bandContainer', 'activeBandContainer'] as $contai
     check_home($photo->getAttribute('src') === (content_exists($photoPath) ? $photoPath : 'img/band_small.png'),
       'Incorrect lineup photo: ' . $slug);
     $period = trim($contents[1]);
-    if ($containerId === 'activeBandContainer') {
-      $period = preg_replace('/\bpresent\b/i', '[present]', $period, 1);
-    }
     check_home($xpath->query('./div[3]', $card)->item(0)->textContent === $period,
       'Incorrect lineup period: ' . $slug);
     $members = array_values(array_filter(array_map('trim', explode(',', $contents[5]))));
@@ -120,11 +117,28 @@ foreach (['lineup-container', 'bandContainer', 'activeBandContainer'] as $contai
     $activeFiles = array_map(function ($slug) {
       return 'bands/' . $slug . '.txt';
     }, $expectedActive);
-    array_multisort(array_map('content_mtime', $activeFiles), SORT_DESC, $activeFiles);
+    array_multisort(array_map(function ($file) {
+      return get_band_mtime(basename($file, '.txt'));
+    }, $activeFiles), SORT_DESC, $activeFiles);
     check_home($slugs === array_map(function ($file) {
       return basename($file, '.txt');
     }, $activeFiles), 'Active Bands selection or order changed.');
   }
+}
+
+$artistFiles = content_glob('artists/*.txt', GLOB_NOSORT);
+$artistModified = array_map(function ($file) {
+  return get_artist_mtime(basename($file, '.txt'));
+}, $artistFiles);
+array_multisort($artistModified, SORT_DESC, $artistFiles);
+$artistCards = $xpath->query('//*[@id="artist-container"]/div[@class="artist-item"]');
+check_home($artistCards->length === 4, 'Expected four Last Modified Artists.');
+foreach ($artistCards as $index => $card) {
+  $slug = basename($artistFiles[$index], '.txt');
+  check_home($xpath->query('./div[2]/a', $card)->item(0)->getAttribute('href') === '/artist.php?a=' . $slug,
+    'Last Modified Artists must use combined update dates.');
+  check_home($xpath->query('./div[@title="Entry updated"]', $card)->item(0)->textContent
+    === date('d-m-Y', get_artist_mtime($slug)), 'Incorrect Last Modified Artists date.');
 }
 
 $treeHtml = render_home_test_page($root, 'tree.php');

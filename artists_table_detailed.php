@@ -100,8 +100,8 @@
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[5]) . "'>" . implode(', ', $links) . "</td>"; // played with
 
-          // Fetch file modification time as a unix timestamp and convert to a human-readable date
-          echo "<td class='not-wrap'>" . date('d-m-Y', content_mtime('artists/' . $basename . '.txt')) . "</td>";
+          $entry_ts = get_artist_mtime($basename);
+          echo "<td class='not-wrap' data-sort-value='" . $entry_ts . "'>" . date('d-m-Y', $entry_ts) . "</td>";
 
           echo "</tr>";
         }
