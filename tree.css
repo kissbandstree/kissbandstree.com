@@ -55,6 +55,51 @@ body.drag-pan-lock * {
 
 /* CLASSES */
 
+.tree-page {
+  --band-photo-width: 161px;
+  --band-comment-width: 256px;
+}
+
+.tree-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 64px;
+  max-width: calc(100vw - 52px);
+  width: 100%;
+}
+
+.tree-controls .toc-button {
+  gap: 0;
+  height: 52px;
+  justify-content: center;
+  width: 52px;
+}
+
+.tree-controls #settings-feedback {
+  flex-basis: 100%;
+  margin: 0;
+  order: 1;
+  text-align: center;
+}
+
+.tree-photos-hidden {
+  --band-photo-width: 0px;
+}
+
+.tree-comments-hidden {
+  --band-comment-width: 0px;
+}
+
+.tree-photos-hidden .band-photo,
+.tree-photos-hidden .band-text-box,
+.tree-photos-hidden .artist-header-photo,
+.tree-photos-hidden .grid-container-artist,
+.tree-comments-hidden .band-comment {
+  display: none;
+}
+
 .sidebar {
   flex: 0 0 1024px;
   display: flex;
@@ -116,17 +161,17 @@ body.drag-pan-lock * {
 }
 
 .artist {
-  flex: 0 0 896px;
+  flex: 0 0 calc(479px + var(--band-photo-width) + var(--band-comment-width));
   margin-right: 96px;
 }
 
 .artist h1 {
-  margin-bottom: 32px;
+  margin: 16px 0;
 }
 
 .band-box {
   display: grid;
-  grid-template-columns: 161px minmax(0, 1fr) 256px;
+  grid-template-columns: var(--band-photo-width) minmax(0, 1fr) var(--band-comment-width);
   grid-template-rows: auto 1fr;
   border: 1px solid var(--white);
   width: 100%;
@@ -210,7 +255,7 @@ body.drag-pan-lock * {
 
 .arrow-outer-container {
   display: grid;
-  grid-template-columns: 161px minmax(0, 1fr) 256px;
+  grid-template-columns: var(--band-photo-width) minmax(0, 1fr) var(--band-comment-width);
   width: 100%;
 }
 

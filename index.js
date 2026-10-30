@@ -266,6 +266,25 @@ function resetSettings() {
   window.location.replace(url.href);
 }
 
+function updateTreeVisibility() {
+  for (const option of ['photos', 'comments']) {
+    const button = document.getElementById(`toggle-${option}-button`);
+    if (!button) continue;
+
+    const visible = localStorage.getItem(`tree.${option}`) !== 'false';
+    document.body.classList.toggle(`tree-${option}-hidden`, !visible);
+    button.classList.toggle('button-on', visible);
+    button.setAttribute('aria-pressed', String(visible));
+  }
+}
+
+function toggleTreeVisibility(option) {
+  const key = `tree.${option}`;
+  const visible = localStorage.getItem(key) !== 'false';
+  localStorage.setItem(key, String(!visible));
+  updateTreeVisibility();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const actions = {
     'toggle-settings-panel-button': toggleSettingsPanel,
@@ -276,7 +295,9 @@ document.addEventListener('DOMContentLoaded', function () {
     'toggle-mode-button': toggleMode,
     'toggle-fullscreen-button': toggleFullscreen,
     'share-settings-button': shareCurrentPage,
-    'reset-settings-button': resetSettings
+    'reset-settings-button': resetSettings,
+    'toggle-photos-button': () => toggleTreeVisibility('photos'),
+    'toggle-comments-button': () => toggleTreeVisibility('comments')
   };
   Object.entries(actions).forEach(([id, action]) => {
     const button = document.getElementById(id);
@@ -288,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   updateModeButtonState();
   updateFullscreenButtonState();
+  updateTreeVisibility();
 });
 
 // Check for mode preference on page load
@@ -473,7 +495,7 @@ function enableTreeDragPan() {
 
   document.addEventListener('pointerdown', function (event) {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
-    if (event.target instanceof Element && event.target.closest('a, button, input, select, textarea, #settings-menu-container')) return;
+    if (event.target instanceof Element && event.target.closest('a, button, input, select, textarea, #settings-menu-container, .tree-controls')) return;
     if (isTextTarget(event.target)) return;
 
     pointerId = event.pointerId;

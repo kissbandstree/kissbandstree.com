@@ -28,8 +28,16 @@
       <span>Artists: <?= count($artists); ?>.</span>
     </div>
 
-    <div class="center">
-      <?php require($_SERVER['DOCUMENT_ROOT'] . "/settings.php"); ?>
+    <div class="tree-controls no-swipe" role="group" aria-label="Tree controls">
+      <?php require __DIR__ . '/settings-controls.php'; ?>
+      <button id="toggle-photos-button" class="toc-button" type="button" title="Toggle band and artist photos" aria-pressed="true">
+        <svg class="icons" aria-hidden="true"><use href="icons.svg#photo"></use></svg>
+        <span class="control-label">Photos</span>
+      </button>
+      <button id="toggle-comments-button" class="toc-button" type="button" title="Toggle lineup comments" aria-pressed="true">
+        <svg class="icons" aria-hidden="true"><use href="icons.svg#speech"></use></svg>
+        <span class="control-label">Comments</span>
+      </button>
     </div>
 
     <div class="text">

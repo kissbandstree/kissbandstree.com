@@ -554,7 +554,8 @@ body.settings-lock {
   overscroll-behavior-y: contain;
 }
 
-.settings-panel .toc-button {
+.settings-panel .toc-button,
+.tree-controls .toc-button {
   align-items: center;
   background: transparent;
   display: flex;
@@ -568,7 +569,8 @@ body.settings-lock {
   width: 100%;
 }
 
-.settings-panel .toc-button .icons {
+.settings-panel .toc-button .icons,
+.tree-controls .toc-button .icons {
   flex: none;
   margin: 0;
 }
@@ -578,12 +580,15 @@ body.settings-lock {
 }
 
 .settings-panel .button-on,
-.settings-panel .button-on .icons {
+.settings-panel .button-on .icons,
+.tree-controls .button-on,
+.tree-controls .button-on .icons {
   color: var(--color1);
   fill: var(--color1);
 }
 
-.settings-panel button:disabled {
+.settings-panel button:disabled,
+.tree-controls button:disabled {
   cursor: default;
   opacity: 0.5;
 }
@@ -1034,7 +1039,8 @@ h2.small-photo-heading .artist-photo-wrap {
 }
 
 /* hide checkbox but keep it accessible */
-.sr-only {
+.sr-only,
+.tree-controls .control-label {
   position: absolute;
   width: 1px;
   height: 1px;

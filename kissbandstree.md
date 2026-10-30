@@ -23,10 +23,19 @@
 ## Presentation
 
 - Never use easing transitions.
-- Settings replaces the header's Dark mode control and is also available in the
-  Tree sidebar. It contains Dark mode, Fullscreen, Share and Reset. Adapt the
+- Settings replaces the header's Dark mode control. It contains Dark mode,
+  Fullscreen, Share and Reset. Tree shows these four controls directly on the
+  page instead of a Settings menu, sharing their markup in `settings-controls.php`.
+  Tree controls are icon-only buttons with tooltips and screen-reader labels.
+  Settings menus on other pages keep their visible control labels.
+  Keep Tree artist names vertically centered with Photos enabled or disabled.
+  Tree also has Photos and Comments toggles, enabled by default and remembered
+  across visits. Photos controls band and artist photographs, including the
+  artist thumbnail gallery, but not album artwork or site logos. Comments
+  controls lineup comments. Hidden columns collapse while lineup arrows stay
+  aligned. Reset restores both toggles. Adapt the
   existing Pekosoft controls and sharing fallback in `index.js`, without adding
-  another shared runtime dependency.
+  another JavaScript dependency.
 - TOC and Settings follow Pekosoft's responsive sidebar behavior. At 800px and
   wider, both are open by default, remain open during outside clicks, Escape
   and navigation, and remember their individual open states. Page content makes

@@ -26,15 +26,17 @@ function createSettings(url = 'http://localhost:8003/release_related.php?a=shogu
       addEventListener(name, callback) { this.handlers[name] = callback; },
       focus() { this.focused = true; },
       contains(target) { return target === this; },
-      click() { this.handlers.click?.(); }
+      click() { return this.handlers.click?.(); }
     };
   }
-  const ids = ['settings-panel', 'settings-menu-container', 'settings-feedback', 'toc',
-    'toggle-menu-button', 'burger-container',
-    'toggle-settings-panel-button', 'toggle-settings-panel-close-button', 'toggle-mode-button',
-    'toggle-fullscreen-button', 'share-settings-button', 'reset-settings-button'];
+  const isTree = new URL(url).pathname === '/tree.php';
+  const ids = ['settings-feedback', 'toggle-mode-button', 'toggle-fullscreen-button',
+    'share-settings-button', 'reset-settings-button', ...(isTree
+      ? ['toggle-photos-button', 'toggle-comments-button']
+      : ['settings-panel', 'settings-menu-container', 'toc', 'toggle-menu-button',
+        'burger-container', 'toggle-settings-panel-button', 'toggle-settings-panel-close-button'])];
   const elements = Object.fromEntries(ids.map(id => [id, element()]));
-  elements['settings-panel'].hidden = true;
+  if (elements['settings-panel']) elements['settings-panel'].hidden = true;
   const events = {};
   const windowEvents = {};
   const layout = { desktop };
@@ -214,6 +216,7 @@ test('Reset clears all saved settings and filters, restores Grid and preserves q
       isPlaying: 'true', currentArtist: 'tommy_thayer',
       isPlayingReleaseBand: 'true', currentReleaseBand: 'kiss',
       isPlayingReleaseRelated: 'true', currentReleaseRelated: 'shogun_mojo',
+      'tree.photos': 'false', 'tree.comments': 'false',
       futureSetting: 'custom',
       'global.toc_sidebar_open': 'false', 'global.settings_sidebar_open': 'false'
     });
@@ -223,18 +226,89 @@ test('Reset clears all saved settings and filters, restores Grid and preserves q
   }
 });
 
-test('header and Tree use the same Settings markup with four controls and swipe exclusion', () => {
+test('header Settings and inline Tree controls share the four standard actions', () => {
   const markup = fs.readFileSync(path.join(root, 'settings.php'), 'utf8');
+  const controls = fs.readFileSync(path.join(root, 'settings-controls.php'), 'utf8');
   for (const id of ['toggle-mode-button', 'toggle-fullscreen-button', 'share-settings-button', 'reset-settings-button']) {
-    assert.equal(markup.split(`id="${id}"`).length - 1, 1);
+    assert.equal(controls.split(`id="${id}"`).length - 1, 1);
   }
   assert.match(markup, /id="settings-menu-container" class="no-swipe"/);
   assert.match(markup, /id="settings-panel"[^>]*hidden/);
-  for (const file of ['toc.php', 'tree.php']) {
+  const header = fs.readFileSync(path.join(root, 'toc.php'), 'utf8');
+  assert.match(header, /require\(\$_SERVER\['DOCUMENT_ROOT'\] \. "\/settings.php"\)/);
+  for (const file of ['settings.php', 'tree.php']) {
     const content = fs.readFileSync(path.join(root, file), 'utf8');
-    assert.match(content, /require\(\$_SERVER\['DOCUMENT_ROOT'\] \. "\/settings.php"\)/);
+    assert.match(content, /require __DIR__ \. '\/settings-controls.php'/);
     assert.doesNotMatch(content, /onclick="toggleMode\(\)"/);
   }
+  const tree = fs.readFileSync(path.join(root, 'tree.php'), 'utf8');
+  assert.doesNotMatch(tree, /\/settings.php|id="toggle-settings-panel-button"/);
+  assert.match(tree, /class="tree-controls no-swipe"/);
+  for (const option of ['photos', 'comments']) {
+    assert.match(tree, new RegExp(`id="toggle-${option}-button"[^>]*aria-pressed="true"`));
+  }
+});
+
+test('Tree Photos and Comments default on, toggle independently and persist across visits', () => {
+  const setup = createSettings('http://localhost:8003/tree.php', {}, true);
+  assert.equal(setup.elements['settings-panel'], undefined);
+  for (const option of ['photos', 'comments']) {
+    const button = setup.elements[`toggle-${option}-button`];
+    assert.equal(button.attributes['aria-pressed'], 'true');
+    button.click();
+    assert.equal(setup.storage[`tree.${option}`], 'false');
+    assert.equal(button.attributes['aria-pressed'], 'false');
+    assert.equal(setup.document.body.classList.contains(`tree-${option}-hidden`), true);
+  }
+  const restored = createSettings('http://localhost:8003/tree.php', setup.storage, true);
+  assert.equal(restored.elements['toggle-photos-button'].attributes['aria-pressed'], 'false');
+  assert.equal(restored.elements['toggle-comments-button'].attributes['aria-pressed'], 'false');
+  restored.elements['toggle-photos-button'].click();
+  assert.equal(restored.document.body.classList.contains('tree-photos-hidden'), false);
+  assert.equal(restored.document.body.classList.contains('tree-comments-hidden'), true);
+  restored.elements['reset-settings-button'].click();
+  const reset = createSettings('http://localhost:8003/tree.php', restored.storage, true);
+  assert.equal(reset.elements['toggle-photos-button'].attributes['aria-pressed'], 'true');
+  assert.equal(reset.elements['toggle-comments-button'].attributes['aria-pressed'], 'true');
+});
+
+test('Tree icon buttons retain their labels without hiding Settings menu text', () => {
+  const controls = fs.readFileSync(path.join(root, 'settings-controls.php'), 'utf8');
+  const tree = fs.readFileSync(path.join(root, 'tree.php'), 'utf8');
+  for (const label of ['Dark mode', 'Fullscreen', 'Share', 'Reset']) {
+    assert.ok(controls.includes(`<span class="control-label">${label}</span>`));
+  }
+  for (const label of ['Photos', 'Comments']) {
+    assert.ok(tree.includes(`<span class="control-label">${label}</span>`));
+  }
+  const styles = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
+  assert.match(styles, /\.sr-only,\s*\.tree-controls \.control-label\s*\{/);
+  assert.doesNotMatch(styles, /(?:^|\})\s*\.control-label\s*\{/);
+});
+
+test('Tree visibility preferences do not change other pages or their Settings menus', () => {
+  const setup = createSettings(undefined, { 'tree.photos': 'false', 'tree.comments': 'false' });
+  assert.equal(setup.document.body.classList.contains('tree-photos-hidden'), false);
+  assert.equal(setup.document.body.classList.contains('tree-comments-hidden'), false);
+});
+
+test('inline Tree controls reuse Dark mode, Fullscreen, Share and Reset without a Settings panel', async () => {
+  const setup = createSettings('http://localhost:8003/tree.php?focus=kiss', {}, true);
+  setup.elements['toggle-mode-button'].click();
+  assert.equal(setup.storage.mode, 'dark');
+  assert.equal(setup.elements['toggle-mode-button'].attributes['aria-pressed'], 'true');
+  await setup.elements['toggle-fullscreen-button'].click();
+  assert.equal(setup.document.fullscreenElement, setup.document.documentElement);
+  await setup.elements['toggle-fullscreen-button'].click();
+  assert.equal(setup.document.fullscreenElement, null);
+  const copied = [];
+  setup.navigator.clipboard = { writeText: async value => copied.push(value) };
+  await setup.elements['share-settings-button'].click();
+  assert.deepEqual(copied, ['http://localhost:8003/tree.php?focus=kiss']);
+  assert.equal(setup.elements['settings-feedback'].textContent, 'Link copied.');
+  setup.elements['reset-settings-button'].click();
+  assert.deepEqual(Object.keys(setup.storage), []);
+  assert.deepEqual(setup.replacements, ['http://localhost:8003/tree.php?focus=kiss']);
 });
 
 test('the copied sprite contains every literal site icon reference', () => {
