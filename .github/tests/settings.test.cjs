@@ -110,6 +110,14 @@ test('artist-name and arrow hover highlight only matching names and arrows and c
   }
 });
 
+test('TOC and Settings share row layout, icon spacing, hover and scrolling rules', () => {
+  const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
+  assert.match(css, /\.toc-container ul li a,\s*\.settings-panel \.toc-button,\s*\.tree-controls \.toc-button\s*\{[^}]*gap:\s*10px;[^}]*height:\s*48px;[^}]*padding:\s*10px;/);
+  assert.match(css, /\.toc-container ul li a \.icons,\s*\.settings-panel \.toc-button \.icons,\s*\.tree-controls \.toc-button \.icons\s*\{[^}]*margin:\s*0;/);
+  assert.match(css, /\.toc-container ul li a:hover,\s*\.settings-panel \.toc-button:hover\s*\{\s*background:\s*var\(--grey2\);/);
+  assert.match(css, /\.toc-container ul,\s*\.settings-panel-scroll\s*\{[^}]*min-height:\s*0;[^}]*overflow-y:\s*auto;[^}]*overscroll-behavior-y:\s*contain;/);
+});
+
 test('mobile menus start closed and close each other, with outside-click and Escape dismissal', () => {
   const { context, document, elements, events } = createSettings();
   context.toggleMenu();

@@ -104,11 +104,23 @@ test('Tree and pages without a header attach no swipe handlers', () => {
 
 test('header controls, their SVG children and the open menu never trigger navigation', () => {
   assert.match(menu, /id="toc" class="toc-container no-swipe"/);
-  for (const selector of ['a', '[onclick]', "[role='button']", '.no-swipe']) {
+  for (const selector of ['a:not([data-swipe-link])', '[onclick]', "[role='button']", '.no-swipe']) {
     const swipe = createSwipe('/');
     assert.equal(swipe.swipe('forward', {
       closest: selectors => selectors.split(', ').includes(selector) ? {} : null
     }), '/');
+  }
+});
+
+test('header logo and its SVG children allow swipes while retaining a Home link', () => {
+  const toc = fs.readFileSync(path.join(root, 'toc.php'), 'utf8');
+  assert.match(toc, /<a href="\/" class="logo-link logo-link-small" data-swipe-link draggable="false">/);
+  for (const direction of ['forward', 'backward']) {
+    const swipe = createSwipe('/artists_grid.php');
+    const logo = {};
+    assert.equal(swipe.swipe(direction, {
+      closest: selector => selector === 'a[data-swipe-link]' ? logo : null
+    }), direction === 'forward' ? '/releases_band_grid.php' : '/bands_grid.php');
   }
 });
 

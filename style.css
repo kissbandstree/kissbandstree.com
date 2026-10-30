@@ -410,6 +410,10 @@ input[type="checkbox"] {
   color: var(--white);
 }
 
+.heading .logo-link {
+  user-select: none;
+}
+
 .logo-link svg {
   display: block;
   width: 100%;
@@ -494,18 +498,24 @@ body:has(> .heading) {
 
 }
 
-.toc-container ul {
+.toc-container ul,
+.settings-panel-scroll {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
+.toc-container ul {
   list-style: none;
   margin: 0;
-  overflow-y: auto;
   padding: 0;
   text-align: left;
 }
 
 .toc-container ul li {
   color: var(--white);
-  padding: 4px 10px;
+  padding: 0;
   text-decoration: none;
 }
 
@@ -552,6 +562,7 @@ body.settings-lock {
   bottom: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   position: fixed;
   right: max(0px, calc((100vw - var(--maxwidth)) / 2));
   top: 55px;
@@ -563,34 +574,36 @@ body.settings-lock {
   display: none;
 }
 
-.settings-panel-scroll {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-}
-
+.toc-container ul li a,
 .settings-panel .toc-button,
 .tree-controls .toc-button {
   align-items: center;
   background: transparent;
   display: flex;
   flex: none;
+  font-family: inherit;
   font-size: 26px;
   font-weight: bold;
   gap: 10px;
   height: 48px;
+  line-height: normal;
   margin: 0;
+  padding: 10px;
   text-align: left;
   width: 100%;
 }
 
+.toc-container ul li a .icons,
 .settings-panel .toc-button .icons,
 .tree-controls .toc-button .icons {
+  display: block;
   flex: none;
   margin: 0;
+  position: static;
+  top: auto;
 }
 
+.toc-container ul li a:hover,
 .settings-panel .toc-button:hover {
   background: var(--grey2);
 }

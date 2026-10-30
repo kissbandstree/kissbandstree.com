@@ -67,7 +67,9 @@
   Below 800px, menus start closed, open one at a time and close on outside clicks
   or Escape. Mobile TOC also closes on navigation, including Back.
 - The header stays fixed across the full site frame above both sidebars.
-  Settings control labels use the same text size and weight as TOC entries.
+  TOC links and Settings controls share row sizing, padding, icon alignment,
+  label typography and the grey2 hover background. Their scroll areas and
+  bottom Close controls use the same spacing.
 - TOC labels use regular capitalization, such as Bands and Related, not all caps.
 - Reset clears all localStorage settings for this site, including Kiss-member
   and band filters, slideshow state, theme, collapsed sections, view and sidebar
@@ -78,6 +80,9 @@
 - Run `node --test .github/tests/settings.test.cjs` after changing Settings.
 - Swipe left or right on the header to move through Home and the main-menu
   sections, wrapping at either end and preserving the Grid/Table/List view.
+  The linked header logo accepts swipes too. A tap still opens Home; a
+  horizontal drag suppresses the follow-up click. Other links and header
+  controls stay excluded.
   Detail pages use their parent section. Tree is excluded from the swipe
   sequence and retains its own drag-to-pan interaction.
 - Keep swipe handling in a single `swipe.js` on each site. Reuse Pekosoft's

@@ -69,7 +69,7 @@ test('vertical scrolling and vertically locked diagonal gestures never navigate'
 });
 
 test('links, controls, inline SVG controls, no-swipe regions and editable text are excluded', () => {
-  for (const selector of ['a', 'button', 'input', 'textarea', 'select', 'canvas', 'table',
+  for (const selector of ['a:not([data-swipe-link])', 'button', 'input', 'textarea', 'select', 'canvas', 'table',
     '[onclick]', "[role='button']", '.no-swipe', 'editable']) {
     const gesture = createGesture();
     gesture.send('pointerdown', 0, 0, {
@@ -82,6 +82,46 @@ test('links, controls, inline SVG controls, no-swipe regions and editable text a
     gesture.send('pointerup', 100);
     assert.deepEqual(gesture.directions, [], selector);
   }
+});
+
+test('logo taps preserve native clicks and horizontal drags suppress only their follow-up click', () => {
+  const gesture = createGesture();
+  const captured = [];
+  gesture.scope.setPointerCapture = id => captured.push(id);
+  const target = {
+    closest: selector => selector === 'a[data-swipe-link]' ? {} : null
+  };
+  gesture.send('pointerdown', 0, 0, { target });
+  assert.deepEqual(captured, []);
+  gesture.send('pointerup', 0);
+  assert.equal(gesture.send('click', 0, 0, { detail: 1 }).prevented, false);
+  assert.deepEqual(gesture.directions, []);
+
+  for (const distance of [-100, 100, 30]) {
+    gesture.send('pointerdown', 0, 0, { target });
+    gesture.send('pointermove', distance);
+    gesture.send('pointerup', distance);
+    assert.equal(gesture.send('click', distance, 0, { detail: 1, stopPropagation() {} }).prevented, true);
+    assert.equal(gesture.send('click', distance, 0, { detail: 1 }).prevented, false);
+  }
+  assert.deepEqual(gesture.directions, ['forward', 'backward']);
+  assert.equal(captured.length, 3);
+});
+
+test('logo swipes do not suppress a new tap, keyboard click or cancelled gesture', () => {
+  const gesture = createGesture();
+  const target = { closest: selector => selector === 'a[data-swipe-link]' ? {} : null };
+  gesture.send('pointerdown', 0, 0, { target });
+  gesture.send('pointermove', -100);
+  gesture.send('pointerup', -100);
+  assert.equal(gesture.send('click', 0, 0, { detail: 0 }).prevented, false);
+  gesture.send('pointerdown', 0, 0, { target });
+  gesture.send('pointerup', 0);
+  assert.equal(gesture.send('click', 0, 0, { detail: 1 }).prevented, false);
+  gesture.send('pointerdown', 0, 0, { target });
+  gesture.send('pointermove', -100);
+  gesture.send('pointercancel', -100);
+  assert.equal(gesture.send('click', 0, 0, { detail: 1 }).prevented, false);
 });
 
 test('secondary mouse buttons and other pointer IDs cannot complete a gesture', () => {

@@ -4,6 +4,8 @@ function attachSwipeNavigation(scope, navigate) {
   let pointerId = null;
   let swipeLocked = false;
   let swipeHorizontal = false;
+  let swipeLink = null;
+  let suppressClickUntil = 0;
 
   const lockThreshold = 16;
   const commitThreshold = 75;
@@ -14,25 +16,10 @@ function attachSwipeNavigation(scope, navigate) {
     pointerId = null;
     swipeLocked = false;
     swipeHorizontal = false;
+    swipeLink = null;
   }
 
-  if (scope !== document) {
-    scope.style.touchAction = "pan-y";
-  }
-
-  scope.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
-    const target = event.target;
-    const excluded = "a, button, input, textarea, select, canvas, table, [onclick], [role='button'], .no-swipe";
-    if (target.isContentEditable || target.closest(excluded)) {
-      resetSwipe();
-      return;
-    }
-
-    pointerId = event.pointerId;
-    startX = event.clientX;
-    startY = event.clientY;
-
+  function capturePointer() {
     if (typeof scope.setPointerCapture === "function") {
       try {
         scope.setPointerCapture(pointerId);
@@ -41,6 +28,29 @@ function attachSwipeNavigation(scope, navigate) {
         if (error.name !== "NotFoundError") throw error;
       }
     }
+  }
+
+  if (scope !== document) {
+    scope.style.touchAction = "pan-y";
+  }
+
+  scope.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    suppressClickUntil = 0;
+    const target = event.target;
+    const excluded = "a:not([data-swipe-link]), button, input, textarea, select, canvas, table, [onclick], [role='button'], .no-swipe";
+    if (target.isContentEditable || target.closest(excluded)) {
+      resetSwipe();
+      return;
+    }
+
+    pointerId = event.pointerId;
+    startX = event.clientX;
+    startY = event.clientY;
+    swipeLink = target.closest("a[data-swipe-link]");
+
+    // Keep a logo tap targeted at its link until a horizontal gesture starts.
+    if (!swipeLink) capturePointer();
   });
 
   scope.addEventListener("pointermove", (event) => {
@@ -54,6 +64,7 @@ function attachSwipeNavigation(scope, navigate) {
       if (Math.abs(deltaX) < lockThreshold && Math.abs(deltaY) < lockThreshold) return;
       swipeLocked = true;
       swipeHorizontal = Math.abs(deltaX) > Math.abs(deltaY);
+      if (swipeHorizontal && swipeLink) capturePointer();
     }
 
     if (swipeHorizontal) event.preventDefault();
@@ -68,10 +79,19 @@ function attachSwipeNavigation(scope, navigate) {
     const committed = swipeHorizontal
       && Math.abs(deltaX) > Math.abs(deltaY)
       && Math.abs(deltaX) > commitThreshold;
+    if (swipeHorizontal) suppressClickUntil = Date.now() + 500;
     resetSwipe();
 
     if (committed) navigate(deltaX > 0 ? "backward" : "forward");
   });
+
+  scope.addEventListener("click", (event) => {
+    if (event.detail !== 0 && Date.now() < suppressClickUntil) {
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClickUntil = 0;
+    }
+  }, true);
 
   scope.addEventListener("pointercancel", (event) => {
     if (event.pointerId === pointerId) resetSwipe();

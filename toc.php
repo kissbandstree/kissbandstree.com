@@ -5,7 +5,7 @@
   </div>
 
   <div>
-    <a href="/" class="logo-link logo-link-small">
+    <a href="/" class="logo-link logo-link-small" data-swipe-link draggable="false">
       <?php echo content_text($_SERVER['DOCUMENT_ROOT'] . '/img/logo.svg'); ?>
     </a>
   </div>
