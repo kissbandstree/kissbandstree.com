@@ -5,8 +5,7 @@ const test = require('node:test');
 const vm = require('node:vm');
 
 const root = path.join(__dirname, '..', '..');
-const source = fs.readFileSync(path.join(root, 'swipe-gesture.js'), 'utf8')
-  + '\n' + fs.readFileSync(path.join(root, 'swipe.js'), 'utf8');
+const source = fs.readFileSync(path.join(root, 'swipe.js'), 'utf8');
 const menu = fs.readFileSync(path.join(root, 'burger.php'), 'utf8');
 const origin = 'http://localhost:8003';
 
@@ -100,7 +99,7 @@ test('Tree and pages without a header attach no swipe handlers', () => {
   assert.equal(tree.swipe('forward'), '/tree.php');
   assert.equal(createSwipe('/tree.php').swipe('forward'), '/tree.php');
   const treeSource = fs.readFileSync(path.join(root, 'tree.php'), 'utf8');
-  assert.doesNotMatch(treeSource, /src="swipe(?:-gesture)?\.js/);
+  assert.doesNotMatch(treeSource, /src="swipe\.js/);
 });
 
 test('header controls, their SVG children and the open menu never trigger navigation', () => {
@@ -113,9 +112,8 @@ test('header controls, their SVG children and the open menu never trigger naviga
   }
 });
 
-test('runtime footer loads the local versioned gesture module before the navigation adapter', () => {
+test('runtime footer loads exactly one local versioned swipe script', () => {
   const footer = fs.readFileSync(path.join(root, 'footer.php'), 'utf8');
-  assert.match(footer, /src="swipe-gesture\.js\?v=<\?php echo filemtime\(/);
   assert.match(footer, /src="swipe\.js\?v=<\?php echo filemtime\(/);
-  assert.ok(footer.indexOf('src="swipe-gesture.js') < footer.indexOf('src="swipe.js'));
+  assert.equal([...footer.matchAll(/src="[^"]*swipe[^"]*"/g)].length, 1);
 });
