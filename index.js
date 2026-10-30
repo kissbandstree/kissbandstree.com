@@ -1,14 +1,51 @@
 // Kiss Bands Tree
 // https://kissbandstree.com/index.js
 
-// Function to toggle the TOC visibility
+function isDesktopSidebarLayout() {
+  return window.matchMedia('(min-width: 800px)').matches;
+}
+
+function syncSidebarState() {
+  const toc = document.getElementById('toc');
+  const panel = document.getElementById('settings-panel');
+  const tocOpen = toc?.classList.contains('toc-open') || false;
+  const settingsOpen = panel?.classList.contains('settings-panel-open') || false;
+
+  if (panel) panel.hidden = !settingsOpen;
+  document.getElementById('toggle-menu-button')?.setAttribute('aria-expanded', String(tocOpen));
+  document.getElementById('toggle-settings-panel-button')?.setAttribute('aria-expanded', String(settingsOpen));
+  document.body.classList.toggle('toc-sidebar-open', tocOpen);
+  document.body.classList.toggle('settings-sidebar-open', settingsOpen);
+  document.body.classList.toggle('toc-lock', tocOpen && !isDesktopSidebarLayout());
+  document.body.classList.toggle('settings-lock', settingsOpen && !isDesktopSidebarLayout());
+
+  if (isDesktopSidebarLayout()) {
+    if (toc) localStorage.setItem('global.toc_sidebar_open', String(tocOpen));
+    if (panel) localStorage.setItem('global.settings_sidebar_open', String(settingsOpen));
+  }
+}
+
+function restoreDesktopSidebarState() {
+  const toc = document.getElementById('toc');
+  const panel = document.getElementById('settings-panel');
+  const desktop = isDesktopSidebarLayout();
+  const savedTocOpen = localStorage.getItem('global.toc_sidebar_open');
+  const savedSettingsOpen = localStorage.getItem('global.settings_sidebar_open');
+
+  toc?.classList.toggle('toc-open', desktop && (savedTocOpen === null || savedTocOpen === 'true'));
+  panel?.classList.toggle('settings-panel-open', desktop && (savedSettingsOpen === null || savedSettingsOpen === 'true'));
+  syncSidebarState();
+}
 
 function toggleMenu() {
   const toc = document.getElementById('toc');
   if (!toc) return; // Skip if TOC is missing
 
-  const isOpen = toc.classList.toggle('toc-open');
-  document.body.classList.toggle('toc-lock', isOpen);
+  if (!isDesktopSidebarLayout()) {
+    document.getElementById('settings-panel')?.classList.remove('settings-panel-open');
+  }
+  toc.classList.toggle('toc-open');
+  syncSidebarState();
 }
 
 function closeMenu() {
@@ -16,14 +53,48 @@ function closeMenu() {
   if (!toc) return;
 
   toc.classList.remove('toc-open');
-  document.body.classList.remove('toc-lock');
+  syncSidebarState();
 }
+
+function closeSettingsPanel() {
+  const panel = document.getElementById('settings-panel');
+  if (!panel) return;
+
+  panel.classList.remove('settings-panel-open');
+  syncSidebarState();
+}
+
+function toggleSettingsPanel() {
+  const panel = document.getElementById('settings-panel');
+  if (!panel) return;
+
+  if (!isDesktopSidebarLayout()) {
+    document.getElementById('toc')?.classList.remove('toc-open');
+  }
+  panel.classList.toggle('settings-panel-open');
+  syncSidebarState();
+}
+
+document.addEventListener('click', function (event) {
+  if (!event.isTrusted || isDesktopSidebarLayout()) return;
+  const container = document.getElementById('settings-menu-container');
+  if (container && !container.contains(event.target)) closeSettingsPanel();
+});
+
+document.addEventListener('keydown', function (event) {
+  const panel = document.getElementById('settings-panel');
+  if (event.key === 'Escape' && !isDesktopSidebarLayout() && panel && !panel.hidden) {
+    closeSettingsPanel();
+    document.getElementById('toggle-settings-panel-button').focus();
+  }
+});
 
 // Function to close the TOC when clicked outside
 
 document.addEventListener('click', function (event) {
+  if (!event.isTrusted || isDesktopSidebarLayout()) return;
   const toc = document.getElementById('toc');
-  const burger = document.querySelector('.burgerIcon');
+  const burger = document.getElementById('burger-container');
 
   // If TOC doesn't exist, skip
   if (!toc) return;
@@ -42,10 +113,19 @@ document.addEventListener('keydown', function (event) {
   const toc = document.getElementById('toc');
   if (!toc) return;
 
-  if (event.key === 'Escape' && toc.classList.contains('toc-open')) {
-    closeMenu();
+  if (event.key === 'Escape' && !isDesktopSidebarLayout() && toc.classList.contains('toc-open')) {
+    closeMobileToc();
   }
 });
+
+function closeMobileToc() {
+  if (!isDesktopSidebarLayout()) closeMenu();
+}
+
+window.addEventListener('pagehide', closeMobileToc);
+window.addEventListener('pageshow', closeMobileToc);
+window.addEventListener('resize', restoreDesktopSidebarState);
+document.addEventListener('DOMContentLoaded', restoreDesktopSidebarState);
 
 // Close TOC when a TOC link is activated
 document.addEventListener('DOMContentLoaded', function () {
@@ -54,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   toc.addEventListener('click', function (event) {
     if (event.target && event.target.closest('a')) {
-      closeMenu();
+      closeMobileToc();
     }
   });
 });
@@ -107,7 +187,108 @@ function toggleMode() {
   } else {
     localStorage.setItem('mode', 'light');
   }
+  updateModeButtonState();
 }
+
+function updateModeButtonState() {
+  const button = document.getElementById('toggle-mode-button');
+  if (!button) return;
+  const active = document.documentElement.classList.contains('invert-colors');
+  button.classList.toggle('button-on', active);
+  button.setAttribute('aria-pressed', String(active));
+}
+
+function updateFullscreenButtonState() {
+  const button = document.getElementById('toggle-fullscreen-button');
+  if (!button) return;
+  const active = Boolean(document.fullscreenElement);
+  button.classList.toggle('button-on', active);
+  button.setAttribute('aria-pressed', String(active));
+}
+
+function showSettingsFeedback(message) {
+  const feedback = document.getElementById('settings-feedback');
+  if (!feedback) return;
+  feedback.textContent = message;
+  feedback.hidden = false;
+}
+
+async function toggleFullscreen() {
+  try {
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  } catch (error) {
+    console.error('Unable to change fullscreen mode', error);
+    showSettingsFeedback('Unable to change fullscreen mode.');
+  }
+}
+
+document.addEventListener('fullscreenchange', updateFullscreenButtonState);
+
+async function shareCurrentPage() {
+  const shareUrl = window.location.href;
+  const shareTitle = document.title || 'Kiss Bands Tree';
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: shareTitle,
+        text: shareTitle,
+        url: shareUrl
+      });
+      return;
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      console.warn('Unable to share page', error);
+    }
+  }
+
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      showSettingsFeedback('Link copied.');
+      return;
+    } catch (error) {
+      console.warn('Unable to copy share URL', error);
+    }
+  }
+
+  window.prompt('Copy this link:', shareUrl);
+}
+
+function resetSettings() {
+  localStorage.clear();
+  const url = new URL(window.location.href);
+  url.pathname = url.pathname.replace(/_(?:table(?:_detailed)?|list)\.php$/i, '_grid.php');
+  window.location.replace(url.href);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const actions = {
+    'toggle-settings-panel-button': toggleSettingsPanel,
+    'toggle-settings-panel-close-button': () => {
+      closeSettingsPanel();
+      document.getElementById('toggle-settings-panel-button').focus();
+    },
+    'toggle-mode-button': toggleMode,
+    'toggle-fullscreen-button': toggleFullscreen,
+    'share-settings-button': shareCurrentPage,
+    'reset-settings-button': resetSettings
+  };
+  Object.entries(actions).forEach(([id, action]) => {
+    const button = document.getElementById(id);
+    if (button) button.addEventListener('click', action);
+  });
+  const fullscreenButton = document.getElementById('toggle-fullscreen-button');
+  if (fullscreenButton) {
+    fullscreenButton.disabled = !document.documentElement.requestFullscreen || document.fullscreenEnabled === false;
+  }
+  updateModeButtonState();
+  updateFullscreenButtonState();
+});
 
 // Check for mode preference on page load
 
@@ -117,6 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (mode === 'dark') {
     document.documentElement.classList.add('invert-colors');
   }
+  updateModeButtonState();
 
   // Add artist-name class to all artist.php links
 
@@ -158,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter' && document.activeElement) {
     const focusedElement = document.activeElement;
-    if (focusedElement.hasAttribute('onclick') || focusedElement.tagName === 'BUTTON') {
+    if (focusedElement.hasAttribute('onclick') && focusedElement.tagName !== 'BUTTON') {
       focusedElement.click();
     }
   }
@@ -291,6 +473,7 @@ function enableTreeDragPan() {
 
   document.addEventListener('pointerdown', function (event) {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
+    if (event.target instanceof Element && event.target.closest('a, button, input, select, textarea, #settings-menu-container')) return;
     if (isTextTarget(event.target)) return;
 
     pointerId = event.pointerId;

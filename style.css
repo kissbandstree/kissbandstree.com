@@ -421,6 +421,10 @@ input[type="checkbox"] {
   width: auto;
 }
 
+body:has(> .heading) {
+  padding-top: 52px;
+}
+
 .heading {
   align-items: center;
   display: flex;
@@ -428,8 +432,12 @@ input[type="checkbox"] {
   margin: 0 auto;
   max-width: var(--maxwidth);
   padding: 10px;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  z-index: 15;
 }
 
 .less-padding {
@@ -490,7 +498,8 @@ input[type="checkbox"] {
   flex-direction: column;
 }
 
-body.toc-lock {
+body.toc-lock,
+body.settings-lock {
   overflow: hidden;
 }
 
@@ -508,6 +517,129 @@ body.toc-lock {
   height: 32px;
   margin: 0;
   width: 32px;
+}
+
+/* Settings */
+
+.settings-toggle {
+  background: transparent;
+  display: block;
+  flex: none;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  width: 32px;
+}
+
+.settings-panel {
+  background: var(--grey1);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: max(0px, calc((100vw - var(--maxwidth)) / 2));
+  top: 55px;
+  width: min(320px, 100%);
+  z-index: 999;
+}
+
+.settings-panel[hidden] {
+  display: none;
+}
+
+.settings-panel-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
+.settings-panel .toc-button {
+  align-items: center;
+  background: transparent;
+  display: flex;
+  flex: none;
+  font-size: 26px;
+  font-weight: bold;
+  gap: 10px;
+  height: 48px;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.settings-panel .toc-button .icons {
+  flex: none;
+  margin: 0;
+}
+
+.settings-panel .toc-button:hover {
+  background: var(--grey2);
+}
+
+.settings-panel .button-on,
+.settings-panel .button-on .icons {
+  color: var(--color1);
+  fill: var(--color1);
+}
+
+.settings-panel button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+#settings-feedback {
+  margin: 10px;
+  text-align: left;
+}
+
+body.toc-sidebar-open #toggle-menu-button .icons,
+body.settings-sidebar-open #toggle-settings-panel-button .icons {
+  fill: var(--color1);
+}
+
+@media (min-width: 800px) {
+  :root {
+    --sidebar-width: min(320px, 28vw);
+    --site-frame-offset: max(0px, calc((100vw - var(--maxwidth)) / 2));
+  }
+
+  .toc-container,
+  .settings-panel {
+    top: 55px;
+    bottom: auto;
+    left: var(--site-frame-offset);
+    right: auto;
+    width: var(--sidebar-width);
+    margin: 16px 0;
+    height: calc(100dvh - 87px);
+  }
+
+  .settings-panel {
+    left: auto;
+    right: var(--site-frame-offset);
+  }
+
+  body:not(.tree-page):is(.toc-sidebar-open, .settings-sidebar-open) {
+    width: auto;
+    max-width: none;
+    margin-left: calc(var(--site-frame-offset) + var(--toc-sidebar-space, 0px));
+    margin-right: calc(var(--site-frame-offset) + var(--settings-sidebar-space, 0px));
+  }
+
+  body.toc-sidebar-open {
+    --toc-sidebar-space: calc(var(--sidebar-width) + 16px);
+  }
+
+  body.settings-sidebar-open {
+    --settings-sidebar-space: calc(var(--sidebar-width) + 16px);
+  }
+}
+
+@media (max-width: 799px) {
+  .settings-panel {
+    width: 100%;
+  }
 }
 
 /* Members and Last modified on front page */

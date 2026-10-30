@@ -23,6 +23,26 @@
 ## Presentation
 
 - Never use easing transitions.
+- Settings replaces the header's Dark mode control and is also available in the
+  Tree sidebar. It contains Dark mode, Fullscreen, Share and Reset. Adapt the
+  existing Pekosoft controls and sharing fallback in `index.js`, without adding
+  another shared runtime dependency.
+- TOC and Settings follow Pekosoft's responsive sidebar behavior. At 800px and
+  wider, both are open by default, remain open during outside clicks, Escape
+  and navigation, and remember their individual open states. Page content makes
+  room for open sidebars. Tree keeps its poster layout and drag-to-pan behavior.
+  Below 800px, menus start closed, open one at a time and close on outside clicks
+  or Escape. Mobile TOC also closes on navigation, including Back.
+- The header stays fixed across the full site frame above both sidebars.
+  Settings control labels use the same text size and weight as TOC entries.
+- TOC labels use regular capitalization, such as Bands and Related, not all caps.
+- Reset clears all localStorage settings for this site, including Kiss-member
+  and band filters, slideshow state, theme, collapsed sections, view and sidebar
+  preferences. It reloads with defaults in Grid view, preserving the current
+  section or detail page and its query parameters.
+- Keep `icons.svg` identical to Pekosoft's sprite when updating it. Check that
+  all icons referenced by this site remain present.
+- Run `node --test .github/tests/settings.test.cjs` after changing Settings.
 - Swipe left or right on the header to move through Home and the main-menu
   sections, wrapping at either end and preserving the Grid/Table/List view.
   Detail pages use their parent section. Tree is excluded from the swipe

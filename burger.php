@@ -1,12 +1,15 @@
 <div id="burger-container">
-  <svg
-    class="icons show-pointer burgerIcon"
+  <button
+    id="toggle-menu-button"
+    class="settings-toggle burgerIcon"
+    type="button"
     onclick="toggleMenu()"
-    tabindex="0"
+    aria-controls="toc"
+    aria-expanded="false"
+    title="Menu"
     aria-label="Menu">
-    <title>Menu</title>
-    <use href="icons.svg#burger"></use>
-  </svg>
+    <svg class="icons" aria-hidden="true"><use href="icons.svg#burger"></use></svg>
+  </button>
 
   <div id="toc" class="toc-container no-swipe">
     <ul>
@@ -21,7 +24,7 @@
             <svg class="icons">
               <use href="icons.svg#band"></use>
             </svg>
-            BANDS
+            Bands
           </a>
         </h1>
       </li>
@@ -36,7 +39,7 @@
             <svg class="icons">
               <use href="icons.svg#person"></use>
             </svg>
-            ARTISTS
+            Artists
           </a>
         </h1>
       </li>
@@ -51,7 +54,7 @@
             <svg class="icons">
               <use href="icons.svg#lp"></use>
             </svg>
-            RELEASES
+            Releases
           </a>
         </h1>
       </li>
@@ -66,7 +69,7 @@
             <svg class="icons">
               <use href="icons.svg#lp"></use>
             </svg>
-            RELATED
+            Related
           </a>
         </h1>
       </li>
@@ -76,7 +79,7 @@
             <svg class="icons">
               <use href="icons.svg#about"></use>
             </svg>
-            ABOUT
+            About
           </a>
         </h1>
       </li>
@@ -86,7 +89,7 @@
             <svg class="icons">
               <use href="icons.svg#star"></use>
             </svg>
-            THANKS
+            Thanks
           </a>
         </h1>
       </li>
@@ -96,7 +99,7 @@
             <svg class="icons">
               <use href="icons.svg#cake_diagram"></use>
             </svg>
-            STATS
+            Stats
           </a>
         </h1>
       </li>
@@ -106,21 +109,22 @@
             <svg class="icons">
               <use href="icons.svg#tree"></use>
             </svg>
-            TREE
+            Tree
           </a>
         </h1>
       </li>
     </ul>
 
     <div class="toc-close-wrap">
-      <svg
-        class="icons show-pointer no-margin"
+      <button
+        id="toggle-menu-close-button"
+        class="settings-toggle"
+        type="button"
         onclick="closeMenu()"
-        tabindex="0"
+        title="Close"
         aria-label="Close">
-        <title>Close</title>
-        <use href="icons.svg#close"></use>
-      </svg>
+        <svg class="icons" aria-hidden="true"><use href="icons.svg#close"></use></svg>
+      </button>
     </div>
   </div>
 </div>

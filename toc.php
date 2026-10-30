@@ -11,10 +11,7 @@
   </div>
 
   <div>
-    <svg class="icons show-pointer" onclick="toggleMode()" tabindex="0" aria-label="Toggle dark mode">
-      <title>Toggle dark mode</title>
-      <use href="icons.svg#moon"></use>
-    </svg>
+    <?php require($_SERVER['DOCUMENT_ROOT'] . "/settings.php"); ?>
   </div>
 
 </div>
