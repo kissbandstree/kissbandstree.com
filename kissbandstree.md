@@ -81,14 +81,14 @@
   sharing retains it. Keep `.htaccess` and local Caddy dispatch rules consistent.
   Detail-page URLs are unchanged. Run `php .github/tests/routes.php` for routing
   checks and add `--http http://localhost:8003` to test the running server.
-- Calendar shows artist birthdays and appears between Related and About in
-  the main menu and header swipe sequence. Keep its existing artist links,
 - Sortable tables let users resize columns by dragging a header edge while
   keeping the table full width. On touchscreens, drag the right side of the
   header. Column proportions are saved once when a drag ends, not during
   pointer movement, and restored across visits as the table fits its container.
   Double-click or double-tap
   the edge to restore its default width.
+- Calendar shows artist birthdays and appears between Related and About in
+  the main menu and header swipe sequence. Keep its existing artist links,
   date tooltips and current-day indicator. Months shrink to the available
   content width between open sidebars; day rows grow when birthday photos wrap.
 - Reset clears all localStorage settings for this site, including Kiss-member
