@@ -77,6 +77,8 @@
   `page.php` selects existing templates through `page-routes.php`. Old section
   PHP URLs permanently redirect, preserving the original view and other query
   parameters. Explicit Grid queries and trailing slashes redirect to the base URL.
+  Disable Apache DirectorySlash so legacy physical section directories do not
+  override clean page routes or create redirects back to trailing-slash URLs.
   Invalid view parameters return HTTP 400. Canonical URLs omit the view parameter;
   sharing retains it. Keep `.htaccess` and local Caddy dispatch rules consistent.
   Detail-page URLs are unchanged. Run `php .github/tests/routes.php` for routing

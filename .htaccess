@@ -1,5 +1,6 @@
 
 RewriteEngine on
+DirectorySlash Off
 
 # Redirect www → non-www (http or https)
 RewriteCond %{HTTP_HOST} ^www\.kissbandstree\.com$ [NC]

@@ -13,6 +13,7 @@ function check_route($condition, $message)
 }
 
 $apache = file_get_contents(dirname(__DIR__, 2) . '/.htaccess');
+check_route(preg_match('/^DirectorySlash Off$/m', $apache) === 1, 'Apache must not force directory slashes on clean page routes.');
 preg_match_all('/^RewriteRule (\S+) page\.php \[L\]$/m', $apache, $matches);
 $patterns = $matches[1];
 check_route(count($patterns) === 3, 'Missing Apache page dispatch rules.');
@@ -46,6 +47,23 @@ foreach (get_page_routes() as $section => $views) {
   }
   if ($section !== '') {
     check_route(resolve_page_request('/' . $section . '/')['redirect'] === '/' . $section, 'Trailing slash did not redirect.');
+  }
+}
+
+foreach (['bands', 'artists', 'releases'] as $section) {
+  $sectionDirectory = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . $section;
+  $createdDirectory = !is_dir($sectionDirectory);
+  if ($createdDirectory && !mkdir($sectionDirectory)) {
+    throw new RuntimeException('Could not create route directory fixture: ' . $section);
+  }
+  try {
+    $slashRoute = resolve_page_request('/' . $section . '/');
+    check_route($slashRoute['redirect'] === '/' . $section, 'Physical section directory changed canonical routing: ' . $section);
+    check_route(resolve_page_request('/' . $section)['redirect'] === null, 'Physical section directory redirected the clean page: ' . $section);
+  } finally {
+    if ($createdDirectory) {
+      rmdir($sectionDirectory);
+    }
   }
 }
 foreach (['bands', 'artists', 'releases', 'related'] as $section) {
@@ -84,6 +102,26 @@ if (($argv[1] ?? '') === '--http') {
     }
     check_route(preg_match('/(?:Warning|Fatal error|Parse error|Notice|Deprecated):/', strip_tags($body)) !== 1, 'PHP diagnostics: ' . $path);
     return $response;
+  }
+  foreach (['bands', 'artists', 'releases'] as $section) {
+    $sectionDirectory = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . $section;
+    $createdDirectory = !is_dir($sectionDirectory);
+    if ($createdDirectory && !mkdir($sectionDirectory)) {
+      throw new RuntimeException('Could not create HTTP route directory fixture: ' . $section);
+    }
+    try {
+      $slash = request_route('/' . $section . '/?view=list&' . $query);
+      check_route($slash['status'] === 301 && ($slash['headers']['location'] ?? '') === '/' . $section . '?' . $query . '&view=list', 'Physical section slash did not normalize: ' . $section);
+      $response = request_route('/' . $section . '?view=list&' . $query);
+      check_route($response['status'] === 200, 'Physical section route failed: ' . $section);
+      $canonical = htmlspecialchars('https://kissbandstree.com/' . $section . '?' . $query, ENT_QUOTES, 'UTF-8');
+      check_route(strpos($response['body'], 'rel="canonical" href="' . $canonical . '"') !== false, 'Wrong physical section canonical URL: ' . $section);
+      check_route(strpos($response['body'], 'icons.svg#view_list') !== false, 'Wrong physical section view: ' . $section);
+    } finally {
+      if ($createdDirectory) {
+        rmdir($sectionDirectory);
+      }
+    }
   }
   function view_switch_url($body)
   {
