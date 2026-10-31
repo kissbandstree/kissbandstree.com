@@ -974,6 +974,35 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
   width: 150px;
 }
 
+table.sortable th.sortable-header,
+table.sortable2 th.sortable-header {
+  cursor: pointer;
+}
+
+table.resizable-columns {
+  max-width: none;
+  min-width: 100%;
+}
+
+table.resizable-columns td,
+table.resizable-columns th {
+  min-width: 0;
+}
+
+table.resizable-columns th.column-resize-target,
+table.resizable-columns th.column-resizing {
+  cursor: col-resize !important;
+}
+
+table.resizable-columns th.column-resizing,
+table.resizable-columns td.column-resizing {
+  border-right: 1px solid var(--color1);
+}
+
+table.resizable-columns th {
+  touch-action: pan-y pinch-zoom;
+}
+
 .table-container tr {
   height: 44px;
 }

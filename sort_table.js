@@ -37,7 +37,7 @@
     for (var col = 0; col < headers.length; col++) {
       var th = headers[col];
       if (isNoSort(th)) continue;
-      th.style.cursor = "pointer";
+      th.classList.add("sortable-header");
       th.addEventListener("click", createHeaderHandler(table, th, col));
 
       var defaultDir = (th.getAttribute("data-sort-default") || "").toLowerCase();
