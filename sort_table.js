@@ -33,12 +33,13 @@
     if (!table.tHead || !table.tHead.rows.length) return;
 
     var headers = table.tHead.rows[0].cells;
+    var storageKey = sortStorageKey(table);
     var defaultSort = null;
     for (var col = 0; col < headers.length; col++) {
       var th = headers[col];
       if (isNoSort(th)) continue;
       th.classList.add("sortable-header");
-      th.addEventListener("click", createHeaderHandler(table, th, col));
+      th.addEventListener("click", createHeaderHandler(table, th, col, storageKey));
 
       var defaultDir = (th.getAttribute("data-sort-default") || "").toLowerCase();
       if (!defaultSort && (defaultDir === "asc" || defaultDir === "desc")) {
@@ -50,22 +51,51 @@
       }
     }
 
-    if (defaultSort) {
+    var savedSort = restoreSort(storageKey, headers);
+    if (savedSort) {
+      applySort(table, headers[savedSort.colIndex], savedSort.colIndex, savedSort.dir);
+    } else if (defaultSort) {
       applySort(table, defaultSort.header, defaultSort.colIndex, defaultSort.dir);
     }
+  }
+
+  function sortStorageKey(table) {
+    var position = Array.prototype.indexOf.call(document.querySelectorAll("table"), table);
+    return "table.sort:" + window.location.pathname + ":" + position + ":" + (table.id || table.className);
+  }
+
+  function restoreSort(storageKey, headers) {
+    var saved = localStorage.getItem(storageKey);
+    if (saved === null) return null;
+
+    var sort;
+    try {
+      sort = JSON.parse(saved);
+    } catch (error) {
+      console.warn("Unable to restore saved table sorting", error);
+      return null;
+    }
+    if (!sort || !Number.isInteger(sort.colIndex) || sort.colIndex < 0
+      || sort.colIndex >= headers.length || isNoSort(headers[sort.colIndex])
+      || (sort.dir !== "asc" && sort.dir !== "desc")) {
+      console.warn("Ignoring invalid saved table sorting", storageKey);
+      return null;
+    }
+    return sort;
   }
 
   function isNoSort(th) {
     return /\bsorttable_nosort\b/.test(th.className || "");
   }
 
-  function createHeaderHandler(table, header, colIndex) {
+  function createHeaderHandler(table, header, colIndex, storageKey) {
     return function () {
       var prevCol = table.getAttribute("data-sort-col");
       var prevDir = table.getAttribute("data-sort-dir") || "asc";
       var dir = prevCol === String(colIndex) && prevDir === "asc" ? "desc" : "asc";
 
       applySort(table, header, colIndex, dir);
+      localStorage.setItem(storageKey, JSON.stringify({ colIndex: colIndex, dir: dir }));
     };
   }
 

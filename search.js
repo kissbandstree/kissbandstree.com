@@ -59,8 +59,16 @@
     renderArtists(filtered);
   };
 
-  bandInput.addEventListener('input', updateBands);
-  artistInput.addEventListener('input', updateArtists);
-  bandResults.innerHTML = '';
-  artistResults.innerHTML = '';
+  bandInput.value = localStorage.getItem('search.bands') || '';
+  artistInput.value = localStorage.getItem('search.artists') || '';
+  bandInput.addEventListener('input', () => {
+    localStorage.setItem('search.bands', bandInput.value);
+    updateBands();
+  });
+  artistInput.addEventListener('input', () => {
+    localStorage.setItem('search.artists', artistInput.value);
+    updateArtists();
+  });
+  updateBands();
+  updateArtists();
 })();

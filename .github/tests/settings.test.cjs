@@ -280,6 +280,9 @@ test('Reset clears all saved settings and filters, restores Grid and preserves q
       isPlayingReleaseBand: 'true', currentReleaseBand: 'kiss',
       isPlayingReleaseRelated: 'true', currentReleaseRelated: 'shogun_mojo',
       'tree.photos': 'false', 'tree.comments': 'false',
+      'table.sort:/artists:0:filter_table': '{"colIndex":6,"dir":"desc"}',
+      'table.column_widths:/artists:0:filter_table': '[50,60,260,220,220,180,150]',
+      'search.bands': 'Kiss', 'search.artists': 'Paul',
       futureSetting: 'custom',
       'global.toc_sidebar_open': 'false', 'global.settings_sidebar_open': 'false'
     });

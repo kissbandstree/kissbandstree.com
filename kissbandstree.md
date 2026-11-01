@@ -89,6 +89,12 @@
   pointer movement, and restored across visits as the table fits its container.
   Double-click or double-tap
   the edge to restore its default width.
+- Save all persistent user settings in localStorage. Each sortable table
+  remembers its selected column and sort direction across visits. Restore saved
+  sorting instead of the authored default, without writing during restoration.
+  Site Reset clears saved sorting and column widths along with other settings.
+  Search remembers both search fields and restores their matching results.
+  Fullscreen requires a user action and cannot be restored automatically.
 - Calendar shows artist birthdays and appears between Related and About in
   the main menu and header swipe sequence. Keep its existing artist links,
   date tooltips and current-day indicator. Months shrink to the available
