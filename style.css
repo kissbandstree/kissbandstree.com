@@ -107,7 +107,9 @@ a:not(:has(img, svg)):hover {
 }
 
 a:hover .icons,
-button:hover .icons {
+button:hover .icons,
+a.focus:hover img,
+a.focus:hover > svg {
   opacity: 0.8;
 }
 
