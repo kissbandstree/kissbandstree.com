@@ -106,6 +106,16 @@ a:not(:has(img, svg)):hover {
   background: var(--white);
 }
 
+a:hover .icons,
+button:hover .icons {
+  opacity: 0.8;
+}
+
+.toc-container a:hover .icons,
+.toc-button:hover .icons {
+  opacity: 1;
+}
+
 a:not(:has(img, svg)):visited {
   color: var(--color2);
 }
