@@ -1,6 +1,6 @@
 # Deployment
 
-The site deploys through GitHub Actions using SFTP.
+The site deploys through GitHub Actions using lftp over SFTP.
 
 Open GitHub, then go to `Settings` > `Secrets and variables` > `Actions`.
 
@@ -19,7 +19,11 @@ Use port `22` unless the host says something else.
 
 Normal deploys run automatically when `main` is pushed to GitHub.
 
-The normal deploy uploads only site files changed in the latest commit. If a tracked site file is deleted or renamed in Git, the workflow removes the old server file too.
+Normal deployment compares with the last successful upload on the same branch,
+recovering failed commits. Successful checks and dry runs are not upload
+baselines. Missing baselines stop explicitly rather than falling back to full.
+If a tracked site file is deleted or renamed, the old server file is removed
+after uploads.
 
 Content now lives in `data/*.json`. Deploy these files, `content.php` and
 `functions.php` with the PHP pages. The workflow uploads JSON collections
@@ -39,17 +43,18 @@ deletions. These exclusions do not delete local originals or existing server
 copies, and do not purge older Git history. Published images in `photos_bands/`
 and `photos_bands_large/` remain deployable.
 
-`.ftpignore` supplies the same repository/archive exclusions for FTP clients
-that support it. GitHub Actions enforces its own exclusions in the workflow;
-it does not read `.ftpignore`.
+`.ftpignore` supplies the repository/archive exclusions for both GitHub
+deployment modes and file-transfer clients that support it.
 
 Run `bash .github/tests/deployment.sh .github/workflows/deploy.yml` to check
-the upload ordering, archive exclusions and shell syntax with mocked transfer
-commands.
+the upload ordering, archive exclusions, failed-commit recovery and quoting.
+The tests exercise the Node deployment planner without contacting production.
 
 To run a deploy by hand, open `Actions` > `Deploy site` > `Run workflow`.
 
-Use mode `changed` for a fast latest-commit deploy.
+Use mode `check` first to verify SFTP access and the destination without changes.
+Use `dry-run` to preview counts without connecting. Use `changed` to deploy
+changes since the last successful upload.
 
 Use mode `full` if the server needs a repair sync. Full sync checks the whole site tree, so it is slower. Full sync does not delete remote-only files.
 
@@ -65,3 +70,8 @@ These local repository files are not uploaded:
 - `kissbandstree.md`
 - `LICENCE`
 - `photos_bands_originals/`
+
+Legacy `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` and `SERVER_DIR` secrets
+are accepted when corresponding SFTP settings are absent. The protocol remains
+SFTP. Verify the path in SFTP before migration. See the shared
+[deployment procedure](../SITES.md#deployment).

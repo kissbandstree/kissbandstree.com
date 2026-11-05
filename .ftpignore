@@ -11,3 +11,24 @@ LICENCE
 
 # Local photo originals
 photos_bands_originals/**
+
+# Shared deployment exclusions
+.dev/**
+.githooks/**
+tests/**
+.editorconfig
+**/*.md
+THIRD-PARTY-LICENCES
+**/.env*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/error_log*
+**/*.log
+**/*.bak
+**/*.tmp
+**/.DS_Store
+**/Thumbs.db
+.well-known/acme-challenge/**
+.well-known/pki-validation/**
