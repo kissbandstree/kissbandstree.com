@@ -57,7 +57,7 @@ $artist_name = trim($contents[0]);
 
   <div class="skip-buttons colored">
     <span id="skip-left-btn" class="skip-button">
-      <a href="<?php echo 'artist.php?a=' . $prev_artist; ?>" title="Previous">
+      <a href="<?php echo 'artist?a=' . $prev_artist; ?>" title="Previous">
         <svg class="icons">
           <use href="icons.svg#skip_left"></use>
         </svg>
@@ -73,7 +73,7 @@ $artist_name = trim($contents[0]);
     </span>
 
     <span id="skip-right-btn" class="skip-button">
-      <a href="<?php echo 'artist.php?a=' . $next_artist; ?>" title="Next">
+      <a href="<?php echo 'artist?a=' . $next_artist; ?>" title="Next">
         <svg class="icons">
           <use href="icons.svg#skip_right"></use>
         </svg>
@@ -98,7 +98,7 @@ $artist_name = trim($contents[0]);
 
       shouldResumeOnNextPage = true;
       localStorage.setItem('currentArtist', nextArtist);
-      window.location.href = 'artist.php?a=' + nextArtist;
+      window.location.href = 'artist?a=' + nextArtist;
     }
 
     function setPlayIcon(state) {
@@ -170,7 +170,7 @@ $artist_name = trim($contents[0]);
   $links = [];
   foreach ($list as $name) {
     $slug = strtolower(str_replace([" ", ".", "'", "-", "[", "]"], ["_", "", "", "_", "", ""], $name));
-    $links[] = "<a href='/artist.php?a=$slug'>$name</a>";
+    $links[] = "<a href='/artist?a=$slug'>$name</a>";
   }
   ?>
   </div>
@@ -333,11 +333,11 @@ $artist_name = trim($contents[0]);
         }
 
         echo "<h2 class='small-photo-heading'>";
-        echo "<a href='band.php?a=" . urlencode($slug) . "' class='thumb-link'>";
+        echo "<a href='band?a=" . urlencode($slug) . "' class='thumb-link'>";
         echo "<span class='band-photo-wrap'><img src='$imgUrl' alt='" . htmlspecialchars($band_title) . "' class='band-photo bitmap' loading='lazy' decoding='async'></span>";
         echo "</a>";
 
-        echo "<a href='band.php?a=" . urlencode($slug) . "' class='artist-name'>" . htmlspecialchars($band_title) . "</a>";
+        echo "<a href='band?a=" . urlencode($slug) . "' class='artist-name'>" . htmlspecialchars($band_title) . "</a>";
 
         if ($years !== '') {
           $safe_years = htmlspecialchars($years, ENT_QUOTES, 'UTF-8');
@@ -356,7 +356,7 @@ $artist_name = trim($contents[0]);
           $slug_member = sanitize_artist_slug($name);
 
           if (content_exists("artists/$slug_member.txt")) {
-            echo "<a href=\"/artist.php?a=$slug_member\">$name</a>";
+            echo "<a href=\"/artist?a=$slug_member\">$name</a>";
           } else {
             echo htmlspecialchars($name);
           }

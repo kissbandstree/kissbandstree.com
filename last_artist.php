@@ -50,16 +50,16 @@ $latest_four_artists = array_slice($artists, 0, 4); // Get the four latest modif
                 ["_", "", "", "_", "", ""],
                 $name
             ));
-            $links[] = "<a href='/artist.php?a=$slug'>$name</a>";
+            $links[] = "<a href='/artist?a=$slug'>$name</a>";
         }
 
         // Output some stuff
         if (content_exists('photos_artists/' . $basename . '.png')) {
-            echo "<div><a href='/artist.php?a=$basename'><img src='photos_artists/$basename.png' alt='artist' class='bitmap rounded'></a></div>";
+            echo "<div><a href='/artist?a=$basename'><img src='photos_artists/$basename.png' alt='artist' class='bitmap rounded'></a></div>";
         } else {
-            echo "<div><a href='/artist.php?a=$basename'><img src='img/artist_small.png' alt='artist' class='bitmap rounded'></a></div>"; // photo
+            echo "<div><a href='/artist?a=$basename'><img src='img/artist_small.png' alt='artist' class='bitmap rounded'></a></div>"; // photo
         }
-        echo "<div><a href='/artist.php?a=$basename'>" . trim($contents[0]) . "</a></div>"; // artist
+        echo "<div><a href='/artist?a=$basename'>" . trim($contents[0]) . "</a></div>"; // artist
         echo "<div>" . trim($contents[1]) . "</div>"; // year
         echo "<div>" . implode(', ', $links) . "</div>"; // played with
         // Fetch file modification time as a unix timestamp and convert to a human-readable date

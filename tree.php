@@ -69,7 +69,7 @@
 
         foreach ($bands_array as $band_name) {
           $slug = sanitize_band_slug($band_name);
-          $band_url = 'band.php?a=' . urlencode($slug);
+          $band_url = 'band?a=' . urlencode($slug);
           $links[] = "<a href=\"$band_url\">" . htmlspecialchars($band_name) . "</a>";
         }
 
@@ -100,7 +100,7 @@
       }
 
       foreach ($artists as $artist_name => $file_path) {
-        $artist_url = 'artist.php?a=' . urlencode(sanitize_artist_slug($artist_name));
+        $artist_url = 'artist?a=' . urlencode(sanitize_artist_slug($artist_name));
         echo "<p><strong><a href=\"$artist_url\">" . htmlspecialchars($artist_name) . "</a></strong> played in: ";
         echo generateSimpleBandLinks($file_path);
         echo ". </p>";
@@ -125,7 +125,7 @@
         $output = [];
         foreach ($artists_info as $name => $instruments) {
           $slug = sanitize_artist_slug($name);
-          $link = '<a href="artist.php?a=' . urlencode($slug) . '">' . htmlspecialchars($name) . '</a> (' . htmlspecialchars($instruments) . ')';
+          $link = '<a href="artist?a=' . urlencode($slug) . '">' . htmlspecialchars($name) . '</a> (' . htmlspecialchars($instruments) . ')';
           $output[] = $link;
         }
 
@@ -182,7 +182,7 @@
         if (!content_exists($imgUrl)) $imgUrl = 'img/album.png';
 
         echo '<div class="grid-item">';
-        echo '<a href="release_band.php?a=' . urlencode($slug) . '">';
+        echo '<a href="release_band?a=' . urlencode($slug) . '">';
         echo '<img src="' . $imgUrl . '" alt="' . htmlspecialchars($title) . '" title="' . $tooltip . '" class="bitmap">';
         echo '</a>';
         echo '</div>';
@@ -249,7 +249,7 @@
         }
 
         echo '<div class="grid-item">';
-        echo '<a href="release_related.php?a=' . urlencode($slug) . '">';
+        echo '<a href="release_related?a=' . urlencode($slug) . '">';
         echo '<img src="' . $imgUrl . '" alt="' . htmlspecialchars($title) . '" title="' . $tooltip . '" class="bitmap">';
         echo '</a>';
         echo '</div>';
@@ -290,7 +290,7 @@
         if ($bandName === '') continue;
 
         $slug = sanitize_band_slug($bandName);
-        $bandUrl = 'band.php?a=' . urlencode($slug);
+        $bandUrl = 'band?a=' . urlencode($slug);
         $bandFilePath = 'bands/' . $slug . '.txt';
 
         if (!content_exists($bandFilePath)) {
@@ -334,7 +334,7 @@
 
           if ($name !== '?') {
             if ($name !== '' && content_exists('artists/' . $memberNameLink . '.txt')) {
-              $artistLink = "<a href=\"/artist.php?a={$memberNameLink}\" class=\"artist-name\">" . htmlspecialchars($name) . "</a>";
+              $artistLink = "<a href=\"/artist?a={$memberNameLink}\" class=\"artist-name\">" . htmlspecialchars($name) . "</a>";
             } else {
               $artistLink = htmlspecialchars($name);
             }
@@ -369,7 +369,7 @@
       $artistPhotoPath = 'photos_artists_large/' . sanitize_artist_slug($artistName) . '.png';
       echo '<div class="artist">';
       echo '<div class="artist-header">';
-      $artistUrl = 'artist.php?a=' . urlencode(sanitize_artist_slug($artistName));
+      $artistUrl = 'artist?a=' . urlencode(sanitize_artist_slug($artistName));
       echo '<div class="artist-header-name"><h1><a href="' . $artistUrl . '">' . htmlspecialchars($artistName) . '</a></h1></div>';
       if (content_exists($artistPhotoPath)) {
         echo '<div class="artist-header-photo"><img src="' . $artistPhotoPath . '" alt="' . htmlspecialchars($artistName) . '" class="bitmap"></div>';
@@ -402,7 +402,7 @@
 
       foreach ($artistFiles as $txtFile) {
         $artistName = basename($txtFile, '.txt');
-        $artistUrl  = 'artist.php?a=' . urlencode($artistName);
+        $artistUrl  = 'artist?a=' . urlencode($artistName);
         $imgUrl     = 'photos_artists/' . $artistName . '.png';
         if (!content_exists($imgUrl)) $imgUrl = 'img/artist_small.png';
 

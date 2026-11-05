@@ -67,7 +67,7 @@
               ["_", "", "", "_", "", ""],
               $name
             ));
-            $links[] = "<a href='/artist.php?a=$slug'>$name</a>";
+            $links[] = "<a href='/artist?a=$slug'>$name</a>";
           }
 
           $collab_members = get_artist_collaborator_members($basename);
@@ -78,7 +78,7 @@
           echo "<td style='text-align: right;' class='not-wrap'>" . ($i + 1) . "</td>"; // index
           if (content_exists('photos_artists/' . $basename . '.png')) {
             echo "<td class='not-wrap' title='" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "'>
-        <a href='/artist.php?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>
+        <a href='/artist?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>
         <img src='photos_artists/" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . ".png' alt='artist' class='bitmap'>
         </a>
         </td>";
@@ -86,7 +86,7 @@
             echo "<td class='not-wrap'><img src='img/artist_small.png' alt='artist' class='bitmap'></td>"; // photo
           }
           echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "'>
-      <a href='/artist.php?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "</a>
+      <a href='/artist?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "</a>
       </td>"; // artist
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[1]) . "'>" . trim($contents[1]) . "</td>"; // instrument
           echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars(trim($contents[6]), ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[6]), ENT_QUOTES, 'UTF-8') . "</td>";

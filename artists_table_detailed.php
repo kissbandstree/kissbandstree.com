@@ -62,7 +62,7 @@
               ["_", "", "", "_", "", ""],
               $name
             ));
-            $links[] = "<a href='/artist.php?a=$slug'>$name</a>";
+            $links[] = "<a href='/artist?a=$slug'>$name</a>";
           }
 
           $collab_members = get_artist_collaborator_members($basename);
@@ -73,13 +73,13 @@
           echo "<td style='text-align: right;'>" . ($i + 1) . "</td>"; // index
 
           if (content_exists('photos_artists/' . $basename . '.png')) {
-            echo "<td class='not-wrap' title='" . trim($contents[0]) . "'><a href='/artist.php?a=$basename'><img src='photos_artists/$basename.png' alt='artist' class='bitmap'></a></td>";
+            echo "<td class='not-wrap' title='" . trim($contents[0]) . "'><a href='/artist?a=$basename'><img src='photos_artists/$basename.png' alt='artist' class='bitmap'></a></td>";
           } else {
             echo "<td class='not-wrap'><img src='img/artist_small.png' alt='artist' class='bitmap'></td>"; // photo
           }
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[0]) . "'>
-          <a href='/artist.php?a=$basename'>" . trim($contents[0]) . "</a>
+          <a href='/artist?a=$basename'>" . trim($contents[0]) . "</a>
           </td>"; // artist
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[1]) . "'>" . trim($contents[1]) . "</td>"; // instrument

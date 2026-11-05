@@ -139,7 +139,7 @@ foreach (['artist' => 'artists', 'band' => 'bands'] as $type => $directory) {
       foreach ($entries as $index => $entry) {
         [$bandSlug, $lineup, $previousLineup] = $expectedBands[$index];
         $headingLink = $xpath->query('./h2/a', $entry)->item(0);
-        check_credits($headingLink->getAttribute('href') === 'band.php?a=' . urlencode($bandSlug),
+        check_credits($headingLink->getAttribute('href') === 'band?a=' . urlencode($bandSlug),
           "Artist lineup order changed: $slug");
         $breaks = 0;
         for ($node = $entry->lastChild; $node !== null; $node = $node->previousSibling) {

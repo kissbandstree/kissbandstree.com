@@ -41,7 +41,7 @@
       }
 
       echo '<div class="grid-item" data-members="' . $membersAttr . '">';
-      echo '<a href="release_band.php?a=' . urlencode($slug) . '">';
+      echo '<a href="release_band?a=' . urlencode($slug) . '">';
       echo '<img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" title="' . $tooltip . '" class="bitmap">';
       echo '</a>';
       echo '</div>';

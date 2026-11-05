@@ -70,7 +70,7 @@ $band_slugs = array_map(function ($b) {
 
   <div class="skip-buttons colored">
     <span id="skip-left-btn" class="skip-button">
-      <a href="band.php?a=<?= htmlspecialchars($prev_band) ?>" title="Previous">
+      <a href="band?a=<?= htmlspecialchars($prev_band) ?>" title="Previous">
         <svg class="icons">
           <use href="icons.svg#skip_left"></use>
         </svg>
@@ -86,7 +86,7 @@ $band_slugs = array_map(function ($b) {
     </span>
 
     <span id="skip-right-btn" class="skip-button">
-      <a href="band.php?a=<?= htmlspecialchars($next_band) ?>" title="Next">
+      <a href="band?a=<?= htmlspecialchars($next_band) ?>" title="Next">
         <svg class="icons">
           <use href="icons.svg#skip_right"></use>
         </svg>
@@ -110,7 +110,7 @@ $band_slugs = array_map(function ($b) {
       const nextBand = bands[(currentIndex + 1) % bands.length];
       shouldResumeOnNextPage = true;
       localStorage.setItem('currentBand', nextBand);
-      window.location.href = 'band.php?a=' + nextBand;
+      window.location.href = 'band?a=' + nextBand;
     }
 
     function setPlayIcon(state) {
@@ -201,7 +201,7 @@ $band_slugs = array_map(function ($b) {
 
         $link = ($name === 'unknown' || !content_exists($path))
           ? $safeName
-          : "<a href=\"/artist.php?a=$slug\">$safeName</a>";
+          : "<a href=\"/artist?a=$slug\">$safeName</a>";
 
         echo "<h2>$link - $safeInstr</h2>";
       }
@@ -226,7 +226,7 @@ $band_slugs = array_map(function ($b) {
     $with_kiss = array_map('trim', explode(',', $contents[5]));
     $links = array_map(function ($name) {
       $slug = sanitize_artist_slug($name);
-      return "<a href='/artist.php?a=$slug'>" . htmlspecialchars($name) . "</a>";
+      return "<a href='/artist?a=$slug'>" . htmlspecialchars($name) . "</a>";
     }, $with_kiss);
 
     echo "WITH KISS MEMBER: " . implode(', ', $links) . "<br><br>";

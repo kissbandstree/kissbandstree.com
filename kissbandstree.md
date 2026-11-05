@@ -81,7 +81,9 @@
   override clean page routes or create redirects back to trailing-slash URLs.
   Invalid view parameters return HTTP 400. Canonical URLs omit the view parameter;
   sharing retains it. Keep `.htaccess` and local Caddy dispatch rules consistent.
-  Detail-page URLs are unchanged. Run `php .github/tests/routes.php` for routing
+  Detail pages use `/band`, `/artist`, `/release_band` and `/release_related`,
+  retaining their query parameters. Old `.php` links redirect permanently.
+  Run `php .github/tests/routes.php` for routing
   checks and add `--http http://localhost:8003` to test the running server.
 - Sortable tables let users resize columns by dragging a header edge while
   keeping the table full width. On touchscreens, drag the right side of the

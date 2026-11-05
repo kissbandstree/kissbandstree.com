@@ -29,7 +29,7 @@ function render_kiss_member_links($members_line)
   $links = [];
   foreach ($members as $member) {
     $slug = sanitize_artist_slug($member);
-    $links[] = '<a href="/artist.php?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($member, ENT_QUOTES, 'UTF-8') . '</a>';
+    $links[] = '<a href="/artist?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($member, ENT_QUOTES, 'UTF-8') . '</a>';
   }
 
   return implode(', ', $links);
@@ -40,7 +40,7 @@ function render_band_card(string $file, ?int $modified = null, ?string $period =
   $contents = content_file($file, FILE_IGNORE_NEW_LINES);
   $slug = basename($file, '.txt');
   $name = htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8');
-  $bandUrl = '/band.php?a=' . rawurlencode($slug);
+  $bandUrl = '/band?a=' . rawurlencode($slug);
   $photo = 'photos_bands/' . $slug . '.png';
   if (!content_exists($photo)) {
     $photo = 'img/band_small.png';

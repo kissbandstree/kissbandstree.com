@@ -48,7 +48,7 @@ function generateBandLink($file_path) {
     $band_name_clean = preg_replace('/\s*\[.*?\]|\s*\/.*?$/i', '', $band_name_clean);
 
     // Replace spaces with underscores and make the band name lowercase for the URL
-    $band_url = 'band.php?a=' . urlencode(strtolower(str_replace('__', '_', str_replace(' ', '_', $band_name_clean))));
+    $band_url = 'band?a=' . urlencode(strtolower(str_replace('__', '_', str_replace(' ', '_', $band_name_clean))));
 
     // Determine the band file path for the current band
     $band_file_path = 'bands/' . strtolower(str_replace(' ', '_', $band_name_clean)) . '.txt';
@@ -81,7 +81,7 @@ function generateBandLink($file_path) {
 
         // Check if artist file exists
         if (content_exists('artists/' . $member_name_link . '.txt')) {
-          $artist_link = "<a href=\"/artist.php?a=$member_name_link\">$name</a>";
+          $artist_link = "<a href=\"/artist?a=$member_name_link\">$name</a>";
         } else {
           $artist_link = $name;
         }
@@ -122,7 +122,7 @@ function generateBandLink($file_path) {
     // Iterate through the first four artists and generate the band links
     foreach ($artists_first as $artist_name => $file_path) {
         echo '<td class="left-top not-wrap">';
-        echo '<h1><a href="artist.php?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
+        echo '<h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
         generateBandLink($file_path);
         echo '</td>';
     }
@@ -146,7 +146,7 @@ function generateBandLink($file_path) {
     // Iterate through the next four artists and generate the band links
     foreach ($artists_next as $artist_name => $file_path) {
         echo '<td class="left-top not-wrap">';
-        echo '<h1><a href="artist.php?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
+        echo '<h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
         generateBandLink($file_path);
         echo '</td>';
     }
@@ -168,7 +168,7 @@ function generateBandLink($file_path) {
     // Iterate through the last two artists and generate the band links
     foreach ($artists_last as $artist_name => $file_path) {
         echo '<td class="left-top not-wrap">';
-        echo '<h1><a href="artist.php?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
+        echo '<h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
         generateBandLink($file_path);
         echo '</td>';
     }

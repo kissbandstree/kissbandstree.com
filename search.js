@@ -19,7 +19,7 @@
     }
 
     bandResults.innerHTML = items.slice(0, 30).map((item) => {
-      const href = 'band.php?a=' + encodeURIComponent(item.slug);
+      const href = 'band?a=' + encodeURIComponent(item.slug);
       const years = item.years ? ' <span class="search-date">[' + item.years + ']</span>' : '';
       return '<div class="search-result-line"><a href="' + href + '">' + item.name + '</a>' + years + '</div>';
     }).join('');
@@ -32,7 +32,7 @@
     }
 
     artistResults.innerHTML = items.slice(0, 30).map((item) => {
-      const href = 'artist.php?a=' + encodeURIComponent(item.slug);
+      const href = 'artist?a=' + encodeURIComponent(item.slug);
       return '<div class="search-result-line"><a href="' + href + '">' + item.name + '</a></div>';
     }).join('');
   };

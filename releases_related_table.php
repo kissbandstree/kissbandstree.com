@@ -67,15 +67,15 @@
               ["_", "", "", "_", "", ""],
               $memberName
             ));
-            $memberLinks[] = '<a href="/artist.php?a=' . htmlspecialchars($memberSlug, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($memberName, ENT_QUOTES, 'UTF-8') . '</a>';
+            $memberLinks[] = '<a href="/artist?a=' . htmlspecialchars($memberSlug, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($memberName, ENT_QUOTES, 'UTF-8') . '</a>';
           }
           $imgUrl = find_related_thumb($slug);
 
           echo '<tr data-members="' . $membersAttr . '">';
           echo '<td class="not-wrap" style="text-align: right;">' . ($i + 1) . '</td>';
-          echo '<td class="not-wrap less-padding"><a href="/release_related.php?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') . '"><img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="release" class="bitmap"></a></td>';
+          echo '<td class="not-wrap less-padding"><a href="/release_related?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') . '"><img src="' . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . '" alt="release" class="bitmap"></a></td>';
           echo '<td class="not-wrap" style="text-align: left;" title="' . htmlspecialchars($artist, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($artist, ENT_QUOTES, 'UTF-8') . '</td>';
-          echo '<td class="not-wrap" style="text-align: left;" title="' . htmlspecialchars($album, ENT_QUOTES, 'UTF-8') . '"><a href="/release_related.php?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') . '">"' . htmlspecialchars($album, ENT_QUOTES, 'UTF-8') . '"</a></td>';
+          echo '<td class="not-wrap" style="text-align: left;" title="' . htmlspecialchars($album, ENT_QUOTES, 'UTF-8') . '"><a href="/release_related?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') . '">"' . htmlspecialchars($album, ENT_QUOTES, 'UTF-8') . '"</a></td>';
           echo '<td class="not-wrap" style="text-align: left;" title="' . htmlspecialchars($date, ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($date, ENT_QUOTES, 'UTF-8') . '</td>';
           echo '<td class="not-wrap" style="text-align: left;" title="' . $membersAttr . '">' . implode(', ', $memberLinks) . '</td>';
           echo '<td class="not-wrap">' . date('d-m-Y', content_mtime($file)) . '</td>';

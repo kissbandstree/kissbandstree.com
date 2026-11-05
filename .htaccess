@@ -1,5 +1,6 @@
 
 RewriteEngine on
+Options -MultiViews
 DirectorySlash Off
 
 # Redirect www → non-www (http or https)
@@ -12,6 +13,10 @@ RewriteCond %{HTTP:X-Forwarded-SSL} !on
 RewriteRule ^(.*)$ https://kissbandstree.com/$1 [R=301,L]
 
 # Route public pages and old implementation URLs before rendering any content.
+RewriteCond %{THE_REQUEST} "\s/+(band|artist|release_band|release_related)\.php[?\s]" [NC]
+RewriteRule ^(band|artist|release_band|release_related)\.php$ /$1 [R=301,L]
+RewriteRule ^(band|artist|release_band|release_related)/$ /$1 [R=301,L]
+RewriteRule ^(band|artist|release_band|release_related)$ $1.php [END]
 RewriteRule ^(index|calendar|about|thanks|stats|tree|(bands|artists|releases_band|releases_related)_(grid|table|list))\.php$ page.php [L]
 RewriteRule ^(bands|artists|releases|related|calendar|about|thanks|stats|tree)/?$ page.php [L]
 RewriteRule ^$ page.php [L]

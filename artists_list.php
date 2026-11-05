@@ -43,7 +43,7 @@ require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . 
       $contents = content_file($artist_file, FILE_IGNORE_NEW_LINES);
       $artist_name = trim($contents[0]);
       $artist_id = preg_replace('/[^a-z0-9]/i', '_', strtolower($artist_name));
-      $artist_url = 'artist.php?a=' . urlencode(basename($artist_file, '.txt'));
+      $artist_url = 'artist?a=' . urlencode(basename($artist_file, '.txt'));
 
       // Photo path (fallback if missing)
       $imgUrl = 'photos_artists/' . $artist_id . '.png';
@@ -81,7 +81,7 @@ require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . 
           $band_display_name = trim($band_contents[0]);
           $year_line = trim($band_contents[1]);
 
-          echo "<div class='band-entry'><a href='band.php?a=" . urlencode($slug) . "' class='band-name'>" . htmlspecialchars($band_display_name) . "</a>"
+          echo "<div class='band-entry'><a href='band?a=" . urlencode($slug) . "' class='band-name'>" . htmlspecialchars($band_display_name) . "</a>"
             . "<span> [" . htmlspecialchars($year_line) . "]</span></div>";
         }
       } else {

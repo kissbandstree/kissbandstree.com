@@ -18,83 +18,83 @@
 <div class="member-container colored" id="member-container">
 
   <div class='artist-item'>
-    <a href="artist.php?a=gene_simmons">
+    <a href="artist?a=gene_simmons">
       <img src="photos_artists/gene_simmons.png" class="bitmap rounded" alt="Gene Simmons">
     </a>
     <br>
-    <a href="artist.php?a=gene_simmons" class="artist-name">Gene Simmons</a>
+    <a href="artist?a=gene_simmons" class="artist-name">Gene Simmons</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=paul_stanley">
+    <a href="artist?a=paul_stanley">
       <img src="photos_artists/paul_stanley.png" class="bitmap rounded" alt="Paul Stanley">
     </a>
     <br>
-    <a href="artist.php?a=paul_stanley" class="artist-name">Paul Stanley</a>
+    <a href="artist?a=paul_stanley" class="artist-name">Paul Stanley</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=peter_criss">
+    <a href="artist?a=peter_criss">
       <img src="photos_artists/peter_criss.png" class="bitmap rounded" alt="Peter Criss">
     </a>
     <br>
-    <a href="artist.php?a=peter_criss" class="artist-name">Peter Criss</a>
+    <a href="artist?a=peter_criss" class="artist-name">Peter Criss</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=ace_frehley">
+    <a href="artist?a=ace_frehley">
       <img src="photos_artists/ace_frehley.png" class="bitmap rounded" alt="Ace Frehley">
     </a>
     <br>
-    <a href="artist.php?a=ace_frehley" class="artist-name">Ace Frehley</a>
+    <a href="artist?a=ace_frehley" class="artist-name">Ace Frehley</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=eric_carr">
+    <a href="artist?a=eric_carr">
       <img src="photos_artists/eric_carr.png" class="bitmap rounded" alt="Eric Carr">
     </a>
     <br>
-    <a href="artist.php?a=eric_carr" class="artist-name">Eric Carr</a>
+    <a href="artist?a=eric_carr" class="artist-name">Eric Carr</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=vinnie_vincent">
+    <a href="artist?a=vinnie_vincent">
       <img src="photos_artists/vinnie_vincent.png" class="bitmap rounded" alt="Vinnie Vincent">
     </a>
     <br>
-    <a href="artist.php?a=vinnie_vincent" class="artist-name">Vinnie Vincent</a>
+    <a href="artist?a=vinnie_vincent" class="artist-name">Vinnie Vincent</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=mark_st_john">
+    <a href="artist?a=mark_st_john">
       <img src="photos_artists/mark_st_john.png" class="bitmap rounded" alt="Mark St. John">
     </a>
     <br>
-    <a href="artist.php?a=mark_st_john" class="artist-name">Mark St. John</a>
+    <a href="artist?a=mark_st_john" class="artist-name">Mark St. John</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=bruce_kulick">
+    <a href="artist?a=bruce_kulick">
       <img src="photos_artists/bruce_kulick.png" class="bitmap rounded" alt="Bruce Kulick">
     </a>
     <br>
-    <a href="artist.php?a=bruce_kulick" class="artist-name">Bruce Kulick</a>
+    <a href="artist?a=bruce_kulick" class="artist-name">Bruce Kulick</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=eric_singer">
+    <a href="artist?a=eric_singer">
       <img src="photos_artists/eric_singer.png" class="bitmap rounded" alt="Eric Singer">
     </a>
     <br>
-    <a href="artist.php?a=eric_singer" class="artist-name">Eric Singer</a>
+    <a href="artist?a=eric_singer" class="artist-name">Eric Singer</a>
   </div>
 
   <div class='artist-item'>
-    <a href="artist.php?a=tommy_thayer">
+    <a href="artist?a=tommy_thayer">
       <img src="photos_artists/tommy_thayer.png" class="bitmap rounded" alt="Tommy Thayer">
     </a>
     <br>
-    <a href="artist.php?a=tommy_thayer" class="artist-name">Tommy Thayer</a>
+    <a href="artist?a=tommy_thayer" class="artist-name">Tommy Thayer</a>
   </div>
 
 </div>

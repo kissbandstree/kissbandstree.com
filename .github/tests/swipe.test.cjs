@@ -85,9 +85,13 @@ test('detail pages and detailed artist table use their parent navigation section
     const query = mode === 'grid' ? '' : `?view=${mode}`;
     for (const [page, next] of [
       ['/band.php?a=shogun_mojo_2', `/artists${query}`],
+      ['/band?a=shogun_mojo_2', `/artists${query}`],
       ['/artist.php?a=tommy_thayer', `/releases${query}`],
+      ['/artist?a=tommy_thayer', `/releases${query}`],
       ['/release_band.php?a=kiss', `/related${query}`],
+      ['/release_band?a=kiss', `/related${query}`],
       ['/release_related.php?a=shogun_mojo', '/calendar'],
+      ['/release_related?a=shogun_mojo', '/calendar'],
       ['/artists_table_detailed.php', `/releases${query}`]
     ]) {
       assert.equal(createSwipe(page, mode).swipe('forward'), next);

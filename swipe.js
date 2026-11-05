@@ -108,10 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const sections = {
     "/band.php": "/bands",
+    "/band": "/bands",
     "/artist.php": "/artists",
+    "/artist": "/artists",
     "/artists_table_detailed.php": "/artists",
     "/release_band.php": "/releases",
-    "/release_related.php": "/related"
+    "/release_band": "/releases",
+    "/release_related.php": "/related",
+    "/release_related": "/related"
   };
   const currentPath = sections[window.location.pathname] || window.location.pathname;
   const home = header.querySelector(".logo-link");

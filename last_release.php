@@ -83,8 +83,8 @@ function latest_release_thumb($type, $slug)
     $safeDate = htmlspecialchars($release['dateText'], ENT_QUOTES, 'UTF-8');
     $imgUrl = latest_release_thumb($type, $slug);
     $href = $type === 'band'
-      ? '/release_band.php?a=' . urlencode($slug)
-      : '/release_related.php?a=' . urlencode($slug);
+      ? '/release_band?a=' . urlencode($slug)
+      : '/release_related?a=' . urlencode($slug);
 
     echo "<div class='band-item'>";
     echo "<div><a href='" . htmlspecialchars($href, ENT_QUOTES, 'UTF-8') . "'><img src='" . htmlspecialchars($imgUrl, ENT_QUOTES, 'UTF-8') . "' alt='release' class='bitmap'></a></div>";

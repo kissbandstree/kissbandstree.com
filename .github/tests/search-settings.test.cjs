@@ -35,8 +35,8 @@ test('both search fields and their results restore without saving again', () => 
   const reloaded = createSearch(state.storage);
   assert.equal(reloaded.elements.bandSearchInput.value, 'Kiss');
   assert.equal(reloaded.elements.artistSearchInput.value, 'Paul');
-  assert.match(reloaded.elements.bandSearchResults.innerHTML, /band.php\?a=kiss/);
-  assert.match(reloaded.elements.artistSearchResults.innerHTML, /artist.php\?a=paul_stanley/);
+  assert.match(reloaded.elements.bandSearchResults.innerHTML, /band\?a=kiss/);
+  assert.match(reloaded.elements.artistSearchResults.innerHTML, /artist\?a=paul_stanley/);
   assert.equal(reloaded.writes.length, 0);
 });
 

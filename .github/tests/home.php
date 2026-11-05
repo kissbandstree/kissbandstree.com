@@ -86,7 +86,7 @@ foreach (['lineup-container', 'bandContainer', 'activeBandContainer'] as $contai
     check_home($memberLinks->length === count($members), 'Missing lineup members: ' . $slug);
     foreach ($memberLinks as $index => $link) {
       check_home($link->textContent === $members[$index]
-        && $link->getAttribute('href') === '/artist.php?a=' . sanitize_artist_slug($members[$index]),
+        && $link->getAttribute('href') === '/artist?a=' . sanitize_artist_slug($members[$index]),
         'Incorrect member link: ' . $slug);
     }
     $treeLinks = $xpath->query('./div/a[text()="SHOW ON TREE"]', $card);
@@ -135,7 +135,7 @@ $artistCards = $xpath->query('//*[@id="artist-container"]/div[@class="artist-ite
 check_home($artistCards->length === 4, 'Expected four Last Modified Artists.');
 foreach ($artistCards as $index => $card) {
   $slug = basename($artistFiles[$index], '.txt');
-  check_home($xpath->query('./div[2]/a', $card)->item(0)->getAttribute('href') === '/artist.php?a=' . $slug,
+  check_home($xpath->query('./div[2]/a', $card)->item(0)->getAttribute('href') === '/artist?a=' . $slug,
     'Last Modified Artists must use combined update dates.');
   check_home($xpath->query('./div[@title="Entry updated"]', $card)->item(0)->textContent
     === date('d-m-Y', get_artist_mtime($slug)), 'Incorrect Last Modified Artists date.');

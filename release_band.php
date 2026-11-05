@@ -78,7 +78,7 @@ $releaseSlugs = array_map(function ($item) {
 
   <div class="skip-buttons colored">
     <span id="skip-left-btn" class="skip-button">
-      <a href="release_band.php?a=<?= htmlspecialchars($prevRelease, ENT_QUOTES, 'UTF-8') ?>" title="Previous">
+      <a href="release_band?a=<?= htmlspecialchars($prevRelease, ENT_QUOTES, 'UTF-8') ?>" title="Previous">
         <svg class="icons">
           <use href="icons.svg#skip_left"></use>
         </svg>
@@ -94,7 +94,7 @@ $releaseSlugs = array_map(function ($item) {
     </span>
 
     <span id="skip-right-btn" class="skip-button">
-      <a href="release_band.php?a=<?= htmlspecialchars($nextRelease, ENT_QUOTES, 'UTF-8') ?>" title="Next">
+      <a href="release_band?a=<?= htmlspecialchars($nextRelease, ENT_QUOTES, 'UTF-8') ?>" title="Next">
         <svg class="icons">
           <use href="icons.svg#skip_right"></use>
         </svg>
@@ -115,7 +115,7 @@ $releaseSlugs = array_map(function ($item) {
       const nextRelease = releases[(currentIndex + 1) % releases.length];
       shouldResumeOnNextPage = true;
       localStorage.setItem('currentReleaseBand', nextRelease);
-      window.location.href = 'release_band.php?a=' + encodeURIComponent(nextRelease);
+      window.location.href = 'release_band?a=' + encodeURIComponent(nextRelease);
     }
 
     function setPlayIcon(state) {

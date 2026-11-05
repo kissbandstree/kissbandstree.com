@@ -32,7 +32,7 @@
 
     foreach ($artistFiles as $index => $txtFile) {
       $artistName = basename($txtFile, '.txt');
-      $artistUrl = 'artist.php?a=' . urlencode($artistName);
+      $artistUrl = 'artist?a=' . urlencode($artistName);
 
       $imgUrl = 'photos_artists/' . $artistName . '.png';
       if (!content_exists($imgUrl)) {

@@ -37,7 +37,7 @@ require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . 
 
     $slug       = basename($f, '.txt');
     $name       = trim($c[0] ?? $slug);
-    $artist_url = '/artist.php?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8');
+    $artist_url = '/artist?a=' . htmlspecialchars($slug, ENT_QUOTES, 'UTF-8');
 
     $imgRel = content_exists(__DIR__ . "/photos_artists/$slug.png")
       ? "/photos_artists/$slug.png"

@@ -58,7 +58,7 @@
               ["_", "", "", "_", "", ""],
               $name
             ));
-            $links[] = "<a href='/artist.php?a=$slug'>$name</a>";
+            $links[] = "<a href='/artist?a=$slug'>$name</a>";
           }
 
           // Output table rows
@@ -66,12 +66,12 @@
           echo "<td class='not-wrap' style='text-align: right;'>" . ($i + 1) . "</td>";
 
           if (content_exists('photos_bands/' . $basename . '.png')) {
-            echo "<td class='not-wrap less-padding'><a href='/band.php?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></td>";
+            echo "<td class='not-wrap less-padding'><a href='/band?a=$basename'><img src='photos_bands/$basename.png' alt='band' class='bitmap'></a></td>";
           } else {
-            echo "<td class='not-wrap'><a href='/band.php?a=$basename'><img src='img/band.png' alt='band' class='bitmap'></a></td>";
+            echo "<td class='not-wrap'><a href='/band?a=$basename'><img src='img/band.png' alt='band' class='bitmap'></a></td>";
           }
 
-          echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "'><a href='/band.php?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "</a></td>";
+          echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "'><a href='/band?a=" . htmlspecialchars($basename, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars(trim($contents[0]), ENT_QUOTES, 'UTF-8') . "</a></td>";
 
           $year_text = trim($contents[1]);
           echo "<td class='not-wrap' style='text-align: left;' title='" . htmlspecialchars($year_text, ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($year_text, ENT_QUOTES, 'UTF-8') . "</td>";

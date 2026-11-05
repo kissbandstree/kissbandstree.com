@@ -166,10 +166,14 @@ if (($argv[1] ?? '') === '--http') {
   foreach (['/missing-clean-route', '/missing-clean-route.php', '/page.php'] as $path) {
     check_route(request_route($path)['status'] === 404, 'Missing page did not return 404.');
   }
-  foreach (['/style.css', '/icons.svg', '/png/og/calendar.png', '/band.php?a=kiss_1', '/artist.php?a=paul_stanley'] as $path) {
+  foreach (['/band', '/artist', '/release_band', '/release_related'] as $path) {
+    $legacy = request_route($path . '.php?' . $query);
+    check_route($legacy['status'] === 301 && ($legacy['headers']['location'] ?? '') === $path . '?' . $query, 'Detail redirect lost query: ' . $path);
+  }
+  foreach (['/style.css', '/icons.svg', '/png/og/calendar.png', '/band?a=kiss_1', '/artist?a=paul_stanley'] as $path) {
     check_route(request_route($path)['status'] === 200, 'Existing resource or detail page failed: ' . $path);
   }
-  $band = request_route('/band.php?a=kiss_1');
+  $band = request_route('/band?a=kiss_1');
   check_route(view_switch_url($band['body']) === '/bands', 'Band identifier leaked into section navigation.');
 }
 echo "Passed: $checks routing checks.\n";

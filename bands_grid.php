@@ -85,7 +85,7 @@
     <?php
     foreach ($bandFiles as $index => $txtFile) {
       $bandName = basename($txtFile, '.txt');
-      $bandUrl = 'band.php?a=' . urlencode($bandName);
+      $bandUrl = 'band?a=' . urlencode($bandName);
 
       $imgUrl = 'photos_bands/' . $bandName . '.png';
       if (!content_exists($imgUrl)) {

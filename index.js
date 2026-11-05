@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Add artist-name class to all artist.php links
 
-  document.querySelectorAll('a[href*="artist.php?a="], a[href*="band.php?a="]').forEach(a => {
+  document.querySelectorAll('a[href*="artist?a="], a[href*="band?a="]').forEach(a => {
     if (a.querySelector('img, svg') || a.textContent.trim() === '') {
       return;
     }
