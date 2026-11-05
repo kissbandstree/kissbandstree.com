@@ -1031,7 +1031,8 @@ table.resizable-columns th {
   filter: invert(1) hue-rotate(180deg);
 }
 
-.invert-colors .bitmap {
+.invert-colors .bitmap,
+.invert-colors img:not([src*=".svg" i]) {
   filter: invert(1) hue-rotate(180deg);
 }
 
