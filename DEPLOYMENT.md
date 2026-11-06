@@ -12,10 +12,11 @@ Add these repository secrets:
 
 Add these repository variables:
 
-- `SFTP_REMOTE_DIR`
 - `SFTP_PORT`
 
 Use port `22` unless the host says something else.
+The workflow defines `SFTP_REMOTE_DIR` as `/home/flamenco/kissbandstree.com`.
+The old destination variable and `SERVER_DIR` secret are not used.
 
 Normal deploys run automatically when `main` is pushed to GitHub.
 
@@ -71,7 +72,7 @@ These local repository files are not uploaded:
 - `LICENCE`
 - `photos_bands_originals/`
 
-Legacy `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` and `SERVER_DIR` secrets
+Legacy `FTP_SERVER`, `FTP_USERNAME` and `FTP_PASSWORD` secrets
 are accepted when corresponding SFTP settings are absent. The protocol remains
 SFTP. Verify the path in SFTP before migration. See the shared
 [deployment procedure](../SITES.md#deployment).
