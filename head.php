@@ -75,7 +75,7 @@ $ogTitle = isset($pagetitle) && is_string($pagetitle) && $pagetitle !== ''
 <link rel="canonical" href="<?php echo htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8'); ?>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=<?php echo filemtime(__DIR__ . '/style.css'); ?>">
 <script src="/sort_table.js"></script>
 <script src="/search_table.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">

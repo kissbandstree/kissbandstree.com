@@ -438,7 +438,7 @@ input[type="checkbox"] {
 }
 
 body:has(> .heading) {
-  padding-top: 52px;
+  padding-top: 48px;
 }
 
 .heading {
@@ -447,13 +447,15 @@ body:has(> .heading) {
   justify-content: space-between;
   margin: 0 auto;
   max-width: var(--maxwidth);
-  padding: 10px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
+  box-sizing: border-box;
+  height: 48px;
   z-index: 15;
+  padding: 8px;
 }
 
 .less-padding {
