@@ -497,7 +497,7 @@ body:has(> .heading) {
   background-color: var(--grey1);
   border: 0px;
   display: none;
-  height: calc(100dvh - 55px);
+  height: calc(100dvh - 48px);
   left: 0px;
   margin: 0 auto;
   max-width: var(--maxwidth);
@@ -505,7 +505,7 @@ body:has(> .heading) {
   bottom: auto;
   padding: 0px;
   position: fixed;
-  top: 55px;
+  top: 48px;
   width: 100%;
   z-index: 999;
   overflow: hidden;
@@ -579,7 +579,7 @@ body.settings-lock {
   overflow: hidden;
   position: fixed;
   right: max(0px, calc((100vw - var(--maxwidth)) / 2));
-  top: 55px;
+  top: 48px;
   width: min(320px, 100%);
   z-index: 999;
 }
@@ -654,13 +654,13 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
 
   .toc-container,
   .settings-panel {
-    top: 55px;
+    top: 48px;
     bottom: auto;
     left: var(--site-frame-offset);
     right: auto;
     width: var(--sidebar-width);
     margin: 16px 0;
-    height: calc(100dvh - 87px);
+    height: calc(100dvh - 80px);
   }
 
   .settings-panel {
