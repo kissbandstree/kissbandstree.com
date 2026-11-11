@@ -415,8 +415,12 @@ Shogun Mojo Dan Reed ikiz
   photo is unavailable, use the standard artist placeholder and report the gap.
 - Compare existing photos before cropping. Frame bands closely while retaining
   all members. Prepare square artist portraits with clear faces.
+- Never add borders or empty padding to photos. Crop or size each image to fill
+  its output dimensions while retaining all band members.
+- Full-size band PNGs must be exactly 1024x656 pixels. Prepare each image at
+  this size without borders or empty padding, retaining every member in frame.
+  Band thumbnails remain 155x99 pixels.
 - Generate final images directly from the original, not from resized previews.
-  Band PNG outputs normally use 1018x650 large and 155x99 thumbnail dimensions.
   Artist thumbnails use 64x64; large portraits should retain native detail
   rather than being enlarged merely to reach 1024x1024.
 - Include verified **L-R** names in band photo descriptions. Record the actual

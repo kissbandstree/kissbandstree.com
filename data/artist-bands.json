@@ -421,7 +421,7 @@
             ]
         },
         "brent_fitz": {
-            "modified": 1764278390,
+            "modified": 1794087846,
             "lines": [
                 "Union #1\n",
                 "Gene Simmons solo #4\n",
@@ -429,7 +429,8 @@
                 "Bruce Kulick solo #2\n",
                 "Bruce Kulick solo #3\n",
                 "Bruce Kulick solo #2 reunion\n",
-                "Bruce Kulick solo #4\n"
+                "Bruce Kulick solo #4\n",
+                "Bruce Kulick solo #2 reunion #2"
             ]
         },
         "brent_woods": {
@@ -479,7 +480,7 @@
             ]
         },
         "bruce_kulick": {
-            "modified": 1764276700,
+            "modified": 1794087846,
             "lines": [
                 "Jon Botkin #?1\r\n",
                 "Jon Botkin #?2\r\n",
@@ -518,7 +519,8 @@
                 "Bruce Kulick solo #2\r\n",
                 "Bruce Kulick solo #3\r\n",
                 "Bruce Kulick solo #2 reunion\r\n",
-                "Bruce Kulick solo #4"
+                "Bruce Kulick solo #4\r\n",
+                "Bruce Kulick solo #2 reunion #2"
             ]
         },
         "bruce_norton": {
@@ -3085,13 +3087,14 @@
             ]
         },
         "todd_kerns": {
-            "modified": 1764278463,
+            "modified": 1794087846,
             "lines": [
                 "The Kulick Brothers\n",
                 "Bruce Kulick solo #2\n",
                 "Bruce Kulick solo #3\n",
                 "Bruce Kulick solo #2 reunion\n",
-                "Bruce Kulick solo #4"
+                "Bruce Kulick solo #4\n",
+                "Bruce Kulick solo #2 reunion #2"
             ]
         },
         "todd_youth": {
@@ -3337,12 +3340,13 @@
             ]
         },
         "zach_throne": {
-            "modified": 1753736490,
+            "modified": 1794087846,
             "lines": [
                 "Bruce Kulick solo #2\n",
                 "Ace Frehley solo #21\n",
                 "Bruce Kulick solo #2 reunion\n",
-                "Gene Simmons solo #6"
+                "Gene Simmons solo #6\n",
+                "Bruce Kulick solo #2 reunion #2"
             ]
         }
     }
