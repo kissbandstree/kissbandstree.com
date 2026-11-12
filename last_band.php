@@ -7,7 +7,7 @@ require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . 
         <use href="icons.svg#band"></use>
     </svg>
     <h2>
-        LAST MODIFIED BANDS
+        Last modified bands
     </h2>
     <svg class="icons show-pointer no-margin"
         onclick="toggleDiv('bandContainer')"

@@ -7,7 +7,7 @@ require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . 
         <use href="icons.svg#person"></use>
     </svg>
     <h2>
-        LAST MODIFIED ARTISTS
+        Last modified artists
     </h2>
     <svg class="icons show-pointer no-margin"
         onclick="toggleDiv('artist-container')"

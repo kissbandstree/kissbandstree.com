@@ -63,7 +63,7 @@ function latest_release_thumb($type, $slug)
     <use href="icons.svg#lp"></use>
   </svg>
   <h2>
-    LATEST RELEASES
+    Latest releases
   </h2>
   <svg class="icons show-pointer no-margin"
     onclick="toggleDiv('lastReleaseContainer')"

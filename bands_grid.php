@@ -35,7 +35,7 @@
       <use href="icons.svg#filter"></use>
     </svg>
 
-    <h2>FILTER</h2>
+    <h2>Filter</h2>
 
     <a href="#" id="resetBtn" title="Reset" aria-label="Reset filters">
       <svg class="icons" aria-hidden="true" focusable="false">

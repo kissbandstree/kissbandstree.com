@@ -5,7 +5,7 @@
     <use href="icons.svg#person"></use>
   </svg>
   <h2>
-    MEMBERS
+    Members
   </h2>
   <svg class="icons show-pointer no-margin"
     onclick="toggleDiv('member-container')"

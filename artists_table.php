@@ -29,22 +29,22 @@
             <span title="Alphabetical number">#</span>
           </th>
           <th class="not-wrap sorttable_nosort">
-            <span title="Picture">PIC.</span>
+            <span title="Picture">Pic.</span>
           </th>
           <th class="not-wrap artist" data-sort-type="text" data-sort-default="asc">
-            <span title="Artist name">ARTIST</span>
+            <span title="Artist name">Artist</span>
           </th>
           <th class="not-wrap instrument" data-sort-type="text">
-            <span title="Main instrument(s)">INSTR.</span>
+            <span title="Main instrument(s)">Instr.</span>
           </th>
           <th class="not-wrap" data-sort-type="text">
             <span title="Also known as">AKA</span>
           </th>
           <th class="not-wrap with" data-sort-type="text">
-            <span title="Played with what Kiss member(s)">WITH</span>
+            <span title="Played with what Kiss member(s)">With</span>
           </th>
           <th class="not-wrap" data-sort-type="date-dmy">
-            <span title="Entry created or modified">ENTRY</span>
+            <span title="Entry created or modified">Entry</span>
           </th>
         </tr>
       </thead>

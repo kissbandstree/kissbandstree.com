@@ -18,7 +18,7 @@ require_once __DIR__ . '/functions.php';
     <use href="icons.svg#cake_diagram"></use>
   </svg>
 
-  <h2>STATS</h2>
+  <h2>Stats</h2>
 
   <svg class="icons" aria-hidden="true" focusable="false">
     <title>Stats</title>
@@ -299,7 +299,7 @@ require_once __DIR__ . '/functions.php';
 
 <div class="standard">
   <div class="stats-row">
-    <h2>BANDS WITH</h2>
+    <h2>Bands with</h2>
     <?php echo $bands_pie_svg; ?>
     <p class="stats-text">
 <?php
@@ -318,7 +318,7 @@ require_once __DIR__ . '/functions.php';
   </div>
 
   <div class="stats-row">
-    <h2>BAND PHOTOS</h2>
+    <h2>Band photos</h2>
     <?php echo $band_photo_pie_svg; ?>
     <p class="stats-text">
 <?php
@@ -329,7 +329,7 @@ require_once __DIR__ . '/functions.php';
   </div>
 
   <div class="stats-row">
-    <h2>ARTISTS WITH</h2>
+    <h2>Artists with</h2>
     <?php echo $artists_pie_svg; ?>
     <p class="stats-text">
 <?php
@@ -348,7 +348,7 @@ require_once __DIR__ . '/functions.php';
   </div>
 
   <div class="stats-row">
-    <h2>ARTIST PHOTOS</h2>
+    <h2>Artist photos</h2>
     <?php echo $artist_photo_pie_svg; ?>
     <p class="stats-text">
 <?php
@@ -359,7 +359,7 @@ require_once __DIR__ . '/functions.php';
   </div>
 
   <div class="stats-row">
-    <h2>INSTRUMENTS</h2>
+    <h2>Instruments</h2>
     <?php echo $instrument_pie_svg; ?>
     <p class="stats-text">
 <?php
@@ -372,7 +372,7 @@ require_once __DIR__ . '/functions.php';
   </div>
 
   <div class="stats-row">
-    <h2>GENDER</h2>
+    <h2>Gender</h2>
     <?php echo $gender_pie_svg; ?>
     <p class="stats-text">
 <?php
@@ -383,7 +383,7 @@ require_once __DIR__ . '/functions.php';
   </div>
 
   <div class="stats-row">
-    <h2>ACTIVE BANDS</h2>
+    <h2>Active bands</h2>
     <?php echo $active_band_pie_svg; ?>
     <p class="stats-text">
 <?php

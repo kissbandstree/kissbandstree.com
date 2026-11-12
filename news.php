@@ -4,7 +4,7 @@
       <title>News</title>
       <use href="icons.svg#news"></use>
     </svg>
-    NEWS
+    News
   </h2>
   <svg class="icons show-pointer no-margin"
     onclick="toggleDiv('news-container')"

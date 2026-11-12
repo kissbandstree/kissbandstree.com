@@ -15,7 +15,7 @@
       <use href="icons.svg#timeline"></use>
     </svg>
 
-    <h2>TIMELINE</h2>
+    <h2>Timeline</h2>
 
     <svg class="icons" aria-hidden="true" focusable="false">
       <title>Timeline</title>

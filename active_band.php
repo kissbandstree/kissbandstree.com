@@ -31,7 +31,7 @@ array_multisort(array_map(function ($file) {
     <use href="icons.svg#band"></use>
   </svg>
   <h2>
-    ACTIVE BANDS
+    Active bands
   </h2>
   <svg class="icons show-pointer no-margin"
     onclick="toggleDiv('activeBandContainer')"

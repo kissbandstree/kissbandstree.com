@@ -26,12 +26,12 @@
       <thead>
         <tr style="height: 45px;">
           <th class="not-wrap" data-sort-type="number"><span title="Alphabetical number">#</span></th>
-          <th class="not-wrap sorttable_nosort"><span title="Picture">PIC.</span></th>
-          <th class="not-wrap band" data-sort-type="text" data-sort-default="asc"><span title="Band name">BAND</span></th>
-          <th class="not-wrap" data-sort-type="year"><span title="Year">YEAR</span></th>
-          <th class="not-wrap with" data-sort-type="text"><span title="Played with what Kiss member">WITH</span></th>
-          <th class="not-wrap" data-sort-type="number"><span title="Number of members in lineup">MEMBERS</span></th>
-          <th class="not-wrap" data-sort-type="date-dmy"><span title="Entry created or modified">ENTRY</span></th>
+          <th class="not-wrap sorttable_nosort"><span title="Picture">Pic.</span></th>
+          <th class="not-wrap band" data-sort-type="text" data-sort-default="asc"><span title="Band name">Band</span></th>
+          <th class="not-wrap" data-sort-type="year"><span title="Year">Year</span></th>
+          <th class="not-wrap with" data-sort-type="text"><span title="Played with what Kiss member">With</span></th>
+          <th class="not-wrap" data-sort-type="number"><span title="Number of members in lineup">Members</span></th>
+          <th class="not-wrap" data-sort-type="date-dmy"><span title="Entry created or modified">Entry</span></th>
         </tr>
       </thead>
       <tbody>

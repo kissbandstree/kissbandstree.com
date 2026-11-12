@@ -179,7 +179,7 @@ $releaseSlugs = array_map(function ($item) {
       <use href="icons.svg#photo"></use>
     </svg>
 
-    <h2>COVER</h2>
+    <h2>Cover</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('releaseBandCoverContainer')"
@@ -213,7 +213,7 @@ $releaseSlugs = array_map(function ($item) {
       <use href="icons.svg#notepad"></use>
     </svg>
 
-    <h2>TRACKLIST</h2>
+    <h2>Tracklist</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('release-band-tracklist-container')"
@@ -236,7 +236,7 @@ $releaseSlugs = array_map(function ($item) {
       <use href="icons.svg#speech"></use>
     </svg>
 
-    <h2>COMMENTS</h2>
+    <h2>Comments</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('release-band-comments-container')"

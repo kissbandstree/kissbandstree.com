@@ -181,7 +181,7 @@ $artist_name = trim($contents[0]);
       <use href="icons.svg#photo"></use>
     </svg>
 
-    <h2>ARTIST PHOTO</h2>
+    <h2>Artist photo</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('artistPhotoContainer')"
@@ -266,7 +266,7 @@ $artist_name = trim($contents[0]);
         <use href="icons.svg#band"></use>
       </svg>
 
-    <h2>BANDS</h2>
+    <h2>Bands</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('bandsContainer')"

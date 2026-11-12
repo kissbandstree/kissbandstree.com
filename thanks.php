@@ -15,7 +15,7 @@
       <use href="icons.svg#star"></use>
     </svg>
 
-    <h2>THANKS</h2>
+    <h2>Thanks</h2>
 
     <svg class="icons" aria-hidden="true" focusable="false">
       <title>Thanks</title>

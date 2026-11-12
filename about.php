@@ -15,7 +15,7 @@
       <use href="icons.svg#about"></use>
     </svg>
 
-    <h2>ABOUT</h2>
+    <h2>About</h2>
 
     <svg class="icons" aria-hidden="true" focusable="false">
       <title>About</title>
@@ -27,7 +27,7 @@
 
   <div class="standard colored">
     <h1>
-      ABOUT TREE
+      About tree
     </h1>
   </div>
 
@@ -44,7 +44,7 @@
 
   <div class="standard colored">
     <h1>
-      ABOUT WEBSITE
+      About website
     </h1>
   </div>
 
@@ -61,7 +61,7 @@
 
   <div class="standard colored">
     <h1>
-      KNOWN ISSUES
+      Known issues
     </h1>
   </div>
 

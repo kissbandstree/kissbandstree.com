@@ -30,7 +30,7 @@ $nextViewUrl = resolve_page_request('/' . $nextView, $viewQuery)['url'];
     <use href="icons.svg#lp"></use>
   </svg>
 
-  <h2>RELEASES</h2>
+  <h2>Releases</h2>
 
   <a
     href="<?= htmlspecialchars($nextViewUrl, ENT_QUOTES, 'UTF-8') ?>"

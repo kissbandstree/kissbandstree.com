@@ -28,12 +28,12 @@
   entry, small photo, large photo and credits, plus comments for bands.
   Artists have no separate comments collection. JSON records use their own
   `modified` values, not the collection file's timestamp. Use these helpers for
-  detail pages, table dates and sorting, LAST MODIFIED BANDS, LAST MODIFIED
-  ARTISTS and ACTIVE BANDS. Run `php .github/tests/updated.php` and
+  detail pages, table dates and sorting, Last modified bands, Last modified
+  Artists and Active bands. Run `php .github/tests/updated.php` and
   `php .github/tests/home.php` after changing update-date behavior.
-- Home shows Kiss's LINEUPS above MEMBERS, including reunion periods in the
-  chronological order of Gene Simmons's Tree timeline. Lineups, LAST MODIFIED
-  BANDS and ACTIVE BANDS share `render_band_card` and their responsive layout.
+- Home shows Kiss's Lineups above Members, including reunion periods in the
+  chronological order of Gene Simmons's Tree timeline. Lineups, Last modified
+  bands and Active bands share `render_band_card` and their responsive layout.
   Cards show the photo, linked name and lineup number, period, linked Kiss
   members and SHOW ON TREE. Keep update dates in the two existing sections.
   Reuse `/tree?focus=SLUG` for navigation. Run

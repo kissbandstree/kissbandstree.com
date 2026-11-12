@@ -73,7 +73,7 @@ function render_member_filter() {
       <title>Filter</title>
       <use href="icons.svg#filter"></use>
     </svg>
-    <h2>FILTER</h2>
+    <h2>Filter</h2>
     <a href="#" id="resetBtn" title="Reset" aria-label="Reset filters">
       <svg class="icons" aria-hidden="true" focusable="false">
         <use href="icons.svg#reset"></use>
@@ -189,7 +189,7 @@ function render_band_filter() {
       <title>Filter</title>
       <use href="icons.svg#filter"></use>
     </svg>
-    <h2>FILTER</h2>
+    <h2>Filter</h2>
     <a href="#" id="resetBtnArtists" title="Reset" aria-label="Reset filters">
       <svg class="icons" aria-hidden="true" focusable="false">
         <use href="icons.svg#reset"></use>

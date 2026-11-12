@@ -6,7 +6,7 @@ require_once __DIR__ . '/functions.php';
     <title>Lineups</title>
     <use href="icons.svg#band"></use>
   </svg>
-  <h2>LINEUPS</h2>
+  <h2>Lineups</h2>
   <svg class="icons show-pointer no-margin"
     onclick="toggleDiv('lineup-container')"
     tabindex="0" aria-label="Toggle lineups">

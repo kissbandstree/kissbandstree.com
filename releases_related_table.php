@@ -41,12 +41,12 @@
       <thead>
         <tr style="height: 45px;">
           <th class="not-wrap" data-sort-type="number"><span title="Chronological number">#</span></th>
-          <th class="not-wrap sorttable_nosort"><span title="Picture">PIC.</span></th>
-          <th class="not-wrap artist" data-sort-type="text"><span title="Artist name">ARTIST</span></th>
-          <th class="not-wrap album" data-sort-type="text"><span title="Album name">ALBUM</span></th>
-          <th class="not-wrap date" data-sort-type="date-dmy" data-sort-default="asc"><span title="Release date">DATE</span></th>
-          <th class="not-wrap with" data-sort-type="text"><span title="Kiss members on record">WITH</span></th>
-          <th class="not-wrap" data-sort-type="date-dmy"><span title="Entry created or modified">ENTRY</span></th>
+          <th class="not-wrap sorttable_nosort"><span title="Picture">Pic.</span></th>
+          <th class="not-wrap artist" data-sort-type="text"><span title="Artist name">Artist</span></th>
+          <th class="not-wrap album" data-sort-type="text"><span title="Album name">Album</span></th>
+          <th class="not-wrap date" data-sort-type="date-dmy" data-sort-default="asc"><span title="Release date">Date</span></th>
+          <th class="not-wrap with" data-sort-type="text"><span title="Kiss members on record">With</span></th>
+          <th class="not-wrap" data-sort-type="date-dmy"><span title="Entry created or modified">Entry</span></th>
         </tr>
       </thead>
       <tbody>

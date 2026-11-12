@@ -39,7 +39,7 @@ $searchData = [
     <title>Search</title>
     <use href="icons.svg#search"></use>
   </svg>
-  <h2>SEARCH</h2>
+  <h2>Search</h2>
   <svg class="icons show-pointer no-margin"
     onclick="toggleDiv('searchContainer')"
     tabindex="0" aria-label="Toggle search">

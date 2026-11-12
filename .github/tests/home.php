@@ -39,8 +39,8 @@ $xpath = new DOMXPath($document);
 $headings = array_map(function ($heading) {
   return trim($heading->textContent);
 }, iterator_to_array($xpath->query('//h2')));
-check_home(array_search('LINEUPS', $headings, true) + 1 === array_search('MEMBERS', $headings, true),
-  'LINEUPS must immediately precede MEMBERS.');
+check_home(array_search('Lineups', $headings, true) + 1 === array_search('Members', $headings, true),
+  'Lineups must immediately precede Members.');
 
 $expectedLineups = [
   'kiss_1', 'kiss_2', 'kiss_3', 'kiss_4', 'kiss_5', 'kiss_6',

@@ -30,17 +30,17 @@
       <thead>
         <tr style="height: 45px;">
           <th class="not-wrap" data-sort-type="number"><span title="Alphabetical number">#</span></th>
-          <th class="not-wrap sorttable_nosort"><span title="Picture">PIC.</span></th>
-          <th class="not-wrap artist" data-sort-type="text" data-sort-default="asc"><span title="Artist name">ARTIST</span></th>
-          <th class="not-wrap instrument" data-sort-type="text"><span title="Main instrument(s)">INSTR.</span></th>
+          <th class="not-wrap sorttable_nosort"><span title="Picture">Pic.</span></th>
+          <th class="not-wrap artist" data-sort-type="text" data-sort-default="asc"><span title="Artist name">Artist</span></th>
+          <th class="not-wrap instrument" data-sort-type="text"><span title="Main instrument(s)">Instr.</span></th>
           <th class="not-wrap" data-sort-type="text"><span title="Web address">URL</span></th>
-          <th class="not-wrap" data-sort-type="text"><span title="Facebook page">FB.COM</span></th>
+          <th class="not-wrap" data-sort-type="text"><span title="Facebook page">FB.com</span></th>
           <th class="not-wrap" data-sort-type="text"><span title="Also known as">AKA</span></th>
-          <th class="not-wrap sex" data-sort-type="text"><span title="Gender">GENDER</span></th>
-          <th class="not-wrap birth" data-sort-type="text"><span title="Date of birth">BIRTH</span></th>
-          <th class="not-wrap passing" data-sort-type="text"><span title="Date of passing">PASSING</span></th>
-          <th class="not-wrap with" data-sort-type="text"><span title="Played with what Kiss member(s)">WITH</span></th>
-          <th class="not-wrap" data-sort-type="date-dmy"><span title="Entry created or modified">ENTRY</span></th>
+          <th class="not-wrap sex" data-sort-type="text"><span title="Gender">Gender</span></th>
+          <th class="not-wrap birth" data-sort-type="text"><span title="Date of birth">Birth</span></th>
+          <th class="not-wrap passing" data-sort-type="text"><span title="Date of passing">Passing</span></th>
+          <th class="not-wrap with" data-sort-type="text"><span title="Played with what Kiss member(s)">With</span></th>
+          <th class="not-wrap" data-sort-type="date-dmy"><span title="Entry created or modified">Entry</span></th>
         </tr>
       </thead>
       <tbody>

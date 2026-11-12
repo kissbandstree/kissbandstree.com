@@ -78,7 +78,7 @@ require_once __DIR__ . '/content.php'; require_once($_SERVER['DOCUMENT_ROOT'] . 
       <use href="icons.svg#calendar"></use>
     </svg>
 
-    <h2>CALENDAR</h2>
+    <h2>Calendar</h2>
 
     <svg class="icons" aria-hidden="true" focusable="false">
       <title>Calendar</title>
