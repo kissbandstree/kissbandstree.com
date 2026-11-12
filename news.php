@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/functions.php'; ?>
 <div class="top-line">
   <h2>
     <svg class="icons" aria-hidden="true">
@@ -18,7 +19,7 @@
 
   <div class="full">
     23-06-2026
-    <a href="https://github.com/kissbandstree">We are now on GitHub.</a>
+    <a href="https://github.com/kissbandstree">We are now on GitHub.<?php echo external_link_icon('https://github.com/kissbandstree'); ?></a>
   </div>
 
   <div class="full">

@@ -84,10 +84,10 @@
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[1]) . "'>" . trim($contents[1]) . "</td>"; // instrument
 
-          echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[7]) . "'><a href='" . trim($contents[7]) . "'> " . str_replace('http://', '', $contents[7]) . "</a></td>"; // url
+          echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[7]) . "'><a href='" . trim($contents[7]) . "'> " . str_replace('http://', '', $contents[7]) . external_link_icon(trim($contents[7])) . "</a></td>"; // url
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[2]) . "'>
-          <a href='https://facebook.com/" . trim($contents[2]) . "'> " . trim($contents[2]) . "</a>
+          <a href='https://facebook.com/" . trim($contents[2]) . "'> " . trim($contents[2]) . (trim($contents[2]) !== '' ? external_link_icon('https://facebook.com/' . trim($contents[2])) : '') . "</a>
           </td>"; // facebook
 
           echo "<td class='not-wrap' style='text-align: left;' title='" . trim($contents[6]) . "'>" . trim($contents[6]) . "</td>"; // aka

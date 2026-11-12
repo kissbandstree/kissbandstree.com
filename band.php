@@ -215,14 +215,14 @@ $band_slugs = array_map(function ($b) {
     if ($url) {
       $nice = preg_replace('#^https?://#i', '', $url);
       echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#world"></use></svg>';
-      echo "URL: <a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($nice) . "</a><br>";
+      echo "URL: <a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($nice) . external_link_icon($url) . "</a><br>";
     }
 
     $facebook = trim($contents[3]);
     if ($facebook) {
       $fbUrl = 'https://facebook.com/' . ltrim($facebook, '/');
       echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#facebook"></use></svg>';
-      echo "Facebook: <a href='" . htmlspecialchars($fbUrl) . "'>" . htmlspecialchars($facebook) . "</a><br>";
+      echo "Facebook: <a href='" . htmlspecialchars($fbUrl) . "'>" . htmlspecialchars($facebook) . external_link_icon($fbUrl) . "</a><br>";
     }
 
     $with_kiss = array_map('trim', explode(',', $contents[5]));
@@ -290,7 +290,7 @@ $band_slugs = array_map(function ($b) {
     $url = get_credit($credits, 3);
     echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#reference"></use></svg>';
     echo "Source: " . ($url && $url !== 'n/a'
-      ? "<a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($source) . "</a>"
+      ? "<a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($source) . external_link_icon($url) . "</a>"
       : htmlspecialchars($source));
     ?>
   </div>

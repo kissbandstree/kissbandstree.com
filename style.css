@@ -102,11 +102,13 @@ a {
   color: var(--color1);
 }
 
-a:not(:has(img, svg)):hover {
+a:not(:has(img, svg)):hover,
+a:has(> .external-link-icon):not(:has(img, svg:not(.external-link-icon))):hover {
   background: var(--white);
 }
 
 a:hover .icons,
+a:hover .external-link-icon,
 button:hover .icons,
 a.focus:hover img,
 a.focus:hover > svg {
@@ -118,7 +120,8 @@ a.focus:hover > svg {
   opacity: 1;
 }
 
-a:not(:has(img, svg)):visited {
+a:not(:has(img, svg)):visited,
+a:has(> .external-link-icon):not(:has(img, svg:not(.external-link-icon))):visited {
   color: var(--color2);
 }
 
@@ -210,6 +213,14 @@ input[type="checkbox"] {
   height: 16px;
   margin-right: 6px;
   vertical-align: 0.03em;
+  width: 16px;
+}
+
+.external-link-icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 16px;
+  vertical-align: baseline;
   width: 16px;
 }
 

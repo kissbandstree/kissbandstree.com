@@ -237,14 +237,14 @@ $artist_name = trim($contents[0]);
     $url = trim($contents[7]);
     if ($url !== "") {
       $display_url = preg_replace("#^https?://#", "", $url); // strip protocol
-      echo "<span title=\"Website\">WEBSITE: </span><a href=\"$url\">$display_url</a><br>";
+      echo "<span title=\"Website\">WEBSITE: </span><a href=\"$url\">$display_url" . external_link_icon($url) . "</a><br>";
     }
 
     // Facebook
     $facebook = trim($contents[2]);
     if ($facebook !== "") {
       $facebook_url = "https://facebook.com/$facebook";
-      echo "<span title=\"Facebook page\">FACEBOOK: </span><a href=\"$facebook_url\">$facebook</a><br>";
+      echo "<span title=\"Facebook page\">FACEBOOK: </span><a href=\"$facebook_url\">$facebook" . external_link_icon($facebook_url) . "</a><br>";
     }
 
     // With Kiss member(s)
@@ -398,7 +398,7 @@ $artist_name = trim($contents[0]);
               $source = get_credit($credits, 3);
             }
             echo ($url && $url !== 'n/a')
-              ? "<a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($source) . "</a>"
+              ? "<a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($source) . external_link_icon($url) . "</a>"
               : htmlspecialchars($source);
             ?>
 

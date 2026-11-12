@@ -3,6 +3,17 @@ require_once __DIR__ . '/content.php';
 
 // Shared helper functions
 
+function external_link_icon(string $url): string
+{
+  $parts = parse_url($url);
+  if (!is_array($parts) || !isset($parts['scheme'], $parts['host'])
+    || !in_array(strtolower($parts['scheme']), ['http', 'https'], true)
+    || in_array(strtolower($parts['host']), ['kissbandstree.com', 'www.kissbandstree.com', 'localhost', '127.0.0.1'], true)) {
+    return '';
+  }
+  return ' <svg class="external-link-icon" aria-hidden="true" focusable="false"><use href="/icons.svg#external"></use></svg>';
+}
+
 function sanitize_band_slug($band_name)
 {
   $slug = preg_replace('/\s*\[.*?\]|\s*\/.*?$/', '', $band_name); // Remove brackets and slashes
