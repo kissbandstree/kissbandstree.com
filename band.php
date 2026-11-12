@@ -175,7 +175,7 @@ $band_slugs = array_map(function ($b) {
       <use href="icons.svg#photo"></use>
     </svg>
 
-    <h2>LINEUP PHOTO</h2>
+    <h2>Lineup photo</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('lineupPhotoContainer')"
@@ -214,13 +214,15 @@ $band_slugs = array_map(function ($b) {
     $url = trim($contents[2]);
     if ($url) {
       $nice = preg_replace('#^https?://#i', '', $url);
+      echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#world"></use></svg>';
       echo "URL: <a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($nice) . "</a><br>";
     }
 
     $facebook = trim($contents[3]);
     if ($facebook) {
       $fbUrl = 'https://facebook.com/' . ltrim($facebook, '/');
-      echo "FACEBOOK: <a href='" . htmlspecialchars($fbUrl) . "'>" . htmlspecialchars($facebook) . "</a><br>";
+      echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#facebook"></use></svg>';
+      echo "Facebook: <a href='" . htmlspecialchars($fbUrl) . "'>" . htmlspecialchars($facebook) . "</a><br>";
     }
 
     $with_kiss = array_map('trim', explode(',', $contents[5]));
@@ -229,10 +231,13 @@ $band_slugs = array_map(function ($b) {
       return "<a href='/artist?a=$slug'>" . htmlspecialchars($name) . "</a>";
     }, $with_kiss);
 
-    echo "WITH KISS MEMBER: " . implode(', ', $links) . "<br><br>";
+    echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#person"></use></svg>';
+    echo "With Kiss member: " . implode(', ', $links) . "<br><br>";
 
-    echo "<a href=\"/tree?focus=" . urlencode($band) . "\">SHOW ON TREE</a><br><br>";
+    echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#tree"></use></svg>';
+    echo "<a href=\"/tree?focus=" . urlencode($band) . "\">Show on tree</a><br><br>";
 
+    echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#calendar"></use></svg>';
     echo "Entry updated: " . date('d-m-Y.', get_band_mtime($band));
     ?>
   </div>
@@ -243,7 +248,7 @@ $band_slugs = array_map(function ($b) {
       <use href="icons.svg#speech"></use>
     </svg>
 
-    <h2>COMMENTS</h2>
+    <h2>Comments</h2>
 
     <svg class="icons show-pointer no-margin"
       onclick="toggleDiv('band-comments-container')"
@@ -266,7 +271,7 @@ $band_slugs = array_map(function ($b) {
   </div>
 
   <div class="standard">
-    <h2>PHOTO CREDITS</h2><br>
+    <h2>Photo credits</h2><br>
     <?php
     $credit_file = "bands_credits/$band.txt";
     $credits = content_exists($credit_file) ? content_file($credit_file, FILE_IGNORE_NEW_LINES) : [];
@@ -276,12 +281,15 @@ $band_slugs = array_map(function ($b) {
       return !empty($array[$index]) ? trim($array[$index]) : 'n/a';
     }
 
-    echo "DESCRIPTION: " . htmlspecialchars(get_credit($credits, 0)) . "<br>";
-    echo "PHOTOGRAPHER: " . htmlspecialchars(get_credit($credits, 1)) . "<br>";
+    echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#quote"></use></svg>';
+    echo "Description: " . htmlspecialchars(get_credit($credits, 0)) . "<br>";
+    echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#photo"></use></svg>';
+    echo "Photographer: " . htmlspecialchars(get_credit($credits, 1)) . "<br>";
 
     $source = get_credit($credits, 2);
     $url = get_credit($credits, 3);
-    echo "SOURCE: " . ($url && $url !== 'n/a'
+    echo '<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#reference"></use></svg>';
+    echo "Source: " . ($url && $url !== 'n/a'
       ? "<a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($source) . "</a>"
       : htmlspecialchars($source));
     ?>

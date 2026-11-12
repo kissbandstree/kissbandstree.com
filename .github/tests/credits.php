@@ -91,8 +91,9 @@ foreach (['artist' => 'artists', 'band' => 'bands'] as $type => $directory) {
     fclose($pipes[2]);
     $status = proc_close($process);
     check_credits($status === 0 && $errors === '', "Rendering failed for $type/$slug: $errors");
-    check_credits(preg_match('~DESCRIPTION:\s*(.*?)<br>\s*PHOTOGRAPHER:\s*(.*?)<br>\s*SOURCE:\s*(.*?)</div>~s',
-      $html, $matches) === 1, "Credit block missing for $type/$slug");
+    $creditHtml = preg_replace('~<svg\b[^>]*>.*?</svg>~s', '', $html);
+    check_credits(preg_match('~Description:\s*(.*?)<br>\s*Photographer:\s*(.*?)<br>\s*Source:\s*(.*?)</div>~si',
+      $creditHtml, $matches) === 1, "Credit block missing for $type/$slug");
     foreach ($expected as $index => $value) {
       $actual = trim(html_entity_decode(strip_tags($matches[$index + 1]), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
       check_credits($actual === $value, "Credit field $index shifted for $type/$slug: $actual");
@@ -102,6 +103,22 @@ foreach (['artist' => 'artists', 'band' => 'bands'] as $type => $directory) {
     if ($linked) {
       check_credits(html_entity_decode($anchor[1], ENT_QUOTES | ENT_HTML5, 'UTF-8') === $url,
         "Wrong source destination for $type/$slug");
+    }
+    if ($type === 'band') {
+      $bandLines = content_file("bands/$slug.txt", FILE_IGNORE_NEW_LINES);
+      $expectedIcons = [];
+      if (trim($bandLines[2]) !== '') $expectedIcons[] = 'world';
+      if (trim($bandLines[3]) !== '') $expectedIcons[] = 'facebook';
+      $expectedIcons = array_merge($expectedIcons, ['person', 'tree', 'calendar', 'quote', 'photo', 'reference']);
+      preg_match_all('~<svg class="entry-metadata-icon" aria-hidden="true"><use href="icons.svg#([^"]+)"></use></svg>~',
+        $html, $icons);
+      check_credits($icons[1] === $expectedIcons, "Missing or unexpected band metadata icons for $slug");
+      foreach (['Bands', 'Lineup photo', 'Comments', 'Photo credits'] as $heading) {
+        check_credits(str_contains($html, '<h2>' . $heading . '</h2>'), "Incorrect heading case for $slug: $heading");
+      }
+      foreach (['With Kiss member:', 'Show on tree', 'Description:', 'Photographer:', 'Source:'] as $label) {
+        check_credits(str_contains($creditHtml, $label), "Incorrect metadata label case for $slug: $label");
+      }
     }
     if ($type === 'artist') {
       $document = new DOMDocument();

@@ -204,6 +204,15 @@ input[type="checkbox"] {
   margin: 0 auto;
 }
 
+.entry-metadata-icon {
+  display: inline-block;
+  fill: var(--white);
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: 0.03em;
+  width: 16px;
+}
+
 .no-margin {
   margin: 0;
 }

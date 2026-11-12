@@ -30,7 +30,7 @@ $nextViewUrl = resolve_page_request('/' . $nextView, $viewQuery)['url'];
     <use href="icons.svg#band"></use>
   </svg>
 
-  <h2>BANDS</h2>
+  <h2>Bands</h2>
 
   <a
     href="<?= htmlspecialchars($nextViewUrl, ENT_QUOTES, 'UTF-8') ?>"

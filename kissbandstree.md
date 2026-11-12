@@ -107,6 +107,10 @@
   section or detail page and its query parameters.
 - Keep `icons.svg` identical to Pekosoft's sprite when updating it. Check that
   all icons referenced by this site remain present.
+- Band detail metadata and photo-credit rows use 16px inline icons from the
+  shared sprite, retaining their text labels and existing links.
+- Use sentence case for interface headings and metadata labels, preserving
+  proper names and acronyms such as URL.
 - Page bitmaps use the TOC symbols: `png/` contains 512 by 512 PNGs and
   `png/og/` contains 1200 by 630 sharing previews, with white symbols on black.
   Home uses the site icon. Grid, Table and List share their section preview.
