@@ -15,6 +15,7 @@ $artistName = trim($contents[0] ?? '');
 $albumTitle = trim($contents[1] ?? '');
 $releaseDate = trim($contents[2] ?? '');
 $kissMembers = trim($contents[3] ?? '');
+$spotifyUrl = trim($contents[4] ?? '');
 
 $pagetitle = $albumTitle !== '' ? $albumTitle : $release;
 
@@ -202,6 +203,7 @@ $releaseSlugs = array_map(function ($item) {
     if ($memberLinks !== '') {
       echo 'WITH KISS MEMBER: ' . $memberLinks . '<br>';
     }
+    echo render_release_spotify_link($spotifyUrl);
     echo '<br>';
     echo 'Entry updated: ' . date('d-m-Y.', content_mtime($filePath));
     ?>

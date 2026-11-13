@@ -265,6 +265,8 @@
 | Related tracklists | `data/related-release-tracklists.json` |
 | About, intro, footer, thanks and other page text | `data/pages.json` |
 
+- Band and related release records use an optional fifth line for the verified
+  Spotify album URL. Leave it absent when the matching release is unverified.
 - Run `php .github/tests/content.php` after content or loader changes.
 - Run `php .github/tests/credits.php` after credit or credit-display changes.
   It checks field positions and source links on every credited page.

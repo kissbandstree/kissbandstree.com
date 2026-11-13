@@ -14,6 +14,18 @@ function external_link_icon(string $url): string
   return ' <svg class="external-link-icon" aria-hidden="true" focusable="false"><use href="/icons.svg#external"></use></svg>';
 }
 
+function render_release_spotify_link(string $url): string
+{
+  if ($url === '') {
+    return '';
+  }
+  if (!preg_match('~^https://open\.spotify\.com/album/[A-Za-z0-9]{22}$~D', $url)) {
+    throw new RuntimeException('Invalid Spotify album URL: ' . $url);
+  }
+  return '<svg class="entry-metadata-icon" aria-hidden="true"><use href="/icons.svg#spotify"></use></svg>'
+    . '<a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '">Spotify' . external_link_icon($url) . '</a><br>';
+}
+
 function sanitize_band_slug($band_name)
 {
   $slug = preg_replace('/\s*\[.*?\]|\s*\/.*?$/', '', $band_name); // Remove brackets and slashes
