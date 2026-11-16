@@ -57,7 +57,7 @@ if (preg_match('/^https?:\/\//i', $rawImage) === 1) {
 }
 
 $ogTitle = isset($pagetitle) && is_string($pagetitle) && $pagetitle !== ''
-	? $pagetitle
+	? 'Kiss Bands Tree - ' . $pagetitle
 	: ($previewSlug === 'index' ? 'Kiss Bands Tree' : 'Kiss Bands Tree - ' . $previewTitles[$previewSlug]);
 ?>
 <meta property="og:image" content="<?php echo htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8'); ?>">
@@ -71,7 +71,7 @@ $ogTitle = isset($pagetitle) && is_string($pagetitle) && $pagetitle !== ''
 <meta property="og:url" content="<?php echo htmlspecialchars($ogUrl, ENT_QUOTES, 'UTF-8'); ?>">
 <meta property="og:description" content="All the bands with members of the American rock band Kiss.">
 
-<title>Kiss Bands Tree</title>
+<title><?php echo htmlspecialchars($ogTitle, ENT_QUOTES, 'UTF-8'); ?></title>
 <link rel="canonical" href="<?php echo htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8'); ?>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">

@@ -29,6 +29,8 @@ function render_preview_head($root, $page, $host = 'localhost:8003', $thumb = nu
   foreach ($document->getElementsByTagName('meta') as $element) {
     $meta[$element->getAttribute('property')] = $element->getAttribute('content');
   }
+  check_preview($document->getElementsByTagName('title')->item(0)->textContent === $meta['og:title'],
+    'Browser and sharing titles differ: ' . $page);
   return $meta;
 }
 
@@ -60,6 +62,14 @@ foreach ($sections as $slug => $pages) {
   foreach ($pages as $page) {
     foreach (['localhost:8003' => 'http://localhost:8003', 'kissbandstree.com' => 'https://kissbandstree.com'] as $host => $origin) {
       $meta = render_preview_head($root, $page, $host);
+      $sectionTitles = [
+        'index' => '', 'bands' => 'Bands', 'artists' => 'Artists',
+        'releases_band' => 'Releases', 'releases_related' => 'Related',
+        'calendar' => 'Calendar', 'about' => 'About', 'thanks' => 'Thanks',
+        'stats' => 'Stats', 'tree' => 'Tree',
+      ];
+      $expectedTitle = 'Kiss Bands Tree' . ($sectionTitles[$slug] !== '' ? ' - ' . $sectionTitles[$slug] : '');
+      check_preview($meta['og:title'] === $expectedTitle, 'Wrong brand-first section title: ' . $page);
       check_preview($meta['og:image'] === $origin . '/png/og/' . $slug . '.png', 'Wrong section preview: ' . $page);
       check_preview($meta['og:image:type'] === 'image/png' && $meta['og:image:width'] === '1200'
         && $meta['og:image:height'] === '630', 'Missing preview dimensions: ' . $page);
@@ -87,7 +97,7 @@ foreach ([
   $meta = render_preview_head($root, $page, 'localhost:8003', $thumb, 'Detail & title');
   $expected = strpos($thumb, 'https://') === 0 ? $thumb : 'http://localhost:8003/' . ltrim($thumb, '/');
   check_preview($meta['og:image'] === $expected, 'Detail image replaced: ' . $page);
-  check_preview($meta['og:title'] === 'Detail & title', 'Detail title replaced: ' . $page);
+  check_preview($meta['og:title'] === 'Kiss Bands Tree - Detail & title', 'Wrong brand-first detail title: ' . $page);
   check_preview(!isset($meta['og:image:width']), 'Generic dimensions applied to a detail photo: ' . $page);
 }
 
