@@ -128,9 +128,7 @@ $releaseFiles = array_map(function ($item) {
     }
 
     function setPlayIcon(state) {
-      const use = playButton.querySelector('use');
-      if (!use) return;
-      use.setAttribute('href', state === 'play' ? 'icons.svg#play' : 'icons.svg#pause');
+      playButton.classList.toggle('button-on', state === 'pause');
       playButton.setAttribute('title', state === 'play' ? 'Play' : 'Pause');
     }
 

@@ -81,8 +81,31 @@ test('Home, Calendar and detail pages preserve remembered navigation views', () 
     setup.links.forEach((link, index) => {
       assert.equal(link.getAttribute('href'), destination(sections[index], 'table'));
     });
+
     setup.storage.mode = 'list';
     setup.links[0].handlers.click({ preventDefault() {} });
     assert.equal(setup.location.pathname + setup.location.search, '/bands?view=list');
+  }
+});
+
+test('detail slideshows keep the Play icon and mark it active while running', () => {
+  for (const file of ['artist.php', 'band.php', 'release_band.php', 'release_related.php']) {
+    const template = fs.readFileSync(path.join(__dirname, '..', '..', file), 'utf8');
+    assert.match(template, /<a href="#" id="playPauseBtn"[\s\S]*?<use href="icons\.svg#play"/);
+    assert.doesNotMatch(template, /icons\.svg#pause/);
+    const source = template.slice(template.indexOf('    function setPlayIcon(state)'), template.indexOf('    function togglePlay()'));
+    const button = {
+      active: false,
+      classList: { toggle(name, enabled) { assert.equal(name, 'button-on'); button.active = enabled; } },
+      setAttribute(name, value) { assert.equal(name, 'title'); this.title = value; }
+    };
+    const context = vm.createContext({ playButton: button });
+    vm.runInContext(source, context);
+    context.setPlayIcon('pause');
+    assert.equal(button.active, true, file);
+    assert.equal(button.title, 'Pause', file);
+    context.setPlayIcon('play');
+    assert.equal(button.active, false, file);
+    assert.equal(button.title, 'Play', file);
   }
 });

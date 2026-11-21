@@ -102,15 +102,8 @@ $artist_name = trim($contents[0]);
     }
 
     function setPlayIcon(state) {
-      const use = playButton.querySelector('use');
-      if (!use) return;
-      if (state === 'play') {
-        use.setAttribute('href', 'icons.svg#play');
-        playButton.setAttribute('title', 'Play');
-      } else {
-        use.setAttribute('href', 'icons.svg#pause');
-        playButton.setAttribute('title', 'Pause');
-      }
+      playButton.classList.toggle('button-on', state === 'pause');
+      playButton.setAttribute('title', state === 'play' ? 'Play' : 'Pause');
     }
 
     function togglePlay() {

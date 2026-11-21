@@ -1166,6 +1166,10 @@ h2.small-photo-heading .artist-photo-wrap {
   width: 100%;
 }
 
+#playPauseBtn.button-on .icons {
+  fill: var(--color1);
+}
+
 /* keep the no-shift highlight, now not tied to .top-line */
 input[name="member"]:checked+.artist-toggle .artist-photo-wrap {
   box-shadow: 0 0 0 4px var(--white);
