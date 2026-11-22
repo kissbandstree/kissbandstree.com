@@ -109,7 +109,7 @@ function plan(root, mode, base, sha, generateFeed = false) {
     fs.writeFileSync(path.join(root, 'data', 'updates.json'), `${JSON.stringify({ workflow_runs: runs, total_count: runs.length })}\n`);
     add(uploads, 'data/updates.json');
   }
-  const priority = file => file.startsWith('data/') ? 0 : file === 'content.php' ? 1 : file === 'functions.php' ? 2 : 3;
+  const priority = file => file.startsWith('data/') ? 0 : ['content.php', 'updates_view.php', 'updates.css'].includes(file) ? 1 : ['functions.php', 'updates.php'].includes(file) ? 2 : 3;
   const files = [...uploads].sort((left, right) => priority(left) - priority(right) || left.localeCompare(right));
   for (const file of files) {
     if (!fs.lstatSync(path.join(root, file)).isFile()) throw new Error(`Deployment file is not a regular file: ${file}`);

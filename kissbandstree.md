@@ -72,7 +72,7 @@
   bottom Close controls use the same spacing.
 - TOC labels use regular capitalization, such as Bands and Related, not all caps.
 - Public sections use clean root URLs: `/bands`, `/artists`, `/releases`,
-  `/related`, `/calendar`, `/about`, `/thanks`, `/stats` and `/tree`.
+  `/related`, `/calendar`, `/about`, `/thanks`, `/stats`, `/tree` and `/updates`.
   Grid is the default; the four view sections use `?view=table` and `?view=list`.
   `page.php` selects existing templates through `page-routes.php`. Old section
   PHP URLs permanently redirect, preserving the original view and other query

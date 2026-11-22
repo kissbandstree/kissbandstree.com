@@ -123,6 +123,9 @@
           </a>
         </h1>
       </li>
+      <li>
+        <h1><a href="/updates"><svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>Updates</a></h1>
+      </li>
     </ul>
 
     <div class="toc-close-wrap">

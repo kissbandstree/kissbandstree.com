@@ -13,6 +13,7 @@ function get_page_routes()
     'thanks' => ['grid' => 'thanks.php'],
     'stats' => ['grid' => 'stats.php'],
     'tree' => ['grid' => 'tree.php'],
+    'updates' => ['grid' => 'updates.php'],
   ];
 }
 

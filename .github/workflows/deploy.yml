@@ -60,7 +60,7 @@ jobs:
       SFTP_PORT: ${{ vars.SFTP_PORT || '22' }}
       SFTP_REMOTE_DIR: /home/flamenco/kissbandstree.com
       DEPLOY_MODE: ${{ inputs.mode || 'changed' }}
-      DEPLOY_UPDATES_FEED: 'false'
+      DEPLOY_UPDATES_FEED: 'true'
       DEPLOY_FULL_PRUNE: ''
 
     steps:
@@ -70,7 +70,7 @@ jobs:
           fetch-depth: 0
 
       - name: Test deployment behavior
-        run: node --test .github/tests/deployment.cjs
+        run: node --test .github/tests/deployment.cjs .github/tests/updates.cjs
 
       - name: Find last successful upload
         id: baseline

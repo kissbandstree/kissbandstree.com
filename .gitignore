@@ -6,6 +6,7 @@ Desktop.ini
 
 # Logs and temporary files
 *.log
+/data/updates.json
 *.tmp
 *.temp
 

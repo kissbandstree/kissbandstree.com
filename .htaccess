@@ -1,5 +1,6 @@
 
 RewriteEngine on
+RewriteRule ^updates_view\.php$ - [F,L]
 Options -MultiViews
 DirectorySlash Off
 
@@ -17,6 +18,6 @@ RewriteCond %{THE_REQUEST} "\s/+(band|artist|release_band|release_related)\.php[
 RewriteRule ^(band|artist|release_band|release_related)\.php$ /$1 [R=301,L]
 RewriteRule ^(band|artist|release_band|release_related)/$ /$1 [R=301,L]
 RewriteRule ^(band|artist|release_band|release_related)$ $1.php [END]
-RewriteRule ^(index|calendar|about|thanks|stats|tree|(bands|artists|releases_band|releases_related)_(grid|table|list))\.php$ page.php [L]
-RewriteRule ^(bands|artists|releases|related|calendar|about|thanks|stats|tree)/?$ page.php [L]
+RewriteRule ^(index|calendar|about|thanks|stats|tree|updates|(bands|artists|releases_band|releases_related)_(grid|table|list))\.php$ page.php [L]
+RewriteRule ^(bands|artists|releases|related|calendar|about|thanks|stats|tree|updates)/?$ page.php [L]
 RewriteRule ^$ page.php [L]
