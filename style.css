@@ -724,6 +724,11 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
   padding: 6px 10px;
 }
 
+.heading + .top-line,
+.heading + .standard {
+  margin-top: 16px;
+}
+
 .top-line .icons {
   /* kill global centering on icons here */
   margin: 0;
