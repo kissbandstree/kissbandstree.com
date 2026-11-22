@@ -119,8 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   const currentPath = sections[window.location.pathname] || window.location.pathname;
   const home = header.querySelector(".logo-link");
-  const links = [home, ...document.querySelectorAll("#toc a[href]")]
+  const links = [...document.querySelectorAll("#toc a[href]")]
     .filter(link => link && !["/tree", "/tree.php"].includes(new URL(link.href).pathname));
+  if (home && !links.some(link => new URL(link.href).pathname === "/")) links.unshift(home);
 
   function normalizePath(path) {
     return path === "/index.php" ? "/" : path;

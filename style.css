@@ -642,6 +642,10 @@ body.settings-lock {
   background: var(--grey2);
 }
 
+.toc-container ul li a { color: var(--white); }
+.toc-container ul li a .icons { fill: currentColor; }
+.toc-container ul li a[aria-current="page"] { color: var(--color1); }
+
 .settings-panel .button-on,
 .settings-panel .button-on .icons,
 .tree-controls .button-on,

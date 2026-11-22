@@ -1,3 +1,13 @@
+<?php
+$currentPath = rtrim(preg_replace('~\.php$~', '', parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/'), '/') ?: '/';
+$currentSection = [
+  '/index' => '/',
+  '/band' => '/bands',
+  '/artist' => '/artists',
+  '/release_band' => '/releases',
+  '/release_related' => '/related',
+][$currentPath] ?? $currentPath;
+?>
 <div id="burger-container">
   <button
     id="toggle-menu-button"
@@ -13,10 +23,11 @@
 
   <div id="toc" class="toc-container no-swipe">
     <ul>
+      <li><h1><a href="/"<?php if ($currentSection === '/'): ?> aria-current="page"<?php endif; ?>><svg class="icons" aria-hidden="true"><use href="/icons.svg#home"></use></svg>Home</a></h1></li>
       <li>
         <h1>
           <a
-            href="/bands"
+            href="/bands"<?php if ($currentSection === '/bands'): ?> aria-current="page"<?php endif; ?>
             data-view-group="bands"
             data-view-grid="/bands"
             data-view-table="/bands?view=table"
@@ -31,7 +42,7 @@
       <li>
         <h1>
           <a
-            href="/artists"
+            href="/artists"<?php if ($currentSection === '/artists'): ?> aria-current="page"<?php endif; ?>
             data-view-group="artists"
             data-view-grid="/artists"
             data-view-table="/artists?view=table"
@@ -46,7 +57,7 @@
       <li>
         <h1>
           <a
-            href="/releases"
+            href="/releases"<?php if ($currentSection === '/releases'): ?> aria-current="page"<?php endif; ?>
             data-view-group="releases"
             data-view-grid="/releases"
             data-view-table="/releases?view=table"
@@ -61,7 +72,7 @@
       <li>
         <h1>
           <a
-            href="/related"
+            href="/related"<?php if ($currentSection === '/related'): ?> aria-current="page"<?php endif; ?>
             data-view-group="related"
             data-view-grid="/related"
             data-view-table="/related?view=table"
@@ -75,7 +86,7 @@
       </li>
       <li>
         <h1>
-          <a href="/calendar">
+          <a href="/calendar"<?php if ($currentSection === '/calendar'): ?> aria-current="page"<?php endif; ?>>
             <svg class="icons">
               <use href="icons.svg#calendar"></use>
             </svg>
@@ -85,7 +96,7 @@
       </li>
       <li>
         <h1>
-          <a href="/about">
+          <a href="/about"<?php if ($currentSection === '/about'): ?> aria-current="page"<?php endif; ?>>
             <svg class="icons">
               <use href="icons.svg#about"></use>
             </svg>
@@ -95,7 +106,7 @@
       </li>
       <li>
         <h1>
-          <a href="/thanks">
+          <a href="/thanks"<?php if ($currentSection === '/thanks'): ?> aria-current="page"<?php endif; ?>>
             <svg class="icons">
               <use href="icons.svg#star"></use>
             </svg>
@@ -105,7 +116,7 @@
       </li>
       <li>
         <h1>
-          <a href="/stats">
+          <a href="/stats"<?php if ($currentSection === '/stats'): ?> aria-current="page"<?php endif; ?>>
             <svg class="icons">
               <use href="icons.svg#cake_diagram"></use>
             </svg>
@@ -115,7 +126,7 @@
       </li>
       <li>
         <h1>
-          <a href="/tree">
+          <a href="/tree"<?php if ($currentSection === '/tree'): ?> aria-current="page"<?php endif; ?>>
             <svg class="icons">
               <use href="icons.svg#tree"></use>
             </svg>
@@ -124,7 +135,7 @@
         </h1>
       </li>
       <li>
-        <h1><a href="/updates"><svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>Updates</a></h1>
+        <h1><a href="/updates"<?php if ($currentSection === '/updates'): ?> aria-current="page"<?php endif; ?>><svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>Updates</a></h1>
       </li>
     </ul>
 

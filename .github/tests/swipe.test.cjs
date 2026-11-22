@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
@@ -6,7 +7,8 @@ const vm = require('node:vm');
 
 const root = path.join(__dirname, '..', '..');
 const source = fs.readFileSync(path.join(root, 'swipe.js'), 'utf8');
-const menu = fs.readFileSync(path.join(root, 'burger.php'), 'utf8');
+const menu = execFileSync('php', ['-r', '$_SERVER["REQUEST_URI"] = "/"; require $argv[1];',
+  path.join(root, 'burger.php')], { encoding: 'utf8' });
 const origin = 'http://localhost:8003';
 
 function createSwipe(url, mode = 'grid', hasHeader = true) {
@@ -57,13 +59,26 @@ function createSwipe(url, mode = 'grid', hasHeader = true) {
 
 test('main-menu swipes wrap through Home and skip Tree in both directions', () => {
   const pages = ['/', '/bands', '/artists', '/releases',
-    '/related', '/calendar', '/about', '/thanks', '/stats'];
+    '/related', '/calendar', '/about', '/thanks', '/stats', '/updates'];
   for (let index = 0; index < pages.length; index++) {
     assert.equal(createSwipe(pages[index]).swipe('forward'), pages[(index + 1) % pages.length]);
     assert.equal(createSwipe(pages[index]).swipe('backward'),
       pages[(index - 1 + pages.length) % pages.length]);
   }
   assert.equal(createSwipe('/index.php').swipe('forward'), '/bands');
+});
+
+test('TOC marks the current section for views and detail pages', () => {
+  for (const [request, expected] of [
+    ['/', '/'], ['/related?view=table', '/related'], ['/band?a=kiss', '/bands'],
+    ['/artist?a=tommy_thayer', '/artists'], ['/release_band?a=kiss', '/releases'],
+    ['/release_related?a=kiss', '/related'], ['/updates', '/updates'], ['/missing', null]
+  ]) {
+    const html = execFileSync('php', ['-r', '$_SERVER["REQUEST_URI"] = $argv[2]; require $argv[1];',
+      path.join(root, 'burger.php'), request], { encoding: 'utf8' });
+    const selected = [...html.matchAll(/<a\s+href="([^"]+)"\s+aria-current="page"/g)].map(match => match[1]);
+    assert.deepEqual(selected, expected === null ? [] : [expected], request);
+  }
 });
 
 test('Grid, Table and List navigation follows the existing view preference', () => {
