@@ -35,6 +35,7 @@ test('Updates paginates Git history and reports invalid input or feeds', t => {
   };
   const first = render({});
   assert.equal(first.status, 200);
+  assert.match(first.body, /<svg class="icons" aria-hidden="true"><use href="\/icons\.svg#github"><\/use><\/svg>\s*<h1>Updates<\/h1>\s*<svg class="icons" aria-hidden="true"><use href="\/icons\.svg#github"><\/use><\/svg>/);
   assert.match(first.body, /Page 1 of 2/);
   assert.match(first.body, /Update 0 &lt;test&gt;/);
   assert.match(first.body, new RegExp(`https://github.com/example/site/commit/${runs[0].head_sha}`));

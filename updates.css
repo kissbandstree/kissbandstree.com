@@ -4,11 +4,6 @@
   text-align: center;
 }
 
-.updates-heading::after {
-  content: "";
-  flex: 0 0 32px;
-}
-
 .updates {
   container-type: inline-size;
   padding: 16px;

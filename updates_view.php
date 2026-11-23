@@ -52,6 +52,7 @@ $escape = static fn($value) => htmlspecialchars((string) $value, ENT_QUOTES, 'UT
   <div class="top-line updates-heading">
     <svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>
     <h1>Updates</h1>
+    <svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>
   </div>
   <div class="standard colored updates">
     <nav class="updates-pagination" aria-label="Updates pagination">
