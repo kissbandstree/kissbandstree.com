@@ -59,12 +59,23 @@ if (preg_match('/^https?:\/\//i', $rawImage) === 1) {
 $ogTitle = isset($pagetitle) && is_string($pagetitle) && $pagetitle !== ''
 	? 'Kiss Bands Tree - ' . $pagetitle
 	: ($previewSlug === 'index' ? 'Kiss Bands Tree' : 'Kiss Bands Tree - ' . $previewTitles[$previewSlug]);
+
+// Declare the real dimensions for photos and covers as well as section images.
+$ogImagePath = parse_url($ogImage, PHP_URL_PATH);
+$ogImageHost = parse_url($ogImage, PHP_URL_HOST);
+$ogImageFile = is_string($ogImagePath) ? realpath(__DIR__ . '/' . ltrim($ogImagePath, '/')) : false;
+$ogImageSize = false;
+if (in_array($ogImageHost, ['kissbandstree.com', parse_url($origin, PHP_URL_HOST)], true)
+	&& $ogImageFile !== false && strpos($ogImageFile, __DIR__ . DIRECTORY_SEPARATOR) === 0
+	&& is_file($ogImageFile)) {
+	$ogImageSize = getimagesize($ogImageFile);
+}
 ?>
 <meta property="og:image" content="<?php echo htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8'); ?>">
-<?php if (!$hasCustomImage): ?>
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<?php if ($ogImageSize !== false): ?>
+<meta property="og:image:type" content="<?php echo htmlspecialchars($ogImageSize['mime'], ENT_QUOTES, 'UTF-8'); ?>">
+<meta property="og:image:width" content="<?php echo $ogImageSize[0]; ?>">
+<meta property="og:image:height" content="<?php echo $ogImageSize[1]; ?>">
 <?php endif; ?>
 <meta property="og:title" content="<?php echo htmlspecialchars($ogTitle, ENT_QUOTES, 'UTF-8'); ?>">
 <meta property="og:type" content="website">
