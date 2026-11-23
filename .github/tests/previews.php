@@ -98,7 +98,14 @@ foreach ([
   $expected = strpos($thumb, 'https://') === 0 ? $thumb : 'http://localhost:8003/' . ltrim($thumb, '/');
   check_preview($meta['og:image'] === $expected, 'Detail image replaced: ' . $page);
   check_preview($meta['og:title'] === 'Kiss Bands Tree - Detail & title', 'Wrong brand-first detail title: ' . $page);
-  check_preview(!isset($meta['og:image:width']), 'Generic dimensions applied to a detail photo: ' . $page);
+  if (parse_url($expected, PHP_URL_HOST) === 'example.com') {
+    check_preview(!isset($meta['og:image:width']), 'Invented dimensions for an external image: ' . $page);
+  } else {
+    $size = getimagesize($root . parse_url($expected, PHP_URL_PATH));
+    check_preview($meta['og:image:width'] === (string) $size[0]
+      && $meta['og:image:height'] === (string) $size[1]
+      && $meta['og:image:type'] === $size['mime'], 'Missing or incorrect detail-image dimensions: ' . $page);
+  }
 }
 
-echo 'Passed: 20 PNG assets, ' . $pageCount . " section pages, local/production URLs and detail-image precedence.\n";
+echo 'Passed: 20 PNG assets, ' . $pageCount . " section pages, local/production URLs, detail-image precedence and actual dimensions.\n";
