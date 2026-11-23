@@ -69,6 +69,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Test social preview metadata
+        run: php .github/tests/previews.php
+
       - name: Test deployment behavior
         run: node --test .github/tests/deployment.cjs .github/tests/updates.cjs
 
@@ -136,3 +139,4 @@ jobs:
         env:
           DEPLOY_BASE: ${{ steps.baseline.outputs.sha }}
         run: node .github/scripts/deploy.cjs
+  
