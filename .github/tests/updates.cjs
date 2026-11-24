@@ -38,6 +38,10 @@ test('Updates paginates Git history and reports invalid input or feeds', t => {
   assert.match(first.body, /<svg class="icons" aria-hidden="true"><use href="\/icons\.svg#github"><\/use><\/svg>\s*<h1>Updates<\/h1>\s*<svg class="icons" aria-hidden="true"><use href="\/icons\.svg#github"><\/use><\/svg>/);
   assert.match(first.body, /Page 1 of 2/);
   assert.match(first.body, /Update 0 &lt;test&gt;/);
+  assert.match(first.body, /<table>\s*<thead><tr><th scope="col">Title<\/th><th scope="col">Date<\/th><th scope="col">Number<\/th><th scope="col">Commit<\/th><\/tr><\/thead>\s*<tbody>/);
+  assert.doesNotMatch(first.body, /data-label=/);
+  const styles = fs.readFileSync(path.join(root, 'updates.css'), 'utf8');
+  assert.doesNotMatch(styles, /container-type|@container|data-label|display:\s*grid/);
   assert.match(first.body, new RegExp(`https://github.com/example/site/commit/${runs[0].head_sha}`));
   assert.doesNotMatch(first.body, /Update 25 &lt;test&gt;/);
   const second = render({ page: '2' });

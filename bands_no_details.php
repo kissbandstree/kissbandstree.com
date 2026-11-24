@@ -55,7 +55,7 @@
   ?>
 
   <table class="standard">
-    <tr>
+    <thead><tr>
       <?php
       // Associative array with artist names and file paths
       $artists = array(
@@ -67,19 +67,23 @@
 
       // Iterate through the first four artists and generate the band links
       foreach ($artists as $artist_name => $file_path) {
+        echo '<th scope="col"><h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1></th>';
+      }
+      echo '</tr></thead><tbody><tr>';
+      foreach ($artists as $file_path) {
         echo '<td class="left-top not-wrap">';
-        echo '<h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
         generateBandLink($file_path);
         echo '</td>';
       }
       ?>
     </tr>
+    </tbody>
   </table>
 
   <br>
 
   <table class="standard">
-    <tr>
+    <thead><tr>
       <?php
       // Associative array with the next four artist names and file paths
       $artists_next = array(
@@ -91,19 +95,23 @@
 
       // Iterate through the next four artists and generate the band links
       foreach ($artists_next as $artist_name => $file_path) {
+        echo '<th scope="col"><h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1></th>';
+      }
+      echo '</tr></thead><tbody><tr>';
+      foreach ($artists_next as $file_path) {
         echo '<td class="left-top not-wrap">';
-        echo '<h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
         generateBandLink($file_path);
         echo '</td>';
       }
       ?>
     </tr>
+    </tbody>
   </table>
 
   <br>
 
   <table class="standard">
-    <tr>
+    <thead><tr>
       <?php
       // Associative array with the last two artist names and file paths
       $artists_last = array(
@@ -113,8 +121,11 @@
 
       // Iterate through the last two artists and generate the band links
       foreach ($artists_last as $artist_name => $file_path) {
+        echo '<th scope="col"><h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1></th>';
+      }
+      echo '<th scope="col"></th><th scope="col"></th></tr></thead><tbody><tr>';
+      foreach ($artists_last as $file_path) {
         echo '<td class="left-top not-wrap">';
-        echo '<h1><a href="artist?a=' . urlencode(strtolower(str_replace(' ', '_', str_replace('.', '', $artist_name)))) . '">' . $artist_name . '</a></h1><br>';
         generateBandLink($file_path);
         echo '</td>';
       }
@@ -126,6 +137,7 @@
         <br> <!-- Empty cell for the last table -->
       </td>
     </tr>
+    </tbody>
   </table>
 
   <?php require($_SERVER['DOCUMENT_ROOT'] . "/footer.php"); ?>

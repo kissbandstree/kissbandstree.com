@@ -1,12 +1,45 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 const test = require('node:test');
 const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, '..', '..', 'index.js'), 'utf8');
 const resizeSource = source.slice(source.indexOf('function setupResizableTables()'), source.indexOf("if (document.readyState === 'loading')"));
 const storageKey = 'table.column_widths:/artists:0:filter_table';
+
+test('legacy band columns expose matching headers and body cells for resizing', () => {
+  for (const file of ['bands_details.php', 'bands_no_details.php']) {
+    const result = spawnSync('php', ['-r', `
+      $_SERVER['DOCUMENT_ROOT'] = getenv('TEST_ROOT');
+      $_SERVER['SCRIPT_NAME'] = '/' . getenv('TEST_PAGE');
+      $_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'];
+      $_SERVER['HTTP_HOST'] = 'localhost:8003';
+      ob_start();
+      require $_SERVER['DOCUMENT_ROOT'] . '/' . getenv('TEST_PAGE');
+      $html = ob_get_clean();
+      $document = new DOMDocument();
+      $document->loadHTML($html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING);
+      $xpath = new DOMXPath($document);
+      $tables = [];
+      foreach ($document->getElementsByTagName('table') as $table) {
+        $tables[] = [
+          'headers' => $xpath->query('./thead/tr/th[@scope="col"]', $table)->length,
+          'cells' => $xpath->query('./tbody/tr/td', $table)->length
+        ];
+      }
+      echo json_encode($tables);
+    `], {
+      encoding: 'utf8',
+      env: { ...process.env, TEST_ROOT: path.resolve(__dirname, '..', '..'), TEST_PAGE: file }
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout), Array.from({ length: 3 }, () => ({
+      headers: 4, cells: 4
+    })), file);
+  }
+});
 
 function createTable(saved, containerWidth = 1340) {
   const writes = [];
@@ -18,10 +51,11 @@ function createTable(saved, containerWidth = 1340) {
     add() {}, remove() {}, toggle() {}, contains() { return false; }
   });
   const table = {
-    id: 'filter_table', className: 'artists-table', dataset: {}, style: {},
+    id: 'filter_table', className: 'artists-table', dataset: {}, clientLeft: 2,
+    style: { setProperty(name, value) { this[name] = value; }, removeProperty(name) { delete this[name]; } },
     classList: classList(), parentElement: { get clientWidth() { return layout.width; } },
     addEventListener(name, callback) { handlers[name] = callback; },
-    getBoundingClientRect() { return { width: Math.max(1140, layout.width) }; },
+    getBoundingClientRect() { return { left: 0, width: Math.max(1140, layout.width) }; },
     querySelectorAll(selector) { return selector === 'thead th' ? headers : []; }
   };
   const headers = defaults.map((defaultWidth, index) => ({
@@ -90,12 +124,15 @@ test('a drag writes nothing during movement and saves exactly once on release', 
   const header = state.headers[2];
   const startX = header.getBoundingClientRect().right - 1;
   state.handlers.pointerdown(state.event(header, startX));
+  assert.equal(parseFloat(state.table.style['--column-resize-guide-left']), header.getBoundingClientRect().right - 2);
   for (const delta of [10, 20, 30, 40, 50]) {
     state.handlers.pointermove(state.event(header, startX + delta));
     assert.equal(state.writes.length, 0);
+    assert.equal(parseFloat(state.table.style['--column-resize-guide-left']), header.getBoundingClientRect().right - 2);
   }
   const widths = state.widths();
   state.handlers.pointerup(state.event(header, startX + 50));
+  assert.equal(state.table.style['--column-resize-guide-left'], undefined);
   state.handlers.lostpointercapture();
   assert.equal(state.writes.length, 1);
   assert.equal(state.table.getBoundingClientRect().width, 1340);

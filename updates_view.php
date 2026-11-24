@@ -62,7 +62,7 @@ $escape = static fn($value) => htmlspecialchars((string) $value, ENT_QUOTES, 'UT
     </nav>
     <div class="updates-scroll">
       <table>
-        <thead><tr><th>Title</th><th>Date</th><th>Number</th><th>Commit</th></tr></thead>
+        <thead><tr><th scope="col">Title</th><th scope="col">Date</th><th scope="col">Number</th><th scope="col">Commit</th></tr></thead>
         <tbody>
         <?php if ($unavailable): ?>
           <tr><td colspan="4">Updates unavailable</td></tr>
@@ -71,10 +71,10 @@ $escape = static fn($value) => htmlspecialchars((string) $value, ENT_QUOTES, 'UT
         <?php else: ?>
           <?php foreach ($pageRuns as $index => $run): ?>
             <tr>
-              <td data-label="Title"><a href="<?php echo $escape($repository . '/commit/' . $run['head_sha']); ?>" target="_blank" rel="noopener noreferrer"><?php echo $escape($run['display_title']); ?></a></td>
-              <td data-label="Date"><time datetime="<?php echo $escape($run['created_at']); ?>"><?php echo gmdate('d-m-Y H:i', strtotime($run['created_at'])); ?> UTC</time></td>
-              <td data-label="Number"><?php echo $total - ($page - 1) * $perPage - $index; ?></td>
-              <td data-label="Commit"><?php echo $escape(substr($run['head_sha'], 0, 7)); ?></td>
+              <td><a href="<?php echo $escape($repository . '/commit/' . $run['head_sha']); ?>" target="_blank" rel="noopener noreferrer"><?php echo $escape($run['display_title']); ?></a></td>
+              <td><time datetime="<?php echo $escape($run['created_at']); ?>"><?php echo gmdate('d-m-Y H:i', strtotime($run['created_at'])); ?> UTC</time></td>
+              <td><?php echo $total - ($page - 1) * $perPage - $index; ?></td>
+              <td><?php echo $escape(substr($run['head_sha'], 0, 7)); ?></td>
             </tr>
           <?php endforeach; ?>
         <?php endif; ?>
