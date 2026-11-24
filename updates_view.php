@@ -72,7 +72,7 @@ $escape = static fn($value) => htmlspecialchars((string) $value, ENT_QUOTES, 'UT
           <?php foreach ($pageRuns as $index => $run): ?>
             <tr>
               <td><a href="<?php echo $escape($repository . '/commit/' . $run['head_sha']); ?>" target="_blank" rel="noopener noreferrer"><?php echo $escape($run['display_title']); ?></a></td>
-              <td><time datetime="<?php echo $escape($run['created_at']); ?>"><?php echo gmdate('d-m-Y H:i', strtotime($run['created_at'])); ?> UTC</time></td>
+              <td><time datetime="<?php echo $escape($run['created_at']); ?>"><?php echo gmdate('d-m-Y H:i', strtotime($run['created_at'])); ?></time></td>
               <td><?php echo $total - ($page - 1) * $perPage - $index; ?></td>
               <td><?php echo $escape(substr($run['head_sha'], 0, 7)); ?></td>
             </tr>
