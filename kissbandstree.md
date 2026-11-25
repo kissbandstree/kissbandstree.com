@@ -24,9 +24,9 @@
 
 - Never use easing transitions.
 - Keep section and footer gaps at 16px, applied only above each block.
-  Section headings sit directly against their content, retaining the explicit
-  1px separator where `small-top-margin` is used. Do not add standalone `<br>`
-  spacers between sections; use the shared layout margins instead.
+  Keep 16px between section headings and their following content, including
+  blocks using `small-top-margin`. Do not add standalone `<br>` spacers between
+  sections. Use the shared layout margins instead.
 - Centralize band and artist update dates in `get_band_mtime` and
   `get_artist_mtime` in `functions.php`. Use the newest timestamp among the
   entry, small photo, large photo and credits, plus comments for bands.

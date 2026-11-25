@@ -741,15 +741,9 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
 /* Members and Last modified on front page */
 
 .top-line {
-  align-items: center;
-  background: var(--grey1);
-  border-bottom: 2px solid var(--black);
-  display: flex;
   position: relative;
-  justify-content: center;
   margin: 16px auto 0;
   max-width: var(--maxwidth);
-  padding: 6px 10px;
 }
 
 .heading + .top-line,
@@ -757,8 +751,8 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
   margin-top: 16px;
 }
 
-.top-line + :is(.standard, .image-container, .table-container, .grid-container, .grid-container-artist, .grid-container-release):not(.small-top-margin) {
-  margin-top: 0;
+.top-line + :is(.standard, .image-container, .table-container, .grid-container, .grid-container-artist, .grid-container-release) {
+  margin-top: 16px;
 }
 
 .top-line .icons {
@@ -767,10 +761,6 @@ body.settings-sidebar-open #toggle-settings-panel-button .icons {
 }
 
 .top-line h2 {
-  flex: 1;
-  /* h2 takes center lane */
-  margin: 0;
-  text-align: center;
   position: relative;
 }
 

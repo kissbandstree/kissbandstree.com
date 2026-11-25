@@ -1,19 +1,5 @@
-.updates-heading h1 {
-  flex: 1;
-  margin: 0;
-  text-align: center;
-}
-
 .updates {
   padding: 0;
-}
-
-.updates-pagination {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin-bottom: 16px;
 }
 
 .updates-scroll {
