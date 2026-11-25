@@ -23,6 +23,10 @@
 ## Presentation
 
 - Never use easing transitions.
+- Keep section and footer gaps at 16px, applied only above each block.
+  Section headings sit directly against their content, retaining the explicit
+  1px separator where `small-top-margin` is used. Do not add standalone `<br>`
+  spacers between sections; use the shared layout margins instead.
 - Centralize band and artist update dates in `get_band_mtime` and
   `get_artist_mtime` in `functions.php`. Use the newest timestamp among the
   entry, small photo, large photo and credits, plus comments for bands.
@@ -44,7 +48,7 @@
   Match Pekosoft's Focus logo sizing: 32px height with automatic width.
   Run `php .github/tests/footer.php` after changing the footer.
 - Settings replaces the header's Dark mode control. It contains Dark mode,
-  Fullscreen, Share and Reset. Tree shows these four controls directly on the
+  Fullscreen, Share, Background and Reset. Tree shows these controls directly on the
   page instead of a Settings menu, sharing their markup in `settings-controls.php`.
   Tree controls are icon-only buttons with tooltips and screen-reader labels.
   Settings menus on other pages keep their visible control labels.
@@ -58,8 +62,16 @@
   artist thumbnail gallery, but not album artwork or site logos. Comments
   controls lineup comments. Hidden columns collapse while lineup arrows stay
   aligned. Reset restores both toggles. Adapt the
-  existing Pekosoft controls and sharing fallback in `index.js`, without adding
-  another JavaScript dependency.
+  existing controls and sharing fallback in `index.js`. Shared navigation,
+  Background and external-link markers live in the identical cross-site
+  `site_ui.php`, `site_ui.css` and `site_ui.js` components. Site-specific
+  background configuration lives in `data/site_ui.json`. Background starts
+  off, persists across pages and resets to off without inverting the photo.
+  Use the Kiss #1 (Dec 1972 - May 1980) photo as the supplied background.
+  The TOC begins with Home, Previous page, Play and Next page icons.
+  Tree is the final TOC link, separated from Updates by a section gap.
+  Keep its manual link available but exclude it from Play and Previous/Next
+  with `data-play-skip="true"`, as well as from header swipes.
 - TOC and Settings follow Pekosoft's responsive sidebar behavior. At 800px and
   wider, both are open by default, remain open during outside clicks, Escape
   and navigation, and remember their individual open states. Page content makes
@@ -67,8 +79,12 @@
   Below 800px, menus start closed, open one at a time and close on outside clicks
   or Escape. Mobile TOC also closes on navigation, including Back.
 - The header stays fixed across the full site frame above both sidebars.
+  Its logo is not selectable, while its link, context menu and swipes remain
+  available. Desktop sidebars extend to the viewport bottom.
   TOC links and Settings controls share row sizing, padding, icon alignment,
-  label typography and the grey2 hover background. Their scroll areas and
+  label typography and the grey1 hover background. Both have black interiors
+  and 4px grey1 borders. Shared rows use Arial bold at 24px, a minimum 42px
+  height, 10px horizontal padding, 16px gaps and 28px icons. Their scroll areas and
   bottom Close controls use the same spacing.
 - TOC labels use regular capitalization, such as Bands and Related, not all caps.
 - Public sections use clean root URLs: `/bands`, `/artists`, `/releases`,

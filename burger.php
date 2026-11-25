@@ -125,17 +125,17 @@ $currentSection = [
         </h1>
       </li>
       <li>
+        <h1><a href="/updates"<?php if ($currentSection === '/updates'): ?> aria-current="page"<?php endif; ?>><svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>Updates</a></h1>
+      </li>
+      <li class="toc-section-start">
         <h1>
-          <a href="/tree"<?php if ($currentSection === '/tree'): ?> aria-current="page"<?php endif; ?>>
+          <a href="/tree" data-play-skip="true"<?php if ($currentSection === '/tree'): ?> aria-current="page"<?php endif; ?>>
             <svg class="icons">
               <use href="icons.svg#tree"></use>
             </svg>
             Tree
           </a>
         </h1>
-      </li>
-      <li>
-        <h1><a href="/updates"<?php if ($currentSection === '/updates'): ?> aria-current="page"<?php endif; ?>><svg class="icons" aria-hidden="true"><use href="/icons.svg#github"></use></svg>Updates</a></h1>
       </li>
     </ul>
 

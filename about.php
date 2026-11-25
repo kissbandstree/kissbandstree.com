@@ -23,15 +23,11 @@
     </svg>
   </div>
 
-  </div>
-
   <div class="standard colored">
     <h1>
       About tree
     </h1>
   </div>
-
-  <br>
 
   <div class="standard justify">
     <?php
@@ -39,16 +35,11 @@
     ?>
   </div>
 
-  <br>
-  <br>
-
   <div class="standard colored">
     <h1>
       About website
     </h1>
   </div>
-
-  <br>
 
   <div class="standard justify">
     <?php
@@ -56,16 +47,11 @@
     ?>
   </div>
 
-  <br>
-  <br>
-
   <div class="standard colored">
     <h1>
       Known issues
     </h1>
   </div>
-
-  <br>
 
   <div class="standard justify">
     <?php

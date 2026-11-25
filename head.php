@@ -90,3 +90,4 @@ if (in_array($ogImageHost, ['kissbandstree.com', parse_url($origin, PHP_URL_HOST
 <script src="/sort_table.js"></script>
 <script src="/search_table.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require __DIR__ . '/site_ui.php'; ?>
