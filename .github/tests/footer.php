@@ -24,6 +24,10 @@ if (substr_count($branding, '<br />') !== 1
   || strpos($branding, 'class="footer-credit"') > strpos($branding, 'class="focus"')) {
   throw new RuntimeException('Footer branding must render two credit lines followed by one Focus logo.');
 }
+if (preg_match('~<a [^>]*class="focus"[^>]*>([\s\S]*?)</a>~', $branding, $logo) !== 1
+  || trim(strip_tags($logo[1])) !== '') {
+  throw new RuntimeException('The Focus logo link must not contain text that triggers an external-link marker.');
+}
 
 ob_start();
 require $root . '/footer.php';
